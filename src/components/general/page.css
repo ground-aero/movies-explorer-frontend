@@ -1,4 +1,33 @@
+@import url('../../vendor/normalize.css');
+@import url('../../vendor/fonts/fonts.css');
+
 .page {
     background-color: #FFF;
     margin: 0;
+}
+
+.page__container {
+    width: 100vw;
+    max-width: 1280px;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffc;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+@media (max-width: 768px) {
+    .page__container {
+        max-width: 768px;
+    }
+}
+
+@media (max-width: 360px) {
+    .page__container {
+        max-width: 360px;
+    }
 }
