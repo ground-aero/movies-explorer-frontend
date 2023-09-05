@@ -8,11 +8,11 @@ import Portfolio from './Portfolio/Portfolio.jsx';
 import '../general/content.css';
 import './LandPage.css';
 
-function LandPage({}) {
+function LandPage() {
 
     return (
-        <main className="landpage content">
-            <h3>LANDING PAGE Block: Promo, NavTab, AboutProject, Techs, AboutMe, Portfolio</h3>
+        <main className='landpage content'>
+            <h2>LANDING PAGE Block: Promo, NavTab, AboutProject, Techs, AboutMe, Portfolio</h2>
 
             <Promo/>
             <NavTab/>

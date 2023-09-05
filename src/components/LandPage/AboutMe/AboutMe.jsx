@@ -8,7 +8,7 @@ function AboutMe({}) {
     return (
         <section id="about-project" className="about-project content__section">
 
-            <h2>Section - AboutMe</h2>
+            <h3>Section - AboutMe</h3>
 
         </section>
     );

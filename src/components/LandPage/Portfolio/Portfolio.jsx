@@ -8,7 +8,7 @@ function Portfolio({}) {
     return (
         <section id="navtab" className="navtab content__section">
 
-            <h2>Section - Portfolio</h2>
+            <h3>Section - Portfolio</h3>
 
         </section>
     );

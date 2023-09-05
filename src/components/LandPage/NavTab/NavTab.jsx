@@ -8,7 +8,7 @@ function NavTab({}) {
     return (
         <section id="navtab" className="navtab content__section">
 
-            <h2>Section - NavTab</h2>
+            <h3>Section - NavTab</h3>
 
         </section>
     );

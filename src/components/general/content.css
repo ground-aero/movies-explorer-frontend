@@ -4,6 +4,5 @@
 }
 
 .content__section {
-    display: flex;
     outline: 1px dotted black;
 }

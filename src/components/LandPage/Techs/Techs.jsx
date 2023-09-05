@@ -8,7 +8,7 @@ function Techs({}) {
     return (
         <section id="techs" className="techs content__section">
 
-            <h2>Section - Techs</h2>
+            <h3>Section - Techs</h3>
             {/*<div className="promo__elements-wrap">*/}
             {/*</div>*/}
 
