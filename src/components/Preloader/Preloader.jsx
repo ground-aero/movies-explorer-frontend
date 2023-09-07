@@ -6,7 +6,7 @@ import './Preloader.css';
 function Preloader() {
     return (
         <span className='preloader'>
-            <h3>Preloader </h3>
+            <h3>Preloader * </h3>
 
         </span>
     );

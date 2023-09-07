@@ -1,6 +1,7 @@
 .movies-card {
     display: inline-block;
-    background-color: #000;
+    max-width: 200px;
+    background-color: darkgrey;
     color: #FFF;
     outline: 1px dashed darkred;
 }

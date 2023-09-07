@@ -6,7 +6,8 @@ import SavedMovies from '../SavedMovies/SavedMovies.jsx';
 
 function App() {
   return (
-    <div className="page__container">
+      <>
+          {/** <div className="page__container"> */}
 
       <LandPage/>
 
@@ -14,7 +15,8 @@ function App() {
 
         <SavedMovies/>
 
-    </div>
+          {/** </div> */}
+      </>
   );
 }
 

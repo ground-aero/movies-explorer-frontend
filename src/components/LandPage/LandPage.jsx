@@ -12,7 +12,7 @@ function LandPage() {
 
     return (
         <main className='landpage content'>
-            <h2>LANDING PAGE Block: Promo, NavTab, AboutProject, Techs, AboutMe, Portfolio</h2>
+            <h2>LAND PAGE: Promo, NavTab, AboutProject, Techs, AboutMe, Portfolio</h2>
 
             <Promo/>
             <NavTab/>

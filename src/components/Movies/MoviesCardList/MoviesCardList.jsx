@@ -1,15 +1,18 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.
 import React from 'react';
 import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard.jsx';
 
 function MoviesCardList() {
     return (
-        <div className='movies-cardlist'>
-            <h5>MoviesCardList -> for SEC -Movies. </h5>
+        <ul className='movies-cardlist'>
+            <>
+            <h4>MoviesCardList +MoviesCard -> for SEC -Movies/ Saved M. </h4>
             {/*FilterCheckbox - // внутри SearchForm // фильтр с чекбоксом «Только короткометражки»
             отд. управляемыq компонент FilterCheckbox */}
-
-        </div>
+            <MoviesCard />
+            </>
+        </ul>
     );
 }
 
