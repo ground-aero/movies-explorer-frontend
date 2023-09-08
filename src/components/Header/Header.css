@@ -1,10 +1,21 @@
 .header {
     height: 74px;
-    background: lightblue;
 }
 
 .header_wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.header_type_authorized {
+    background: #073042;
+}
+
+.header_type_non-authorized {
+    /*display: none;*/
+}
+
+.logo {
+    height: 38px;
 }

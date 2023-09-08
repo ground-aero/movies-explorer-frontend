@@ -1,5 +1,4 @@
 // Component Footer
-import React from 'react';
 import './Footer.css';
 
 function Footer () {

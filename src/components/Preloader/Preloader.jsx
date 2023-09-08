@@ -1,5 +1,4 @@
 // component - preloader.
-import React from 'react';
 import '../general/content.css';
 import './Preloader.css';
 

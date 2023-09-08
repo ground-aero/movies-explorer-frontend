@@ -1,35 +1,66 @@
-// import logo from '../../logo.svg';
+import React, {useEffect} from 'react';
+import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import '../general/page.css'
-import LandPage from '../LandPage/LandPage.jsx';
-import Movies from '../Movies/Movies.jsx';
-import SavedMovies from '../SavedMovies/SavedMovies.jsx';
-import Register from '../Register/Register.jsx';
-import Login from '../Login/Login.jsx';
-import Profile from '../Profile/Profile.jsx';
-import Header from '../Header/Header.jsx';
-import Footer from '../Footer/Footer.jsx';
+import Main from '../Main/Main';
+import Movies from '../Movies/Movies';
+import SavedMovies from '../SavedMovies/SavedMovies';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
+/** @returns {JSX.Element} */
 function App() {
-  return (
-      <>
-          {/** <div className="page__container"> */}
+    const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = React.useState(false);
 
-      <LandPage />
+    function handleLogin() {
+        setLoggedIn(true);
+        navigate('/', {replace: true});
+    }
 
-        <Movies />
+    function onLogout() {
+        setLoggedIn(false);
+        navigate('/sign-in', {replace: true});
+    }
 
-        <SavedMovies />
+    // useEffect(() => {
+    //     if (loggedIn) {
+    //         navigate('/');
+    //     } else {
+    //         navigate('/sign-up', {replace: true});
+    //     }
+    // }, [loggedIn]);
 
-          <Register />
-          <Login />
-          <Profile />
+    return (
+        <>
+            <Routes>
+                {/* при загрузке App, путь по умолчанию / не имеет соотв роута. Настраиваем. */}
+                <Route exact path='/'
+                       element={
+                    <>
+                        <Header
+                            loggedIn={loggedIn}
+                            onLogout={onLogout}
+                        />
+                        <Main/>
+                        <Footer/>
+                    </>
+                       }
+                />
+                <Route path='/sign-in' element={<Login/>}/>
+                <Route path='/signup' element={<Register/>}/>
+                <Route patch='/movies' element={<Movies/>}/>
 
-          <Header />
-          <Footer />
+            </Routes>
 
-          {/** </div> */}
-      </>
-  );
+            <SavedMovies/>
+
+            <Profile/>
+
+        </>
+    );
 }
 
 export default App;

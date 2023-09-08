@@ -1,5 +1,4 @@
 // sub-component for page with movies search.
-import React from 'react';
 import './FilterCheckbox.css';
 
 function FilterCheckbox() {

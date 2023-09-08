@@ -1,7 +1,6 @@
 // component for page with movies search.
-import React from 'react';
 import '../general/content.css';
-import FilterCheckbox from './FilterCheckbox/FilterCheckbox.jsx';
+import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 /*import './SearchForm.css';*/
 
 function SearchForm() {

@@ -1,7 +1,6 @@
 // component - компонент страницы с сохранёнными карточками фильмов.
-import React from 'react';
 import '../general/content.css';
-import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList.jsx';
+import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 
 function SavedMovies() {

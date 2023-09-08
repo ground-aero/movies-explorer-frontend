@@ -1,7 +1,6 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.
-import React from 'react';
 import './MoviesCardList.css';
-import MoviesCard from '../MoviesCard/MoviesCard.jsx';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList() {
     return (

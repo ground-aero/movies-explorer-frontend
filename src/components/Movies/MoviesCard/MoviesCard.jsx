@@ -1,5 +1,4 @@
 // component - for single film card.
-import React from 'react';
 import './MoviesCard.css';
 
 function MoviesCard() {
