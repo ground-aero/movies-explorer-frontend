@@ -1,3 +1,6 @@
 .movies-cardlist {
+    list-style: none;
+    margin: 0;
     outline: 1px dotted darkred;
+    padding: 0;
 }

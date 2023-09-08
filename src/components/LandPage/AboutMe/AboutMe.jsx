@@ -3,7 +3,7 @@ import React from 'react';
 import './AboutMe.css';
 import '../../general/content.css';
 
-function AboutMe({}) {
+function AboutMe() {
 
     return (
         <section id="about-project" className="about-project content__section">

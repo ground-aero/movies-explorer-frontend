@@ -11,7 +11,7 @@ import './LandPage.css';
 function LandPage() {
 
     return (
-        <main className='landpage content'>
+        <main className='content'>
             <h2>LAND PAGE: Promo, NavTab, AboutProject, Techs, AboutMe, Portfolio</h2>
 
             <Promo/>

@@ -3,7 +3,7 @@ import React from 'react';
 import './Techs.css';
 import '../../general/content.css';
 
-function Techs({}) {
+function Techs() {
 
     return (
         <section id="techs" className="techs content__section">

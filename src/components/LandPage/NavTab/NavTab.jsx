@@ -3,7 +3,7 @@ import React from 'react';
 import './NavTab.css';
 import '../../general/content.css';
 
-function NavTab({}) {
+function NavTab() {
 
     return (
         <section id="navtab" className="navtab content__section">

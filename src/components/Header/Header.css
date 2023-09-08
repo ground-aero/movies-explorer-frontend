@@ -1,0 +1,10 @@
+.header {
+    height: 74px;
+    background: lightblue;
+}
+
+.header_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

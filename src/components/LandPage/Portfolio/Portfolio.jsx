@@ -3,7 +3,7 @@ import React from 'react';
 import './Portfolio.css';
 import '../../general/content.css';
 
-function Portfolio({}) {
+function Portfolio() {
 
     return (
         <section id="navtab" className="navtab content__section">
