@@ -22,14 +22,14 @@ function App() {
 
     function onLogout() {
         setLoggedIn(false);
-        navigate('/sign-in', {replace: true});
+        navigate('/signin', {replace: true});
     }
 
     // useEffect(() => {
     //     if (loggedIn) {
     //         navigate('/');
     //     } else {
-    //         navigate('/sign-up', {replace: true});
+    //         navigate('/signup', {replace: true});
     //     }
     // }, [loggedIn]);
 
@@ -49,15 +49,14 @@ function App() {
                     </>
                        }
                 />
-                <Route path='/sign-in' element={<Login/>}/>
+                <Route path='/signin' element={<Login/>}/>
                 <Route path='/signup' element={<Register/>}/>
-                <Route patch='/movies' element={<Movies/>}/>
+
+                <Route path='/movies' element={<Movies/>}/>
+                <Route path='/saved-movies' element={<SavedMovies/>}/>
+                <Route path='/profile' element={<Profile/>}/>
 
             </Routes>
-
-            <SavedMovies/>
-
-            <Profile/>
 
         </>
     );

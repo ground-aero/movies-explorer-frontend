@@ -5,11 +5,24 @@
 .menu_wrap {
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.menu__links_wrap {
+    display: flex;
+    min-width: 211px;
+    height: 18px;
+    justify-content: space-between;
 }
 
 .menu__link {
     display: flex;
     padding-right: 16px;
+}
+
+.menu__logo {
+    height: 38px;
 }
 
 .account_wrap {
