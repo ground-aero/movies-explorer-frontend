@@ -16,7 +16,7 @@ function Navigation({ type, rights }) {
                 </Link>
 
                 {/* переключение значений для блоока "Navigation" inside Header */}
-                <span className='menu__links'>
+                <span className={`menu__links_${ rights }`}>
                     <NavLink to='/movies'
                              className={`menu__link menu__link_${ rights } menu__link_type_${ type } menu__link_${weight}`}>Фильмы</NavLink>
                     <NavLink to='/saved-movies'

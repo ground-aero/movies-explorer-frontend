@@ -9,11 +9,15 @@
     justify-content: space-between;
 }
 
-.menu__links {
+.menu__links_authorized {
     display: flex;
     min-width: 211px;
     height: 18px;
     justify-content: space-between;
+}
+
+.menu__links_non-authorized {
+    display: none;
 }
 
 .menu__link {
@@ -35,8 +39,16 @@
     padding-right: 16px;
 }
 
+.menu__link {
+    color: #000;
+}
+
 .menu__link_authorized:last-of-type {
     padding: 0;
+}
+
+.menu__link_type_land {
+    color: #FFF;
 }
 
 .menu__link_type_movies {
