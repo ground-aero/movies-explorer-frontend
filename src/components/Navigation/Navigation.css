@@ -9,7 +9,7 @@
     justify-content: space-between;
 }
 
-.menu__links_wrap {
+.menu__links {
     display: flex;
     min-width: 211px;
     height: 18px;
@@ -19,6 +19,17 @@
 .menu__link {
     display: flex;
     padding-right: 16px;
+    color: #FFF;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    transition: opacity .4s linear;
+}
+
+.menu__link:hover {
+    opacity: .7;
+    cursor: pointer;
 }
 
 .menu__logo {
@@ -28,12 +39,71 @@
 .account_wrap {
     display: flex;
     align-items: center;
+    text-decoration: none;
+    margin-right: 70px;
 }
 
-.account__name {
+.account_wrap_entry {
+    background-color: #2BE080;
     display: flex;
+    height: 32px;
+    border-radius: 50px;
+    padding-right: 3px;
 }
 
-.account__icon {
+.account__text {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 12px;
+    color: #000;
+    margin: 0;
+    padding-right: 7px;
+    padding-left: 11px;
+}
+
+.account__man {
     display: flex;
+    background-color: #FFF;
+    border-radius: 50px;
+    padding: 7.75px;
+    transition: opacity .4s linear;
+}
+
+.account__icon:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.account__link {
+    text-decoration: none;
+    padding-right: 30px;
+}
+
+.account__link_enter {
+    background-color: #2BE080;
+    padding: 8px 20px;
+    border-radius: 3px;
+}
+
+.account__link-text {
+    color: #FFF;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+    transition: opacity .4s linear;
+}
+
+.account__link-text_active {
+    color: #000;
+}
+
+/*.account__link:last-of-type {*/
+/*    padding-right: 70px;*/
+/*}*/
+
+.account__link-text:hover {
+    opacity: .7;
+    cursor: pointer;
 }
