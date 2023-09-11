@@ -3,18 +3,19 @@
 import './Header.css';
 import Navigation from '../Navigation/Navigation.jsx';
 
-/** Шапка на главной странице, как и на других страницах, должна менять отображение,
-* если пользователь авторизован или не авторизован. */
-function Header(props) {
-
+/** Шапка меняет отображение, if user authorized/not-authorized */
+function Header({ loggedIn, type }) {
     return (
         // element={loggedIn ? <Navigate to='/main' replace /> : <Navigate to='/signin' replace />}
-        <header className='header header_wrap header_type_authorized header_type_non-authorized'>
+                <header className={`header header_wrap header_type_${ type }`}>
 
-            {/*{передаем переменную-состояния loggedIn дальше в компонент Navigation }*/}
-            <Navigation loggedIn={props.loggedIn}/>
+                    {/*{ 'loggedIn': App-->Header-->Navigation }*/}
+                    {loggedIn
+                        ? (<Navigation loggedIn={loggedIn} type={type} rights={'authorized'}/>)
+                        : (<Navigation loggedIn={loggedIn} type={type} rights={'non-authorized'}/>)
+                    }
 
-        </header>
+                </header>
     );
 }
 

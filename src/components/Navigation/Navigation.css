@@ -19,12 +19,28 @@
 .menu__link {
     display: flex;
     padding-right: 16px;
-    color: #FFF;
     text-decoration: none;
     font-weight: 400;
     font-size: 13px;
     line-height: 18px;
     transition: opacity .4s linear;
+}
+
+.menu__link_500 {
+    font-weight: 500;
+}
+
+.menu__link_authorized {
+    color: #FFF;
+    padding-right: 16px;
+}
+
+.menu__link_authorized:last-of-type {
+    padding: 0;
+}
+
+.menu__link_type_movies {
+    color: #000;
 }
 
 .menu__link:hover {
@@ -34,22 +50,27 @@
 
 .menu__logo {
     height: 38px;
+    padding-left: 70px;
 }
 
 .account_wrap {
     display: flex;
     align-items: center;
     text-decoration: none;
-    margin-right: 70px;
-}
-
-.account_wrap_entry {
-    background-color: #2BE080;
-    display: flex;
     height: 32px;
     border-radius: 50px;
     padding-right: 3px;
+    margin-right: 70px;
 }
+
+.account_wrap_land {
+    background-color: #2BE080;
+}
+
+.account_wrap_movies {
+    background-color: #FFF;
+}
+
 
 .account__text {
     font-weight: 500;
@@ -98,10 +119,6 @@
 .account__link-text_active {
     color: #000;
 }
-
-/*.account__link:last-of-type {*/
-/*    padding-right: 70px;*/
-/*}*/
 
 .account__link-text:hover {
     opacity: .7;

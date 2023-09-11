@@ -43,16 +43,23 @@ function App() {
                         <Header
                             loggedIn={loggedIn}
                             onLogout={onLogout}
+                            type={'land'}
                         />
                         <Main/>
                         <Footer/>
                     </>
                        }
                 />
-                <Route path='/signin' element={<Login/>}/>
-                <Route path='/signup' element={<Register/>}/>
+                <Route path='/signin' element={!loggedIn ? (<Login/>) : (<Navigate to='/'/>)}/>
+                <Route path='/signup' element={!loggedIn ? (<Register/>) : (<Navigate to='/'/>)}/>
 
-                <Route path='/movies' element={<Movies/>}/>
+                <Route path='/movies' element={
+                    <>
+                        <Header loggedIn={loggedIn} type={'movies'}/>
+                        <Movies loggedIn={loggedIn}/>
+                    </>
+                }
+                />
                 <Route path='/saved-movies' element={<SavedMovies/>}/>
                 <Route path='/profile' element={<Profile/>}/>
 
