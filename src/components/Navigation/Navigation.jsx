@@ -11,6 +11,7 @@ function Navigation(props) {
         <>
             <nav className='menu menu_wrap'>
 
+                {/* Логика переключения блока "Navigation" inside Header */}
                 {props.loggedIn &&
                     <>
                         <Link to='/' className='menu__logo'>
