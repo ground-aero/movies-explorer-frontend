@@ -107,6 +107,7 @@
     cursor: pointer;
 }
 
+/** !loggedIn && land - styles */
 .account__link {
     text-decoration: none;
     padding-right: 30px;

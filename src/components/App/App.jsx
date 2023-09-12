@@ -13,7 +13,7 @@ import Footer from '../Footer/Footer';
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = React.useState(true);
+    const [loggedIn, setLoggedIn] = React.useState(false);
 
     function handleLogin() {
         setLoggedIn(true);

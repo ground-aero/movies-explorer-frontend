@@ -6,7 +6,7 @@ import Navigation from '../Navigation/Navigation.jsx';
 /** Шапка меняет отображение, if user authorized/not-authorized */
 function Header({ loggedIn, type }) {
     return (
-        // element={loggedIn ? <Navigate to='/main' replace /> : <Navigate to='/signin' replace />}
+                // element={loggedIn ? <Navigate to='/main' replace /> : <Navigate to='/signin' replace />}
                 <header className={`header header_wrap header_type_${ type }`}>
 
                     {/*{ 'loggedIn': App-->Header-->Navigation }*/}
