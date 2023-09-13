@@ -1,3 +1,9 @@
+.login__inputs {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .login__input-label {
     display: flex;
     flex-direction: column;

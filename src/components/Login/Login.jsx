@@ -3,15 +3,17 @@ import '../general/content.css';
 import './Login.css';
 import FormSection from '../FormSection/FormSection';
 
-function Login({name, title, buttonText}) {
+function Login({name, title, buttonText, captionText}) {
     /** Стейт, в котором содержится значение инпута */
-        // const [value, setValue] = React.useState('');
+    // const [value, setValue] = React.useState('');
 
     return (
         <main className='content'>
 
-            <FormSection name={'login'} title={'Рады видеть!'} buttonText={'Войти'}>
+            <FormSection name={'login'} title={'Рады видеть!'} buttonText={'Войти'}
+                captionText={'Еще не зарегистрированы?'} captionLink={'Регистрация'}>
 
+            <span className='login__inputs'>
                 <label className='login__input-label' htmlFor='login-input-email'>E-mail
             <input
                 className='login__input'
@@ -40,6 +42,7 @@ function Login({name, title, buttonText}) {
                         required
                     />
                 </label>
+            </span>
 
             </FormSection>
 
