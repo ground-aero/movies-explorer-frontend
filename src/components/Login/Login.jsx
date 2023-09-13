@@ -11,7 +11,7 @@ function Login({name, title, buttonText, captionText}) {
         <main className='content'>
 
             <FormSection name={'login'} title={'Рады видеть!'} buttonText={'Войти'}
-                captionText={'Еще не зарегистрированы?'} captionLink={'Регистрация'}>
+                captionText={'Еще не зарегистрированы?'} captionLink={'/signup'} captionLinkText={'Регистрация'}>
 
             <span className='login__inputs'>
                 <label className='login__input-label' htmlFor='login-input-email'>E-mail

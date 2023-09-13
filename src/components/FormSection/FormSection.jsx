@@ -3,7 +3,7 @@ import './FormSection.css';
 import logoIcon from '../../images/logo.svg';
 import {Link} from 'react-router-dom';
 
-function FormSection({ name, title, buttonText, children, captionText, captionLink }) {
+function FormSection({ name, title, buttonText, children, captionText, captionLink, captionLinkText }) {
 
     return (
         <section className='form-sec'>
@@ -20,7 +20,7 @@ function FormSection({ name, title, buttonText, children, captionText, captionLi
                     <button className='btn btn_entry'>{ buttonText }</button>
                     <span className='caption caption_wrap'>
                         <p className='caption__text'>{ captionText }</p>
-                        <Link to='/' className='caption__link'>{ captionLink }</Link>
+                        <Link to={ captionLink } className='caption__link'>{ captionLinkText }</Link>
                     </span>
                 </form>
 

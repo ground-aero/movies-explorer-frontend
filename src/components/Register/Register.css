@@ -1,3 +1,33 @@
 .register {
     outline: 1px dotted gray;
 }
+
+.register__inputs {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.register__input-label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    font-size: 10px;
+    color: #A0A0A0;
+    padding-top: 24px;
+}
+
+.register__input-label:first-child {
+    padding-top: 40px;
+}
+
+.register__input {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    padding-top: 5px;
+    border: 0;
+    border-bottom: 1px solid #E8E8E8;
+}
+
