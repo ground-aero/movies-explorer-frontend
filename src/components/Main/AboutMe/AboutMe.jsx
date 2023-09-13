@@ -6,7 +6,7 @@ import '../../general/content.css';
 function AboutMe() {
 
     return (
-        <section id="about-project" className="about-project content__section">
+        <section id='about-project' className='about-project content__section'>
 
             <h3>Section - AboutMe</h3>
 

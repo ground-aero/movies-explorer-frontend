@@ -13,10 +13,10 @@ function Navigation({ loggedIn, type, rights }) {
             <nav className={`menu menu_wrap`}>
 
                 <Link to='/' className='menu__logo'>
-                    <img className='logo' src={logoIcon} alt="logo"/>
+                    <img className='logo' src={logoIcon} alt='logo'/>
                 </Link>
 
-                {/* переключение значений для блоока "Navigation" inside Header */}
+                {/* переключение значений для блоока 'Navigation' inside Header */}
                 <span className={`menu__links_${ rights }`}>
                     <NavLink to='/movies'
                              className={`menu__link menu__link_${ rights } menu__link_type_${ type } menu__link_${weight}`}>Фильмы</NavLink>
@@ -24,7 +24,7 @@ function Navigation({ loggedIn, type, rights }) {
                              className={`menu__link menu__link_${ rights } menu__link_type_${ type }`}>Сохраненные Фильмы</NavLink>
                 </span>
 
-                {/** логика отображения блока "account entry" */}
+                {/** логика отображения блока 'account entry' */}
                 {loggedIn &&
                 <>
                     <Link to='/profile'

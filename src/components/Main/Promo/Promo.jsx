@@ -5,10 +5,10 @@ import '../../general/content.css';
 
 function Promo() {
     return (
-            <section id="promo" className="promo content__section">
+            <section id='promo' className='promo content__section'>
 
                 <h3>Section - Promo</h3>
-                {/*<div className="promo__elements-wrap">*/}
+                {/*<div className='promo__elements-wrap'>*/}
                 {/*</div>*/}
 
             </section>

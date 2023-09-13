@@ -1,4 +1,4 @@
-// component with navigation for "AboutProject" page
+// component with navigation for 'AboutProject' page
 import React from 'react';
 import './NavTab.css';
 import '../../general/content.css';
@@ -6,7 +6,7 @@ import '../../general/content.css';
 function NavTab() {
 
     return (
-        <section id="navtab" className="navtab content__section">
+        <section id='navtab' className='navtab content__section'>
 
             <h3>Section - NavTab</h3>
 

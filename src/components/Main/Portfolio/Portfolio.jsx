@@ -6,7 +6,7 @@ import '../../general/content.css';
 function Portfolio() {
 
     return (
-        <section id="navtab" className="navtab content__section">
+        <section id='navtab' className='navtab content__section'>
 
             <h3>Section - Portfolio</h3>
 
