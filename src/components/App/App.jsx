@@ -13,7 +13,7 @@ import Footer from '../Footer/Footer';
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = React.useState(false);
+    const [loggedIn, setLoggedIn] = React.useState(true);
 
     function handleLogin() {
         setLoggedIn(true);
@@ -61,7 +61,16 @@ function App() {
                 }
                 />
                 <Route path='/saved-movies' element={<SavedMovies/>}/>
-                <Route path='/profile' element={<Profile/>}/>
+                <Route path='/profile' element={
+                    <>
+                        <Header
+                            loggedIn={loggedIn}
+                            type={'profile'}
+                        />
+                        <Profile/>
+                    </>
+                }
+                />
 
             </Routes>
 

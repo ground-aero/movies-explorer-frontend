@@ -1,3 +1,37 @@
-.profile {
+.register {
     outline: 1px dotted gray;
+}
+
+.profile__inputs {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.profile__input-label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: 11px;
+    color: #000;
+    line-height: 13.3px;
+    padding-top: 24px;
+}
+
+.profile__input-label:first-child {
+    padding-top: 123px;
+}
+
+.profile__input {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    padding-top: 5px;
+    border: 0;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.profile__input_email {
+    border-bottom: none;
 }

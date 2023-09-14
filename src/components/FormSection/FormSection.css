@@ -7,7 +7,7 @@
 }
 
 .form-sec__box {
-    min-height: 560px;
+    /*min-height: 560px;*/
     min-width: 396px;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,11 @@
     font-size: 24px;
     line-height: 29px;
     padding-top: 40px;
+}
+
+.form-sec__title_type_profile {
+    text-align: center;
+    padding-top: 74px;
 }
 
 .form {
@@ -63,6 +68,10 @@
     padding: 16px 0 70px;
 }
 
+.caption_wrap_profile {
+    text-align: center;
+}
+
 .caption__text {
     font-weight: 400;
     font-size: 14px;
@@ -70,6 +79,20 @@
     color: #A0A0A0;
     margin: 0;
     display: inline-block;
+}
+
+.caption__text_profile {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15.7px;
+    color: #000;
+    margin: 0;
+    display: block;
+}
+
+.caption__text_profile:last-of-type {
+    color: #FF3055;
+    padding: 16px 0 70px;
 }
 
 .caption__text:first-of-type {
