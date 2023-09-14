@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom';
 
 function FormSection({ name, title, buttonText, children, captionText, captionLink, captionLinkText, captionLinkEdit, captionLinkLogout }) {
 
-    console.log(name)
     return (
         <section className='form-sec'>
             <div className='form-sec__box'>
@@ -39,7 +38,6 @@ function FormSection({ name, title, buttonText, children, captionText, captionLi
 
                         </span>
                     }
-
 
                 </form>
 

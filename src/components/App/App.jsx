@@ -9,6 +9,7 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import NotFound from '../NotFound/NotFound';
 
 /** @returns {JSX.Element} */
 function App() {
@@ -71,6 +72,7 @@ function App() {
                     </>
                 }
                 />
+                <Route path='*' element={<NotFound/>}/>
 
             </Routes>
 
