@@ -1,4 +1,4 @@
-// component with navigation for 'AboutProject' page
+// component with navigation for 'About' page
 import React from 'react';
 import './NavTab.css';
 import '../../general/content.css';

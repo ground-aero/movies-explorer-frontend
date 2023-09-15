@@ -4,6 +4,7 @@
 
 @import url('./components/general/page.css');
 @import url('./components/general/root.css');
+@import url('./components/general/content.css');
 
 body {
   margin: 0;
