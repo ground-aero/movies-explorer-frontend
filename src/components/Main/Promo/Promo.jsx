@@ -13,8 +13,7 @@ function Promo() {
                         <h1 className='promo_header'>Учебный проект студента факультета Веб-разработки.</h1>
                         <p className='promo_text'>Листайте ниже, чтобы узнать больше про этот проект и его создателя</p>
                     </span>
-                    <HashLink smooth to='/#portfolio' className='promo__link promo__link_more'>Узнать больше</HashLink>
-
+                    <HashLink smooth to='/#about' className='promo__link promo__link_more'>Узнать больше</HashLink>
                 </div>
 
                 <img src={logoGlobe} className='promo__globe-img' alt='logo globe'/>
