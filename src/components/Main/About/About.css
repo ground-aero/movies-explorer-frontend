@@ -1,6 +1,7 @@
 .about {
     height: 608px;
-    padding-left: 70px;
+    /*padding-left: 70px;*/
+    outline: 4px dashed grey;
 }
 
 .about__header_wrap {

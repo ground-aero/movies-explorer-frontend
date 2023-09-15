@@ -1,6 +1,6 @@
 import Promo from './Promo/Promo';
 import NavTab from './NavTab/NavTab';
-import About from './About/About.jsx';
+import About from './About/About';
 import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
