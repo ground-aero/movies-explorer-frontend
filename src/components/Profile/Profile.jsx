@@ -10,37 +10,37 @@ function Profile() {
             <FormSection name={'profile'} title={'Привет, Виталий!'}
                          captionLinkEdit={'Редактировать'} captionLinkLogout={'Выйти из аккаунта'} captionLink={'/'}>
 
-            <span className='profile__inputs'>
-                <label className='profile__input-label' htmlFor='profile-input-name'>Имя
-            <input
-                className='profile__input'
-                // value={email}
-                // onChange={handleChangeName}
-                type='text'
-                autoFocus
-                id='profile-input-name'
-                name='name'
-                tabIndex='1'
-                minLength='2'
-                required
-            />
-                </label>
+                <span className='profile__inputs'>
+                    <label className='profile__input-label' htmlFor='profile-input-name'>Имя
+                <input
+                    className='profile__input'
+                    // value={email}
+                    // onChange={handleChangeName}
+                    type='text'
+                    autoFocus
+                    id='profile-input-name'
+                    name='name'
+                    tabIndex='1'
+                    minLength='2'
+                    required
+                />
+                    </label>
 
-                <label className='profile__input-label' htmlFor='profile-input-email'>E-mail
-            <input
-                className='profile__input profile__input_email'
-                // value={email}
-                // onChange={handleChangeName}
-                type='email'
-                id='profile-input-email'
-                name='email'
-                tabIndex='2'
-                minLength='4'
-                required
-            />
-                </label>
+                    <label className='profile__input-label' htmlFor='profile-input-email'>E-mail
+                <input
+                    className='profile__input profile__input_email'
+                    // value={email}
+                    // onChange={handleChangeName}
+                    type='email'
+                    id='profile-input-email'
+                    name='email'
+                    tabIndex='2'
+                    minLength='4'
+                    required
+                />
+                    </label>
 
-            </span>
+                </span>
 
             </FormSection>
 
