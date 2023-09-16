@@ -1,4 +1,4 @@
-// Component with techs used
+// Component for 'Main' - with techs used
 import './Techs.css';
 import '../../general/content.css';
 
