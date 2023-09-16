@@ -7,9 +7,9 @@ function About() {
     return (
         <section id='about' className='about content__section'> {/* flex, column - */}
 
-            <div className='about__header_wrap'>
-                <h2 className='about__header'>О проекте</h2>
-                <hr className='about__line'/>
+            <div className='sec__header-wrap sec__header-wrap_about'>
+                <h2 className='sec__header'>О проекте</h2>
+                <hr className='sec__line'/>
             </div>
 
             {/*2nd flex-box*/}

@@ -1,24 +1,10 @@
 .techs {
     height: 625px;
-    /*padding-left: 70px;*/
     background-color: #F5F5F5;
 }
 
-.techs__header_wrap {
-    max-width: 1140px;
+.sec__header-wrap_techs {
     padding-top: 100px;
-}
-
-.techs__header {
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 26.6px;
-    letter-spacing: -1.2pt;
-    margin: 0;
-}
-
-.techs__line {
-    margin:23px 0 0;
 }
 
 .article-techs {

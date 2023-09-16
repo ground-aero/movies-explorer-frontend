@@ -1,14 +1,17 @@
-// component with infos about Student.
-import React from 'react';
+// component for 'Main' - about me.
 import './AboutMe.css';
 import '../../general/content.css';
 
 function AboutMe() {
 
     return (
-        <section id='about-project' className='about-project content__section'>
+        <section id='about-me' className='about-me content__section'>
 
-            <h3>Section - AboutMe</h3>
+            <div className='sec__header-wrap sec__header-wrap_aboutme'>
+                <h3 className='sec__header'>Студент</h3>
+                <hr className='sec__line'/>
+            </div>
+
 
         </section>
     );

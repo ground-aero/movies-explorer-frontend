@@ -7,9 +7,9 @@ function Techs() {
     return (
         <section id='techs' className='techs content__section'>
 
-            <div className='techs__header_wrap'>
-                <h3 className='techs__header'>Технологии</h3>
-                <hr className='techs__line'/>
+            <div className='sec__header-wrap sec__header-wrap_techs'>
+                <h3 className='sec__header'>Технологии</h3>
+                <hr className='sec__line'/>
             </div>
 
             <article className='article-techs'>

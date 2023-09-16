@@ -4,12 +4,15 @@
     outline: 4px dashed grey;
 }
 
-.about__header_wrap {
+.sec__header-wrap {
     max-width: 1140px;
+}
+
+.sec__header-wrap_about {
     padding-top: 110px;
 }
 
-.about__header {
+.sec__header {
     font-weight: 400;
     font-size: 22px;
     line-height: 26.6px;
@@ -17,7 +20,7 @@
     margin: 0;
 }
 
-.about__line {
+.sec__line {
     margin:23px 0 0;
 }
 
