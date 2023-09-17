@@ -1,3 +1,11 @@
+.logo {
+    transition: opacity .4s linear;
+}
+
+.logo:hover {
+    opacity: .7;
+}
+
 .form-sec {
     display: flex;
     flex-direction: column;
@@ -49,6 +57,11 @@
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+    transition: opacity .4s linear;
+}
+
+.btn:hover {
+    opacity: .8;
 }
 
 .btn_entry {
@@ -106,4 +119,9 @@
     color: #3456F3;
     text-decoration: none;
     display: inline-block;
+    transition: opacity .4s linear;
+}
+
+.caption__link:hover {
+    opacity: .7;
 }

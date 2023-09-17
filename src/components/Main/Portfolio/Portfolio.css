@@ -40,10 +40,15 @@
     justify-content: space-between;
     height: 70px;
     padding-bottom: 20px;
+    transition: opacity .4s linear;
 }
 
 .portfolio__item:first-of-type {
     padding: 0;
+}
+
+.portfolio__item:hover {
+    opacity: .7;
 }
 
 .sec__line_portfolio {
