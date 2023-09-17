@@ -30,11 +30,30 @@
 }
 
 .portfolio__item {
-    padding-top: 40px;
+    /*padding-top: 20px;*/
     font-weight: 400;
     font-size: 30px;
     line-height: 50px;
     letter-spacing: -0.85pt;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70px;
+    padding-bottom: 20px;
+}
+
+.portfolio__item:first-of-type {
+    padding: 0;
+}
+
+.sec__line_portfolio {
+    margin: 0;
+    padding: 0;
+    height: 1px;
+    background-color: #E8E8E8;
+    border-color: #E8E8E8;
+    border: 0;
 }
 
 .portfolio__link {
