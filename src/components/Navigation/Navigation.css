@@ -79,6 +79,7 @@
     border-radius: 50px;
     padding-right: 3px;
     margin-right: 70px;
+    transition: opacity .4s linear;
 }
 
 .account_wrap_land {
@@ -89,6 +90,9 @@
     background-color: #FFF;
 }
 
+.account_wrap:hover {
+    opacity: 0.7;
+}
 
 .account__text {
     font-weight: 500;
@@ -105,12 +109,6 @@
     background-color: #FFF;
     border-radius: 50px;
     padding: 7.75px;
-    transition: opacity .4s linear;
-}
-
-.account__icon:hover {
-    opacity: .7;
-    cursor: pointer;
 }
 
 /** !loggedIn && land - styles */
@@ -123,11 +121,6 @@
     background-color: #2BE080;
     padding: 8px 20px;
     border-radius: 3px;
-    transition: opacity .4s linear;
-}
-
-.account__link_enter:hover {
-    opacity: .7;
 }
 
 .account__link-text {
