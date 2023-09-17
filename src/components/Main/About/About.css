@@ -16,7 +16,7 @@
     font-weight: 400;
     font-size: 22px;
     line-height: 26.6px;
-    letter-spacing: -1.2pt;
+    letter-spacing: -0.85pt;
     margin: 0;
 }
 
@@ -44,7 +44,8 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    margin: 26px 0 0;
+    margin: 0;
+    padding: 26px 0 0;
 }
 
 .table {

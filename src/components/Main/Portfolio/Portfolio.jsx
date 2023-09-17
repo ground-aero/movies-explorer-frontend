@@ -1,14 +1,37 @@
 // component with links to other projects
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './Portfolio.css';
 import '../../general/content.css';
+import arrowRight from '../../../images/portfolio_arrow-right.svg';
 
 function Portfolio() {
 
     return (
-        <section id='portfolio' className='portfolio content__section'>
+        <section id='portfolio' className='portfolio content__section content__section_inner'>
 
-            <h3>Section - Portfolio</h3>
+            <span className='portfolio__wrap'>
+            <h4 className='portfolio__header'>Portfolio</h4>
+
+            <ul className='portfolio__list'>
+                <li className='portfolio__item'>
+                    <Link to='https://ground-aero.github.io/how-to-learn/' className='portfolio__link' target='_blank'>Статичный сайт
+                        <img src={arrowRight} className='portfolio__link-image' alt='arrow right'/>
+                    </Link>
+                </li>
+                <li className='portfolio__item'>
+                    <Link to='https://ground-aero.github.io/russian-travel/' className='portfolio__link' target='_blank'>Адаптивный сайт
+                        <img src={arrowRight} className='portfolio__link-image' alt='arrow right'/>
+                    </Link>
+                </li>
+                <li className='portfolio__item'>
+                    <Link to='https://ground-aero.github.io/mesto/' className='portfolio__link' target='_blank'>Одностраничное приложение
+                        <img src={arrowRight} className='portfolio__link-image' alt='arrow right'/>
+                    </Link>
+                </li>
+
+            </ul>
+
+            </span>
 
         </section>
     );

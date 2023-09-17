@@ -1,8 +1,60 @@
 .about-me {
     height: 1079px;
+    color: #000;
 }
 
 .sec__header-wrap_aboutme {
     padding-top: 110px;
 }
 
+.article__outer-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 66px;
+}
+
+.article__inner-wrap {
+    min-height: 326px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.article__inner-content {
+
+}
+
+.article__header {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.85pt;
+    margin: 0;
+}
+
+.article__sub-header {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0;
+    padding-top: 18px;
+}
+
+.article__text_about {
+    line-height: 22px;
+    max-width: 600px;
+    padding-right: 15px;
+}
+
+.article__outer-ref {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16.9px;
+    color: #000;
+}
+
+.about-me__photo {
+    max-width: 270px;
+    border-radius: 10px;
+}

@@ -1,9 +1,7 @@
 import Promo from './Promo/Promo';
-import NavTab from './NavTab/NavTab';
 import About from './About/About';
 import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
-import Portfolio from './Portfolio/Portfolio';
 import '../general/content.css';
 import './Main.css';
 
@@ -17,8 +15,7 @@ function Main() {
             <About/>
             <Techs/>
             <AboutMe/>
-                <Portfolio/>
-                <NavTab/>
+                {/*<Portfolio/>*/}
 
         </main>
     );
