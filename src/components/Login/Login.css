@@ -26,3 +26,10 @@
     border: 0;
     border-bottom: 1px solid #E8E8E8;
 }
+
+.login__input:focus {
+    color: #A0A0A0;
+    border-color: #FFF;
+    outline: 0;
+    box-shadow: 0 0 10px rgb(155, 159, 159, .5);
+}
