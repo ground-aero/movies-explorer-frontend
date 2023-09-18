@@ -58,6 +58,7 @@ function App() {
                     <>
                         <Header loggedIn={loggedIn} type={'movies'}/>
                         <Movies loggedIn={loggedIn}/>
+                        <Footer/>
                     </>
                 }
                 />
