@@ -4,14 +4,16 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList() {
     return (
-        <ul className='movies-cardlist'>
-            <>
-            <h4>MoviesCardList +MoviesCard -> for SEC -Movies/ Saved M. </h4>
-            {/*FilterCheckbox - // внутри SearchForm // фильтр с чекбоксом «Только короткометражки»
-            отд. управляемыq компонент FilterCheckbox */}
-            <MoviesCard />
-            </>
-        </ul>
+            <ul className='movies__cards'>
+
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                <MoviesCard />
+                {/*<li className='movies__card'>Card 0</li>*/}
+                {/*<li className='movies__card'>Card 0.1</li>*/}
+
+            </ul>
     );
 }
 

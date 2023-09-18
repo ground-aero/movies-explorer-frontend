@@ -7,16 +7,15 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 
 function Movies() {
     return (
-            <section className=' movies'>
+            <section className='movies'>
 
                 <SearchForm />
 
+                <MoviesCardList />
+
                 {/*<Preloader />*/}
 
-                {/*<MoviesCardList />*/}
-
             </section>
-
     );
 }
 

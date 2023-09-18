@@ -1,8 +1,15 @@
-.movies-card {
+/*.movies-card {*/
+/*    list-style: none;*/
+/*    margin: 0;*/
+/*    max-width: 200px;*/
+/*    background-color: darkgrey;*/
+/*    color: #FFF;*/
+/*    outline: 1px dashed darkred;*/
+/*}*/
+
+.movies__card {
     list-style: none;
-    margin: 0;
-    max-width: 200px;
-    background-color: darkgrey;
-    color: #FFF;
-    outline: 1px dashed darkred;
+    width: 270px;
+    height: 151px;
+    outline: 1px dashed grey;
 }
