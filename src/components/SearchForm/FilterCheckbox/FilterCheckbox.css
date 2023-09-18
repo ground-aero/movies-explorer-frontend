@@ -18,12 +18,19 @@
     width: 34px;
     height: 14px;
     border-radius: 20px;
+    border: none;
     display: flex;
     justify-content: flex-end;
     background-image: url('../../../images/filter_tumbler-on.svg');
     background-repeat: no-repeat;
     background-size: 10px 10px;
     background-position: center right 2px;
+    cursor: pointer;
+    transition: opacity .4s linear;
+}
+
+.filter__btn:hover {
+    opacity: .8;
 }
 
 .filter__header {

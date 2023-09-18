@@ -20,7 +20,6 @@ function Login({name, title, buttonText, captionText}) {
                 // value={email}
                 // onChange={handleChangeName}
                 type='email'
-                autofocus
                 id='login-input-email'
                 name='email'
                 tabIndex='1'

@@ -11,7 +11,7 @@ function Movies() {
 
                 <SearchForm />
 
-                <MoviesCardList />
+                <MoviesCardList type={'movies'}/>
 
                 {/*<Preloader />*/}
 

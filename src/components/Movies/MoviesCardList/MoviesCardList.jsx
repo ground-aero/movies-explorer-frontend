@@ -2,7 +2,7 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList() {
+function MoviesCardList({ type }) {
     return (
         <>
             <ul className='movies__cards'>
@@ -13,10 +13,11 @@ function MoviesCardList() {
                 <MoviesCard />
             </ul>
 
-            <div className='movies__more'>
-                <button className='movies__btn-more' name='movies__btn-more-btn' type='button'>Еще</button>
-            </div>
-
+            {(type === 'movies') &&
+                <div className='movies__more'>
+                    <button className='movies__btn-more' name='movies__btn-more-btn' type='button'>Еще</button>
+                </div>
+            }
         </>
     );
 }

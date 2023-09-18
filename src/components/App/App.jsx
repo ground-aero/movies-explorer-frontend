@@ -57,12 +57,19 @@ function App() {
                 <Route path='/movies' element={
                     <>
                         <Header loggedIn={loggedIn} type={'movies'}/>
-                        <Movies loggedIn={loggedIn}/>
+                        <Movies loggedIn={loggedIn} type='movies'/>
                         <Footer/>
                     </>
                 }
                 />
-                <Route path='/saved-movies' element={<SavedMovies/>}/>
+                <Route path='/saved-movies' element={
+                    <>
+                        <Header loggedIn={loggedIn} type={'movies'}/>
+                        <SavedMovies type='saved-movies'/>
+                        <Footer/>
+                    </>
+                        }
+                />
                 <Route path='/profile' element={
                     <>
                         <Header

@@ -32,8 +32,9 @@
     text-align: center;
     padding: 8px 10.35px;
     border-radius: 25px;
+    transition: opacity .4s linear;
 }
 
-.search__btn_text {
-
+.search__btn:hover {
+    opacity: .7;
 }

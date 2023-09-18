@@ -11,10 +11,14 @@
     list-style: none;
     width: 270px;
     min-height: 230px;
-    outline: 1px dashed grey;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    transition: box-shadow .3s;
+}
+
+.movies__card:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
 }
 
 .card-name__wrap {
@@ -40,11 +44,10 @@
 
 .card__duration {
     margin: 0;
-    padding: 0;
     font-weight: 400;
     font-size: 11px;
     color: #A0A0A0;
-    padding-top: 6px;
+    padding: 6px 0 16px;
 }
 
 /*.card__heart_active {*/
