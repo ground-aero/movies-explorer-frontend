@@ -5,8 +5,6 @@ import accountMan from '../../images/account-man-full.svg';
 import logoIcon from '../../images/logo.svg';
 
 function Navigation({ loggedIn, type, rights }) {
-    // console.log(props.loggedIn)
-    let weight = (type === 'movies') ? 500 : '';
 
     return (
         <>
@@ -19,9 +17,9 @@ function Navigation({ loggedIn, type, rights }) {
                 {/* переключение значений для блоока 'Navigation' inside Header */}
                 <span className={`menu__links_${ rights }`}>
                     <NavLink to='/movies'
-                             className={`menu__link menu__link_${ rights } menu__link_type_${ type } menu__link_${weight}`}>Фильмы</NavLink>
+                             className={({isActive}) => `menu__link_type_${type} menu__link ` + (isActive ? `menu__link_active` : '')}>Фильмы</NavLink>
                     <NavLink to='/saved-movies'
-                             className={`menu__link menu__link_${ rights } menu__link_type_${ type }`}>Сохраненные Фильмы</NavLink>
+                             className={({isActive}) => `menu__link_type_${type} menu__link ` + (isActive ? 'menu__link_active' : '')}>Сохраненные Фильмы</NavLink>
                 </span>
 
                 {/** логика отображения блока 'account entry' */}

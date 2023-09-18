@@ -41,11 +41,7 @@ function App() {
                 <Route exact path='/'
                        element={
                     <>
-                        <Header
-                            loggedIn={loggedIn}
-                            onLogout={onLogout}
-                            type={'land'}
-                        />
+                        <Header loggedIn={loggedIn} type={'land'} onLogout={onLogout}/>
                         <Main/>
                         <Footer/>
                     </>
@@ -64,7 +60,7 @@ function App() {
                 />
                 <Route path='/saved-movies' element={
                     <>
-                        <Header loggedIn={loggedIn} type={'movies'}/>
+                        <Header loggedIn={loggedIn} type={'saved-movies'}/>
                         <SavedMovies type='saved-movies'/>
                         <Footer/>
                     </>
