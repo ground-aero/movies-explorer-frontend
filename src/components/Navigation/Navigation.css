@@ -85,9 +85,10 @@
     align-items: center;
     text-decoration: none;
     height: 32px;
-    border-radius: 50px;
+    border-radius: 25px;
     padding-right: 3px;
     margin-right: 70px;
+    box-shadow: 0 0 12px rgba(30,30,30,.1);
     transition: opacity .4s linear;
 }
 

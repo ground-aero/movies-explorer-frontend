@@ -21,6 +21,14 @@
     padding: 0;
 }
 
+.search__input:focus {
+    color: #A0A0A0;
+    background-color: #FAFAFCFF;
+    border-color: #FFF;
+    outline: 0;
+    box-shadow: 0 0 10px rgba(133, 133, 133, 0.2);
+}
+
 .search__btn {
     height: 34px;
     background-color: #3456F3;
