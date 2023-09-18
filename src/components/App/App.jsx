@@ -14,7 +14,7 @@ import NotFound from '../NotFound/NotFound';
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = React.useState(false);
+    const [loggedIn, setLoggedIn] = React.useState(true);
 
     function handleLogin() {
         setLoggedIn(true);

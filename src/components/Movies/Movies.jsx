@@ -1,22 +1,22 @@
 // Component for page with movies search.
 import '../general/content.css';
+import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 
 function Movies() {
     return (
-        <section className='movies content__section'>
+            <section className=' movies'>
 
-            <h6>MOVIES SEC: SearchForm, Preloader, MoviesCardList, MoviesCard</h6>
+                <SearchForm />
 
-            <SearchForm />
+                {/*<Preloader />*/}
 
-            <Preloader />
+                {/*<MoviesCardList />*/}
 
-            <MoviesCardList />
+            </section>
 
-        </section>
     );
 }
 

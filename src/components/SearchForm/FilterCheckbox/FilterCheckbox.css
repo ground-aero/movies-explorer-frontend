@@ -1,3 +1,35 @@
-.filter-checkbox {
-    outline: 1px dotted green;
+.filter {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.filter_checkbox {
+    padding-top: 33px;
+}
+
+.filter__wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.filter__btn {
+    background-color: #2BE080;
+    width: 34px;
+    height: 14px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-end;
+    background-image: url('../../../images/filter_tumbler-on.svg');
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+    background-position: center right 2px;
+}
+
+.filter__header {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0;
+    padding-left: 14px;
 }

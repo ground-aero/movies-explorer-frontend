@@ -1,18 +1,19 @@
 // component for page with movies search.
 import '../general/content.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
-/*import './SearchForm.css';*/
+import './SearchForm.css';
 
 function SearchForm() {
     return (
-        <section className='search-form'>
+            <form action='' className='search search_form'>
+                <span className='search__wrap'>
+                    <input type='text' className='search__input' placeholder='Фильм'/>
+                    <button className='search__btn'>Найти</button>
+                </span>
 
+                <FilterCheckbox />
 
-            <h4>SearchForm(DIV). with inside /span/ FilterCheckbox</h4>
-            {/* FilterCheckbox - // внутри SearchForm // фильтр с чекбоксом «Только короткометражки» */}
-            <FilterCheckbox />
-
-        </section>
+            </form>
     );
 }
 
