@@ -6,6 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 70px;
 }
 
 .header_type_land {
@@ -18,4 +19,16 @@
 
 .header_type_profile {
     background: #FFF;
+}
+
+@media (max-width: 1024px) {
+    .header_wrap {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header_wrap {
+        padding: 0 14px;
+    }
 }
