@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
 import '../general/page.css'
 import Main from '../Main/Main';
@@ -14,7 +14,7 @@ import NotFound from '../NotFound/NotFound';
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = React.useState(true);
+    const [loggedIn, setLoggedIn] = useState(true);
 
     function handleLogin() {
         setLoggedIn(true);

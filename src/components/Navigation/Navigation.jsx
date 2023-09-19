@@ -3,7 +3,7 @@ import {NavLink, Link} from 'react-router-dom';
 import './Navigation.css';
 import accountMan from '../../images/account-man-full.svg';
 import logoIcon from '../../images/logo.svg';
-import burger from '../../images/burger_size_44.svg';
+import NavBurger from './NavBurger/NavBurger';
 
 function Navigation({ loggedIn, type, rights }) {
 
@@ -22,13 +22,12 @@ function Navigation({ loggedIn, type, rights }) {
                     <NavLink to='/saved-movies'
                              className={({isActive}) => `menu__link_type_${type} menu__link ` + (isActive ? 'menu__link_active' : '')}>Сохраненные Фильмы</NavLink>
 
-                {/* Mobile burger menu ( if loggedIn ) */}
-                    <button className='burger' type='button'>
-                        <img src={burger} className={`burger__img_${type}`} alt='burger menu'/>
-                    </button>
+                    {/* Burger <= 728-px */}
+                    <NavBurger/>
+
                 </span>
 
-                {/** логика отображения блока 'account entry' */}
+                {/** логика отображения 'account' */}
                 {loggedIn &&
                 <>
                     <Link to='/profile'
@@ -39,6 +38,8 @@ function Navigation({ loggedIn, type, rights }) {
                     </Link>
                 </>
                 }
+
+                {/** логика отображения блока 'Регистрация' / Войти' */}
                 {!loggedIn &&
                     <span className='account_wrap'>
                         <Link to='/signup'
@@ -50,12 +51,6 @@ function Navigation({ loggedIn, type, rights }) {
                             <p className='account__link-text account__link-text_active'>Войти</p>
                         </Link>
 
-                        {/*<Link to='/'*/}
-                        {/*      className={`account account_wrap account_wrap_${ type }_hidden`}>*/}
-                        {/*<p className='account__text'>Аккаунт</p>*/}
-                        {/*<img src={accountMan}*/}
-                        {/*     className='account__man' alt='account icon'/>*/}
-                        {/*</Link>*/}
                     </span>
                 }
 
