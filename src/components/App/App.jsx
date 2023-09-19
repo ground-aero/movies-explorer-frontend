@@ -41,7 +41,7 @@ function App() {
                 <Route exact path='/'
                        element={
                     <>
-                        <Header loggedIn={loggedIn} type={'land'} onLogout={onLogout}/>
+                        <Header loggedIn={loggedIn} type='land' onLogout={onLogout}/>
                         <Main/>
                         <Footer/>
                     </>
@@ -52,7 +52,7 @@ function App() {
 
                 <Route path='/movies' element={
                     <>
-                        <Header loggedIn={loggedIn} type={'movies'}/>
+                        <Header loggedIn={loggedIn} type='movies'/>
                         <Movies loggedIn={loggedIn} type='movies'/>
                         <Footer/>
                     </>
@@ -60,7 +60,7 @@ function App() {
                 />
                 <Route path='/saved-movies' element={
                     <>
-                        <Header loggedIn={loggedIn} type={'saved-movies'}/>
+                        <Header loggedIn={loggedIn} type='saved-movies'/>
                         <SavedMovies type='saved-movies'/>
                         <Footer/>
                     </>
@@ -70,7 +70,7 @@ function App() {
                     <>
                         <Header
                             loggedIn={loggedIn}
-                            type={'profile'}
+                            type='profile'
                         />
                         <Profile/>
                     </>

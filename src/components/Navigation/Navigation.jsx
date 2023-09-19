@@ -3,6 +3,7 @@ import {NavLink, Link} from 'react-router-dom';
 import './Navigation.css';
 import accountMan from '../../images/account-man-full.svg';
 import logoIcon from '../../images/logo.svg';
+import burger from '../../images/burger_size_44.svg';
 
 function Navigation({ loggedIn, type, rights }) {
 
@@ -20,6 +21,11 @@ function Navigation({ loggedIn, type, rights }) {
                              className={({isActive}) => `menu__link_type_${type} menu__link ` + (isActive ? `menu__link_active` : '')}>Фильмы</NavLink>
                     <NavLink to='/saved-movies'
                              className={({isActive}) => `menu__link_type_${type} menu__link ` + (isActive ? 'menu__link_active' : '')}>Сохраненные Фильмы</NavLink>
+
+                {/* Mobile burger menu ( if loggedIn ) */}
+                    <button className='burger' type='button'>
+                        <img src={burger} className={`burger__img_${type}`} alt='burger menu'/>
+                    </button>
                 </span>
 
                 {/** логика отображения блока 'account entry' */}
@@ -43,6 +49,13 @@ function Navigation({ loggedIn, type, rights }) {
                               className={`account__link account__link_enter`}>
                             <p className='account__link-text account__link-text_active'>Войти</p>
                         </Link>
+
+                        {/*<Link to='/'*/}
+                        {/*      className={`account account_wrap account_wrap_${ type }_hidden`}>*/}
+                        {/*<p className='account__text'>Аккаунт</p>*/}
+                        {/*<img src={accountMan}*/}
+                        {/*     className='account__man' alt='account icon'/>*/}
+                        {/*</Link>*/}
                     </span>
                 }
 

@@ -9,6 +9,10 @@
     justify-content: space-between;
 }
 
+.burger {
+    display: none;
+}
+
 .menu__links_authorized {
     display: flex;
     min-width: 211px;
@@ -95,6 +99,10 @@
     background-color: #2BE080;
 }
 
+.account_wrap_land_hidden {
+    display: none;
+}
+
 .account_wrap_movies {
     background-color: #FFF;
 }
@@ -124,6 +132,12 @@
 .account__link {
     text-decoration: none;
     padding-right: 30px;
+    transition: opacity .4s linear;
+}
+
+.account__link:hover {
+    opacity: .7;
+    cursor: pointer;
 }
 
 .account__link_enter {
@@ -146,8 +160,38 @@
     color: #000;
 }
 
-.account__link-text:hover {
-    opacity: .7;
-    cursor: pointer;
+@media (max-width: 800px) {
+    .menu__link {
+        display: none;
+    }
+
+    .account_wrap {
+        display: none;
+    }
+    /*mobile*/
+    .burger {
+        display: block;
+        width: 44px;
+        height: 44px;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background-color: inherit;
+        position: absolute;
+        top: 15px;
+        right: 30px;
+    }
+    /* img {type} movies */
+    .burger__img_movies {
+        filter: invert(100%);
+    }
 }
 
+@media (max-width: 600px) {
+    /*mobile*/
+    .burger {
+        width: 40px;
+        height: 43px;
+        right: 16px;
+    }
+}
