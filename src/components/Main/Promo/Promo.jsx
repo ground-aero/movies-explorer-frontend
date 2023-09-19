@@ -11,7 +11,7 @@ function Promo() {
                 <div className='promo__wrap'>
                     <span className='promo__wrap_left'>
                         <h1 className='promo_header'>Учебный проект студента факультета Веб-разработки.</h1>
-                        <p className='promo_text'>Листайте ниже, чтобы узнать больше про этот проект и его создателя</p>
+                        <p className='promo_text'>Листайте ниже, чтобы узнать больше про&nbsp;этот проект и его создателя</p>
                     </span>
                     <HashLink smooth to='/#about' className='promo__link promo__link_more'>Узнать больше</HashLink>
                 </div>
