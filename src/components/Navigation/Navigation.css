@@ -70,7 +70,9 @@
     color: #FFF;
 }
 
-.menu__link_type_movies {
+.menu__link_type_movies,
+.menu__link_type_saved-movies,
+.menu__link_type_profile {
     color: #000;
 }
 
@@ -103,7 +105,8 @@
     display: none;
 }
 
-.account_wrap_movies {
+.account_wrap_movies,
+.account_wrap_profile {
     background-color: #FFF;
 }
 
@@ -165,7 +168,11 @@
         display: none;
     }
 
-    .account_wrap {
+    /*.account_wrap,*/
+    .account_wrap_movies_authorized,
+    .account_wrap_saved-movies_authorized,
+    .account_wrap_land_authorized,
+    .account_wrap_profile_authorized {
         display: none;
     }
 }

@@ -16,22 +16,22 @@ function Navigation({ loggedIn, type, rights }) {
                 </Link>
 
                 {/* переключение значений для блоока 'Navigation' inside Header */}
-                <span className={`menu__links_${ rights }`}>
+                <nav className={`menu__links_${ rights }`}>
                     <NavLink to='/movies'
                              className={({isActive}) => `menu__link_type_${type} menu__link ` + (isActive ? `menu__link_active` : '')}>Фильмы</NavLink>
                     <NavLink to='/saved-movies'
                              className={({isActive}) => `menu__link_type_${type} menu__link ` + (isActive ? 'menu__link_active' : '')}>Сохраненные Фильмы</NavLink>
 
                     {/* Burger <= 728-px */}
-                    <NavBurger/>
+                    <NavBurger type={type}/>
 
-                </span>
+                </nav>
 
                 {/** логика отображения 'account' */}
                 {loggedIn &&
                 <>
                     <Link to='/profile'
-                          className={`account account_wrap account_wrap_${ type }`}>
+                          className={`account account_wrap account_wrap_${ type } account_wrap_${ type }_${rights}`}>
                         <p className='account__text'>Аккаунт</p>
                         <img src={accountMan}
                              className='account__man' alt='account icon'/>
@@ -41,7 +41,7 @@ function Navigation({ loggedIn, type, rights }) {
 
                 {/** логика отображения блока 'Регистрация' / Войти' */}
                 {!loggedIn &&
-                    <span className='account_wrap'>
+                    <nav className='account_wrap'>
                         <Link to='/signup'
                               className={`account__link`}>
                             <p className='account__link-text'>Регистрация</p>
@@ -51,7 +51,7 @@ function Navigation({ loggedIn, type, rights }) {
                             <p className='account__link-text account__link-text_active'>Войти</p>
                         </Link>
 
-                    </span>
+                    </nav>
                 }
 
             </nav>
