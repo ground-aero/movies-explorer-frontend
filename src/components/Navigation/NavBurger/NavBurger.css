@@ -32,7 +32,13 @@
         filter: invert(100%);
         position: relative;
         z-index: 1;
+        transition: opacity .4s linear;
     }
+
+    .burger__img:hover {
+        opacity: .8;
+    }
+
     .overlay {
         visibility: hidden;
         opacity: 0;
@@ -69,6 +75,11 @@
         right: 22px;
         z-index: 3;
         cursor: pointer;
+        transition: opacity .4s linear;
+    }
+
+    .overlay__close:hover {
+        opacity: .8;
     }
 
     .overlay__container {
@@ -114,6 +125,14 @@
     .link_profile {
         position: relative;
         z-index: 3;
+    }
+
+    .link_burger {
+        transition: opacity 4.s linear;
+    }
+
+    .link_burger:hover {
+        opacity: .7;
     }
 
     .link_active {

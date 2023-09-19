@@ -48,10 +48,6 @@
     flex-grow: 1;
 }
 
-.form_entry {
-    /*height: 100%;*/
-}
-
 .btn {
     border: none;
     text-align: center;
@@ -95,21 +91,29 @@
 }
 
 .caption__text_profile {
+    text-decoration: none;
     font-weight: 500;
     font-size: 13px;
     line-height: 15.7px;
-    color: #000;
     margin: 0;
     display: block;
-}
-
-.caption__text_profile:last-of-type {
     color: #FF3055;
     padding: 16px 0 70px;
+    transition: opacity .4s linear;
 }
 
-.caption__text:first-of-type {
-    padding-right: 6px;
+.caption__text_profile:hover {
+    opacity: .7;
+}
+
+.caption__text_profile_btn {
+    border: none;
+    color: #000;
+    background-color: transparent;
+    text-align: center;
+    padding: 0;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
 .caption__link {

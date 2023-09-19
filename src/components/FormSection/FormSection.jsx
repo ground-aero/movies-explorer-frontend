@@ -1,10 +1,20 @@
 // FormSection - universal element - for Profile, Login, Register components
 import './FormSection.css';
 import logoIcon from '../../images/logo.svg';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
-function FormSection({ name, title, buttonText, children, captionText, captionLink, captionLinkText, captionLinkEdit, captionLinkLogout }) {
-
+function FormSection({
+                         name,
+                         title,
+                         buttonText,
+                         children,
+                         captionText,
+                         captionLink,
+                         captionLinkText,
+                         captionLinkEdit,
+                         captionLinkLogout
+})
+{
     return (
         <section className='form-sec'>
             <div className='form-sec__box'>
@@ -33,8 +43,8 @@ function FormSection({ name, title, buttonText, children, captionText, captionLi
                     }
                     {(name === 'profile') &&
                         <span className='caption caption_wrap_profile'>
-                            <p className='caption__text_profile'>{ captionLinkEdit }</p>
-                            <p className='caption__text_profile'>{ captionLinkLogout }</p>
+                            <button type='button' className='caption__text_profile caption__text_profile_btn '>{ captionLinkEdit }</button>
+                            <Link to='/' className='caption__text_profile'>{ captionLinkLogout }</Link>
 
                         </span>
                     }

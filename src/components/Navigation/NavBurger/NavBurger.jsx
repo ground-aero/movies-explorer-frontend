@@ -20,7 +20,7 @@ function NavBurger ({ type, rights }) {
         <>
             {/* Burger toggle */}
             <button onClick={openBurger} className='burger' type='button'>
-                <img src={burger} className={`burger__img_${type}`} alt='burger menu'/>
+                <img src={burger} className={`burger__img burger__img_${type}`} alt='burger menu'/>
             </button>
 
             {/* Overlay opened */}
