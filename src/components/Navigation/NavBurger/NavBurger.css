@@ -128,7 +128,7 @@
     }
 
     .link_burger {
-        transition: opacity 4.s linear;
+        transition: opacity .4s linear;
     }
 
     .link_burger:hover {

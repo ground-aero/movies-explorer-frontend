@@ -99,6 +99,11 @@
 
 .account_wrap_land {
     background-color: #2BE080;
+    transition: opacity .4s linear;
+}
+
+.account_wrap_land:hover {
+    opacity: .8;
 }
 
 .account_wrap_land_hidden {
@@ -106,12 +111,20 @@
 }
 
 .account_wrap_movies,
+.account_wrap_saved-movies,
 .account_wrap_profile {
     background-color: #FFF;
+    transition: opacity .4s linear;
 }
 
-.account_wrap:hover {
-    opacity: 0.7;
+.account_wrap_profile:hover {
+    opacity: .8;
+}
+.account_wrap_movies:hover {
+    opacity: .8;
+}
+.account_wrap_saved-movies:hover {
+    opacity: .8;
 }
 
 .account__text {
@@ -135,18 +148,26 @@
 .account__link {
     text-decoration: none;
     padding-right: 30px;
-    transition: opacity .4s linear;
-}
-
-.account__link:hover {
-    opacity: .7;
-    cursor: pointer;
 }
 
 .account__link_enter {
     background-color: #2BE080;
     padding: 8px 20px;
     border-radius: 3px;
+    transition: opacity .4s linear;
+}
+.account__link_register {
+    transition: opacity .4s linear;
+}
+
+.account__link_enter:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.account__link_register:hover {
+    opacity: .7;
+    cursor: pointer;
 }
 
 .account__link-text {
@@ -156,7 +177,6 @@
     font-size: 12px;
     line-height: 16px;
     margin: 0;
-    transition: opacity .4s linear;
 }
 
 .account__link-text_active {
