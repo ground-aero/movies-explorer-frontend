@@ -64,3 +64,32 @@
 .footer__link:hover {
     opacity: .7;
 }
+
+@media (max-width: 540px) {
+    .footer {
+        min-height: 253px;
+    }
+    .footer__bottom_wrap {
+        padding-top: 30px;
+    }
+    .footer__bottom_wrap {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .footer__items {
+        max-height: 42px;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .footer__item {
+        line-height: 14px;
+    }
+    .footer-link {
+        font-size: 12px;
+    }
+    .footer__year {
+        font-size: 12px;
+        padding-top: 30px;
+    }
+}
