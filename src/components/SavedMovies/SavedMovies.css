@@ -8,3 +8,15 @@
     display: flex;
     height: 140px;
 }
+
+@media (max-width: 768px) {
+    .saved-movies {
+        padding: 0 30px;
+    }
+}
+
+/*@media (max-width: 540px) {*/
+/*    .saved-movies {*/
+/*        padding: 0 14px;*/
+/*    }*/
+/*}*/

@@ -2,9 +2,11 @@
     list-style: none;
     max-width: 270px;
     min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: flex-start;*/
+    position: relative;
+    overflow: hidden;
     transition: box-shadow .3s linear;
 }
 
@@ -12,29 +14,22 @@
     box-shadow: 0 0 15px rgba(30,30,30,.7);
 }
 
-.card__img {
-    max-width: 270px;
+.movies__card_saved-movies {
+
 }
 
-.card-name__wrap {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0;
-    padding: 14px 0 29px;
-    border-bottom: 1px solid #E8E8E8;
+.card__img {
+    max-width: 270px;
 }
 
 .card__name {
     font-weight: 500;
     font-size: 13px;
-}
-
-.card__heart {
-    width: 10px;
-    height: 8.5px;
-    padding-right: 7.5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0 29px;
 }
 
 .card__duration {
@@ -43,11 +38,57 @@
     font-size: 11px;
     color: #A0A0A0;
     padding: 6px 0 16px;
+    display: flex;
+    cursor: pointer;
+    border-top: 1px solid #E8E8E8;
+}
+
+.movies__card .card__btn-wrap {
+    /*display: none;*/
+    opacity: .2;
+    visibility: hidden;
+    transition: opacity .3s ease;
+}
+.movies__card .card__btn-wrap button {
+    width: 9px;
+    height: 9px;
+    transition: opacity .3s ease;
+}
+.card__btn_delete {
+    background-color: #efefef;
+    border: none;
+    border-radius: 50%;
+    background-image: url('../../../images/delete_icon_thin.svg');
+    background-repeat: no-repeat;
+    background-size: 9px 9px;
+    background-position: center;
+    padding: 10px 10px;
+    /*position: relative;*/
+    /*z-index: 2;*/
+    /*overflow: hidden;*/
+    transition: opacity .4s linear;
+    cursor: pointer;
+}
+
+.movies__card .card__name:hover .card__btn-wrap {
+    opacity: 1;
+    visibility: visible;
+}
+.movies__card .card__duration:hover .card__btn-wrap {
+    opacity: 1;
+    visibility: visible;
+}
+
+.card__heart {
+    width: 10px;
+    height: 8.5px;
+    padding-right: 7.5px;
 }
 
 @media (max-width: 768px) {
     .movies__card {
-        width: 100%;
+        max-width: 339px;
+        min-width: 339px;
     }
     .card__img {
         max-width: 339px;

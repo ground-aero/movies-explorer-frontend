@@ -13,12 +13,12 @@ function MoviesCardList({ type, cards }) { // cards: App->Movies->MoviesCardList
         <>
             <ul className='movies__cards'>
 
-                <MoviesCard nameRU={'33 слова о дизайне'} image={cardImg1}/>
-                <MoviesCard nameRU={'Киноальманах «100 лет дизайна»'} image={cardImg2}/>
-                <MoviesCard nameRU={'Бег это свобода'} image={cardImg3}/>
-                <MoviesCard nameRU={'Книготорговцы'} image={cardImg4}/>
-                <MoviesCard nameRU={'Когда я думаю о Германии ночью'} image={cardImg5}/>
-                <MoviesCard nameEN={'Gimme Danger: История Игги и The Stooges'} image={cardImg6}/>
+                <MoviesCard type={ type } nameRU={'33 слова о дизайне'} image={cardImg1}/>
+                <MoviesCard type={ type } nameRU={'Киноальманах «100 лет дизайна»'} image={cardImg2}/>
+                <MoviesCard type={ type } nameRU={'Бег это свобода'} image={cardImg3}/>
+                <MoviesCard type={ type } nameRU={'Книготорговцы'} image={cardImg4}/>
+                <MoviesCard type={ type } nameRU={'Когда я думаю о Германии ночью'} image={cardImg5}/>
+                <MoviesCard type={ type } nameEN={'Gimme Danger: История Игги и The Stooges'} image={cardImg6}/>
 
             </ul>
 
