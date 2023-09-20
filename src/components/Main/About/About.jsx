@@ -14,14 +14,14 @@ function About() {
 
             {/*2nd flex-box*/}
             <article className='articles articles_wrap'>
-                <article className='article'>
+                <div className='article'>
                     <h3 className='article__title'>Дипломный проект включал 5 этапов</h3>
                     <p className='article__text'>Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>
-                </article>
-                <article className='article'>
-                    <h3 className='article__title'>Дипломный проект включал 5 этапов</h3>
-                    <p className='article__text'>Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>
-                </article>
+                </div>
+                <div className='article'>
+                    <h3 className='article__title article__title_bottom'>На выполнение диплома ушло 5 недель</h3>
+                    <p className='article__text'>У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
+                </div>
             </article>
 
             {/*3rd flex-box - table - align-self: flex-end*/}
