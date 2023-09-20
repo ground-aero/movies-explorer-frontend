@@ -72,3 +72,51 @@
     height: 17px;
     text-align: right;
 }
+
+@media (max-width: 768px) {
+    .content__section_inner {
+        padding-top: 90px;
+    }
+    .portfolio__item {
+        font-size: 28px;
+    }
+    .portfolio__item:last-of-type {
+        padding-bottom: 90px;
+    }
+    .portfolio__link-image {
+        height: 16px;
+    }
+    .about-me {
+        min-height: 100%;
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 540px) {
+    .portfolio {
+        min-height: 100%;
+    }
+    .portfolio__header {
+        font-size: 14px;
+    }
+    .portfolio__item {
+        font-size: 28px;
+    }
+    .content__section_inner {
+        padding-top: 70px;
+    }
+    .portfolio__list {
+        padding-top: 40px;
+    }
+    .portfolio__item {
+        font-size: 18px;
+        line-height: 28px;
+        height: 47px;
+    }
+    .portfolio__link-image {
+        width: 11px;
+    }
+    .portfolio__item:last-of-type {
+        padding-bottom: 70px;
+    }
+}

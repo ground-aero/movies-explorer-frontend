@@ -10,7 +10,7 @@ function Portfolio() {
         <section id='portfolio' className='portfolio content__section content__section_inner'>
 
             <span className='portfolio__wrap'>
-            <h4 className='portfolio__header'>Portfolio</h4>
+            <h4 className='portfolio__header'>Портфолио</h4>
 
             <ul className='portfolio__list'>
                 <li className='portfolio__item'>
