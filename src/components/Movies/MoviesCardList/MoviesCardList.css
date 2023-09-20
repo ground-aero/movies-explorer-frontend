@@ -48,5 +48,12 @@
     .movies__btn-more {
         margin: 50px 0 80px;
     }
+}
 
+@media (max-width: 540px) {
+    .movies__cards {
+        grid-template-columns: repeat(auto-fit, 300px);
+        gap: 34px 0;
+        padding-top: 40px;
+    }
 }

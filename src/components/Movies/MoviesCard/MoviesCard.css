@@ -20,6 +20,7 @@
 
 .card__img {
     max-width: 270px;
+    overflow: hidden;
 }
 
 .card__name {
@@ -100,15 +101,24 @@
     }
 }
 
-/*@media (max-width: 540px) {*/
-/*    .movies__card {*/
-/*        padding: 0;*/
-/*        min-height: 100%;*/
-/*    }*/
-/*}*/
-/*.card__heart_active {*/
-/*    background-image: url('../../../images/card_heart_red.svg');*/
-/*    background-repeat: no-repeat;*/
-/*    background-size: 10px 8.5px;*/
-/*    background-position: center right;*/
-/*}*/
+@media (max-width: 540px) {
+    .movies__card {
+        max-width: 300px;
+        min-width: 300px;
+    }
+    .card__img {
+        max-width: 300px;
+        min-width: 300px;
+    }
+    .card__name {
+        font-size: 12px;
+        padding: 14px 0 29px;
+    }
+}
+
+.card__heart_active {
+    background-image: url('../../../images/card_heart_red.svg');
+    background-repeat: no-repeat;
+    background-size: 10px 8.5px;
+    background-position: center right;
+}

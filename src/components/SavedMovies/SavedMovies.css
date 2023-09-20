@@ -15,8 +15,8 @@
     }
 }
 
-/*@media (max-width: 540px) {*/
-/*    .saved-movies {*/
-/*        padding: 0 14px;*/
-/*    }*/
-/*}*/
+@media (max-width: 540px) {
+    .saved-movies {
+        padding: 0 10px;
+    }
+}
