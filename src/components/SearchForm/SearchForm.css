@@ -36,6 +36,7 @@
     cursor: pointer;
     font-weight: 500;
     font-size: 11px;
+    letter-spacing: 0.5pt;
     color: #FFF;
     text-align: center;
     padding: 8px 10.35px;
@@ -45,4 +46,22 @@
 
 .search__btn:hover {
     opacity: .7;
+}
+
+@media (max-width: 768px) {
+    .search_form {
+        /*padding: 0 14px;*/
+        min-height: 100%;
+    }
+    .search__wrap {
+        padding-top: 80px;
+    }
+
+}
+
+@media (max-width: 540px) {
+    .search_form {
+        padding: 0;
+        min-height: 100%;
+    }
 }

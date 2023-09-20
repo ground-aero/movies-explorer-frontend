@@ -1,16 +1,25 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import cardImg1 from '../../../images/card_img_template.svg';
+import cardImg2 from '../../../images/card_img2.svg';
+import cardImg3 from '../../../images/card_img3.svg';
+import cardImg4 from '../../../images/card_img4.svg';
+import cardImg5 from '../../../images/card_img5.svg';
+import cardImg6 from '../../../images/card_img6.svg';
 
-function MoviesCardList({ type }) {
+function MoviesCardList({ type, cards }) { // cards: App->Movies->MoviesCardList
     return (
         <>
             <ul className='movies__cards'>
 
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
-                <MoviesCard />
+                <MoviesCard nameRU={'33 слова о дизайне'} image={cardImg1}/>
+                <MoviesCard nameRU={'Киноальманах «100 лет дизайна»'} image={cardImg2}/>
+                <MoviesCard nameRU={'Бег это свобода'} image={cardImg3}/>
+                <MoviesCard nameRU={'Книготорговцы'} image={cardImg4}/>
+                <MoviesCard nameRU={'Когда я думаю о Германии ночью'} image={cardImg5}/>
+                <MoviesCard nameEN={'Gimme Danger: История Игги и The Stooges'} image={cardImg6}/>
+
             </ul>
 
             {(type === 'movies') &&

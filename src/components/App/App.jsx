@@ -16,6 +16,10 @@ function App() {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(true);
 
+    /** Состояние массива карточек */
+    const [cards, setCards] = useState([]);
+    // console.log(cards);
+
     function handleLogin() {
         setLoggedIn(true);
         navigate('/', {replace: true});
@@ -53,7 +57,7 @@ function App() {
                 <Route path='/movies' element={
                     <>
                         <Header loggedIn={loggedIn} type='movies'/>
-                        <Movies loggedIn={loggedIn} type='movies'/>
+                        <Movies loggedIn={loggedIn} type='movies' cards={cards}/>
                         <Footer/>
                     </>
                 }

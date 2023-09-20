@@ -187,12 +187,21 @@
     .menu__link {
         display: none;
     }
-
     /*.account_wrap,*/
     .account_wrap_movies_authorized,
     .account_wrap_saved-movies_authorized,
     .account_wrap_land_authorized,
     .account_wrap_profile_authorized {
         display: none;
+    }
+}
+
+@media (max-width: 540px) {
+    .account__link-text {
+        font-size: 10px;
+        line-height: 16px;
+    }
+    .account__link_enter {
+        padding: 5px 12px;
     }
 }

@@ -19,7 +19,6 @@
 
 .movies__btn-more {
     margin: 0;
-
     width: 320px;
     min-height: 36px;
     background-color: #F9F9F9;
@@ -28,10 +27,26 @@
     font-size: 12px;
     border: none;
     border-radius: 6px;
+    box-shadow: 0 0 10px rgb(155, 159, 159, .35);
     cursor: pointer;
     transition: opacity .4s linear;
 }
 
 .movies__btn-more:hover {
     opacity: .7;
+}
+
+@media (max-width: 768px) {
+    .movies__cards {
+        grid-template-columns: repeat(auto-fit, 339px);
+        gap: 30px 30px;
+        padding-bottom: 10px;
+    }
+    .movies__more {
+        height: 100%;
+    }
+    .movies__btn-more {
+        margin: 50px 0 80px;
+    }
+
 }
