@@ -44,13 +44,12 @@
     border-top: 1px solid #E8E8E8;
 }
 
-.movies__card .card__btn-wrap {
-    /*display: none;*/
+.movies__card .card__btn-wrap_delete {
     opacity: .2;
     visibility: hidden;
     transition: opacity .3s ease;
 }
-.movies__card .card__btn-wrap button {
+.movies__card .card__btn-wrap_ button {
     width: 9px;
     height: 9px;
     transition: opacity .3s ease;
@@ -64,26 +63,33 @@
     background-size: 9px 9px;
     background-position: center;
     padding: 10px 10px;
-    /*position: relative;*/
-    /*z-index: 2;*/
-    /*overflow: hidden;*/
     transition: opacity .4s linear;
     cursor: pointer;
 }
 
-.movies__card .card__name:hover .card__btn-wrap {
+.movies__card .card__name:hover .card__btn-wrap_delete {
     opacity: 1;
     visibility: visible;
 }
-.movies__card .card__duration:hover .card__btn-wrap {
+.movies__card .card__duration:hover .card__btn-wrap_delete {
     opacity: 1;
     visibility: visible;
 }
 
-.card__heart {
-    width: 10px;
-    height: 8.5px;
-    padding-right: 7.5px;
+.card__btn_heart {
+    background-color: #F9F9F9;
+    border: none;
+    border-radius: 50%;
+    background-image: url('../../../images/card_heart_red.svg');
+    background-repeat: no-repeat;
+    background-size: 9px 9px;
+    background-position: center;
+    padding: 10px 10px;
+    transition: opacity .4s linear;
+}
+.card__btn_heart:hover {
+    opacity: .7;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
