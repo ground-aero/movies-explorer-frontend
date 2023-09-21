@@ -2,8 +2,8 @@
 import { NavLink, Link } from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import './NavBurger.css';
-import burger from '../../../images/burger_white.webp';
-import accountMan from '../../../images/account-man-full.webp';
+import burger from '../../../images/burger_white.svg';
+import accountMan from '../../../images/account-man-full.svg';
 
 function NavBurger ({ type, rights }) {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);

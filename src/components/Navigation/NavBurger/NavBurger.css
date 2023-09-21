@@ -63,7 +63,7 @@
 
     .overlay__close {
         display: block;
-        background-image: url('../../../images/close_icon.webp');
+        background-image: url('../../../images/close_icon.svg');
         background-repeat: no-repeat;
         background-color: transparent;
         width: 22px;

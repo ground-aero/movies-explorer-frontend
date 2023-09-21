@@ -1,8 +1,8 @@
 // NavBar.js
 import {NavLink, Link} from 'react-router-dom';
 import './Navigation.css';
-import accountMan from '../../images/account-man-full.webp';
-import logoIcon from '../../images/logo.webp';
+import accountMan from '../../images/account-man-full.svg';
+import logoIcon from '../../images/logo.svg';
 import NavBurger from './NavBurger/NavBurger';
 
 function Navigation({ loggedIn, type, rights }) {

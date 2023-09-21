@@ -1,12 +1,12 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import cardImg1 from '../../../images/card_img_template.webp';
-import cardImg2 from '../../../images/card_img2.webp';
-import cardImg3 from '../../../images/card_img3.webp';
-import cardImg4 from '../../../images/card_img4.webp';
-import cardImg5 from '../../../images/card_img5.webp';
-import cardImg6 from '../../../images/card_img6.webp';
+import cardImg1 from '../../../images/card_img_template.svg';
+import cardImg2 from '../../../images/card_img2.svg';
+import cardImg3 from '../../../images/card_img3.svg';
+import cardImg4 from '../../../images/card_img4.svg';
+import cardImg5 from '../../../images/card_img5.svg';
+import cardImg6 from '../../../images/card_img6.svg';
 
 function MoviesCardList({ type, cards }) { // cards: App->Movies->MoviesCardList
     return (

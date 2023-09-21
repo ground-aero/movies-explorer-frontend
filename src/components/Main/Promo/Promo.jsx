@@ -2,7 +2,7 @@
 import { HashLink } from 'react-router-hash-link';
 import './Promo.css';
 import '../../general/content.css';
-import logoGlobe from '../../../images/logo-world.webp';
+import logoGlobe from '../../../images/logo-world.svg';
 
 function Promo() {
     return (

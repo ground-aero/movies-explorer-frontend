@@ -1,7 +1,7 @@
 // component for 'Main' - about me, contains 'Portfolio' sub-component.
 import './AboutMe.css';
 import '../../general/content.css';
-import myPhoto from '../../../images/me_squoshed.webp';
+import myPhoto from '../../../images/me_squoshed.svg';
 import Portfolio from '../Portfolio/Portfolio.jsx'
 
 function AboutMe() {
@@ -21,8 +21,9 @@ function AboutMe() {
                     <h5 className='article__sub-header'>Фронтенд-разработчик, 43 года</h5>
                     <p className='article__text article__text_about'>
                         Я родился в Краснодаре, живу в Москве, закончил факультет переводчиков КГТУ. У&nbsp;меня есть жена,
-                        сын и дочь. Я люблю и долгое время работал в авиации, а ещё увлекаюсь прогулками. Недавно начал кодить.
-                        С 2013 года работал в компании Goldair Handling SA. После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и планирую полностью перейти на веб-разработку и программирование.
+                        сын и дочь. Я долгое время работал в авиации, а ещё увлекаюсь прогулками. Недавно начал кодить.
+                        С 2013 года работал в компании Goldair Handling SA. После того, как прошёл курс по веб-разработке, начал заниматься своим пет-проектом, фриланс-заказами.
+                        Планирую полностью перейти на веб-разработку и программирование.
                     </p>
                     </span>
                     {/*justify flex-end*/}
