@@ -1,5 +1,7 @@
 # Макет: light-1
 
+### Ссылка на макет: [Figma 'light-1' template](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=932-3961&mode=design&t=VCMDVvNjAbCo2lft-0)
+
 ### Project / Front domain: [https://ga-movies.nomoredomains.icu.ru](https://ga-movies.nomoredomains.icu.ru)
 
 ### Getting Started with Create React App
