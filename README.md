@@ -1,5 +1,7 @@
 # Макет: light-1
 
+### Project / Front domain: [https://ga-movies.nomoredomains.icu.ru](https://ga-movies.nomoredomains.icu.ru)
+
 ### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
