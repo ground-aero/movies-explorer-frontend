@@ -148,4 +148,11 @@
         height: 43px;
         right: 16px;
     }
+    .overlay__container {
+        width: 100vw;
+        padding: 144px 0 46px;
+    }
+    .link:nth-child(n+2) {
+        margin-top: 24px;
+    }
 }
