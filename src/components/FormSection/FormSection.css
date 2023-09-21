@@ -145,4 +145,18 @@
     .form-sec__title_type_profile {
         padding-top: 70px;
     }
+    .form-sec__logo {
+        padding-top: 56px;
+        align-self: center;
+    }
+    .form-sec__title {
+        text-align: center;
+        padding: 50px 0 80px;
+    }
+    .caption_wrap {
+        padding-bottom: 30px;
+    }
+    .caption__text:first-child {
+        padding-right: 6px;
+    }
 }

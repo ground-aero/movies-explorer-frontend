@@ -38,3 +38,8 @@
     box-shadow: 0 0 10px rgb(155, 159, 159, .5);
 }
 
+@media (max-width: 540px) {
+    .register__input-label:first-child {
+        padding-top: 0;
+    }
+}
