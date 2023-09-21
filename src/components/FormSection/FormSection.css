@@ -159,4 +159,10 @@
     .caption__text:first-child {
         padding-right: 6px;
     }
+    .caption__text {
+        font-size: 12px;
+    }
+    .caption__link {
+        font-size: 12px;
+    }
 }
