@@ -2,7 +2,7 @@
 import '../general/content.css';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../Preloader/Preloader.jsx';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 
 function Movies({ cards, type  }) {
