@@ -129,3 +129,20 @@
 .caption__link:hover {
     opacity: .7;
 }
+
+/*@media (max-width: 768px) {*/
+/*    .header_wrap {*/
+/*        padding: 0 30px;*/
+/*    }*/
+/*}*/
+
+@media (max-width: 540px) {
+    .form-sec__box {
+        min-width: 260px;
+        max-width: 260px;
+        /*flex-grow: 1;*/
+    }
+    .form-sec__title_type_profile {
+        padding-top: 70px;
+    }
+}

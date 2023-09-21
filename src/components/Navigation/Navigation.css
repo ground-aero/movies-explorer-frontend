@@ -183,6 +183,10 @@
     color: #000;
 }
 
+.account_wrap_profile_non-authorized {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .menu__link {
         display: none;
@@ -204,4 +208,5 @@
     .account__link_enter {
         padding: 5px 12px;
     }
+
 }
