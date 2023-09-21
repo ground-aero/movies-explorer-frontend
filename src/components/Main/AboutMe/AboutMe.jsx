@@ -1,7 +1,7 @@
 // component for 'Main' - about me, contains 'Portfolio' sub-component.
 import './AboutMe.css';
 import '../../general/content.css';
-import myPhoto from '../../../images/me_squoshed.jpg';
+import myPhoto from '../../../images/me_squoshed.webp';
 import Portfolio from '../Portfolio/Portfolio.jsx'
 
 function AboutMe() {

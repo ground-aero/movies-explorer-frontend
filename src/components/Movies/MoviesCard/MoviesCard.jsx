@@ -1,7 +1,7 @@
 // component - for single film card.
 import './MoviesCard.css';
-import heartImgRed from '../../../images/card_heart_red.svg';
-import closeIcon from '../../../images/close_icon.svg';
+import heartImgRed from '../../../images/card_heart_red.webp';
+import closeIcon from '../../../images/close_icon.webp';
 
 function MoviesCard({ type, nameRU, nameEN, image }) {
     const name = nameRU ? nameRU : nameEN;

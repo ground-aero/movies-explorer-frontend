@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import './Portfolio.css';
 import '../../general/content.css';
-import arrowRight from '../../../images/portfolio_arrow-right.svg';
+import arrowRight from '../../../images/portfolio_arrow-right.webp';
 
 function Portfolio() {
 

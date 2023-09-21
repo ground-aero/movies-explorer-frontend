@@ -1,6 +1,6 @@
 // FormSection - universal element - for Profile, Login, Register components
 import './FormSection.css';
-import logoIcon from '../../images/logo.svg';
+import logoIcon from '../../images/logo.webp';
 import {Link, NavLink} from 'react-router-dom';
 
 function FormSection({

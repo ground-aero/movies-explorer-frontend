@@ -58,7 +58,7 @@
     background-color: #efefef;
     border: none;
     border-radius: 50%;
-    background-image: url('../../../images/delete_icon_thin.svg');
+    background-image: url('../../../images/delete_icon_thin.webp');
     background-repeat: no-repeat;
     background-size: 9px 9px;
     background-position: center;
@@ -80,7 +80,7 @@
     background-color: #F9F9F9;
     border: none;
     border-radius: 50%;
-    background-image: url('../../../images/card_heart_red.svg');
+    background-image: url('../../../images/card_heart_red.webp');
     background-repeat: no-repeat;
     background-size: 9px 9px;
     background-position: center;
@@ -123,7 +123,7 @@
 }
 
 .card__heart_active {
-    background-image: url('../../../images/card_heart_red.svg');
+    background-image: url('../../../images/card_heart_red.webp');
     background-repeat: no-repeat;
     background-size: 10px 8.5px;
     background-position: center right;
