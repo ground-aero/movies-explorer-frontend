@@ -33,3 +33,20 @@
     color: #3456F3;
     margin-bottom: 60px;
 }
+
+@media (max-width: 540px) {
+    .not-found_page__err {
+        font-size: 80px;
+        line-height: 97px;
+    }
+    .not-found_info__wrap {
+        margin: 329px 0 0;
+    }
+    .not-found_page__text {
+        font-size: 12px;
+        line-height: 14.5px;
+    }
+    .link__back {
+        font-size: 12px;
+    }
+}
