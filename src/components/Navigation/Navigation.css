@@ -31,6 +31,7 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 18px;
+    color: #000;
     transition: opacity .4s linear;
 }
 
@@ -50,11 +51,6 @@
 .menu__link_authorized {
     color: #FFF;
     padding-right: 16px;
-}
-
-.menu__link {
-    color: #000;
-    transition: opacity .4s linear;
 }
 
 .menu__link:last-of-type {
