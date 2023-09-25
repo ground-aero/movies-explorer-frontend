@@ -129,8 +129,7 @@
     line-height: 12px;
     color: #000;
     margin: 0;
-    padding-right: 7px;
-    padding-left: 11px;
+    padding: 0 7px 2px 11px;
 }
 
 .account__man {
@@ -184,6 +183,9 @@
 }
 
 @media (max-width: 768px) {
+    .menu__links_authorized {
+        min-width: 0;
+    }
     .account__link_register {
         padding-right: 30px;
     }

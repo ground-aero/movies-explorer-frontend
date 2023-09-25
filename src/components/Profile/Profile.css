@@ -11,7 +11,7 @@
     font-size: 11px;
     color: #000;
     line-height: 13.3px;
-    padding-top: 24px;
+    padding-top: 16px;
 }
 
 .profile__input-label:first-child {
@@ -23,7 +23,6 @@
     font-size: 14px;
     line-height: 17px;
     color: #000;
-    padding-top: 5px;
     border: 0;
     border-bottom: 1px solid #E8E8E8;
 }
@@ -37,4 +36,25 @@
 
 .profile__input_email {
     border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .profile__input-label:first-child {
+        padding-top: 96px;
+    }
+    .caption_wrap_profile {
+        padding: 192px 0 269px;
+    }
+}
+
+@media (max-width: 540px) {
+    .profile__input-label:first-child {
+        padding-top: 80px;
+    }
+    .caption_wrap_profile {
+        padding: 360px 0 40px;
+    }
+    .caption__text_profile {
+        font-size: 12px;
+    }
 }
