@@ -16,7 +16,7 @@ function Navigation({ loggedIn, type, rights }) {
                 </Link>
 
                 {/* переключение значений для блоока 'Navigation' inside Header */}
-                <nav className={`menu__links_${ rights }`}>
+                <nav className={`menu__links menu__links_${ rights }`}>
                     <NavLink to='/movies'
                              className={({isActive}) => `menu__link_type_${type} menu__link ` + (isActive ? `menu__link_active` : '')}>Фильмы</NavLink>
                     <NavLink to='/saved-movies'

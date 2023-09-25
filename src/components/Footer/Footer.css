@@ -14,7 +14,7 @@
     text-align: center;
     color: #A0A0A0;
     margin: 0;
-    padding: 79px 0 20px;
+    padding: 80px 0 20px;
 }
 
 .footer__line {
@@ -29,7 +29,7 @@
 .footer__bottom_wrap {
     display: flex;
     justify-content: space-between;
-    padding-top: 20px;
+    padding-top: 19px;
 }
 
 .footer__year {
@@ -50,6 +50,7 @@
 
 .footer__item {
     list-style-type: none;
+    line-height: 15.8px;
 }
 
 .footer__link {
@@ -69,6 +70,10 @@
     .footer {
         min-height: 253px;
     }
+    .footer__header {
+        font-size: 12px;
+        line-height: 14.5px;
+    }
     .footer__bottom_wrap {
         padding-top: 30px;
     }
@@ -85,7 +90,7 @@
     .footer__item {
         line-height: 14px;
     }
-    .footer-link {
+    .footer__link {
         font-size: 12px;
     }
     .footer__year {
