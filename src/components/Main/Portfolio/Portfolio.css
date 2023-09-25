@@ -66,11 +66,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    letter-spacing: -1.2px;
 }
 
 .portfolio__link-image {
     height: 17px;
     text-align: right;
+    padding: 4px;
 }
 
 @media (max-width: 768px) {
@@ -113,8 +115,14 @@
         line-height: 28px;
         height: 47px;
     }
+    .portfolio__link {
+        letter-spacing: -0.7px;
+    }
     .portfolio__link-image {
         width: 11px;
+    }
+    .portfolio__item {
+        height: 48px;
     }
     .portfolio__item:last-of-type {
         padding-bottom: 70px;
