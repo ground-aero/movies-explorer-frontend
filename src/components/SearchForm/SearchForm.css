@@ -35,10 +35,10 @@
     cursor: pointer;
     font-weight: 500;
     font-size: 11px;
-    letter-spacing: 0.5pt;
+    letter-spacing: 0.4px;
     color: #FFF;
     text-align: center;
-    padding: 8px 10.35px;
+    padding: 8px 11.35px;
     border-radius: 25px;
     transition: opacity .4s linear;
 }
@@ -71,6 +71,6 @@
         line-height: 22px;
     }
     .search__wrap {
-        padding: 90px 0 9px;
+        padding: 85px 0 9px;
     }
 }

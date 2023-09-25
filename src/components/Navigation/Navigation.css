@@ -185,7 +185,7 @@
 
 @media (max-width: 768px) {
     .account__link_register {
-        padding-right: 15px;
+        padding-right: 30px;
     }
     .menu__link {
         display: none;

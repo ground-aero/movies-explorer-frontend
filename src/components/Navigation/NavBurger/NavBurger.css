@@ -148,6 +148,12 @@
         height: 43px;
         right: 16px;
     }
+    .burger__img_movies,
+    .burger__img_saved-movies,
+    .burger__img_profile {
+        width: 35px;
+        padding: 4px;
+    }
     .overlay__container {
         width: 100vw;
         padding: 144px 0 46px;

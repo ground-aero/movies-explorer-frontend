@@ -38,6 +38,7 @@
     .movies__cards {
         grid-template-columns: repeat(auto-fit, 339px);
         gap: 30px 30px;
+        min-height: 270px;
         padding-bottom: 10px;
     }
     .movies__more {

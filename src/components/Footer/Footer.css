@@ -66,6 +66,13 @@
     opacity: .7;
 }
 
+@media (max-width: 768px) {
+    .footer__header {
+        padding-top: 78px;
+    }
+}
+
+
 @media (max-width: 540px) {
     .footer {
         min-height: 253px;
@@ -73,6 +80,7 @@
     .footer__header {
         font-size: 12px;
         line-height: 14.5px;
+        padding-top: 80px;
     }
     .footer__bottom_wrap {
         padding-top: 30px;

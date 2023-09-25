@@ -95,11 +95,15 @@
     .movies__card {
         max-width: 339px;
         min-width: 339px;
+        max-height: 270px;
     }
     .card__img {
         max-width: 339px;
         min-width: 339px;
         overflow: hidden;
+    }
+    .card__name {
+        padding: 8px 0 30px;
     }
     .card__duration {
         padding-bottom: 0;
@@ -110,14 +114,21 @@
     .movies__card {
         max-width: 300px;
         min-width: 300px;
+        min-height: 246px;
     }
     .card__img {
         max-width: 300px;
         min-width: 300px;
+        min-height: 168px;
     }
     .card__name {
         font-size: 12px;
-        padding: 14px 0 29px;
+        padding: 10px 0 28px;
+        line-height: 14.5px;
+    }
+    .card__duration {
+        font-size: 10px;
+        line-height: 12px;
     }
 }
 
