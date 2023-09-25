@@ -57,16 +57,12 @@
 .about-me__photo {
     max-width: 270px;
     border-radius: 10px;
-    object-fit: cover;
 }
 
 @media (max-width: 768px) {
     .about-me {
         min-height: 994px;
         padding: 0 50px 30px;
-    }
-    .article__inner-wrap {
-        min-height: 100%;
     }
     .sec__header-wrap_aboutme {
         padding-top: 90px;
@@ -88,7 +84,6 @@
     }
     .about-me__photo {
         max-width: 255px;
-        max-height: 307px;
     }
     .content__section_inner {
         padding: 91px 0 0;
@@ -115,7 +110,6 @@
     }
     .about-me__photo {
         max-width: 100%;
-        max-height: 352px;
     }
     .article__header {
         font-size: 30px;
@@ -132,12 +126,6 @@
         line-height: 16px;
     }
     .article__outer-ref {
-        padding-top: 8px;
-    }
-    .article__outer-wrap {
-        padding-top: 59px;
-    }
-    .article__sub-header {
-        padding-top: 19px;
+        padding-top: 40px;
     }
 }

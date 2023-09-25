@@ -18,7 +18,7 @@ function MoviesCard({ type, nameRU, nameEN, image }) {
                 </div>
             </span>
 
-                <span className='card__duration'>1ч 42м</span>
+                <span className='card__duration'>1ч42мин</span>
 
         </li>
     );

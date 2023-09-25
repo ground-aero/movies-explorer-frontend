@@ -14,7 +14,7 @@ function Techs() {
 
             <article className='article-techs'>
                 <h4 className='article-techs__title'>7 технологий</h4>
-                <p className='article-techs__text'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном&nbsp;проекте.</p>
+                <p className='article-techs__text'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
             </article>
 
             <ul className='techs__list'>
