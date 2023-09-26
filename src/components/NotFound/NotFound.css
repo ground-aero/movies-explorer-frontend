@@ -34,7 +34,20 @@
     margin-bottom: 60px;
 }
 
+@media (max-width: 768px) {
+    .not-found_page {
+        min-height: 1024px;
+        justify-content: flex-start;
+    }
+    .link__back {
+        margin: 185px 0 0;
+    }
+}
+
 @media (max-width: 540px) {
+    .not-found_page {
+        min-height: 780px;
+    }
     .not-found_page__err {
         font-size: 80px;
         line-height: 97px;
@@ -45,8 +58,10 @@
     .not-found_page__text {
         font-size: 12px;
         line-height: 14.5px;
+        margin: 12px 0 0;
     }
     .link__back {
         font-size: 12px;
+        margin: 282px 0 0;
     }
 }

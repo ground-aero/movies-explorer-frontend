@@ -10,7 +10,7 @@
     font-weight: 400;
     font-size: 10px;
     color: #A0A0A0;
-    padding-top: 24px;
+    padding-top: 34px;
 }
 
 .register__input-label:first-child {
@@ -34,8 +34,35 @@
     box-shadow: 0 0 10px rgb(155, 159, 159, .5);
 }
 
+.register__err {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FF3055;
+    padding-top: 14px
+}
+
+@media (max-width: 768px) {
+    .btn_entry_register {
+        margin-top: 132px;
+    }
+}
+
 @media (max-width: 540px) {
+    .register__input-label {
+        padding-top: 34px;
+    }
     .register__input-label:first-child {
         padding-top: 0;
     }
+    .register__input-label > input:first-of-type {
+        padding-bottom: 10px;
+    }
+    .register__input-label {
+        padding-top: 25px;
+    }
+    .register__err {
+        padding-top: 5px;
+    }
+
 }

@@ -34,8 +34,31 @@
     box-shadow: 0 0 10px rgb(155, 159, 159, .5);
 }
 
+@media (max-width: 768px) {
+    .login__input-label {
+        height: 45px;
+    }
+    .btn_entry_login {
+        margin-top: 220px;
+    }
+}
+
 @media (max-width: 540px) {
     .login__input-label:first-child {
         padding-top: 0;
     }
+    .form-sec__title_type_login {
+        padding: 50px 0 80px;
+    }
+    .login__input-label > input:first-of-type {
+        padding-bottom: 10px;
+    }
+    .login__input-label {
+        padding-top: 25px;
+    }
+    .btn_entry_login {
+        margin-top: 308px;
+        font-size: 12px;
+    }
+
 }

@@ -12,32 +12,32 @@ function Register() {
 
             <span className='register__inputs'>
                 <label className='register__input-label' htmlFor='register-input-name'>Имя
-            <input
-                className='register__input'
-                // value={email}
-                // onChange={handleChangeName}
-                type='text'
-                autoFocus
-                id='register-input-name'
-                name='name'
-                tabIndex='1'
-                minLength='2'
-                required
-            />
+                    <input
+                        className='register__input'
+                        // value={email}
+                        // onChange={handleChangeName}
+                        type='text'
+                        autoFocus
+                        id='register-input-name'
+                        name='name'
+                        tabIndex='1'
+                        minLength='2'
+                        required
+                    />
                 </label>
 
                 <label className='register__input-label' htmlFor='register-input-email'>E-mail
-            <input
-                className='register__input'
-                // value={email}
-                // onChange={handleChangeName}
-                type='email'
-                id='register-input-email'
-                name='email'
-                tabIndex='2'
-                minLength='4'
-                required
-            />
+                    <input
+                        className='register__input'
+                        // value={email}
+                        // onChange={handleChangeName}
+                        type='email'
+                        id='register-input-email'
+                        name='email'
+                        tabIndex='2'
+                        minLength='4'
+                        required
+                    />
                 </label>
 
                 <label className='register__input-label' htmlFor='register-input-pass'>Пароль
@@ -53,6 +53,9 @@ function Register() {
                         required
                     />
                 </label>
+
+                <span className='register__err'>Что-то пошло не так...</span>
+
             </span>
 
             </FormSection>

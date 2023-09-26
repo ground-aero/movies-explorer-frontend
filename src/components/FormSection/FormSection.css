@@ -15,10 +15,14 @@
 
 .form-sec__box {
     /*min-height: 560px;*/
-    min-width: 410px;
+    min-width: 396px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+}
+
+.form-sec__box_profile {
+    min-width: 410px;
 }
 
 .form-sec__logo {
@@ -87,6 +91,7 @@
     color: #A0A0A0;
     margin: 0;
     display: inline-block;
+    padding-right: 6px;
 }
 
 .caption__text_profile {
@@ -133,6 +138,12 @@
     .form-sec__title_type_profile {
         padding-top: 236px;
     }
+    .caption__text_profile {
+        padding-bottom: 0;
+    }
+    .caption_wrap {
+        padding-bottom: 232px;
+    }
 }
 
 @media (max-width: 540px) {
@@ -141,19 +152,28 @@
         max-width: 260px;
         /*flex-grow: 1;*/
     }
+    .form-sec__title {
+        text-align: center;
+        padding: 70px 0 0;
+    }
     .form-sec__title_type_profile {
         padding-top: 70px;
+    }
+    .form-sec__title_type_register {
+        padding-top: 50px;
+    }
+    .form-sec__title_type_login {
+        padding-top: 50px;
     }
     .form-sec__logo {
         padding-top: 56px;
         align-self: center;
     }
-    .form-sec__title {
-        text-align: center;
-        padding: 70px 0 0;
+    .form-sec__title_type_register {
+        padding: 50px 0 80px;
     }
     .caption_wrap {
-        padding-bottom: 30px;
+        padding: 11px 0 30px;
     }
     .caption__text:first-child {
         padding-right: 6px;
@@ -162,6 +182,10 @@
         font-size: 12px;
     }
     .caption__link {
+        font-size: 12px;
+    }
+    .btn_entry_register {
+        margin-top: 222px;
         font-size: 12px;
     }
 }
