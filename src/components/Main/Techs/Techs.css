@@ -58,10 +58,6 @@
         padding: 0 50px;
         min-height: 558px;
     }
-    .techs__list {
-        padding-top: 50px;
-        flex-wrap: wrap;
-    }
     .sec__header-wrap_techs {
         padding-top: 81px;
     }
@@ -87,6 +83,10 @@
         min-height: 651px;
         padding: 0 18px;
     }
+    .techs__item {
+        width: 84px;
+        line-height: 14.5px;
+    }
     .sec__header-wrap_techs {
         padding-top: 70px;
     }
@@ -107,7 +107,7 @@
         margin: 0 auto;
     }
     .techs__list {
-        padding: 45px 45px 0;
+        padding: 50px 50px 0;
         flex-wrap: wrap;
         justify-content: flex-start;
     }

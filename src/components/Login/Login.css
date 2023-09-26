@@ -4,6 +4,12 @@
     flex-grow: 1;
 }
 
+.login__input-label:first-of-type {
+    padding-top: 40px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E8E8E8;
+}
+
 .login__input-label {
     display: flex;
     flex-direction: column;
@@ -11,10 +17,8 @@
     font-size: 10px;
     color: #A0A0A0;
     padding-top: 24px;
-}
-
-.login__input-label:first-child {
-    padding-top: 40px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E8E8E8;
 }
 
 .login__input {
@@ -24,7 +28,6 @@
     color: #000;
     padding-top: 5px;
     border: 0;
-    border-bottom: 1px solid #E8E8E8;
 }
 
 .login__input:focus {
@@ -37,9 +40,14 @@
 @media (max-width: 768px) {
     .login__input-label {
         height: 45px;
+        padding-bottom: 0;
+    }
+    .login__input-label:first-of-type {
+        /*height: 45px;*/
+        padding-bottom: 0;
     }
     .btn_entry_login {
-        margin-top: 220px;
+        margin-top: 218px;
     }
 }
 

@@ -206,6 +206,9 @@
         font-size: 10px;
         line-height: 16px;
     }
+    .account__link_register {
+        padding-right: 14px;
+    }
     .account__link_enter {
         padding: 5px 12px;
     }

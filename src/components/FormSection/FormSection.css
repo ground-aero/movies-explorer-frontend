@@ -135,6 +135,15 @@
 }
 
 @media (max-width: 768px) {
+    .form-sec__box_register {
+        padding-top: 232px;
+    }
+    .form-sec__box_login {
+        padding-top: 232px;
+    }
+    .form-sec__logo {
+        padding-top: 0;
+    }
     .form-sec__title_type_profile {
         padding-top: 236px;
     }
@@ -152,6 +161,16 @@
         max-width: 260px;
         /*flex-grow: 1;*/
     }
+    .form-sec__box_register {
+        padding-top: 56px;
+    }
+    .form-sec__box_login {
+        padding-top: 56px;
+    }
+    .form-sec__logo {
+        padding-top: 0;
+        align-self: center;
+    }
     .form-sec__title {
         text-align: center;
         padding: 70px 0 0;
@@ -164,10 +183,6 @@
     }
     .form-sec__title_type_login {
         padding-top: 50px;
-    }
-    .form-sec__logo {
-        padding-top: 56px;
-        align-self: center;
     }
     .form-sec__title_type_register {
         padding: 50px 0 80px;
