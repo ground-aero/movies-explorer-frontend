@@ -33,15 +33,15 @@ function NavBurger ({ type, rights }) {
                     {/*<span className={`links links_${ rights }`}>*/}
                     <span className='links links_wrap'>
                         <NavLink to='/'
-                                 className={({isActive}) => `link link_burger link_${type} ` + (isActive ? `link_active` : '')}>Главная</NavLink>
+                                 className={({isActive}) => `link link_${type} ` + (isActive ? `link_active` : '')}>Главная</NavLink>
                         <NavLink to='/movies'
-                                 className={({isActive}) => `link link_burger link_${type} ` + (isActive ? `link_active` : '')}>Фильмы</NavLink>
+                                 className={({isActive}) => `link link_${type} ` + (isActive ? `link_active` : '')}>Фильмы</NavLink>
                         <NavLink to='/saved-movies'
-                                 className={({isActive}) => `link link_burger link_${type} ` + (isActive ? 'link_active' : '')}>Сохраненные Фильмы</NavLink>
+                                 className={({isActive}) => `link link_${type} ` + (isActive ? 'link_active' : '')}>Сохраненные Фильмы</NavLink>
                     </span>
 
                     <NavLink to='/profile'
-                             className={({isActive}) => `account_wrap link link_burger ` + (isActive ? 'link_active' : '')}>
+                             className={({isActive}) => `account_wrap link link_account ` + (isActive ? 'link_active' : '')}>
                         <p className='account__text'>Аккаунт</p>
                         <img src={accountMan} className='account__man' alt='account icon'/>
                     </NavLink>

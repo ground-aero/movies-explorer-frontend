@@ -1,6 +1,6 @@
 .burger,
 .overlay__close,
-.link_burger {
+.link {
     display: none;
 }
 
@@ -45,7 +45,7 @@
         transition: visibility 0.4s, opacity 0.4s linear;
         display: flex;
         flex-direction: column;
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         right: 0;
@@ -53,7 +53,8 @@
         z-index: 1;
         justify-content: center;
         align-items: center;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.3);
+        height: 1024px;
     }
 
     .overlay_opened {
@@ -71,8 +72,8 @@
         background-position: center;
         border: none;
         position: absolute;
-        top: 22px;
-        right: 22px;
+        top: 26px;
+        right: 26px;
         z-index: 3;
         cursor: pointer;
         transition: opacity .4s linear;
@@ -83,27 +84,29 @@
     }
 
     .overlay__container {
-        width: 65vw;
+        width: 68vw;
         background: #FFF;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        padding: 159px 0 90px;
+        padding: 159px 0 86px;
         box-sizing: border-box;
-        position: fixed;
+        position: absolute;
         top: 0;
         right: 0;
-        bottom: 0;
-        z-index: 2;
+        z-index: 1;
+        height: 100%;
     }
 
     .links_wrap {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 20px 0;
+        position: relative;
     }
 
     .link {
@@ -112,37 +115,44 @@
         text-decoration: none;
         font-weight: 500;
         font-size: 18px;
-        line-height: 21.8px;
+        line-height: 23px;
+        padding-bottom: 4px;
+        border-bottom: 2px solid #FFF;
+        transition: opacity .4s linear;
     }
 
-    .link:nth-child(n+2) {
-        margin-top: 28px;
+    .link_active {
+        text-decoration: none;
+        border-bottom: 2px solid #000;
+        line-height: 23px;
     }
 
     .link_land,
     .link_movies,
     .link_saved-movies,
     .link_profile {
-        position: relative;
-        z-index: 3;
+        /*position: relative;*/
+        /*z-index: 3;*/
+    }
+    .link_account {
+        border-bottom: none;
     }
 
-    .link_burger {
-        transition: opacity .4s linear;
-    }
-
-    .link_burger:hover {
+    .link:hover {
         opacity: .7;
-    }
-
-    .link_active {
-        text-decoration: underline;
     }
 
 }
 
 @media (max-width: 540px) {
     /*mobile*/
+    .overlay {
+        height: 100%;
+    }
+    .overlay_opened {
+        visibility: visible;
+        opacity: 1;
+    }
     .burger {
         width: 40px;
         height: 43px;
@@ -156,9 +166,22 @@
     }
     .overlay__container {
         width: 100vw;
-        padding: 144px 0 46px;
+        padding: 124px 0 42px;
+        height: 780px;
     }
-    .link:nth-child(n+2) {
-        margin-top: 24px;
+    .overlay__close {
+        top: 18px;
+        right: 18px;
     }
+    .links_wrap {
+        gap: 0;
+    }
+    .link {
+        line-height: 22px;
+        margin-top: 19px;
+    }
+    .link_active {
+        line-height: 24px;
+    }
+
 }

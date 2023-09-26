@@ -14,7 +14,7 @@ import NotFound from '../NotFound/NotFound';
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
 
     /** Состояние массива карточек */
     const [cards, setCards] = useState([]);
