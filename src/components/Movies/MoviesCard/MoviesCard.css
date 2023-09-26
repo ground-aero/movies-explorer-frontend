@@ -53,17 +53,21 @@
     height: 9px;
     transition: opacity .3s ease;
 }
-.card__btn_delete {
-    background-color: #efefef;
+
+.card__btn {
+    background-color: #F9F9F9;
+    background-repeat: no-repeat;
     border: none;
     border-radius: 50%;
-    background-image: url('../../../images/delete_icon_thin.svg');
-    background-repeat: no-repeat;
-    background-size: 8px 8px;
     background-position: center;
-    padding: 8px 8px;
     transition: opacity .4s linear;
     cursor: pointer;
+}
+
+.card__btn_delete {
+    background-image: url('../../../images/delete_icon_thin.svg');
+    background-size: 8px 8px;
+    padding: 8px 8px;
 }
 
 .movies__card .card__name:hover .card__btn-wrap_delete {
@@ -76,17 +80,13 @@
 }
 
 .card__btn_heart {
-    background-color: #F9F9F9;
-    border: none;
-    border-radius: 50%;
-    background-image: url('../../../images/card_heart_red.svg');
-    background-repeat: no-repeat;
-    background-size: 10px 8.5px;
-    background-position: center;
-    padding: 10px 12px;
-    transition: opacity .4s linear;
+    background-image: url('../../../images/card_heart_grey.svg');
+    background-size: 10px 10px;
+    padding: 10px 10px;
 }
+
 .card__btn_heart:hover {
+    background-image: url('../../../images/card_heart_red.svg');
     opacity: .7;
     cursor: pointer;
 }
