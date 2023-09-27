@@ -35,6 +35,9 @@
 }
 
 @media (max-width: 768px) {
+    .not-found_info__wrap {
+        margin: 408px 0 0;
+    }
     .not-found_page {
         min-height: 1024px;
         justify-content: flex-start;
