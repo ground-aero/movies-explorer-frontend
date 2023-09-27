@@ -27,8 +27,10 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 8px 0 27px;
+    align-items: flex-start;
+    /*padding: 8px 0 27px;*/
+    padding: 10px 0 0;
+    height: 47px;
 }
 
 .card__duration {
@@ -103,9 +105,10 @@
         overflow: hidden;
     }
     .card__name {
-        padding: 8px 0 30px;
+        padding: 12px 0 0;
     }
     .card__duration {
+        padding-top: 3px;
         padding-bottom: 0;
     }
 }
@@ -120,15 +123,18 @@
         max-width: 300px;
         min-width: 300px;
         min-height: 168px;
+        max-height: 168px;
     }
     .card__name {
         font-size: 12px;
-        padding: 10px 0 28px;
+        padding: 14px 0 0;
         line-height: 14.5px;
+        height: 43px;
     }
     .card__duration {
         font-size: 10px;
         line-height: 12px;
+        padding-top: 4px;
     }
 }
 
