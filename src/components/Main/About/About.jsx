@@ -5,7 +5,7 @@ import '../../general/content.css';
 function About() {
 
     return (
-        <section id='about' className='about content__section'> {/* flex, column - */}
+        <section id='about' className='sec about content__section'> {/* flex, column - */}
 
             <div className='sec__header-wrap sec__header-wrap_about'>
                 <h2 className='sec__header'>О проекте</h2>
@@ -27,12 +27,12 @@ function About() {
             {/*3rd flex-box - table - align-self: flex-end*/}
             <ul className='table'>
                 <li className='table-cell'>
-                    <p className='table-row table-row_left'>1 неделя</p>
-                    <p className='table-row table-row_right'>4 недели</p>
+                    <p className='table-row table-row_theme_primary'>1 неделя</p>
+                    <p className='table-row table-row_theme_secondary'>4 недели</p>
                 </li>
                 <li className='table-cell'>
-                    <p className='table-row table-row_left table-row_tech'>Back-end</p>
-                    <p className='table-row table-row_right table-row_tech'>Front-end</p>
+                    <p className='table-row table-row_theme_primary table-row_type_tech'>Back-end</p>
+                    <p className='table-row table-row_theme_secondary table-row_type_tech'>Front-end</p>
                 </li>
 
             </ul>

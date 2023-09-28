@@ -5,7 +5,7 @@ import '../../general/content.css';
 function Techs() {
 
     return (
-        <section id='techs' className='techs content__section'>
+        <section id='techs' className='sec techs content__section'>
 
             <div className='sec__header-wrap sec__header-wrap_techs'>
                 <h3 className='sec__header'>Технологии</h3>

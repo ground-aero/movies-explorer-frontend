@@ -7,7 +7,7 @@ import arrowRight from '../../../images/portfolio_arrow-right.svg';
 function Portfolio() {
 
     return (
-        <section id='portfolio' className='portfolio content__section content__section_inner'>
+        <section id='portfolio' className='portfolio content-section content-section_inner'>
 
             <span className='portfolio__wrap'>
             <h4 className='portfolio__header'>Портфолио</h4>

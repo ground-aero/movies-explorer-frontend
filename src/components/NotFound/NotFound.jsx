@@ -13,7 +13,7 @@ function NotFound() {
                     <p className='not-found_page__err'>404</p>
                     <p className='not-found_page__text'>Страница не найдена</p>
                 </span>
-                <Link onClick={() => navigate(-1)} className='link__back'>Назад</Link>
+                <Link onClick={() => navigate(-1)} className='link-back'>Назад</Link>
             </section>
         </main>
     );

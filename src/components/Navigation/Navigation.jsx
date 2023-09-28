@@ -41,7 +41,7 @@ function Navigation({ loggedIn, type, rights }) {
 
                 {/** логика отображения блока 'Регистрация' / Войти' */}
                 {!loggedIn &&
-                    <nav className={`account_wrap account_wrap_${ type }_${rights}`}>
+                    <nav className={`account account_wrap account_wrap_${ type }_${rights}`}>
                         <Link to='/signup'
                               className={`account__link account__link_register `}>
                             <p className='account__link-text'>Регистрация</p>

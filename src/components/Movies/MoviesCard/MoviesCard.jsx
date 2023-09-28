@@ -8,7 +8,7 @@ function MoviesCard({ type, nameRU, nameEN, image }) {
     const btnIcon = (type === 'movies') ? 'heart' : 'delete';
 
     return (
-        <li className={`movies__card movies__card_${ type }`}>
+        <li className={`card card_type_${ type }`}>
             <img src={ image } className='card__img' alt='card image'/>
 
             <span className='card__name'>{ name }

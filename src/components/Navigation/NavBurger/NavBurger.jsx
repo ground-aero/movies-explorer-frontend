@@ -20,7 +20,7 @@ function NavBurger ({ type, rights }) {
         <>
             {/* Burger toggle */}
             <button onClick={openBurger} className='burger' type='button'>
-                <img src={burger} className={`burger__img burger__img_${type}`} alt='burger menu'/>
+                <img src={burger} className={`burger__img burger__img_type_${type}`} alt='burger menu'/>
             </button>
 
             {/* Overlay opened */}
@@ -33,15 +33,15 @@ function NavBurger ({ type, rights }) {
                     {/*<span className={`links links_${ rights }`}>*/}
                     <span className='links links_wrap'>
                         <NavLink to='/'
-                                 className={({isActive}) => `link link_${type} ` + (isActive ? `link_active` : '')}>Главная</NavLink>
+                                 className={({isActive}) => `link link_type_${type} ` + (isActive ? `link_active` : '')}>Главная</NavLink>
                         <NavLink to='/movies'
-                                 className={({isActive}) => `link link_${type} ` + (isActive ? `link_active` : '')}>Фильмы</NavLink>
+                                 className={({isActive}) => `link link_type_${type} ` + (isActive ? `link_active` : '')}>Фильмы</NavLink>
                         <NavLink to='/saved-movies'
-                                 className={({isActive}) => `link link_${type} ` + (isActive ? 'link_active' : '')}>Сохраненные Фильмы</NavLink>
+                                 className={({isActive}) => `link link_type_${type} ` + (isActive ? 'link_active' : '')}>Сохраненные Фильмы</NavLink>
                     </span>
 
                     <NavLink to='/profile'
-                             className={({isActive}) => `account_wrap link link_account ` + (isActive ? 'link_active' : '')}>
+                             className={({isActive}) => `account account_wrap link link_type_account ` + (isActive ? 'link_active' : '')}>
                         <p className='account__text'>Аккаунт</p>
                         <img src={accountMan} className='account__man' alt='account icon'/>
                     </NavLink>

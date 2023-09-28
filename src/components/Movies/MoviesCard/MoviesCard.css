@@ -1,4 +1,4 @@
-.movies__card {
+.card {
     list-style: none;
     max-width: 270px;
     /*min-height: 100%;*/
@@ -8,11 +8,11 @@
     transition: box-shadow .3s linear;
 }
 
-.movies__card:hover {
+.card:hover {
     box-shadow: 0 0 15px rgba(30,30,30,.7);
 }
 
-.movies__card_saved-movies {
+.card_saved-movies {
 
 }
 
@@ -44,13 +44,13 @@
     border-top: 1px solid #E8E8E8;
 }
 
-.movies__card .card__btn-wrap_delete {
+.card .card__btn-wrap_delete {
     opacity: .2;
     visibility: hidden;
     transition: opacity .3s ease;
     padding-right: 5px;
 }
-.movies__card .card__btn-wrap_ button {
+.card .card__btn-wrap_ button {
     width: 9px;
     height: 9px;
     transition: opacity .3s ease;
@@ -72,11 +72,11 @@
     padding: 8px 8px;
 }
 
-.movies__card .card__name:hover .card__btn-wrap_delete {
+.card .card__name:hover .card__btn-wrap_delete {
     opacity: 1;
     visibility: visible;
 }
-.movies__card .card__duration:hover .card__btn-wrap_delete {
+.card .card__duration:hover .card__btn-wrap_delete {
     opacity: 1;
     visibility: visible;
 }
@@ -94,7 +94,7 @@
 }
 
 @media (max-width: 768px) {
-    .movies__card {
+    .card {
         max-width: 339px;
         min-width: 339px;
         max-height: 270px;
@@ -114,7 +114,7 @@
 }
 
 @media (max-width: 540px) {
-    .movies__card {
+    .card {
         max-width: 300px;
         min-width: 300px;
         min-height: 246px;

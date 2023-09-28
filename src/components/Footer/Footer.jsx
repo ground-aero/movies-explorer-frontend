@@ -4,13 +4,13 @@ import './Footer.css';
 
 function Footer () {
     return (
-        <footer className='footer content__section'>
+        <footer className='footer'>
 
             <h3 className='footer__header'>Учебный проект Яндекс.Практикум х BeatFilm.</h3>
             <hr className='footer__line'/>
 
             {/* flex: <- space-between -> */}
-            <div className='footer__bottom footer__bottom_wrap'>
+            <div className='footer__bottom'>
 
                 <p className='footer__year'>© 2023</p>
                 <ul className='footer__items'>

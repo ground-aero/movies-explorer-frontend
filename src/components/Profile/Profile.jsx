@@ -28,7 +28,7 @@ function Profile() {
 
                     <label className='profile__input-label' htmlFor='profile-input-email'>E-mail
                 <input
-                    className='profile__input profile__input_email'
+                    className='profile__input profile__input_type_email'
                     // value={email}
                     // onChange={handleChangeName}
                     type='email'

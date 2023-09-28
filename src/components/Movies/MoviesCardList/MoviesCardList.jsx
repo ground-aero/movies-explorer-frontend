@@ -11,7 +11,7 @@ import cardImg6 from '../../../images/card_img6.svg';
 function MoviesCardList({ type, cards }) { // cards: App->Movies->MoviesCardList
     return (
         <>
-            <ul className='movies__cards'>
+            <ul className='cards'>
 
                 <MoviesCard type={ type } nameRU={'33 слова о дизайне'} image={cardImg1}/>
                 <MoviesCard type={ type } nameRU={'Киноальманах «100 лет дизайна»'} image={cardImg2}/>
@@ -31,7 +31,7 @@ function MoviesCardList({ type, cards }) { // cards: App->Movies->MoviesCardList
 
             {(type === 'movies') &&
                 <div className='movies__more'>
-                    <button className='movies__btn-more' name='movies__btn-more-btn' type='button'>Ещё</button>
+                    <button className='movies__btn-more' name='movies__btn-more' type='button'>Ещё</button>
                 </div>
             }
         </>

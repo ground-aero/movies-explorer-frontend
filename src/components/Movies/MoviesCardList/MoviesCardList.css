@@ -1,4 +1,4 @@
-.movies__cards {
+.cards {
     padding: 70px 0 0;
     list-style: none;
     display: grid;
@@ -35,11 +35,12 @@
 }
 
 @media (max-width: 768px) {
-    .movies__cards {
+    .cards {
         grid-template-columns: repeat(auto-fit, 339px);
         gap: 30px 30px;
         min-height: 270px;
         padding-bottom: 10px;
+        justify-content: center;
     }
     .movies__more {
         height: 100%;
@@ -50,12 +51,14 @@
 }
 
 @media (max-width: 540px) {
-    .movies__cards {
+    .cards {
         grid-template-columns: repeat(auto-fit, 300px);
         gap: 34px 0;
         padding-top: 40px;
+        justify-content: center;
     }
     .movies__btn-more {
+        width: 240px;
         margin: 51px 0 80px;
     }
 }

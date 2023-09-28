@@ -25,9 +25,9 @@
     }
 
     /* img {type}: movies, saved-movies, profile */
-    .burger__img_movies,
-    .burger__img_saved-movies,
-    .burger__img_profile {
+    .burger__img_type_movies,
+    .burger__img_type_saved-movies,
+    .burger__img_type_profile {
         color: #FFF;
         filter: invert(100%);
         position: relative;
@@ -127,14 +127,14 @@
         line-height: 23px;
     }
 
-    .link_land,
-    .link_movies,
-    .link_saved-movies,
-    .link_profile {
+    .link_type_land,
+    .link_type_movies,
+    .link_type_saved-movies,
+    .link_type_profile {
         /*position: relative;*/
         /*z-index: 3;*/
     }
-    .link_account {
+    .link_type_account {
         border-bottom: none;
     }
 
@@ -158,9 +158,9 @@
         height: 43px;
         right: 16px;
     }
-    .burger__img_movies,
-    .burger__img_saved-movies,
-    .burger__img_profile {
+    .burger__img_type_movies,
+    .burger__img_type_saved-movies,
+    .burger__img_type_profile {
         width: 35px;
         padding: 4px;
     }

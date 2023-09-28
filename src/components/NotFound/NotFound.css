@@ -25,7 +25,7 @@
     text-align: center;
 }
 
-.link__back {
+.link-back {
     text-decoration: none;
     font-weight: 400;
     font-size: 14px;
@@ -42,7 +42,7 @@
         min-height: 1024px;
         justify-content: flex-start;
     }
-    .link__back {
+    .link-back {
         margin: 185px 0 0;
     }
 }
@@ -63,7 +63,7 @@
         line-height: 14.5px;
         margin: 12px 0 0;
     }
-    .link__back {
+    .link-back {
         font-size: 12px;
         margin: 282px 0 0;
     }
