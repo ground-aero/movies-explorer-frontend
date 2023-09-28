@@ -2,7 +2,6 @@
 import { NavLink, Link } from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import './NavBurger.css';
-// import burger from '../../../images/burger_white.svg';
 import accountMan from '../../../images/account-man-full.svg';
 
 function NavBurger ({ type, rights }) {
@@ -20,7 +19,6 @@ function NavBurger ({ type, rights }) {
         <>
             {/* Burger toggle */}
             <button onClick={openBurger} className={`burger burger_type_${type}`} type='button'>
-                {/*<img src={burger} className={`burger__img burger__img_type_${type}`} alt='burger menu'/>*/}
             </button>
 
             {/* Overlay opened */}
