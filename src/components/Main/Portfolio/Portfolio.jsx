@@ -2,7 +2,6 @@
 import { Link } from 'react-router-dom';
 import './Portfolio.css';
 import '../../general/content.css';
-import arrowRight from '../../../images/portfolio_arrow-right.svg';
 
 function Portfolio() {
 
@@ -15,19 +14,19 @@ function Portfolio() {
             <ul className='portfolio__list'>
                 <li className='portfolio__item'>
                     <Link to='https://ground-aero.github.io/how-to-learn/' className='portfolio__link' target='_blank'>Статичный сайт
-                        <img src={arrowRight} className='portfolio__link-image' alt='arrow right'/>
+                        <span className='portfolio__link-icon'></span>
                     </Link>
                 </li>
                 <li className='portfolio__item'>
                     <hr className='sec__line sec__line_portfolio'/>
                     <Link to='https://ground-aero.github.io/russian-travel/' className='portfolio__link' target='_blank'>Адаптивный сайт
-                        <img src={arrowRight} className='portfolio__link-image' alt='arrow right'/>
+                        <span className='portfolio__link-icon'></span>
                     </Link>
                 </li>
                 <li className='portfolio__item'>
                     <hr className='sec__line sec__line_portfolio'/>
                     <Link to='https://ground-aero.github.io/mesto/' className='portfolio__link' target='_blank'>Одностраничное приложение
-                        <img src={arrowRight} className='portfolio__link-image' alt='arrow right'/>
+                        <span className='portfolio__link-icon'></span>
                     </Link>
                 </li>
 

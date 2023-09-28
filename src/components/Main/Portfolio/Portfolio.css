@@ -72,10 +72,21 @@
     letter-spacing: -1.2px;
 }
 
-.portfolio__link-image {
+.portfolio__link-icon {
+    position: relative;
     height: 17px;
-    text-align: right;
+    width: 17px;
     padding: 4px;
+}
+
+.portfolio__link-icon:before {
+    content: '';
+    background: url('../../../images/portfolio_arrow-right.svg') no-repeat right center;
+    background-size: 17px;
+    position: relative;
+    display: block;
+    height: 17px;
+    width: 17px;
 }
 
 @media (max-width: 768px) {
@@ -90,9 +101,6 @@
     }
     .portfolio__item:last-of-type {
         padding-bottom: 90px;
-    }
-    .portfolio__link-image {
-        height: 16px;
     }
     .about-me {
         min-height: 100%;
@@ -127,9 +135,14 @@
     .portfolio__link {
         letter-spacing: -0.7px;
     }
-    .portfolio__link-image {
-        width: 11px;
+    .portfolio__link-icon {
         height: 11px;
+        width: 11px;
+    }
+    .portfolio__link-icon:before {
+        background-size: 11px;
+        height: 11px;
+        width: 11px;
     }
     .portfolio__item {
         height: 48px;

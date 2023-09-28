@@ -114,7 +114,10 @@
         min-height: 585px;
     }
     .sec__header-wrap_about {
-        padding-top: 91px;
+        padding-top: 90px;
+    }
+    .article:first-of-type {
+        padding-right: 35px;
     }
     .article:last-of-type {
         padding-left: 0;
