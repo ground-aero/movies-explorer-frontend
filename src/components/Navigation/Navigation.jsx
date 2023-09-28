@@ -42,11 +42,11 @@ function Navigation({ loggedIn, type, rights }) {
                 {!loggedIn &&
                     <nav className={`account account_${ rights } account_type_${ type }_${rights}`}>
                         <Link to='/signup'
-                              className={`account__link account__link_register `}>
+                              className={`account__link account__link_type_register `}>
                             <p className='account__link-text'>Регистрация</p>
                         </Link>
                         <Link to='/signin'
-                              className={`account__link account__link_enter `}>
+                              className={`account__link account__link_type_enter `}>
                             <p className='account__link-text account__link-text_active'>Войти</p>
                         </Link>
 

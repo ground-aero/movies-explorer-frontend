@@ -139,22 +139,22 @@
     padding-right: 30px;
 }
 
-.account__link_enter {
+.account__link_type_enter {
     background-color: #2BE080;
     padding: 8px 20px;
     border-radius: 3px;
     transition: opacity .4s linear;
 }
-.account__link_register {
+.account__link_type_register {
     transition: opacity .4s linear;
 }
 
-.account__link_enter:hover {
+.account__link_type_enter:hover {
     opacity: .7;
     cursor: pointer;
 }
 
-.account__link_register:hover {
+.account__link_type_register:hover {
     opacity: .7;
     cursor: pointer;
 }
@@ -180,7 +180,7 @@
     .menu__links_authorized {
         min-width: 0;
     }
-    .account__link_register {
+    .account__link_type_register {
         padding-right: 30px;
     }
     .menu__link {
@@ -200,10 +200,10 @@
         font-size: 10px;
         line-height: 16px;
     }
-    .account__link_register {
+    .account__link_type_register {
         padding-right: 14px;
     }
-    .account__link_enter {
+    .account__link_type_enter {
         padding: 5px 12px;
     }
 
