@@ -2,7 +2,6 @@
 import { NavLink, Link } from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import './NavBurger.css';
-import accountMan from '../../../images/account-man-full.svg';
 
 function NavBurger ({ type, rights }) {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
@@ -39,9 +38,9 @@ function NavBurger ({ type, rights }) {
                     </span>
 
                     <NavLink to='/profile'
-                             className={({isActive}) => `account account_wrap link link_type_account ` + (isActive ? 'link_active' : '')}>
+                             className={({isActive}) => `account link link_type_account ` + (isActive ? 'link_active' : '')}>
                         <p className='account__text'>Аккаунт</p>
-                        <img src={accountMan} className='account__man' alt='account icon'/>
+                        {/*<img src={accountMan} className='account__man' alt='account icon'/>*/}
                     </NavLink>
                     {/*</span>*/}
                 </aside>

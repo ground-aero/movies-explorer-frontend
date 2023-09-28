@@ -127,13 +127,6 @@
         line-height: 23px;
     }
 
-    .link_type_land,
-    .link_type_movies,
-    .link_type_saved-movies,
-    .link_type_profile {
-        /*position: relative;*/
-        /*z-index: 3;*/
-    }
     .link_type_account {
         border-bottom: none;
     }
@@ -145,7 +138,6 @@
 }
 
 @media (max-width: 540px) {
-    /*mobile*/
     .overlay {
         height: 100%;
     }

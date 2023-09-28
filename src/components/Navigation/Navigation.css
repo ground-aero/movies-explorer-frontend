@@ -35,19 +35,6 @@
     transition: opacity .4s linear;
 }
 
-.menu__link_active {
-    font-weight: 500;
-    color: green;
-}
-
-.menu__link_saved-movies_active {
-    font-weight: 500;
-}
-
-.menu__link_movies_active {
-    font-weight: 500;
-}
-
 .menu__link_authorized {
     color: #FFF;
     padding-right: 16px;
@@ -72,6 +59,10 @@
     color: #000;
 }
 
+.menu__link_active {
+    font-weight: 500;
+}
+
 .menu__logo {
     height: 38px;
     padding: 0;
@@ -82,44 +73,47 @@
     opacity: .7;
 }
 
-.account_wrap {
+.account {
     display: flex;
     align-items: center;
     text-decoration: none;
     height: 32px;
     border-radius: 25px;
-    padding-right: 1px;
+    padding-right: 3px;
     box-shadow: 0 0 12px rgba(30,30,30,.1);
-    transition: opacity .4s linear;
+    transition: all .4s linear;
 }
 
-.account_wrap_land {
+.account:after {
+    content: '';
+    background-image: url('../../images/account-man-full.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #FFF;
+    border-radius: 25px;
+    background-size: 11.5px;
+    padding: 6px;
+    width: 15px;
+    height: 15px;
+}
+
+.account_non-authorized:after {
+    display: none;
+}
+
+.account_type_land {
     background-color: #2BE080;
     transition: opacity .4s linear;
 }
 
-.account_wrap_land:hover {
-    opacity: .8;
-}
-
-.account_wrap_land_hidden {
-    display: none;
-}
-
-.account_wrap_movies,
-.account_wrap_saved-movies,
-.account_wrap_profile {
+.account_type_movies,
+.account_type_saved-movies,
+.account_type_profile {
     background-color: #FFF;
     transition: opacity .4s linear;
 }
 
-.account_wrap_profile:hover {
-    opacity: .8;
-}
-.account_wrap_movies:hover {
-    opacity: .8;
-}
-.account_wrap_saved-movies:hover {
+.account:hover {
     opacity: .8;
 }
 
@@ -178,7 +172,7 @@
     color: #000;
 }
 
-.account_wrap_profile_non-authorized {
+.account_type_profile_non-authorized {
     display: none;
 }
 
@@ -192,11 +186,11 @@
     .menu__link {
         display: none;
     }
-    /*.account_wrap,*/
-    .account_wrap_movies_authorized,
-    .account_wrap_saved-movies_authorized,
-    .account_wrap_land_authorized,
-    .account_wrap_profile_authorized {
+    /*.account,*/
+    .account_type_movies_authorized,
+    .account_type_saved-movies_authorized,
+    .account_type_land_authorized,
+    .account_type_profile_authorized {
         display: none;
     }
 }
