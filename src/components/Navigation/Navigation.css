@@ -172,7 +172,9 @@
     color: #000;
 }
 
-.account_type_profile_non-authorized {
+.account_type_profile_non-authorized,
+.account_type_movies_non-authorized,
+.account_type_saved-movies_non-authorized{
     display: none;
 }
 
