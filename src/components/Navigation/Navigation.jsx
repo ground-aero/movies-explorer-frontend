@@ -12,7 +12,7 @@ function Navigation({ loggedIn, type, rights }) {
             <nav className={`menu menu_wrap`}>
 
                 <Link to='/' className='menu__logo'>
-                    <img className='logo' src={logoIcon} alt='logo'/>
+                    <img className='logo' src={logoIcon} alt='логотип'/>
                 </Link>
 
                 {/* переключение значений для блоока 'Navigation' inside Header */}

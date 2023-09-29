@@ -28,7 +28,7 @@ function AboutMe() {
                     {/*justify flex-end*/}
                     <a href='https://github.com/ground-aero' className='article__outer-ref' target='_blank' rel='noopener noreferrer'>Github</a>
                 </article>
-                <img src={myPhoto} className='about-me__photo' alt='my photo'/>
+                <img src={myPhoto} className='about-me__photo' alt='мое фото'/>
             </div>
 
             <Portfolio/>

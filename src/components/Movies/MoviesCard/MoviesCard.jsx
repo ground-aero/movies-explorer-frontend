@@ -7,7 +7,7 @@ function MoviesCard({ type, nameRU, nameEN, image }) {
 
     return (
         <li className={`card card_type_${ type }`}>
-            <img src={ image } className='card__img' alt='card image'/>
+            <img src={ image } className='card__img' alt='изображение карточки'/>
 
             <div className='wrap'>
             <h1 className='card__name'>{ name }</h1>

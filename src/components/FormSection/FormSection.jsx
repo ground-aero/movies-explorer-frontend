@@ -21,7 +21,7 @@ function FormSection({
                 {/** отображение лого в зависимости от компонента (кроме: profile) */}
                 {(name === 'login' || name === 'register') &&
                     <Link to='/' className='form-sec__logo'>
-                        <img className='logo' src={logoIcon} alt='logo'/>
+                        <img className='logo' src={logoIcon} alt='логотип'/>
                     </Link>
                 }
 
