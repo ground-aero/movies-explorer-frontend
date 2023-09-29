@@ -17,6 +17,7 @@ function Register() {
                         // value={email}
                         // onChange={handleChangeName}
                         type='text'
+                        placeholder='введите Ваше имя'
                         autoFocus
                         id='register-input-name'
                         name='name'
@@ -32,6 +33,7 @@ function Register() {
                         // value={email}
                         // onChange={handleChangeName}
                         type='email'
+                        placeholder='введите Ваш email'
                         id='register-input-email'
                         name='email'
                         tabIndex='2'
@@ -46,6 +48,7 @@ function Register() {
                         // value={password}
                         // onChange={handleChangeName}
                         type='password'
+                        placeholder='введите Ваш пароль'
                         id='register-input-pass'
                         name='password'
                         tabIndex='3'

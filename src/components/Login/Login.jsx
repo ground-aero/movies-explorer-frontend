@@ -20,6 +20,7 @@ function Login({name, title, buttonText, captionText}) {
                 // value={email}
                 // onChange={handleChangeName}
                 type='email'
+                placeholder='введите Ваш email'
                 id='login-input-email'
                 name='email'
                 tabIndex='1'
@@ -34,6 +35,7 @@ function Login({name, title, buttonText, captionText}) {
                         // value={password}
                         // onChange={handleChangeName}
                         type='password'
+                        placeholder='введите Ваш пароль'
                         id='login-input-pass'
                         name='password'
                         tabIndex='2'

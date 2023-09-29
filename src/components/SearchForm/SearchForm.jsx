@@ -5,7 +5,7 @@ import './SearchForm.css';
 
 function SearchForm() {
     return (
-            <form action='' className='search search_form'>
+            <form className='search search_form' name='search' >
                 <span className='search__wrap'>
                     <input type='text' className='search__input' placeholder='Фильм'/>
                     <button className='search__btn'>Найти</button>

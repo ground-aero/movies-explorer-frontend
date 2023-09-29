@@ -20,6 +20,7 @@ function Profile() {
                     autoFocus
                     id='profile-input-name'
                     name='name'
+                    placeholder='введите Ваше имя'
                     tabIndex='1'
                     minLength='2'
                     required
@@ -33,6 +34,7 @@ function Profile() {
                     // onChange={handleChangeName}
                     type='email'
                     id='profile-input-email'
+                    placeholder='введите Ваш email'
                     name='email'
                     tabIndex='2'
                     minLength='4'
