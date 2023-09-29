@@ -25,7 +25,7 @@ function FormSection({
                     </Link>
                 }
 
-                <h2 className={`form-sec__title form-sec__title_type_${ name }`}>{ title }</h2>
+                <h1 className={`form-sec__title form-sec__title_type_${ name }`}>{ title }</h1>
 
                 <form className='form form_entry' name={ name }>
 

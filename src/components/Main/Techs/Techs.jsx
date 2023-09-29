@@ -9,7 +9,6 @@ function Techs() {
 
             <div className='sec__header-wrap sec__header-wrap_techs'>
                 <h3 className='sec__header'>Технологии</h3>
-                <hr className='sec__line'/>
             </div>
 
             <article className='article-techs'>

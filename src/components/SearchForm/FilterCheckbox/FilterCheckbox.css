@@ -11,25 +11,49 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    position: relative;
 }
 
-.filter__btn {
-    background-color: #2BE080;
+/* чекбокс */
+.filter__checkbox {
+    position: relative;
     width: 34px;
     height: 14px;
-    border-radius: 20px;
     border: none;
-    display: flex;
-    justify-content: flex-end;
-    background-image: url('../../../images/filter_tumbler-on.svg');
-    background-repeat: no-repeat;
-    background-size: 10px 10px;
-    background-position: center right 2px;
-    cursor: pointer;
-    transition: opacity .4s linear;
+    -webkit-appearance: none;
+    background-color: #2BE080;
+    border-radius: 20px;
+    transition: all .4s linear;
 }
 
-.filter__btn:hover {
+.filter__checkbox:checked {
+    background: #EBEBEB;
+}
+
+/* тумблер */
+.filter__checkbox:before {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 20px;
+    background-color: #FFF;
+    transform: scale(0.8);
+    transition: .2s;
+}
+.filter__checkbox:after {
+    content: '';
+    display: none;
+}
+
+.filter__checkbox:checked:before {
+    right: 20px;
+}
+
+.filter__checkbox:hover {
     opacity: .8;
 }
 
@@ -49,10 +73,13 @@
         flex-direction: row-reverse;
     }
     .filter__header {
-        padding: 0 18px 0 0;
+        padding: 0 16px 0 0;
     }
     .filter_checkbox {
         padding: 30px 0 61px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
     }
 }
 

@@ -25,7 +25,7 @@ function NavBurger ({ type, rights }) {
 
                 <button onClick={closeBurger} className='overlay__close'></button>
 
-                <aside className='overlay__container'>
+                <nav className='overlay__container'>
 
                     {/*<span className={`links links_${ rights }`}>*/}
                     <span className='links links_wrap'>
@@ -43,7 +43,7 @@ function NavBurger ({ type, rights }) {
                         {/*<img src={accountMan} className='account__man' alt='account icon'/>*/}
                     </NavLink>
                     {/*</span>*/}
-                </aside>
+                </nav>
 
             </div>
 

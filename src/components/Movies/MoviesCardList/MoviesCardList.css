@@ -38,7 +38,7 @@
 @media (max-width: 768px) {
     .cards {
         grid-template-columns: repeat(auto-fit, 339px);
-        gap: 30px 30px;
+        gap: 32px 30px;
         min-height: 270px;
         padding-bottom: 10px;
         justify-content: center;
@@ -47,7 +47,7 @@
         height: 100%;
     }
     .movies__btn-more {
-        margin: 50px 0 80px;
+        margin: 53px 0 80px;
     }
 }
 

@@ -56,6 +56,11 @@
     font-size: 14px;
     line-height: 16.9px;
     color: #000;
+    transition: opacity .4s linear;
+}
+
+.article__outer-ref:hover {
+    opacity: .7;
 }
 
 .about-me__photo {

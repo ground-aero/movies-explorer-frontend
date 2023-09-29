@@ -21,16 +21,23 @@
     overflow: hidden;
 }
 
+.wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0 0;
+    height: 47px;
+}
+
+.card__btn-wrap {
+    margin: 0;
+}
+
 .card__name {
     font-weight: 500;
     font-size: 13px;
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    /*padding: 8px 0 27px;*/
-    padding: 10px 0 0;
-    height: 47px;
+    margin: 0;
 }
 
 .card__duration {
@@ -105,7 +112,7 @@
         overflow: hidden;
     }
     .card__name {
-        padding: 12px 0 0;
+        padding: 2px 0 0;
     }
     .card__duration {
         padding-top: 3px;

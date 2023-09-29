@@ -9,7 +9,7 @@ function Portfolio() {
         <section id='portfolio' className='portfolio content-section content-section_inner'>
 
             <span className='portfolio__wrap'>
-            <h4 className='portfolio__header'>Портфолио</h4>
+            <h2 className='portfolio__header'>Портфолио</h2>
 
             <ul className='portfolio__list'>
                 <li className='portfolio__item'>
@@ -18,13 +18,11 @@ function Portfolio() {
                     </Link>
                 </li>
                 <li className='portfolio__item'>
-                    <hr className='sec__line sec__line_portfolio'/>
                     <Link to='https://ground-aero.github.io/russian-travel/' className='portfolio__link' target='_blank'>Адаптивный сайт
                         <span className='portfolio__link-icon'></span>
                     </Link>
                 </li>
                 <li className='portfolio__item'>
-                    <hr className='sec__line sec__line_portfolio'/>
                     <Link to='https://ground-aero.github.io/mesto/' className='portfolio__link' target='_blank'>Одностраничное приложение
                         <span className='portfolio__link-icon'></span>
                     </Link>

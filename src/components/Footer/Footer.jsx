@@ -7,7 +7,6 @@ function Footer () {
         <footer className='footer'>
 
             <h3 className='footer__header'>Учебный проект Яндекс.Практикум х BeatFilm.</h3>
-            <hr className='footer__line'/>
 
             {/* flex: <- space-between -> */}
             <div className='footer__bottom'>

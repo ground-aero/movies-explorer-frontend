@@ -9,10 +9,10 @@ function NotFound() {
     return (
         <main className='content'>
             <section className='not-found not-found_page'>
-                <span className='not-found_info__wrap'>
-                    <p className='not-found_page__err'>404</p>
+                <div className='not-found_info__wrap'>
+                    <h1 className='not-found_page__err'>404</h1>
                     <p className='not-found_page__text'>Страница не найдена</p>
-                </span>
+                </div>
                 <Link onClick={() => navigate(-1)} className='link-back'>Назад</Link>
             </section>
         </main>

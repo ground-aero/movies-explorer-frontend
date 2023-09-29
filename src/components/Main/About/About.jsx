@@ -9,7 +9,6 @@ function About() {
 
             <div className='sec__header-wrap sec__header-wrap_about'>
                 <h2 className='sec__header'>О проекте</h2>
-                <hr className='sec__line'/>
             </div>
 
             {/*2nd flex-box*/}
