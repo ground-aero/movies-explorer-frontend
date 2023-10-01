@@ -12,10 +12,6 @@
     box-shadow: 0 0 15px rgba(30,30,30,.7);
 }
 
-.card_saved-movies {
-
-}
-
 .card__img {
     max-width: 270px;
     overflow: hidden;
@@ -30,7 +26,18 @@
 }
 
 .card__btn-wrap {
-    margin: 0;
+    margin-top: -4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50px;
+    background-color: #F9F9F9;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.card__btn-wrap_delete {
+    align-items: center;
 }
 
 .card__name {
@@ -51,47 +58,44 @@
     border-top: 1px solid #E8E8E8;
 }
 
-.card .card__btn-wrap_delete {
-    opacity: .2;
-    visibility: hidden;
-    transition: opacity .3s ease;
-    padding-right: 5px;
-}
-.card .card__btn-wrap_ button {
-    width: 9px;
-    height: 9px;
-    transition: opacity .3s ease;
-}
-
 .card__btn {
-    background-color: #F9F9F9;
     background-repeat: no-repeat;
+    background-position: center;
     border: none;
     border-radius: 50%;
-    background-position: center;
     transition: opacity .4s linear;
     cursor: pointer;
 }
 
 .card__btn_delete {
-    background-image: url('../../../images/delete_icon_thin.svg');
-    background-size: 8px 8px;
-    padding: 8px 8px;
+    background: url('../../../images/delete_icon_thin.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 8px;
+    background-color: #F9F9F9;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
 }
 
-.card .card__name:hover .card__btn-wrap_delete {
+.wrap:hover .card__btn_delete {
     opacity: 1;
     visibility: visible;
+    background-color: #F9F9F9;
 }
-.card .card__duration:hover .card__btn-wrap_delete {
+.card__btn_delete:hover {
     opacity: 1;
     visibility: visible;
+    background-color: #F9F9F9;
 }
 
 .card__btn_heart {
     background-image: url('../../../images/card_heart_grey.svg');
-    background-size: 10px 10px;
-    padding: 10px 10px;
+    background-repeat: no-repeat;
+    background-size: 10px 8.5px;
+    padding: 12px 12px;
+    background-position: center center;
 }
 
 .card__btn_heart:hover {
@@ -99,6 +103,10 @@
     opacity: .7;
     cursor: pointer;
 }
+
+/*.card__btn_heart_active {*/
+/*    background-image: url('../../../images/card_heart_red.svg');*/
+/*}*/
 
 @media (max-width: 768px) {
     .card {
@@ -132,9 +140,12 @@
         min-height: 168px;
         max-height: 168px;
     }
+    .card__btn-wrap {
+        margin-top: -3px;
+    }
     .card__name {
         font-size: 12px;
-        padding: 14px 0 0;
+        padding: 4px 0 0;
         line-height: 14.5px;
         height: 43px;
     }
@@ -143,11 +154,4 @@
         line-height: 12px;
         padding-top: 4px;
     }
-}
-
-.card__heart_active {
-    background-image: url('../../../images/card_heart_red.svg');
-    background-repeat: no-repeat;
-    background-size: 10px 8.5px;
-    background-position: center right;
 }
