@@ -38,6 +38,10 @@
     box-shadow: 0 0 10px rgb(155, 159, 159, .5);
 }
 
+.btn_entry_login {
+    margin-top: 110px;
+}
+
 @media (max-width: 768px) {
     .login__input-label {
         height: 45px;
@@ -48,7 +52,7 @@
         padding-bottom: 0;
     }
     .btn_entry_login {
-        margin-top: 218px;
+        margin-top: 110px;
     }
 }
 
@@ -66,7 +70,7 @@
         padding-top: 25px;
     }
     .btn_entry_login {
-        margin-top: 308px;
+        margin-top: 159px;
         font-size: 12px;
     }
 

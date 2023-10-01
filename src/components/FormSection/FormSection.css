@@ -74,13 +74,6 @@
     color: #FFF;
 }
 
-.btn_entry_register {
-    margin-top: 110px;
-}
-.btn_entry_login {
-    margin-top: 110px;
-}
-
 .caption_wrap {
     display: inline-block;
     text-align: center;
@@ -206,8 +199,5 @@
     .caption__link {
         font-size: 12px;
     }
-    .btn_entry_register {
-        margin-top: 222px;
-        font-size: 12px;
-    }
+
 }
