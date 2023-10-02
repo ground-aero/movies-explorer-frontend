@@ -5,6 +5,25 @@
     min-height:  405px;
 }
 
+.profile__input-wrap {
+    padding-top: 17px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    position: relative;
+    border-bottom: 1px solid #E8E8E8;
+    transition: border-bottom .3s ease;
+}
+
+.profile__input-wrap:first-of-type {
+    padding-top: 123px;
+}
+.profile__input-wrap:nth-child(2) {
+    border-bottom: none;
+}
+
 .profile__input-label {
     display: flex;
     flex-direction: column;
@@ -12,36 +31,51 @@
     font-size: 11px;
     color: #000;
     line-height: 13.3px;
-    padding-top: 16px;
+    width: 20%;
+    /*padding-top: 16px;*/
 }
 
 .profile__input-label:first-child {
-    padding-top: 123px;
+    /*padding-top: 123px;*/
 }
 
 .profile__input {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 11px;
     line-height: 17px;
     color: #000;
     border: 0;
-    border-bottom: 1px solid #E8E8E8;
-}
-
-.profile__input:focus {
-    color: #A0A0A0;
-    border-color: #FFF;
     outline: 0;
-    box-shadow: 0 0 10px rgb(155, 159, 159, .5);
+    text-align: right;
+    width: 80%;
+    padding: 0;
 }
 
-.profile__input_type_email {
-    border-bottom: none;
+.profile__input:focus + .profile__input-label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    color: #A0A0A0;
+    border-bottom: 1px solid #3456F3;
+    /*box-shadow: 0 0 10px rgb(155, 159, 159, .5);*/
 }
+
+/*.profile__input_type_email {*/
+/*    border-bottom: none;*/
+/*}*/
 
 @media (max-width: 768px) {
-    .profile__input-label:first-child {
-        padding-top: 96px;
+    .profile__input-wrap:first-of-type {
+        padding-top: 97px;
+    }
+    /*.profile__input-label:first-child {*/
+    /*    padding-top: 96px;*/
+    /*}*/
+    .profile__inputs {
+        min-height: 177px;
     }
     .caption_wrap_profile {
         padding: 192px 0 269px;
@@ -49,11 +83,14 @@
 }
 
 @media (max-width: 540px) {
-    .profile__input-label:first-child {
-        padding-top: 80px;
+    .profile__input-wrap:first-of-type {
+        padding-top: 81px;
     }
+    /*.profile__input-label:first-child {*/
+    /*    padding-top: 80px;*/
+    /*}*/
     .caption_wrap_profile {
-        padding: 360px 0 40px;
+        padding: 344px 0 40px;
     }
     .caption__text_profile {
         font-size: 12px;
