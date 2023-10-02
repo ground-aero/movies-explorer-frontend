@@ -12,7 +12,7 @@ function FilterCheckbox() {
             <div className='filter__wrap'>
                 <input className='filter__checkbox' type='checkbox' id='filter-short'/>
             </div>
-            <h5 className='filter__header'>Короткометражки</h5>
+            <label className='filter__header' htmlFor='filter-short'>Короткометражки</label>
             {/*FilterCheckbox - // внутри SearchForm // фильтр с чекбоксом «Только короткометражки» */}
 
         </div>
