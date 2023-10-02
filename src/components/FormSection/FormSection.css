@@ -58,6 +58,7 @@
     text-decoration: none;
     cursor: pointer;
     transition: opacity .4s linear;
+    padding: 0;
 }
 
 .btn:hover {
@@ -187,6 +188,9 @@
     }
     .form-sec__title_type_register {
         padding: 50px 0 80px;
+    }
+    .btn_entry {
+        font-size: 12px;
     }
     .caption_wrap {
         padding: 11px 0 30px;
