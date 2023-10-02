@@ -5,15 +5,17 @@ import SearchForm from '../SearchForm/SearchForm';
 
 function SavedMovies({ type }) {
     return (
-        <section className='saved-movies'>
+        <main className='content'>
+            <section className='saved-movies'>
 
-            <SearchForm />
+                <SearchForm />
 
-            <MoviesCardList type={ type } />
+                <MoviesCardList type={ type } />
 
-            <span className='span__box'></span>
+                <span className='span-box'></span>
 
-        </section>
+            </section>
+        </main>
     );
 }
 

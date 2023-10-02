@@ -1,4 +1,4 @@
-// FormSection - universal element - for Profile, Login, Register components
+// FormSection - universal element - for Profile*, Login, Register components
 import './FormSection.css';
 import logoIcon from '../../images/logo.svg';
 import {Link, NavLink} from 'react-router-dom';
@@ -11,8 +11,6 @@ function FormSection({
                          captionText,
                          captionLink,
                          captionLinkText,
-                         captionLinkEdit,
-                         captionLinkLogout
 })
 {
     return (
@@ -27,7 +25,7 @@ function FormSection({
 
                 <h1 className={`form-sec__title form-sec__title_type_${ name }`}>{ title }</h1>
 
-                <form className='form form_entry' name={ name }>
+                <form className={`form form_entry ${ name }`} name={`form-${ name }`}>
 
                     {/* Register, Login, Profile */}
                     {children}
@@ -36,19 +34,11 @@ function FormSection({
                     {(name === 'login' || name === 'register') &&
                         <>
                             <button className={`btn btn_entry btn_entry_${ name }`}>{ buttonText }</button>
-                            <span className='caption caption_wrap'>
+                            <span className={`caption caption_${ name }`}>
                                 <p className='caption__text'>{ captionText }</p>
                                 <Link to={ captionLink } className='caption__link'>{ captionLinkText }</Link>
                             </span>
                         </>
-                    }
-                    {/** отображение 'Profile' */}
-                    {(name === 'profile') &&
-                        <span className='caption caption_wrap_profile'>
-                            <button type='button' className='caption__text_profile caption__text_profile_btn '>{ captionLinkEdit }</button>
-                            <Link to='/' className='caption__text_profile'>{ captionLinkLogout }</Link>
-
-                        </span>
                     }
 
                 </form>

@@ -15,10 +15,11 @@ import NotFound from '../NotFound/NotFound';
 function App() {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(false);
-
     /** Состояние массива карточек */
     const [cards, setCards] = useState([]);
     // console.log(cards);
+    const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
+    const [IsUpdateProfile, setIsUpdateProfile] = useState(false);
 
     function handleLogin() {
         setLoggedIn(true);
@@ -28,6 +29,12 @@ function App() {
     function onLogout() {
         setLoggedIn(false);
         navigate('/signin', {replace: true});
+    }
+
+    function handleUpdateProfile(name, email) {
+        setIsLoading(true) /** состоянипе для управления текстом кнопки сабмита в каждом попапе: 'Сохранение...' */
+        setIsUpdateProfile(true);
+        // closeAllPopups()
     }
 
     // useEffect(() => {
@@ -51,8 +58,16 @@ function App() {
                     </>
                        }
                 />
-                <Route path='/signin' element={!loggedIn ? (<Login/>) : (<Navigate to='/'/>)}/>
+
                 <Route path='/signup' element={!loggedIn ? (<Register/>) : (<Navigate to='/'/>)}/>
+                <Route path='/signin' element={!loggedIn ? (<Login/>) : (<Navigate to='/'/>)}/>
+                <Route path='/profile' element={
+                    <>
+                        <Header loggedIn={loggedIn} type='profile'/>
+                        <Profile onUpdateProfile={handleUpdateProfile} />
+                    </>
+                }
+                />
 
                 <Route path='/movies' element={
                     <>
@@ -70,16 +85,7 @@ function App() {
                     </>
                         }
                 />
-                <Route path='/profile' element={
-                    <>
-                        <Header
-                            loggedIn={loggedIn}
-                            type='profile'
-                        />
-                        <Profile/>
-                    </>
-                }
-                />
+
                 <Route path='*' element={<NotFound/>}/>
 
             </Routes>

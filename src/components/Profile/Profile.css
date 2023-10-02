@@ -1,8 +1,33 @@
+.form-sec {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.form-sec__box_profile {
+    min-width: 410px;
+    min-height: 624px;
+}
+
+.form-sec__title_type_profile {
+    display: inline-block;
+    text-align: center;
+    padding-top: 74px;
+}
+
+.form {
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .profile__inputs {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    min-height:  405px;
+    min-height:  185px;
 }
 
 .profile__input-wrap {
@@ -63,11 +88,61 @@
     /*box-shadow: 0 0 10px rgb(155, 159, 159, .5);*/
 }
 
+.caption_profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.caption__text_profile {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15.7px;
+    margin: 0;
+    display: block;
+    color: #FF3055;
+    padding: 16px 0 67px;
+    transition: opacity .4s linear;
+}
+
+.caption__text_btn {
+    border: none;
+    font-weight: 400;
+    color: #000;
+    background-color: transparent;
+    text-align: center;
+    padding: 0;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.btn_entry {
+    width: 100%;
+    min-height: 45px;
+    background-color: #3456F3;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    color: #FFF;
+}
 /*.profile__input_type_email {*/
 /*    border-bottom: none;*/
 /*}*/
+.btn_entry_profile {
+    margin-bottom: 67px;
+}
+.btn_entry_profile_disabled {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+}
 
 @media (max-width: 768px) {
+    .form-sec__title_type_profile {
+        padding-top: 236px;
+    }
     .profile__input-wrap:first-of-type {
         padding-top: 97px;
     }
@@ -77,22 +152,37 @@
     .profile__inputs {
         min-height: 177px;
     }
-    .caption_wrap_profile {
+    .caption_profile {
         padding: 192px 0 269px;
     }
+    .btn_entry_profile {
+        margin-top: 192px;
+        margin-bottom: 271px;
+    }
+
 }
 
 @media (max-width: 540px) {
+    .form-sec__box_profile {
+         min-width: 260px;
+    }
+    .form-sec__title_type_profile {
+        padding-top: 70px;
+    }
     .profile__input-wrap:first-of-type {
         padding-top: 81px;
     }
     /*.profile__input-label:first-child {*/
     /*    padding-top: 80px;*/
     /*}*/
-    .caption_wrap_profile {
+    .caption_profile {
         padding: 344px 0 40px;
     }
-    .caption__text_profile {
+    .caption__text {
         font-size: 12px;
+    }
+    .btn_entry_profile {
+        font-size: 12px;
+        margin-top: 345px;
     }
 }

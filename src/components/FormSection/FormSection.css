@@ -21,11 +21,6 @@
     flex-grow: 1;
 }
 
-.form-sec__box_profile {
-    min-width: 410px;
-    min-height: 624px;
-}
-
 .form-sec__logo {
     width: 38px;
     height: 38px;
@@ -38,11 +33,6 @@
     font-size: 24px;
     line-height: 29px;
     padding-top: 40px;
-}
-
-.form-sec__title_type_profile {
-    text-align: center;
-    padding-top: 74px;
 }
 
 .form {
@@ -76,14 +66,11 @@
     color: #FFF;
 }
 
-.caption_wrap {
-    display: inline-block;
+.caption_register,
+.caption_login {
+    display: block;
     text-align: center;
     padding: 16px 0 70px;
-}
-
-.caption_wrap_profile {
-    text-align: center;
 }
 
 .caption__text {
@@ -96,30 +83,8 @@
     padding-right: 6px;
 }
 
-.caption__text_profile {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 15.7px;
-    margin: 0;
-    display: block;
-    color: #FF3055;
-    padding: 16px 0 67px;
-    transition: opacity .4s linear;
-}
-
-.caption__text_profile:hover {
+.caption__text:hover {
     opacity: .7;
-}
-
-.caption__text_profile_btn {
-    border: none;
-    color: #000;
-    background-color: transparent;
-    text-align: center;
-    padding: 0;
-    margin: 0 auto;
-    cursor: pointer;
 }
 
 .caption__link {
@@ -146,13 +111,12 @@
     .form-sec__logo {
         padding-top: 0;
     }
-    .form-sec__title_type_profile {
-        padding-top: 236px;
-    }
-    .caption__text_profile {
+
+    .caption__text {
         padding-bottom: 0;
     }
-    .caption_wrap {
+    .caption_register,
+    .caption_login {
         padding-bottom: 232px;
     }
 }
@@ -192,7 +156,8 @@
     .btn_entry {
         font-size: 12px;
     }
-    .caption_wrap {
+    .caption_register,
+    .caption_login {
         padding: 11px 0 30px;
     }
     .caption__text:first-child {

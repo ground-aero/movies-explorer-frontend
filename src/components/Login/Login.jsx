@@ -13,37 +13,37 @@ function Login({name, title, buttonText, captionText}) {
             <FormSection name={'login'} title={'Рады видеть!'} buttonText={'Войти'}
                 captionText={'Еще не зарегистрированы?'} captionLink={'/signup'} captionLinkText={'Регистрация'}>
 
-            <span className='login__inputs'>
-                <label className='login__input-label' htmlFor='login-input-email'>E-mail
-            <input
-                className='login__input'
-                // value={email}
-                // onChange={handleChangeName}
-                type='email'
-                placeholder='введите Ваш email'
-                id='login-input-email'
-                name='email'
-                tabIndex='1'
-                minLength='4'
-                required
-            />
-                </label>
+                <span className='login__inputs'>
+                    <label className='login__input-label' htmlFor='login-input-email'>E-mail
+                        <input
+                            className='login__input'
+                            // value={email}
+                            // onChange={handleChangeName}
+                            type='email'
+                            placeholder='введите Ваш email'
+                            id='login-input-email'
+                            name='email'
+                            tabIndex='1'
+                            minLength='4'
+                            required
+                        />
+                    </label>
 
-                <label className='login__input-label' htmlFor='login-input-pass'>Пароль
-                    <input
-                        className='login__input'
-                        // value={password}
-                        // onChange={handleChangeName}
-                        type='password'
-                        placeholder='введите Ваш пароль'
-                        id='login-input-pass'
-                        name='password'
-                        tabIndex='2'
-                        minLength='4'
-                        required
-                    />
-                </label>
-            </span>
+                    <label className='login__input-label' htmlFor='login-input-pass'>Пароль
+                        <input
+                            className='login__input'
+                            // value={password}
+                            // onChange={handleChangeName}
+                            type='password'
+                            placeholder='введите Ваш пароль'
+                            id='login-input-pass'
+                            name='password'
+                            tabIndex='2'
+                            minLength='4'
+                            required
+                        />
+                    </label>
+                </span>
 
             </FormSection>
 

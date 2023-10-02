@@ -7,6 +7,7 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 
 function Movies({ cards, type  }) {
     return (
+        <main className='content'>
             <section className='movies content__section'>
 
                 <SearchForm />
@@ -16,6 +17,7 @@ function Movies({ cards, type  }) {
                 {/*<Preloader />*/}
 
             </section>
+        </main>
     );
 }
 
