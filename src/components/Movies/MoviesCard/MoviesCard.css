@@ -1,0 +1,157 @@
+.card {
+    list-style: none;
+    max-width: 270px;
+    /*min-height: 100%;*/
+    max-height: 230px;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow .3s linear;
+}
+
+.card:hover {
+    box-shadow: 0 0 15px rgba(30,30,30,.7);
+}
+
+.card__img {
+    max-width: 270px;
+    overflow: hidden;
+}
+
+.wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0 0;
+    height: 47px;
+}
+
+.card__btn-wrap {
+    margin-top: -4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50px;
+    background-color: #F9F9F9;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.card__btn-wrap_delete {
+    align-items: center;
+}
+
+.card__name {
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.card__duration {
+    margin: 0;
+    font-weight: 400;
+    font-size: 11px;
+    color: #A0A0A0;
+    padding: 5px 0 16px;
+    display: flex;
+    cursor: pointer;
+    border-top: 1px solid #E8E8E8;
+}
+
+.card__btn {
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    border-radius: 50%;
+    transition: opacity .4s linear;
+    cursor: pointer;
+}
+
+.card__btn_delete {
+    background: url('../../../images/delete_icon_thin.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 8px;
+    background-color: #F9F9F9;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.wrap:hover .card__btn_delete {
+    opacity: 1;
+    visibility: visible;
+    background-color: #F9F9F9;
+}
+.card__btn_delete:hover {
+    opacity: 1;
+    visibility: visible;
+    background-color: #F9F9F9;
+}
+
+.card__btn_heart {
+    background-image: url('../../../images/card_heart_grey.svg');
+    background-repeat: no-repeat;
+    background-size: 10px 8.5px;
+    padding: 12px 12px;
+    background-position: center center;
+}
+
+.card__btn_heart:hover {
+    background-image: url('../../../images/card_heart_red.svg');
+    opacity: .7;
+    cursor: pointer;
+}
+
+/*.card__btn_heart_active {*/
+/*    background-image: url('../../../images/card_heart_red.svg');*/
+/*}*/
+
+@media (max-width: 768px) {
+    .card {
+        max-width: 339px;
+        min-width: 339px;
+        max-height: 270px;
+    }
+    .card__img {
+        max-width: 339px;
+        min-width: 339px;
+        overflow: hidden;
+    }
+    .card__name {
+        padding: 2px 0 0;
+    }
+    .card__duration {
+        padding-top: 3px;
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 540px) {
+    .card {
+        max-width: 300px;
+        min-width: 300px;
+        min-height: 246px;
+    }
+    .card__img {
+        max-width: 300px;
+        min-width: 300px;
+        min-height: 168px;
+        max-height: 168px;
+    }
+    .card__btn-wrap {
+        margin-top: -3px;
+    }
+    .card__name {
+        font-size: 12px;
+        padding: 4px 0 0;
+        line-height: 14.5px;
+        height: 43px;
+    }
+    .card__duration {
+        font-size: 10px;
+        line-height: 12px;
+        padding-top: 4px;
+    }
+}

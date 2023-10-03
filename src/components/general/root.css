@@ -1,0 +1,24 @@
+.root {
+    max-width: 1280px;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFF;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+}
+
+/*@media (max-width: 768px) {*/
+/*    .root {*/
+/*        max-width: 768px;*/
+/*    }*/
+/*}*/
+
+/*@media (max-width: 360px) {*/
+/*    .root {*/
+/*        max-width: 360px;*/
+/*    }*/
+/*}*/

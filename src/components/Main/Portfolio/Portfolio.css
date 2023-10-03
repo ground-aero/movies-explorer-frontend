@@ -1,0 +1,140 @@
+.content-section {
+    padding: 0 70px;
+}
+.content-section_inner {
+    padding: 100px 0 0;
+}
+
+.portfolio {
+    min-height: 300px;
+}
+
+.portfolio__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.portfolio__header {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #A0A0A0;
+    margin: 0;
+}
+
+/* portfolio list */
+.portfolio__list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 50px 0 0;
+}
+
+.portfolio__item {
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -0.55pt;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 1px solid #E8E8E8;
+    padding: 20px 0 19px;
+    transition: opacity .4s linear;
+}
+.portfolio__item:first-of-type {
+    padding-top: 0;
+}
+.portfolio__item:last-of-type {
+    padding-bottom: 0;
+    border: none;
+}
+
+.portfolio__item:hover {
+    opacity: .7;
+}
+
+.portfolio__link {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    letter-spacing: -1.2px;
+}
+
+.portfolio__link-icon {
+    position: relative;
+    height: 17px;
+    width: 17px;
+    padding: 4px;
+}
+
+.portfolio__link-icon:before {
+    content: '';
+    background: url('../../../images/portfolio_arrow-right.svg') no-repeat right center;
+    background-size: 17px;
+    position: relative;
+    display: block;
+    height: 17px;
+    width: 17px;
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        padding: 0;
+    }
+    .content-section_inner {
+        padding-top: 90px;
+    }
+    .portfolio__item {
+        font-size: 28px;
+    }
+    .portfolio__item:last-of-type {
+        padding-bottom: 90px;
+    }
+    .about-me {
+        min-height: 100%;
+        padding-bottom: 0;
+    }
+}
+
+@media (max-width: 540px) {
+    .content-section {
+        padding: 0;
+    }
+    .portfolio {
+        min-height: 100%;
+    }
+    .portfolio__header {
+        font-size: 14px;
+    }
+    .portfolio__item {
+        font-size: 18px;
+        line-height: 28px;
+    }
+    .portfolio__item:last-of-type {
+        padding-bottom: 70px;
+    }
+    .content-section_inner {
+        padding-top: 70px;
+    }
+    .portfolio__list {
+        padding-top: 42px;
+    }
+    .portfolio__link {
+        letter-spacing: -0.7px;
+    }
+    .portfolio__link-icon {
+        height: 11px;
+        width: 11px;
+    }
+    .portfolio__link-icon:before {
+        background-size: 11px;
+        height: 11px;
+        width: 11px;
+    }
+}
