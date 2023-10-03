@@ -1,0 +1,114 @@
+.techs {
+    min-height: 625px;
+    background-color: #F5F5F5;
+}
+
+.sec__header-wrap_techs {
+    padding-top: 100px;
+}
+
+.article-techs {
+    margin: 0 auto;
+}
+
+.article-techs__title {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+    margin: 0;
+    padding: 90px 0 0;
+    text-align: center;
+}
+
+.article-techs__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.60px;
+    max-width: 460px;
+    padding-top: 26px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.techs__list {
+    list-style: none;
+    margin: 0;
+    padding: 100px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.techs__item {
+    width: 90px;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    text-align: center;
+    padding: 21px 0;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.9px;
+    letter-spacing: -0.55pt;
+}
+
+@media (max-width: 768px) {
+    .techs {
+        padding: 0 50px;
+        min-height: 558px;
+    }
+    .sec__header-wrap_techs {
+        padding-top: 81px;
+    }
+    .article-techs__title {
+        padding-top: 80px;
+    }
+    .article-techs__text {
+        padding-top: 20px;
+        line-height: 18px;
+        font-size: 12px;
+    }
+    .techs__list {
+        padding: 83px 10px 0;
+        flex-wrap: nowrap;
+    }
+    .techs__item {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 540px) {
+    .techs {
+        min-height: 651px;
+        padding: 0 18px;
+    }
+    .techs__item {
+        width: 84px;
+        line-height: 14.5px;
+    }
+    .sec__header-wrap_techs {
+        padding-top: 70px;
+    }
+    .article-techs__title {
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 36px;
+        padding: 59px 0 0;
+        letter-spacing: -1px;
+    }
+    .article-techs__text {
+        padding: 24px 0 0;
+        font-size: 11px;
+        line-height: 16px;
+        letter-spacing: -0.4px;
+    }
+    .techs__list-wrap {
+        margin: 0 auto;
+    }
+    .techs__list {
+        padding: 50px 50px 0;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}

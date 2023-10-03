@@ -1,0 +1,22 @@
+/** main content */
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+}
+
+.content__section {
+    padding: 0 70px;
+}
+
+@media (max-width: 768px) {
+    .content__section {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 540px) {
+    .content__section {
+        padding: 0 10px;
+    }
+}

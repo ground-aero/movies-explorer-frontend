@@ -1,0 +1,212 @@
+.menu_wrap {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.burger {
+    display: none;
+}
+
+.menu__links {
+    padding-left: 60px;
+}
+
+.menu__links_authorized {
+    display: flex;
+    min-width: 211px;
+    height: 18px;
+    justify-content: space-between;
+}
+
+.menu__links_non-authorized {
+    display: none;
+}
+
+.menu__link {
+    display: flex;
+    padding-right: 16px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #000;
+    transition: opacity .4s linear;
+}
+
+.menu__link_authorized {
+    color: #FFF;
+    padding-right: 16px;
+}
+
+.menu__link:last-of-type {
+    padding: 0;
+}
+
+.menu__link:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.menu__link_type_land {
+    color: #FFF;
+}
+
+.menu__link_type_movies,
+.menu__link_type_saved-movies,
+.menu__link_type_profile {
+    color: #000;
+}
+
+.menu__link_active {
+    font-weight: 500;
+}
+
+.menu__logo {
+    height: 38px;
+    padding: 0;
+    transition: opacity .4s linear;
+}
+
+.menu__logo:hover {
+    opacity: .7;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 32px;
+    border-radius: 25px;
+    padding-right: 3px;
+    box-shadow: 0 0 12px rgba(30,30,30,.1);
+    transition: all .4s linear;
+}
+
+.account:after {
+    content: '';
+    background-image: url('../../images/account-man-full.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #FFF;
+    border-radius: 25px;
+    background-size: 11.5px;
+    padding: 6px;
+    width: 15px;
+    height: 15px;
+}
+
+.account_non-authorized:after {
+    display: none;
+}
+
+.account_type_land {
+    background-color: #2BE080;
+    transition: opacity .4s linear;
+}
+
+.account_type_movies,
+.account_type_saved-movies,
+.account_type_profile {
+    background-color: #FFF;
+    transition: opacity .4s linear;
+}
+
+.account:hover {
+    opacity: .8;
+}
+
+.account__text {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 12px;
+    color: #000;
+    margin: 0;
+    padding: 0 7px 2px 11px;
+}
+
+.account__man {
+    display: flex;
+    background-color: #FFF;
+    border-radius: 50px;
+    padding: 7.75px;
+}
+
+/** !loggedIn && land - styles */
+.account__link {
+    text-decoration: none;
+    padding-right: 30px;
+}
+
+.account__link_type_enter {
+    background-color: #2BE080;
+    padding: 8px 20px;
+    border-radius: 3px;
+    transition: opacity .4s linear;
+}
+.account__link_type_register {
+    transition: opacity .4s linear;
+}
+
+.account__link_type_enter:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.account__link_type_register:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+
+.account__link-text {
+    color: #FFF;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0;
+}
+
+.account__link-text_active {
+    color: #000;
+}
+
+.account_type_profile_non-authorized,
+.account_type_movies_non-authorized,
+.account_type_saved-movies_non-authorized{
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .menu__links_authorized {
+        min-width: 0;
+    }
+    .account__link_type_register {
+        padding-right: 30px;
+    }
+    .menu__link {
+        display: none;
+    }
+    /*.account,*/
+    .account_type_movies_authorized,
+    .account_type_saved-movies_authorized,
+    .account_type_land_authorized,
+    .account_type_profile_authorized {
+        display: none;
+    }
+}
+
+@media (max-width: 540px) {
+    .account__link-text {
+        font-size: 10px;
+        line-height: 16px;
+    }
+    .account__link_type_register {
+        padding-right: 14px;
+    }
+    .account__link_type_enter {
+        padding: 5px 12px;
+    }
+
+}

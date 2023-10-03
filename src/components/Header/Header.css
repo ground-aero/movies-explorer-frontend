@@ -1,0 +1,34 @@
+.header {
+    height: 74px;
+}
+
+.header_wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 70px;
+}
+
+.header_type_land {
+    background: #073042;
+}
+
+.header_type_movies {
+    background: #FFF;
+}
+
+.header_type_profile {
+    background: #FFF;
+}
+
+@media (max-width: 768px) {
+    .header_wrap {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 540px) {
+    .header_wrap {
+        padding: 0 14px;
+    }
+}
