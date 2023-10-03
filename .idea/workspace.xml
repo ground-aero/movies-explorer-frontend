@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0509b248-b22a-44f8-96d0-5c3430155d8e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../. openAI/cardMovie.html" beforeDir="false" afterPath="$PROJECT_DIR$/../. openAI/cardMovie.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../. training React/calorie-zen2" beforeDir="false" afterPath="$PROJECT_DIR$/../. training React/calorie-zen2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../. training React/crypto-duck-functions" beforeDir="false" afterPath="$PROJECT_DIR$/../. training React/crypto-duck-functions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.other-2/calorie-zen" beforeDir="false" afterPath="$PROJECT_DIR$/../.other-2/calorie-zen" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.other-2/maximNikovaev_mesto-react" beforeDir="false" afterPath="$PROJECT_DIR$/../.other-2/maximNikovaev_mesto-react" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.other-2/mesto_versions/mesto-1-draft" beforeDir="false" afterPath="$PROJECT_DIR$/../.other-2/mesto_versions/mesto-1-draft" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.other-2/yandex-templates" beforeDir="false" afterPath="$PROJECT_DIR$/../.other-2/yandex-templates" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../aero/ground.aero" beforeDir="false" afterPath="$PROJECT_DIR$/../aero/ground.aero" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../aero/ground.aero_react" beforeDir="false" afterPath="$PROJECT_DIR$/../aero/ground.aero_react" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../alphacode" beforeDir="false" afterPath="$PROJECT_DIR$/../alphacode" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mesto" beforeDir="false" afterPath="$PROJECT_DIR$/../mesto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mesto-react" beforeDir="false" afterPath="$PROJECT_DIR$/../mesto-react" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../movies-explorer-frontend_mfilinov" beforeDir="false" afterPath="$PROJECT_DIR$/../movies-explorer-frontend_mfilinov" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../movies-front_D.Ovchinnikov" beforeDir="false" afterPath="$PROJECT_DIR$/../movies-front_D.Ovchinnikov" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../movies-front_M.Pestov" beforeDir="false" afterPath="$PROJECT_DIR$/../movies-front_M.Pestov" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../other_friends/AstreyaJulia/mesto-react-auth-A" beforeDir="false" afterPath="$PROJECT_DIR$/../other_friends/AstreyaJulia/mesto-react-auth-A" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../other_friends/Maestr1/lubimovka_9th_team" beforeDir="false" afterPath="$PROJECT_DIR$/../other_friends/Maestr1/lubimovka_9th_team" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../other_friends/Maestr1/mesto" beforeDir="false" afterPath="$PROJECT_DIR$/../other_friends/Maestr1/mesto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../other_friends/Maestr1/mesto-react-auth-M" beforeDir="false" afterPath="$PROJECT_DIR$/../other_friends/Maestr1/mesto-react-auth-M" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../other_friends/Maestr1/mesto-react_11" beforeDir="false" afterPath="$PROJECT_DIR$/../other_friends/Maestr1/mesto-react_11" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../react-mesto-auth" beforeDir="false" afterPath="$PROJECT_DIR$/../react-mesto-auth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../russian-travel" beforeDir="false" afterPath="$PROJECT_DIR$/../russian-travel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training" beforeDir="false" afterPath="$PROJECT_DIR$/../training" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../training-react-2" beforeDir="false" afterPath="$PROJECT_DIR$/../training-react-2" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2UKeCsxAaoXyQp3WrHJzgeuAwi4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Евгений/dev/movies-explorer-frontend/src/images&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.intentionPowerPack&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Евгений\dev\movies-explorer-frontend\src\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Евгений\dev\movies-explorer-frontend\src\images" />
+      <recent name="C:\Users\Евгений\dev\movies-explorer-frontend\src\components\Preloader" />
+      <recent name="C:\Users\Евгений\dev\movies-explorer-frontend\src\components\Main" />
+      <recent name="C:\Users\Евгений\dev\movies-explorer-frontend\src\components\Login" />
+      <recent name="C:\Users\Евгений\dev\movies-explorer-frontend\src\components\SearchForm" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0509b248-b22a-44f8-96d0-5c3430155d8e" name="Changes" comment="" />
+      <created>1692692574825</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692692574825</updated>
+      <workItem from="1692692576187" duration="427000" />
+      <workItem from="1692693033237" duration="625000" />
+      <workItem from="1693742209945" duration="1062000" />
+      <workItem from="1693744423019" duration="15307000" />
+      <workItem from="1693809350905" duration="12175000" />
+      <workItem from="1693841683236" duration="8394000" />
+      <workItem from="1693902665673" duration="9878000" />
+      <workItem from="1693935099369" duration="653000" />
+      <workItem from="1694070759474" duration="21414000" />
+      <workItem from="1694157583018" duration="4369000" />
+      <workItem from="1694162819234" duration="17542000" />
+      <workItem from="1694244047756" duration="9029000" />
+      <workItem from="1694260877017" duration="3575000" />
+      <workItem from="1694418431543" duration="6690000" />
+      <workItem from="1694431192189" duration="20251000" />
+      <workItem from="1694515610517" duration="8083000" />
+      <workItem from="1694533289482" duration="1644000" />
+      <workItem from="1694580993709" duration="16548000" />
+      <workItem from="1694618968656" duration="6860000" />
+      <workItem from="1694674813685" duration="2080000" />
+      <workItem from="1694679277104" duration="9887000" />
+      <workItem from="1694703137110" duration="4601000" />
+      <workItem from="1694710364428" duration="5479000" />
+      <workItem from="1694765059727" duration="21159000" />
+      <workItem from="1694797565109" duration="8809000" />
+      <workItem from="1694847479619" duration="13173000" />
+      <workItem from="1694880236454" duration="2974000" />
+      <workItem from="1694937403923" duration="13252000" />
+      <workItem from="1694973146098" duration="3271000" />
+      <workItem from="1695015278371" duration="21550000" />
+      <workItem from="1695044913880" duration="8680000" />
+      <workItem from="1695066081037" duration="15031000" />
+      <workItem from="1695083432701" duration="5000" />
+      <workItem from="1695104261007" duration="4375000" />
+      <workItem from="1695116955118" duration="3847000" />
+      <workItem from="1695130574141" duration="13801000" />
+      <workItem from="1695147143545" duration="5429000" />
+      <workItem from="1695153753131" duration="24856000" />
+      <workItem from="1695201875884" duration="20417000" />
+      <workItem from="1695231636303" duration="6457000" />
+      <workItem from="1695238651405" duration="23841000" />
+      <workItem from="1695311523240" duration="4091000" />
+      <workItem from="1695326313388" duration="1738000" />
+      <workItem from="1695488358083" duration="258000" />
+      <workItem from="1695552780041" duration="3253000" />
+      <workItem from="1695557499804" duration="22325000" />
+      <workItem from="1695625610440" duration="4070000" />
+      <workItem from="1695630378534" duration="1322000" />
+      <workItem from="1695631846750" duration="16059000" />
+      <workItem from="1695662283499" duration="3766000" />
+      <workItem from="1695666801016" duration="756000" />
+      <workItem from="1695713745398" duration="9141000" />
+      <workItem from="1695729672563" duration="32123000" />
+      <workItem from="1695830104201" duration="6116000" />
+      <workItem from="1695875948911" duration="36546000" />
+      <workItem from="1695962184787" duration="8920000" />
+      <workItem from="1696005346531" duration="7678000" />
+      <workItem from="1696062736512" duration="4579000" />
+      <workItem from="1696075502967" duration="16394000" />
+      <workItem from="1696225230365" duration="30162000" />
+      <workItem from="1696262149348" duration="28000" />
+      <workItem from="1696263186949" duration="9464000" />
+      <workItem from="1696314978555" duration="1458000" />
+      <workItem from="1696356962189" duration="2255000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
