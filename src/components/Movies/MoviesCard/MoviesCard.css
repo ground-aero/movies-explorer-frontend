@@ -90,7 +90,7 @@
     background-color: #F9F9F9;
 }
 
-.card__btn_heart {
+.card__btn_save {
     background-image: url('../../../images/card_heart_grey.svg');
     background-repeat: no-repeat;
     background-size: 10px 8.5px;
@@ -98,13 +98,13 @@
     background-position: center center;
 }
 
-.card__btn_heart:hover {
+.card__btn_save:hover {
     background-image: url('../../../images/card_heart_red.svg');
     opacity: .7;
     cursor: pointer;
 }
 
-/*.card__btn_heart_active {*/
+/*.card__btn_save_active {*/
 /*    background-image: url('../../../images/card_heart_red.svg');*/
 /*}*/
 

@@ -10,11 +10,13 @@ import Profile from '../Profile/Profile';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
+import moviesApi from '../../utils/MoviesApi.js';
+import mainApi from '../../utils/MainApi.js';
 
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
     /** Состояние массива карточек */
     const [cards, setCards] = useState([]);
     // console.log(cards);
@@ -32,10 +34,35 @@ function App() {
     }
 
     function handleUpdateProfile(name, email) {
-        setIsLoading(true) /** состоянипе для управления текстом кнопки сабмита в каждом попапе: 'Сохранение...' */
+        setIsLoading(true) /** состояние для управления текстом кнопки сабмита в каждом попапе: 'Сохранение...' */
         setIsUpdateProfile(true);
         // closeAllPopups()
     }
+
+    function handleGetMovies() {
+        return moviesApi.getAllMovies()
+            .then((res) => {
+                console.log(res)
+                navigate('/movies', {replace: true})
+            })
+            .catch((err) => {
+                console.log(`Ошибка загрузки фильмов ${err}`)
+            })
+    }
+    useEffect(() => {
+        if (loggedIn) {
+            mainApi.getMyMovies()
+                .then((res) => {
+                    console.log(res)
+                    navigate('/movies', {replace: true})
+                })
+                .catch((err) => {
+                    console.log(`Ошибка загрузки фильмов ${err}`)
+                })
+        } else {
+            navigate('/signup', {replace: true});
+        }
+    }, [loggedIn, navigate]);
 
     // useEffect(() => {
     //     if (loggedIn) {
@@ -72,7 +99,7 @@ function App() {
                 <Route path='/movies' element={
                     <>
                         <Header loggedIn={loggedIn} type='movies'/>
-                        <Movies loggedIn={loggedIn} type='movies' cards={cards}/>
+                        <Movies loggedIn={loggedIn} type='movies' cards={cards} handleGetMovies={handleGetMovies}/>
                         <Footer/>
                     </>
                 }

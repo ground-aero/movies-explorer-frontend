@@ -8,7 +8,7 @@ import cardImg4 from '../../../images/card_img4.jpg';
 import cardImg5 from '../../../images/card_img5.jpg';
 import cardImg6 from '../../../images/card_img6.jpg';
 
-function MoviesCardList({ type, cards }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, cards, handleGetMovies }) { // cards: App->Movies->MoviesCardList
     return (
         <>
             <ul className='cards'>
