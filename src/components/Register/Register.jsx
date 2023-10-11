@@ -2,20 +2,42 @@
 import '../general/content.css';
 import './Register.css';
 import FormSection from '../FormSection/FormSection';
+import {useState} from "react";
 
-function Register() {
+function Register({ handleRegister }) {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleChangeName = (e) => {
+        setName(e.target.value);
+    }
+    const handleChangeEmail = (e) => {
+        setEmail(e.target.value);
+    }
+    const handleChangePassword = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        handleRegister(name, email, password)
+    }
+
     return (
         <main className='content'>
 
             <FormSection name={'register'} title={'Добро пожаловать!'} buttonText={'Зарегистрироваться'}
-                         captionText={'Уже зарегистрированы?'} captionLink={'/signin'} captionLinkText={'Войти'}>
+                         captionText={'Уже зарегистрированы?'} captionLink={'/signin'} captionLinkText={'Войти'}
+                         onSubmit={ onSubmit }>
 
-                <span className='register__inputs'>
+                {/*<span className='register__inputs'>*/}
                     <label className='register__input-label' htmlFor='register-input-name'>Имя
                         <input
+                            onChange={handleChangeName}
                             className='register__input'
-                            // value={email}
-                            // onChange={handleChangeName}
+                            value={name}
                             type='text'
                             placeholder='введите Ваше имя'
                             autoFocus
@@ -29,9 +51,9 @@ function Register() {
 
                     <label className='register__input-label' htmlFor='register-input-email'>E-mail
                         <input
+                            onChange={handleChangeEmail}
                             className='register__input'
-                            // value={email}
-                            // onChange={handleChangeName}
+                            value={email}
                             type='email'
                             placeholder='введите Ваш email'
                             id='register-input-email'
@@ -44,9 +66,9 @@ function Register() {
 
                     <label className='register__input-label' htmlFor='register-input-pass'>Пароль
                         <input
+                            onChange={handleChangePassword}
                             className='register__input'
-                            // value={password}
-                            // onChange={handleChangeName}
+                            value={password}
                             type='password'
                             placeholder='введите Ваш пароль'
                             id='register-input-pass'
@@ -59,7 +81,7 @@ function Register() {
 
                     <span className='register__err'>Что-то пошло не так...</span>
 
-                </span>
+                {/*</span>*/}
 
             </FormSection>
 

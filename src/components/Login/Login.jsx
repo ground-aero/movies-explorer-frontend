@@ -13,12 +13,12 @@ function Login({name, title, buttonText, captionText}) {
             <FormSection name={'login'} title={'Рады видеть!'} buttonText={'Войти'}
                 captionText={'Еще не зарегистрированы?'} captionLink={'/signup'} captionLinkText={'Регистрация'}>
 
-                <span className='login__inputs'>
+                {/*<span className='login__inputs'>*/}
                     <label className='login__input-label' htmlFor='login-input-email'>E-mail
                         <input
                             className='login__input'
                             // value={email}
-                            // onChange={handleChangeName}
+                            // onChange={handleChangeEmail}
                             type='email'
                             placeholder='введите Ваш email'
                             id='login-input-email'
@@ -33,7 +33,7 @@ function Login({name, title, buttonText, captionText}) {
                         <input
                             className='login__input'
                             // value={password}
-                            // onChange={handleChangeName}
+                            // onChange={handleChangePassword}
                             type='password'
                             placeholder='введите Ваш пароль'
                             id='login-input-pass'
@@ -43,7 +43,7 @@ function Login({name, title, buttonText, captionText}) {
                             required
                         />
                     </label>
-                </span>
+                {/*</span>*/}
 
             </FormSection>
 

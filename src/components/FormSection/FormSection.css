@@ -42,6 +42,13 @@
     flex-grow: 1;
 }
 
+.form__inputs {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 265px;
+}
+
 .btn {
     border: none;
     text-align: center;

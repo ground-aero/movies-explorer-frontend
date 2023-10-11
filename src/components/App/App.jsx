@@ -12,14 +12,17 @@ import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi.js';
 import mainApi from '../../utils/MainApi.js';
+import {register, authorize, checkToken} from '../../utils/auth.js';
 
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
     /** Состояние массива карточек */
     const [cards, setCards] = useState([]);
     // console.log(cards);
+    const [email, setEmail] = useState('');
+
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
     const [IsUpdateProfile, setIsUpdateProfile] = useState(false);
 
@@ -31,6 +34,17 @@ function App() {
     function onLogout() {
         setLoggedIn(false);
         navigate('/signin', {replace: true});
+    }
+
+    function handleRegister(name, email, password) {
+        return register(name, email, password)
+            .then((res) => {
+                console.log(res);
+                setEmail(res.data.email)
+                setLoggedIn(true)
+                navigate('/movies', {replace: true})
+            })
+            .catch((err) => {console.log(`Ошибка регистрации ${err}`)})
     }
 
     function handleUpdateProfile(name, email) {
@@ -49,20 +63,21 @@ function App() {
                 console.log(`Ошибка загрузки фильмов ${err}`)
             })
     }
-    useEffect(() => {
-        if (loggedIn) {
-            mainApi.getMyMovies()
-                .then((res) => {
-                    console.log(res)
-                    navigate('/movies', {replace: true})
-                })
-                .catch((err) => {
-                    console.log(`Ошибка загрузки фильмов ${err}`)
-                })
-        } else {
-            navigate('/signup', {replace: true});
-        }
-    }, [loggedIn, navigate]);
+
+    // useEffect(() => {
+    //     if (loggedIn) {
+    //         mainApi.getMyMovies()
+    //             .then((res) => {
+    //                 console.log(res)
+    //                 navigate('/movies', {replace: true})
+    //             })
+    //             .catch((err) => {
+    //                 console.log(`Ошибка загрузки фильмов ${err}`)
+    //             })
+    //     } else {
+    //         navigate('/signup', {replace: true});
+    //     }
+    // }, [loggedIn, navigate]);
 
     // useEffect(() => {
     //     if (loggedIn) {
@@ -86,7 +101,7 @@ function App() {
                        }
                 />
 
-                <Route path='/signup' element={!loggedIn ? (<Register/>) : (<Navigate to='/'/>)}/>
+                <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister}/>) : (<Navigate to='/'/>)}/>
                 <Route path='/signin' element={!loggedIn ? (<Login/>) : (<Navigate to='/'/>)}/>
                 <Route path='/profile' element={
                     <>
