@@ -2,8 +2,19 @@
 export const DB_URL = 'http://127.0.0.1:4000';
 // export const DB_URL = 'https://api.ga-movies.nomoredomainsicu.ru';
 
+// function checkResponse(res) {
+//     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+// }
 function checkResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+    if (res.ok) {
+        console.log(res)
+        return res.json();
+    }
+    return res.json()
+        .then((errData) => {
+            console.log(errData)
+            return Promise.reject(errData.message || res.statusText)
+        })
 }
 
 /** user authentication - регистрация пользователя (отправка рег данных)
@@ -16,7 +27,18 @@ export const register = (name, email, password) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({name, email, password}),
-    }).then(checkResponse)
+    })
+        .then((res) => {
+            if (res.ok) {
+                console.log(res)
+                return res.json()
+            }
+            return res.json()
+                .then((err) => {
+                    return Promise.reject(err.message)
+                })
+        })
+        // .then(checkResponse)
 }
 
 /** проверка на существование пользователя (логинизация) */
@@ -29,11 +51,22 @@ export const authorize = (email, password) => {
         },
         body: JSON.stringify({email, password}),
     })
-        .then(checkResponse)
-        .then((data) => {
-            localStorage.setItem('token', data.token)
-            return data;
+        .then((res) => {
+            if (res.ok) {
+                // console.log(res)
+                return res.json()
+            }
+            return res.json()
+                .then((err) => {
+                    return Promise.reject(err.message)
+                })
         })
+        // .then(checkResponse)
+        // .then((data) => {
+        //     console.log(data)
+        //     localStorage.setItem('token', data.token)
+        //     return data;
+        // })
 }
 
 export const checkToken = () => {

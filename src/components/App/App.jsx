@@ -10,9 +10,9 @@ import Profile from '../Profile/Profile';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
-import moviesApi from '../../utils/MoviesApi.js';
-import mainApi from '../../utils/MainApi.js';
-import {register, authorize, checkToken} from '../../utils/auth.js';
+import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
+import * as authApi from '../../utils/AuthApi';
 
 /** @returns {JSX.Element} */
 function App() {
@@ -25,26 +25,73 @@ function App() {
 
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
     const [IsUpdateProfile, setIsUpdateProfile] = useState(false);
-
-    function handleLogin() {
-        setLoggedIn(true);
-        navigate('/', {replace: true});
-    }
-
-    function onLogout() {
-        setLoggedIn(false);
-        navigate('/signin', {replace: true});
-    }
+    const [errorApi, setErrorApi] = useState(null);
 
     function handleRegister(name, email, password) {
-        return register(name, email, password)
+        return authApi.register(name, email, password)
             .then((res) => {
-                console.log(res);
+                console.log(res); // --> data._id, data.name, data.email
                 setEmail(res.data.email)
                 setLoggedIn(true)
                 navigate('/movies', {replace: true})
             })
-            .catch((err) => {console.log(`Ошибка регистрации ${err}`)})
+            .catch((err) => {
+                console.log(`Ошибка регистрации: ${err}`)
+                setErrorApi(err)
+            });
+    }
+
+    function handleLogin(email, password) {
+        if (!email || !password) {
+            return;
+        }
+        return authApi.authorize(email, password)
+            .then((data) => {
+                console.log(data); // --> {token: "eyJhbGciOi....eyJfa'}
+                if (data.token) {
+                    setLoggedIn(true)
+                    localStorage.setItem('token', data.token)
+                    setEmail(email)
+                    navigate('/movies', {replace: true})
+                }
+            })
+            .catch((err) => {
+                setErrorApi(err)
+                console.log(`Ошибка логинизации: ${err}`)
+            })
+    }
+
+    // Проверить валидность токена
+    function handleTokenCheck(token) { /** @endpoint: '/users/me' */
+        if (token) { /** есть ли jwt токен в локальном хранилище браузера ? */
+        authApi.checkToken(token)
+            .then((res) => {
+                /** автологин. Чтобы после перезагрузки не выкидывало снова в логин*/
+                console.log(res)
+                if (res) {
+                    setEmail(res.data.email)
+                    setLoggedIn(true)
+                    navigate('/movies', {replace: true})
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        }
+    }
+
+    useEffect(() => { /** Проверяем токен, получаем email */
+    handleTokenCheck()
+        // console.log(handleTokenCheck()) // дает undefined ?!!!
+        localStorage.setItem('loggedIn', loggedIn.toString())
+        // if (loggedIn)
+    }, [loggedIn]);
+
+    function onLogout() {
+        localStorage.removeItem('token');
+        setEmail(null);
+        setLoggedIn(false);
+        navigate('/', {replace: true});
     }
 
     function handleUpdateProfile(name, email) {
@@ -101,12 +148,12 @@ function App() {
                        }
                 />
 
-                <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister}/>) : (<Navigate to='/'/>)}/>
-                <Route path='/signin' element={!loggedIn ? (<Login/>) : (<Navigate to='/'/>)}/>
+                <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister} errorApi={errorApi}/>) : (<Navigate to='/movies'/>)}/>
+                <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi}/>) : (<Navigate to='/movies'/>)}/>
                 <Route path='/profile' element={
                     <>
                         <Header loggedIn={loggedIn} type='profile'/>
-                        <Profile onUpdateProfile={handleUpdateProfile} />
+                        <Profile onUpdateProfile={handleUpdateProfile} onLogout={onLogout}/>
                     </>
                 }
                 />

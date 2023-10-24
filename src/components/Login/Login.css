@@ -31,6 +31,22 @@
     box-shadow: 0 0 10px rgb(155, 159, 159, .5);
 }
 
+.login__input:focus:invalid {
+    box-shadow: 0 0 10px rgb(255, 48, 85, .5);
+}
+
+.login__input:focus:valid {
+    box-shadow: 0 0 10px rgb(0, 128, 0, .5);
+}
+
+.login__input-err {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FF3055;
+    padding-top: 4px
+}
+
 .btn_entry_login {
     margin-top: 110px;
 }
@@ -43,6 +59,9 @@
     .login__input-label:first-of-type {
         /*height: 45px;*/
         padding-bottom: 0;
+    }
+    .login__input-err {
+        padding-top: 7px;
     }
     .btn_entry_login {
         margin-top: 110px;
@@ -61,6 +80,9 @@
     }
     .login__input-label {
         padding-top: 25px;
+    }
+    .login__input-err {
+        padding-top: 5px;
     }
     .btn_entry_login {
         margin-top: 159px;

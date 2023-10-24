@@ -118,6 +118,12 @@
     cursor: pointer;
 }
 
+.caption__text_btn-logout {
+    color: #FF3055;
+    font-weight: 500;
+    padding: 16px 0 67px;
+}
+
 .btn_entry {
     width: 100%;
     min-height: 45px;
@@ -154,6 +160,9 @@
     }
     .caption_profile {
         padding: 192px 0 269px;
+    }
+    .caption__text_btn-logout {
+        padding: 16px 0 0;
     }
     .btn_entry_profile {
         margin-top: 192px;

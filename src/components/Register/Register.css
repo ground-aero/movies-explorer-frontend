@@ -29,7 +29,15 @@
     box-shadow: 0 0 10px rgb(155, 159, 159, .5);
 }
 
-.register__err {
+.register__input:focus:invalid {
+    box-shadow: 0 0 10px rgb(255, 48, 85, .5);
+}
+
+.register__input:focus:valid {
+    box-shadow: 0 0 10px rgb(0, 128, 0, .5);
+}
+
+.register__input-err {
     font-weight: 400;
     font-size: 10px;
     line-height: 12px;
@@ -52,7 +60,7 @@
         padding-bottom: 9px;
         border-bottom: 1px solid #E8E8E8;
     }
-    .register__err {
+    .register__input-err {
         padding-top: 7px;
     }
     .btn_entry_register {
@@ -67,7 +75,7 @@
     .register__input-label:first-child {
         padding-top: 0;
     }
-    .register__err {
+    .register__input-err {
         padding-top: 5px;
     }
     .btn_entry_register {

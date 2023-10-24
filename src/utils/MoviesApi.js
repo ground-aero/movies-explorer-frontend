@@ -3,7 +3,7 @@
 import { BeatfilmApiSettings } from './constants.js';
 
 // p.s: Напишите этот код на нативном JS, применяя fetch.
-export class MoviesApi {
+class MoviesApi {
     constructor(options) {
         // this._headers = options.headers;
         this._serverUrl = options.serverUrl;
@@ -29,4 +29,4 @@ export class MoviesApi {
 /** экземпляр класса MoviesApi  */
 const moviesApi = new MoviesApi(BeatfilmApiSettings);
 
-export default moviesApi
+export default moviesApi;

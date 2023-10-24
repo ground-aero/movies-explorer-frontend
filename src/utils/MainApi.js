@@ -3,7 +3,7 @@
 import { apiSettings } from './constants.js';
 
 // p.s: Напишите этот код на нативном JS, применяя fetch.
-export class MainApi {
+class MainApi {
     constructor(options) {
         // this._headers = options.headers;
         this._serverUrl = options.serverUrl;
@@ -82,4 +82,4 @@ export class MainApi {
 /** Экземпляр класса mainApi  */
 const mainApi = new MainApi(apiSettings);
 
-export default mainApi
+export default mainApi;

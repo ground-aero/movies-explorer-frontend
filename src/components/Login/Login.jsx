@@ -1,24 +1,33 @@
-// component - for Authorization page  - компонент страницы авторизации.
+// component - for Authorization page
+import {useState} from 'react';
 import '../general/content.css';
 import './Login.css';
 import FormSection from '../FormSection/FormSection';
+import {useForm, useFormWithValidation} from '../ValidForm/ValidForm';
 
-function Login({name, title, buttonText, captionText}) {
-    /** Стейт, в котором содержится значение инпута */
-    // const [value, setValue] = React.useState('');
+function Login({ handleLogin, errorApi }) { // @props из App.js - аутентификация пользователя
+    /** логика и стейты: values.name, values.emaiil, ... --> in ValidForm component */
+    const { values, handleChange } = useForm();
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        handleLogin(values.email, values.password)
+    }
 
     return (
         <main className='content'>
 
             <FormSection name={'login'} title={'Рады видеть!'} buttonText={'Войти'}
-                captionText={'Еще не зарегистрированы?'} captionLink={'/signup'} captionLinkText={'Регистрация'}>
+                captionText={'Еще не зарегистрированы?'} captionLink={'/signup'} captionLinkText={'Регистрация'}
+                onSubmit={ onSubmit } errorApi={errorApi}
+            >
 
                 {/*<span className='login__inputs'>*/}
                     <label className='login__input-label' htmlFor='login-input-email'>E-mail
                         <input
                             className='login__input'
-                            // value={email}
-                            // onChange={handleChangeEmail}
+                            value={values.email}
+                            onChange={handleChange}
                             type='email'
                             placeholder='введите Ваш email'
                             id='login-input-email'
@@ -32,8 +41,8 @@ function Login({name, title, buttonText, captionText}) {
                     <label className='login__input-label' htmlFor='login-input-pass'>Пароль
                         <input
                             className='login__input'
-                            // value={password}
-                            // onChange={handleChangePassword}
+                            value={values.password}
+                            onChange={handleChange}
                             type='password'
                             placeholder='введите Ваш пароль'
                             id='login-input-pass'
@@ -44,6 +53,7 @@ function Login({name, title, buttonText, captionText}) {
                         />
                     </label>
                 {/*</span>*/}
+                <span className='login__input-err'>{ }</span>
 
             </FormSection>
 

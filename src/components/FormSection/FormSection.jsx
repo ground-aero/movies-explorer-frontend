@@ -13,6 +13,7 @@ function FormSection({
                          captionLink,
                          captionLinkText,
                          onSubmit,
+                         errorApi,
                      }) {
 
     return (
@@ -37,13 +38,15 @@ function FormSection({
                     {/* Register, Login - inputs */}
                     <span className='form__inputs'>
                         {children}
-
                     </span>
 
                     {/** отображение 'caption' в зависимости от компонента (кроме: profile) */}
                     {(name === 'login' || name === 'register') &&
                         <>
-                            <button className={`btn btn_entry btn_entry_${name}`}>{buttonText}</button>
+                            <button className={`btn btn_entry btn_entry_${name}`}>
+                                {buttonText}
+                                <span className='btn__api-err'>{ errorApi }</span>
+                            </button>
                             <span className={`caption caption_${name}`}>
                                 <p className='caption__text'>{captionText}</p>
                                 <Link to={captionLink} className='caption__link'>{captionLinkText}</Link>

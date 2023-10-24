@@ -2,10 +2,9 @@
 import '../general/content.css';
 import './Profile.css';
 import FormSection from '../FormSection/FormSection';
-import {Link} from "react-router-dom";
 import {useState} from "react";
 
-function Profile({ onUpdateProfile }) {
+function Profile({ onUpdateProfile, onLogout }) {
     // const [isUpdateProfile, setIsUpdateProfile] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -79,7 +78,9 @@ function Profile({ onUpdateProfile }) {
                         <>
                             <span className='caption caption_profile'>
                                 <button type='button' onClick={ handleUpdateProfile } className='caption__text caption__text_profile caption__text_btn '>{ 'Редактировать' }</button>
-                                <Link to='/' className='caption__text caption__text_profile'>{ 'Выйти из аккаунта' }</Link>
+                                <button type='button' onClick={onLogout} className='caption__text caption__text_profile caption__text_btn caption__text_btn-logout '>
+                                    { 'Выйти из аккаунта' }
+                                </button>
                             </span>
                         </> :
                                 <button type='submit' className={`btn btn_entry btn_entry_profile ${!isChanged ? '' : 'btn_entry_profile_disabled'}`} aria-label='edit' >

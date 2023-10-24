@@ -2,27 +2,38 @@
 import '../general/content.css';
 import './Register.css';
 import FormSection from '../FormSection/FormSection';
-import {useState} from "react";
+import { useForm, useFormWithValidation } from '../ValidForm/ValidForm';
+import {useState} from 'react';
 
-function Register({ handleRegister }) {
+function Register({ handleRegister, errorApi }) { // @props из App.js - регистрация пользователя
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const { values, handleChange } = useForm();
+    // console.log(values)
 
-    const handleChangeName = (e) => {
-        setName(e.target.value);
-    }
-    const handleChangeEmail = (e) => {
-        setEmail(e.target.value);
-    }
-    const handleChangePassword = (e) => {
-        setPassword(e.target.value);
-    }
+    // const [name, setName] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+    const [nameError, setNameError] = useState('Имя может содержать буквы на латинице или крилице');
+    const [emailError, setEmailError] = useState('Email не может быть пустым');
+    const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
 
+    // const handleChangeName = (e) => {
+    //     setName(e.target.value);
+    // }
+    // const handleChangeEmail = (e) => {
+    //     setEmail(e.target.value);
+    // }
+    // const handleChangePassword = (e) => {
+    //     setPassword(e.target.value);
+    // }
+
+    // const onSubmit = (e) => {
+    //     e.preventDefault();
+    //     handleRegister(name, email, password)
+    // }
     const onSubmit = (e) => {
         e.preventDefault();
-        handleRegister(name, email, password)
+        handleRegister(values.name, values.email, values.password)
     }
 
     return (
@@ -30,19 +41,21 @@ function Register({ handleRegister }) {
 
             <FormSection name={'register'} title={'Добро пожаловать!'} buttonText={'Зарегистрироваться'}
                          captionText={'Уже зарегистрированы?'} captionLink={'/signin'} captionLinkText={'Войти'}
-                         onSubmit={ onSubmit }>
+                         onSubmit={ onSubmit } errorApi={errorApi}
+            >
 
                 {/*<span className='register__inputs'>*/}
                     <label className='register__input-label' htmlFor='register-input-name'>Имя
                         <input
-                            onChange={handleChangeName}
-                            className='register__input'
-                            value={name}
                             type='text'
+                            pattern='^[a-zA-Zа-яА-ЯЁё \-]+$'
+                            name='name'
+                            value={values.name}
+                            onChange={handleChange}
+                            className='register__input'
                             placeholder='введите Ваше имя'
                             autoFocus
                             id='register-input-name'
-                            name='name'
                             tabIndex='1'
                             minLength='2'
                             required
@@ -51,13 +64,13 @@ function Register({ handleRegister }) {
 
                     <label className='register__input-label' htmlFor='register-input-email'>E-mail
                         <input
-                            onChange={handleChangeEmail}
-                            className='register__input'
-                            value={email}
+                            name='email'
+                            value={values.email}
+                            onChange={handleChange}
                             type='email'
+                            className='register__input'
                             placeholder='введите Ваш email'
                             id='register-input-email'
-                            name='email'
                             tabIndex='2'
                             minLength='4'
                             required
@@ -66,20 +79,20 @@ function Register({ handleRegister }) {
 
                     <label className='register__input-label' htmlFor='register-input-pass'>Пароль
                         <input
-                            onChange={handleChangePassword}
-                            className='register__input'
-                            value={password}
+                            name='password'
+                            value={values.password}
+                            onChange={handleChange}
                             type='password'
+                            className='register__input'
                             placeholder='введите Ваш пароль'
                             id='register-input-pass'
-                            name='password'
                             tabIndex='3'
                             minLength='4'
                             required
                         />
                     </label>
 
-                    <span className='register__err'>Что-то пошло не так...</span>
+                    <span className='register__input-err'>{ }</span>
 
                 {/*</span>*/}
 
