@@ -48,6 +48,11 @@
 .btn_entry_register {
     margin-top: 110px;
 }
+.btn_entry_register:disabled {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+    cursor: not-allowed;
+}
 
 @media (max-width: 768px) {
     .register__input-label {

@@ -1,8 +1,9 @@
 // FormSection - universal element - for Profile*, Login, Register components
-import {useState} from 'react';
+import {useEffect} from 'react';
 import './FormSection.css';
 import logoIcon from '../../images/logo.svg';
 import {Link, NavLink} from 'react-router-dom';
+import {useFormWithValidation} from "../ValidForm/ValidForm.jsx";
 
 function FormSection({
                          name,
@@ -14,7 +15,14 @@ function FormSection({
                          captionLinkText,
                          onSubmit,
                          errorApi,
+                         isValid,
                      }) {
+
+    const { resetForm } = useFormWithValidation();
+
+    useEffect(() => {
+        resetForm()
+    },[errorApi])
 
     return (
         <section className='form-sec'>
@@ -43,13 +51,13 @@ function FormSection({
                     {/** отображение 'caption' в зависимости от компонента (кроме: profile) */}
                     {(name === 'login' || name === 'register') &&
                         <>
-                            <button className={`btn btn_entry btn_entry_${name}`}>
-                                {buttonText}
+                            <button className={`btn btn_entry btn_entry_${ name }`} disabled={!isValid}>
+                                { buttonText }
                                 <span className='btn__api-err'>{ errorApi }</span>
                             </button>
-                            <span className={`caption caption_${name}`}>
-                                <p className='caption__text'>{captionText}</p>
-                                <Link to={captionLink} className='caption__link'>{captionLinkText}</Link>
+                            <span className={`caption caption_${ name }`}>
+                                <p className='caption__text'>{ captionText }</p>
+                                <Link to={ captionLink } className='caption__link'>{ captionLinkText }</Link>
                             </span>
                         </>
                     }

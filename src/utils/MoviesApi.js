@@ -1,6 +1,6 @@
 // содержит описание запросов к стороннему сервису beatfilm-movies, и не связан с пользовательским интерфейсом
 /** @param options - опции для работы с API (serverURL - url сервера, headers - заголовки в виде объекта) */
-import { BeatfilmApiSettings } from './constants.js';
+import { beatfilmApiSettings } from './constants.js';
 
 // p.s: Напишите этот код на нативном JS, применяя fetch.
 class MoviesApi {
@@ -27,6 +27,6 @@ class MoviesApi {
 }
 
 /** экземпляр класса MoviesApi  */
-const moviesApi = new MoviesApi(BeatfilmApiSettings);
+const moviesApi = new MoviesApi(beatfilmApiSettings);
 
 export default moviesApi;

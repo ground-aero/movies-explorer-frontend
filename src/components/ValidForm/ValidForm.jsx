@@ -28,7 +28,41 @@ export function useFormWithValidation() {
         setValues({...values, [name]: value});
         setErrors({...errors, [name]: target.validationMessage });
         setIsValid(target.closest('form').checkValidity());
+
+        checkInputValid(name, value)
     };
+
+    const regExName = /^[a-zA-Zа-яА-ЯЁё \-]+$/
+    const regExEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
+
+    const checkInputValid = (name, value) => {
+        if (name === 'name') {
+            if (regExName.test(value)) {
+                setIsValid({...isValid, name: true})
+                setErrors({...errors, name: ''})
+            } else {
+                setIsValid({...isValid, name: false})
+                setErrors({...errors, name: 'Имя может содержать не менее 2-х букв на кирилице или латинице'})
+            }
+        }
+        else if (name === 'email') {
+            if (regExEmail.test(value)) {
+                setIsValid({...isValid, email: true})
+                setErrors({...errors, email: ''})
+            } else {
+                setIsValid({...isValid, email: false})
+                setErrors({...errors, email: 'Введите Ваш емейл: email@domain.com'})
+            }
+        } else if (name === 'password') {
+            if (value.length >= 4) {
+                setIsValid({...isValid, password: true})
+                setErrors({...errors, password: ''})
+            } else {
+                setIsValid({...isValid, password: false})
+                setErrors({...errors, password: 'Пароль не менее 4-х символов'})
+            }
+    }
+}
 
     const resetForm = useCallback(
         (newValues = {}, newErrors = {}, newIsValid = false) => {
@@ -39,5 +73,5 @@ export function useFormWithValidation() {
         [setValues, setErrors, setIsValid]
     );
 
-    return { values, handleChange, errors, isValid, resetForm };
+    return { values, setValues, handleChange, errors, isValid, resetForm };
 }
