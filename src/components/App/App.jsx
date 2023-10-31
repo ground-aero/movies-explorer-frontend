@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import '../general/page.css'
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -22,6 +23,7 @@ function App() {
     const [cards, setCards] = useState([]);
     // console.log(cards);
     const [email, setEmail] = useState('');
+    const [currentUser, setCurrentUser] = useState({name: ''});  // Стейт, отвечающий за данные текущего пользователя
 
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
     const [IsUpdateProfile, setIsUpdateProfile] = useState(false);
@@ -52,6 +54,7 @@ function App() {
                     setLoggedIn(true)
                     localStorage.setItem('token', data.token)
                     setEmail(email)
+                    // setCurrentUser(data.name)
                     navigate('/movies', {replace: true})
                 }
             })
@@ -82,8 +85,8 @@ function App() {
 
     useEffect(() => { /** Проверяем токен, получаем email */
     handleTokenCheck()
+        localStorage.setItem('loggedIn', loggedIn.toString()) // true
         // console.log(handleTokenCheck()) // дает undefined ?!!!
-        localStorage.setItem('loggedIn', loggedIn.toString())
         // if (loggedIn)
     }, [loggedIn]);
 
@@ -97,6 +100,7 @@ function App() {
     function handleUpdateProfile(name, email) {
         setIsLoading(true) /** состояние для управления текстом кнопки сабмита в каждом попапе: 'Сохранение...' */
         setIsUpdateProfile(true);
+
         // closeAllPopups()
     }
 
@@ -111,6 +115,22 @@ function App() {
             })
     }
 
+    useEffect(() => {
+        if (loggedIn) {
+            mainApi.getUser()
+                .then((res) => {
+                    console.log(res.data.name) // current user's name, _id, email,...
+                    setCurrentUser({name: res.data.name, email: res.data.email})
+                    // console.log(currentUser)
+                    // navigate('/movies', {replace: true})
+                })
+                .catch((err) => {
+                    console.log(`Ошибка загрузки данных текущего пользователя ${err}`)
+                })
+        } else {
+            navigate('/signin', {replace: true});
+        }
+    }, [loggedIn, navigate]);
     // useEffect(() => {
     //     if (loggedIn) {
     //         mainApi.getMyMovies()
@@ -136,49 +156,53 @@ function App() {
 
     return (
         <>
-            <Routes>
-                {/* при загрузке App, путь по умолчанию / не имеет соотв роута. Настраиваем. */}
-                <Route exact path='/'
-                       element={
-                    <>
-                        <Header loggedIn={loggedIn} type='land' onLogout={onLogout}/>
-                        <Main/>
-                        <Footer/>
-                    </>
-                       }
-                />
+            <CurrentUserContext.Provider value={currentUser}>
+                <Routes>
+                    {/* при загрузке App, путь по умолчанию / не имеет соотв роута. Настраиваем. */}
+                    <Route exact path='/'
+                           element={
+                               <>
+                                   <Header loggedIn={loggedIn} type='land' onLogout={onLogout}/>
+                                   <Main/>
+                                   <Footer/>
+                               </>
+                           }
+                    />
 
-                <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister} errorApi={errorApi}/>) : (<Navigate to='/movies'/>)}/>
-                <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi}/>) : (<Navigate to='/movies'/>)}/>
-                <Route path='/profile' element={
-                    <>
-                        <Header loggedIn={loggedIn} type='profile'/>
-                        <Profile onUpdateProfile={handleUpdateProfile} onLogout={onLogout}/>
-                    </>
-                }
-                />
+                    <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister} errorApi={errorApi}/>) : (<Navigate to='/movies'/>)}/>
+                    <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi}/>) : (<Navigate to='/movies'/>)}/>
+                    <Route path='/profile' element={
+                        <>
+                            <Header loggedIn={loggedIn} type='profile'/>
+                            <Profile onUpdateProfile={handleUpdateProfile}
+                                     currentUser={currentUser}
+                                     onLogout={onLogout} />
+                        </>
+                    }
+                    />
 
-                <Route path='/movies' element={
-                    <>
-                        <Header loggedIn={loggedIn} type='movies'/>
-                        <Movies loggedIn={loggedIn} type='movies' cards={cards} handleGetMovies={handleGetMovies}/>
-                        <Footer/>
-                    </>
-                }
-                />
-                <Route path='/saved-movies' element={
-                    <>
-                        <Header loggedIn={loggedIn} type='saved-movies'/>
-                        <SavedMovies type='saved-movies'/>
-                        <Footer/>
-                    </>
-                        }
-                />
+                    <Route path='/movies' element={
+                        <>
+                            <Header loggedIn={loggedIn} type='movies'/>
+                            <Movies loggedIn={loggedIn} type='movies' cards={cards} handleGetMovies={handleGetMovies}/>
+                            <Footer/>
+                        </>
+                    }
+                    />
+                    <Route path='/saved-movies' element={
+                        <>
+                            <Header loggedIn={loggedIn} type='saved-movies'/>
+                            <SavedMovies type='saved-movies'/>
+                            <Footer/>
+                        </>
+                    }
+                    />
 
-                <Route path='*' element={<NotFound/>}/>
+                    <Route path='*' element={<NotFound/>}/>
 
-            </Routes>
+                </Routes>
 
+            </CurrentUserContext.Provider>
         </>
     );
 }

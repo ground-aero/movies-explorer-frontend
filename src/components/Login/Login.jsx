@@ -62,6 +62,7 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
                             name='email'
                             tabIndex='1'
                             minLength='4'
+                            autoComplete='off'
                             required
                         />
                         {errors.email && <span className='login__input-err'>{ errors.email }</span>}
@@ -78,6 +79,7 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
                             name='password'
                             tabIndex='2'
                             minLength='4'
+                            autoComplete='off'
                             required
                         />
                         {errors.password && <span className='login__input-err'>{ errors.password }</span>}

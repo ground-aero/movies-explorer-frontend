@@ -13,6 +13,17 @@ class MainApi {
         return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status} ${res.statusText}`)
     }
 
+    getUser() {
+        const token = localStorage.getItem('token');
+        return fetch(`${this._serverUrl}/users/me`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        }).then(res => this._onResponse(res))
+    }
+
     // # запрашивает-->возвращает все сохранённые текущим пользователем фильмы
     getMyMovies() {
         const token = localStorage.getItem('token');

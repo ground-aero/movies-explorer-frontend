@@ -3,6 +3,8 @@
 ### Ссылка на макет: [Figma 'light-1' template](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=932-3961&mode=design&t=VCMDVvNjAbCo2lft-0)
 
 ### Project / Front domain: [https://ga-movies.nomoredomains.icu.ru](https://ga-movies.nomoredomains.icu.ru)
+#### ТЗ (Этап IV): [https://practicum.yandex.ru/learn/web/courses/347389fe-50f8-4223-937b-d478373f38bf/sprints/40140/topics/97cc89f9-d314-4720-ab34-eae819224906/lessons/05adf862-8464-4536-ae9d-2a55d99fea8b/](https://practicum.yandex.ru/learn/web/courses/347389fe-50f8-4223-937b-d478373f38bf/sprints/40140/topics/97cc89f9-d314-4720-ab34-eae819224906/lessons/05adf862-8464-4536-ae9d-2a55d99fea8b/)
+#### Критерии (Этап IV): [https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/index.html](https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/index.html)
 
 ## Movies Explorer App
 - `Movies Explorer` - Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.

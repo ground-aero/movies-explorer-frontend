@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import './FormSection.css';
 import logoIcon from '../../images/logo.svg';
 import {Link, NavLink} from 'react-router-dom';
-import {useFormWithValidation} from "../ValidForm/ValidForm.jsx";
+import {useFormWithValidation} from '../ValidForm/ValidForm';
 
 function FormSection({
                          name,
@@ -41,6 +41,7 @@ function FormSection({
                     className={`form form_entry ${name}`}
                     name={`form-${name}`}
                     onSubmit={onSubmit}
+                    autoComplete='off'
                 >
 
                     {/* Register, Login - inputs */}

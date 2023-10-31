@@ -1,20 +1,35 @@
 // component page - for patching/changing of Profile - компонент страницы изменения профиля.
+import {useState, useEffect, useContext} from 'react';
+import {useNavigate} from 'react-router-dom';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import '../general/content.css';
 import './Profile.css';
-import FormSection from '../FormSection/FormSection';
-import {useState} from "react";
+import {useForm, useFormWithValidation} from '../ValidForm/ValidForm';
 
 function Profile({ onUpdateProfile, onLogout }) {
+    const navigate = useNavigate();
+
+    const {handleChange, values, setValues} = useForm();
     // const [isUpdateProfile, setIsUpdateProfile] = useState(false);
+    const currentUser = useContext(CurrentUserContext);
+
+    const [user, setUser] = useState({});
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [isChanged, setIsChanged] = useState(false)
-    // console.log(onUpdateProfile)
-    console.log(isChanged)
+    // console.log(isChanged)
+
+    useEffect(() => {
+        setUser(currentUser)
+        console.log('render currentUser', currentUser)
+        // isValid(false)
+    }, [currentUser]);
+
     /** Обработчики изменения инпута обновляет стейт */
     function handleUpdateProfile() {
         setIsChanged(true)
     }
+
     function handleChangeName(e) {
         if (e.target.value !== name) setIsChanged(true)
         else setIsChanged(false)
@@ -34,13 +49,13 @@ function Profile({ onUpdateProfile, onLogout }) {
             <section className='form-sec'>
 
                 <div className={`form-sec__box form-sec__box_profile`}>
-                    <h1 className={`form-sec__title form-sec__title_type_profile`}>{ 'Привет, Виталий!' }</h1>
+                    <h1 className={`form-sec__title form-sec__title_type_profile`}>{`Привет, ${currentUser.name} `}</h1>
                     <form className={`form profile`} name='form-profile'>
                         <div className='profile__inputs'>
                             <span className='profile__input-wrap'>
                                 <input
                                     className='profile__input'
-                                    value={name}
+                                    value={user.name ?? ''}
                                     onChange={handleChangeName}
                                     type='text'
                                     autoFocus
@@ -57,7 +72,7 @@ function Profile({ onUpdateProfile, onLogout }) {
                             <span className='profile__input-wrap'>
                                 <input
                                     className='profile__input profile__input_type_email'
-                                    value={email}
+                                    value={user.email ?? ''}
                                     onChange={handleChangeEmail}
                                     type='email'
                                     id='profile-input-email'
