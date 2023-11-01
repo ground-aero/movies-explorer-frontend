@@ -23,11 +23,56 @@ function App() {
     const [cards, setCards] = useState([]);
     // console.log(cards);
     const [email, setEmail] = useState('');
-    const [currentUser, setCurrentUser] = useState({name: ''});  // Стейт, отвечающий за данные текущего пользователя
+    const [currentUser, setCurrentUser] = useState({name: '', email: ''});  // Стейт, отвечающий за данные текущего пользователя
 
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
-    const [IsUpdateProfile, setIsUpdateProfile] = useState(false);
+    const [isUpdateProfile, setIsUpdateProfile] = useState(false);
     const [errorApi, setErrorApi] = useState(null);
+
+    useEffect(() => { /** Проверяем токен, получаем email */
+    handleTokenCheck()
+        localStorage.setItem('loggedIn', loggedIn.toString()) // true
+    }, [loggedIn]);
+
+    // useEffect(() => {
+    //     if (loggedIn) {
+    //         mainApi.getUser()
+    //             .then((res) => {
+    //                 console.log(res.data.name) // current user's name, _id, email,...
+    //                 setCurrentUser({name: res.data.name, email: res.data.email})
+    //                 // console.log(currentUser)
+    //                 // navigate('/movies', {replace: true})
+    //             })
+    //             .catch((err) => {
+    //                 console.log(`Ошибка загрузки данных текущего пользователя ${err}`)
+    //             })
+    //     } else {
+    //         navigate('/signin', {replace: true});
+    //     }
+    // }, [loggedIn, navigate]);
+
+    // useEffect(() => {
+    //     if (loggedIn) {
+    //         mainApi.getMyMovies()
+    //             .then((res) => {
+    //                 console.log(res)
+    //                 navigate('/movies', {replace: true})
+    //             })
+    //             .catch((err) => {
+    //                 console.log(`Ошибка загрузки фильмов ${err}`)
+    //             })
+    //     } else {
+    //         navigate('/signup', {replace: true});
+    //     }
+    // }, [loggedIn, navigate]);
+
+    // useEffect(() => {
+    //     if (loggedIn) {
+    //         navigate('/');
+    //     } else {
+    //         navigate('/signup', {replace: true});
+    //     }
+    // }, [loggedIn]);
 
     function handleRegister(name, email, password) {
         return authApi.register(name, email, password)
@@ -51,9 +96,11 @@ function App() {
             .then((data) => {
                 console.log(data); // --> {token: "eyJhbGciOi....eyJfa'}
                 if (data.token) {
-                    setLoggedIn(true)
                     localStorage.setItem('token', data.token)
-                    setEmail(email)
+                    setLoggedIn(true)
+
+                    handleTokenCheck()
+                    // setEmail(email)
                     // setCurrentUser(data.name)
                     navigate('/movies', {replace: true})
                 }
@@ -64,43 +111,42 @@ function App() {
             })
     }
 
-    // Проверить валидность токена
-    function handleTokenCheck(token) { /** @endpoint: '/users/me' */
+    // Проверить валидность токена (авторизацию), запросом на сервер
+    function handleTokenCheck() { /** @endpoint: '/users/me' */
+        let token = localStorage.getItem('token');
         if (token) { /** есть ли jwt токен в локальном хранилище браузера ? */
-        authApi.checkToken(token)
-            .then((res) => {
-                /** автологин. Чтобы после перезагрузки не выкидывало снова в логин*/
-                console.log(res)
-                if (res) {
-                    setEmail(res.data.email)
-                    setLoggedIn(true)
-                    navigate('/movies', {replace: true})
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        }
-    }
-
-    useEffect(() => { /** Проверяем токен, получаем email */
-    handleTokenCheck()
-        localStorage.setItem('loggedIn', loggedIn.toString()) // true
-        // console.log(handleTokenCheck()) // дает undefined ?!!!
-        // if (loggedIn)
-    }, [loggedIn]);
-
-    function onLogout() {
-        localStorage.removeItem('token');
-        setEmail(null);
-        setLoggedIn(false);
-        navigate('/', {replace: true});
+            authApi.checkToken(token)
+                .then((res) => {
+                    /** автологин. Чтобы после перезагрузки не выкидывало снова в логин*/
+                    console.log(res)
+                    if (res) {
+                        let userData = {
+                            id: res.data._id,
+                            name: res.data.name,
+                            email: res.data.email,
+                        }
+                        setCurrentUser(userData) // запись текущего пользака в глоб. контекст
+                        setLoggedIn(true)
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            }
     }
 
     function handleUpdateProfile(name, email) {
         setIsLoading(true) /** состояние для управления текстом кнопки сабмита в каждом попапе: 'Сохранение...' */
         setIsUpdateProfile(true);
 
+        return mainApi.patchUser(name, email)
+            .then((updatedUser) => {
+                  console.log(updatedUser)
+                setCurrentUser({ name: updatedUser.name, email: updatedUser.email })
+                  console.log(currentUser)
+            }).catch((err) => {
+                console.log(`err при обновлении данных профиля ${err}`)
+            }).finally(() => {setIsLoading(false)}) //** управяем состоянием/текстом кнопки сабмита */
         // closeAllPopups()
     }
 
@@ -115,44 +161,12 @@ function App() {
             })
     }
 
-    useEffect(() => {
-        if (loggedIn) {
-            mainApi.getUser()
-                .then((res) => {
-                    console.log(res.data.name) // current user's name, _id, email,...
-                    setCurrentUser({name: res.data.name, email: res.data.email})
-                    // console.log(currentUser)
-                    // navigate('/movies', {replace: true})
-                })
-                .catch((err) => {
-                    console.log(`Ошибка загрузки данных текущего пользователя ${err}`)
-                })
-        } else {
-            navigate('/signin', {replace: true});
-        }
-    }, [loggedIn, navigate]);
-    // useEffect(() => {
-    //     if (loggedIn) {
-    //         mainApi.getMyMovies()
-    //             .then((res) => {
-    //                 console.log(res)
-    //                 navigate('/movies', {replace: true})
-    //             })
-    //             .catch((err) => {
-    //                 console.log(`Ошибка загрузки фильмов ${err}`)
-    //             })
-    //     } else {
-    //         navigate('/signup', {replace: true});
-    //     }
-    // }, [loggedIn, navigate]);
-
-    // useEffect(() => {
-    //     if (loggedIn) {
-    //         navigate('/');
-    //     } else {
-    //         navigate('/signup', {replace: true});
-    //     }
-    // }, [loggedIn]);
+    function onLogout() {
+        localStorage.removeItem('token');
+        setEmail(null);
+        setLoggedIn(false);
+        navigate('/', {replace: true});
+    }
 
     return (
         <>

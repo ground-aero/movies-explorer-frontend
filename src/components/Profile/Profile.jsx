@@ -1,50 +1,55 @@
 // component page - for patching/changing of Profile - компонент страницы изменения профиля.
-import {useState, useEffect, useContext} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, {useState, useEffect, useContext} from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import '../general/content.css';
 import './Profile.css';
-import {useForm, useFormWithValidation} from '../ValidForm/ValidForm';
+import {useFormWithValidation} from '../ValidForm/ValidForm';
 
 function Profile({ onUpdateProfile, onLogout }) {
-    const navigate = useNavigate();
 
-    const {handleChange, values, setValues} = useForm();
-    // const [isUpdateProfile, setIsUpdateProfile] = useState(false);
     const currentUser = useContext(CurrentUserContext);
+    const { values, setValues, handleChange, errors, isValid, setIsValid, resetForm } = useFormWithValidation();
 
-    const [user, setUser] = useState({});
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [isChanged, setIsChanged] = useState(false)
-    // console.log(isChanged)
 
     useEffect(() => {
-        setUser(currentUser)
-        console.log('render currentUser', currentUser)
-        // isValid(false)
-    }, [currentUser]);
+        setName(currentUser.name ?? '')
+        setEmail(currentUser.email ?? '')
+        // setIsChanged(false)
+    }, [currentUser.name, currentUser.email]);
+
+    function handleChangeName(evt) {
+        if (evt.target.value !== name) setIsChanged(true)
+        else setIsChanged(false)
+
+        setName(evt.target.value)
+        handleChange(evt)
+    }
+      console.log(isValid)
+
+    function handleChangeEmail(evt) {
+        if (evt.target.value !== email) setIsChanged(true)
+        else setIsChanged(false)
+
+        setEmail(evt.target.value)
+        handleChange(evt)
+    }
 
     /** Обработчики изменения инпута обновляет стейт */
-    function handleUpdateProfile() {
-        setIsChanged(true)
+    function handleSubmit(e) {
+        e.preventDefault()
+        if (isChanged) onUpdateProfile({ name: values.name, email: values.email })
+
+        setIsChanged(false)
     }
 
-    function handleChangeName(e) {
-        if (e.target.value !== name) setIsChanged(true)
-        else setIsChanged(false)
-        setName(e.target.value);
-    }
-    function handleChangeEmail(e) {
-        if (e.target.value !== email) setIsChanged(true)
-        else setIsChanged(false)
-        setEmail(e.target.value);
-    }
+    console.log(isValid.name, isValid.email)
 
     return (
         <main className='content'>
 
-            {/*<FormSection name={'profile'} title={'Привет, Виталий!'}*/}
             {/*             captionLinkEdit={'Редактировать'} captionLinkLogout={'Выйти из аккаунта'} captionLink={'/'}>*/}
             <section className='form-sec'>
 
@@ -55,8 +60,9 @@ function Profile({ onUpdateProfile, onLogout }) {
                             <span className='profile__input-wrap'>
                                 <input
                                     className='profile__input'
-                                    value={user.name ?? ''}
                                     onChange={handleChangeName}
+                                    // value={user.name ?? ''}
+                                    value={name ?? ''}
                                     type='text'
                                     autoFocus
                                     id='profile-input-name'
@@ -66,14 +72,15 @@ function Profile({ onUpdateProfile, onLogout }) {
                                     minLength='2'
                                     required
                                 />
+                                {errors.name && <span className='profile__input-err'>{ errors.name }</span>}
                                 <label className='profile__input-label' htmlFor='profile-input-name'>Имя</label>
                             </span>
 
                             <span className='profile__input-wrap'>
                                 <input
                                     className='profile__input profile__input_type_email'
-                                    value={user.email ?? ''}
                                     onChange={handleChangeEmail}
+                                    value={email ?? ''}
                                     type='email'
                                     id='profile-input-email'
                                     placeholder='введите Ваш email'
@@ -82,6 +89,7 @@ function Profile({ onUpdateProfile, onLogout }) {
                                     minLength='4'
                                     required
                                 />
+                                {errors.email && <span className='profile__input-err'>{ errors.email }</span>}
                                 <label className='profile__input-label' htmlFor='profile-input-email'>E-mail</label>
                             </span>
 
@@ -92,13 +100,15 @@ function Profile({ onUpdateProfile, onLogout }) {
                         {!isChanged ?
                         <>
                             <span className='caption caption_profile'>
-                                <button type='button' onClick={ handleUpdateProfile } className='caption__text caption__text_profile caption__text_btn '>{ 'Редактировать' }</button>
+                                <button type='button' onClick={ handleSubmit } className='caption__text caption__text_profile caption__text_btn '>{ 'Редактировать' }</button>
                                 <button type='button' onClick={onLogout} className='caption__text caption__text_profile caption__text_btn caption__text_btn-logout '>
                                     { 'Выйти из аккаунта' }
                                 </button>
                             </span>
                         </> :
-                                <button type='submit' className={`btn btn_entry btn_entry_profile ${!isChanged ? '' : 'btn_entry_profile_disabled'}`} aria-label='edit' >
+                                <button type='submit' className={`btn btn_entry btn_entry_profile ${(!isChanged || (!isValid.name || !isValid.email)) ? 'btn_entry_profile_disabled' : '' }`}
+                                        disabled={!isValid.name || !isValid.email} aria-label='edit'
+                                        onClick={handleSubmit} >
                                     { 'Сохранить' }
                                 </button>
                         }
@@ -106,7 +116,6 @@ function Profile({ onUpdateProfile, onLogout }) {
 
                 </div>
             </section>
-            {/*</FormSection>*/}
 
         </main>
     );

@@ -1,4 +1,3 @@
-//
 // export const DB_URL = 'http://127.0.0.1:4000';
 export const DB_URL = 'https://api.ga-movies.nomoredomainsicu.ru';
 
@@ -7,7 +6,7 @@ export const DB_URL = 'https://api.ga-movies.nomoredomainsicu.ru';
 // }
 function checkResponse(res) {
     if (res.ok) {
-        console.log(res)
+        // console.log(res)
         return res.json();
     }
     return res.json()
@@ -69,15 +68,16 @@ export const authorize = (email, password) => {
         // })
 }
 
-export const checkToken = () => {
-    const token = localStorage.getItem('token');
-    return fetch(`${DB_URL}`, {
+    // Проверить токен/авторизацию запросом на сервер
+export const checkToken = (token) => {
+    // const token = localStorage.getItem('token');
+    return fetch(`${DB_URL}/users/me`, {
         method: 'GET',
         headers: {
-            'Accept': 'application/json',
+            // 'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
         },
-        credentials: 'include', // включить отправку авторизационных данных в fetch
+        // credentials: 'include', // включить отправку авторизационных данных в fetch
     }).then(checkResponse);
 };

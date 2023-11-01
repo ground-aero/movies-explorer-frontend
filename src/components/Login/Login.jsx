@@ -8,7 +8,6 @@ import {useForm, useFormWithValidation} from '../ValidForm/ValidForm';
 function Login({ handleLogin, errorApi }) { // @props из App.js - аутентификация пользователя
     /** логика и стейты: values.name, values.emaiil, ... --> in ValidForm component */
     const { handleChange, values, errors, isValid, resetForm } = useFormWithValidation();
-    const {setValues, setEmail} = useForm();
     // console.log(values.email, values.password)
 
     const onSubmit = (e) => {
@@ -19,7 +18,6 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
     useEffect(() => {
         resetForm('', '', true)
     },[])
-
 
     // const [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');

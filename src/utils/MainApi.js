@@ -24,6 +24,21 @@ class MainApi {
         }).then(res => this._onResponse(res))
     }
 
+    patchUser(formValue) {
+        const token = localStorage.getItem('token');
+        return fetch(`${this._serverUrl}/users/me`,{
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: formValue.name,
+                email: formValue.email
+            })
+        }).then(res => this._onResponse(res))
+    }
+
     // # запрашивает-->возвращает все сохранённые текущим пользователем фильмы
     getMyMovies() {
         const token = localStorage.getItem('token');

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, {useCallback} from 'react';
 
 //хук управления формой
 export function useForm() {
@@ -21,6 +21,8 @@ export function useFormWithValidation() {
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
 
+    /** Изменения и запись: 1. значений полей, 2. ошибок валидации полей, 3. статусы isValid
+     * 4. вызов тестирования полей */
     const handleChange = (event) => {
         const target = event.target;
         const name = target.name;
@@ -35,6 +37,7 @@ export function useFormWithValidation() {
     const regExName = /^[a-zA-Zа-яА-ЯЁё \-]+$/
     const regExEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
 
+    /** 1. Тестирование значений полей 2. запись кастомных ошибок, 3. статусы isValid */
     const checkInputValid = (name, value) => {
         if (name === 'name') {
             if (regExName.test(value)) {
@@ -73,5 +76,5 @@ export function useFormWithValidation() {
         [setValues, setErrors, setIsValid]
     );
 
-    return { values, setValues, handleChange, errors, isValid, resetForm };
+    return { values, setValues, handleChange, errors, isValid, setIsValid, resetForm };
 }
