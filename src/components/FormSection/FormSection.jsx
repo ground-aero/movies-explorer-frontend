@@ -21,7 +21,7 @@ function FormSection({
     const { resetForm } = useFormWithValidation();
 
     useEffect(() => {
-        resetForm()
+        resetForm('', '', true)
     },[errorApi])
 
     return (

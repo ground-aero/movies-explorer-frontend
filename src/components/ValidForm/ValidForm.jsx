@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 
 //хук управления формой
 export function useForm() {
@@ -67,7 +67,7 @@ export function useFormWithValidation() {
     }
 }
 
-    const resetForm = useCallback(
+    const resetForm = React.useCallback(
         (newValues = {}, newErrors = {}, newIsValid = false) => {
             setValues(newValues);
             setErrors(newErrors);

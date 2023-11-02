@@ -77,10 +77,10 @@ function App() {
     function handleRegister(name, email, password) {
         return authApi.register(name, email, password)
             .then((res) => {
-                console.log(res); // --> data._id, data.name, data.email
-                setEmail(res.data.email)
+                console.log(res.data); // --> _id, name, email
                 setLoggedIn(true)
-                navigate('/movies', {replace: true})
+                // setEmail(res.data.email)
+                handleLogin(email, password)
             })
             .catch((err) => {
                 console.log(`Ошибка регистрации: ${err}`)
@@ -111,21 +111,22 @@ function App() {
             })
     }
 
-    // Проверить валидность токена (авторизацию), запросом на сервер
+    // Проверить валидность токена (авторизацию), запросом на сервер на: users/me
     function handleTokenCheck() { /** @endpoint: '/users/me' */
         let token = localStorage.getItem('token');
         if (token) { /** есть ли jwt токен в локальном хранилище браузера ? */
             authApi.checkToken(token)
                 .then((res) => {
-                    /** автологин. Чтобы после перезагрузки не выкидывало снова в логин*/
-                    console.log(res)
-                    if (res) {
+                    /** автологин. Чтобы после перезагрузки не выкидывало снова в логин */
+                    console.log(res.data) // <---> data: _id:..., name:..., email:...
+                    if (res.data) {
                         let userData = {
                             id: res.data._id,
                             name: res.data.name,
                             email: res.data.email,
                         }
                         setCurrentUser(userData) // запись текущего пользака в глоб. контекст
+                        console.log(userData)
                         setLoggedIn(true)
                     }
                 })
@@ -141,9 +142,9 @@ function App() {
 
         return mainApi.patchUser(name, email)
             .then((updatedUser) => {
-                  console.log(updatedUser)
-                setCurrentUser({ name: updatedUser.name, email: updatedUser.email })
-                  console.log(currentUser)
+                  console.log(updatedUser.data)
+                setCurrentUser(updatedUser.data)
+                  console.log(currentUser.data)
             }).catch((err) => {
                 console.log(`err при обновлении данных профиля ${err}`)
             }).finally(() => {setIsLoading(false)}) //** управяем состоянием/текстом кнопки сабмита */
@@ -183,8 +184,8 @@ function App() {
                            }
                     />
 
-                    <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister} errorApi={errorApi}/>) : (<Navigate to='/movies'/>)}/>
-                    <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi}/>) : (<Navigate to='/movies'/>)}/>
+                    <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister} errorApi={errorApi} />) : (<Navigate to='/movies'/>)}/>
+                    <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi} />) : (<Navigate to='/movies'/>)}/>
                     <Route path='/profile' element={
                         <>
                             <Header loggedIn={loggedIn} type='profile'/>

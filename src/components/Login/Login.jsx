@@ -23,21 +23,14 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
     // const [password, setPassword] = useState('');
     // const [emailError, setEmailError] = useState('Email не может быть пустым');
     // const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
-
-    // console.log(email,password)
-    // console.log(emailError,passwordError)
     // const handleNameError = (e) => {
     //     setName(e.target.value)
     //     if (!isValid.name) {
     //         setNameError('Имя может содержать буквы на латинице или крилице')
     //     } else { setNameError('') }
     // }
-
     // const handleChangeEmail = (e) => {
     //     setEmail(e.target.value);
-    // }
-    // const handleChangePassword = (e) => {
-    //     setPassword(e.target.value);
     // }
 
     return (
@@ -49,6 +42,7 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
             >
 
                 {/*<span className='login__inputs'>*/}
+
                     <label className='login__input-label' htmlFor='login-input-email'>E-mail
                         <input
                             className='login__input'
@@ -82,8 +76,8 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
                         />
                         {errors.password && <span className='login__input-err'>{ errors.password }</span>}
                     </label>
+
                 {/*</span>*/}
-                {/*<span className='login__input-err'>{ }</span>*/}
 
             </FormSection>
 
