@@ -2,7 +2,7 @@
 import {useEffect} from 'react';
 import './FormSection.css';
 import logoIcon from '../../images/logo.svg';
-import {Link, NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useFormWithValidation} from '../ValidForm/ValidForm';
 
 function FormSection({
@@ -52,11 +52,13 @@ function FormSection({
                     {/** отображение 'caption' в зависимости от компонента (кроме: profile) */}
                     {(name === 'login' || name === 'register') &&
                         <>
+                            {/* конопки: "Войти", "Зарегистрироваться" */}
                             <button className={`btn btn_entry btn_entry_${ name }`} disabled={!isValid}>
                                 { buttonText }
                                 <span className='btn__api-err'>{ errorApi }</span>
                             </button>
                             <span className={`caption caption_${ name }`}>
+                                {/* ссылки: 'Еще не зарегистрированы?', 'Уже зарегистрированы?' */}
                                 <p className='caption__text'>{ captionText }</p>
                                 <Link to={ captionLink } className='caption__link'>{ captionLinkText }</Link>
                             </span>

@@ -1,18 +1,22 @@
 // component - for single film card.
 import './MoviesCard.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
-function MoviesCard({ type, nameRU, nameEN, image }) {
+function MoviesCard({ type, nameRU, nameEN, image, card }) {
     const name = nameRU ? nameRU : nameEN;
     const btnIcon = (type === 'movies') ? 'save' : 'delete';
     const [isSaved, setIsSaved] = useState(false);
 
+    useEffect(() => {
+        // console.log(card)
+    }, [])
+
     return (
         <li className={`card card_type_${ type }`}>
-            <img src={ image } className='card__img' alt='изображение карточки'/>
+            <img src={`https://api.nomoreparties.co/${card.image.url}`} className='card__img' alt={card.nameRU}/>
 
             <div className='wrap'>
-            <h1 className='card__name'>{ name }</h1>
+            <h1 className='card__name'>{ card.nameRU }</h1>
                 <p className={`card__btn-wrap card__btn-wrap_${btnIcon} `}>
                     <button
                         type='button'
@@ -23,7 +27,7 @@ function MoviesCard({ type, nameRU, nameEN, image }) {
                 </p>
             </div>
 
-                <p className='card__duration'>1ч 42м</p>
+                <p className='card__duration'>{`${card.duration}м`}</p>
 
         </li>
     );

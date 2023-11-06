@@ -5,14 +5,14 @@ import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader.jsx';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 
-function Movies({ cards, type, handleGetMovies }) {
+function Movies({ cards, type, onGetMovies, errorApi }) {
     return (
         <main className='content'>
             <section className='movies content__section'>
 
-                <SearchForm />
+                <SearchForm onGetMovies={ onGetMovies } />
 
-                <MoviesCardList type={ type } cards={cards} handleGetMovies={handleGetMovies} />
+                <MoviesCardList type={ type } cards={ cards } onGetMovies={ onGetMovies } errorApi={ errorApi }/>
 
                 {/*<Preloader />*/}
 

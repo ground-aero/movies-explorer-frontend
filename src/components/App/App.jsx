@@ -14,6 +14,7 @@ import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import * as authApi from '../../utils/AuthApi';
+import {clear} from "@testing-library/user-event/dist/clear.js";
 
 /** @returns {JSX.Element} */
 function App() {
@@ -28,6 +29,8 @@ function App() {
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
     const [isUpdateProfile, setIsUpdateProfile] = useState(false);
     const [errorApi, setErrorApi] = useState(null);
+
+    const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
 
     useEffect(() => { /** Проверяем токен, получаем email */
     handleTokenCheck()
@@ -85,6 +88,10 @@ function App() {
             .catch((err) => {
                 console.log(`Ошибка регистрации: ${err}`)
                 setErrorApi(err)
+                let timer = setTimeout(() => {
+                    setErrorApi('')
+                    clearTimeout(timer)
+                }, 7000)
             });
     }
 
@@ -108,6 +115,10 @@ function App() {
             .catch((err) => {
                 setErrorApi(err)
                 console.log(`Ошибка логинизации: ${err}`)
+                let timer = setTimeout(() => {
+                    setErrorApi('')
+                    clearTimeout(timer)
+                }, 7000)
             })
     }
 
@@ -118,7 +129,7 @@ function App() {
             authApi.checkToken(token)
                 .then((res) => {
                     /** автологин. Чтобы после перезагрузки не выкидывало снова в логин */
-                    console.log(res.data) // <---> data: _id:..., name:..., email:...
+                    // console.log(res.data) // { _id:..., name:..., email:... }
                     if (res.data) {
                         let userData = {
                             id: res.data._id,
@@ -126,7 +137,6 @@ function App() {
                             email: res.data.email,
                         }
                         setCurrentUser(userData) // запись текущего пользака в глоб. контекст
-                        console.log(userData)
                         setLoggedIn(true)
                     }
                 })
@@ -144,7 +154,7 @@ function App() {
             .then((updatedUser) => {
                   console.log(updatedUser.data)
                 setCurrentUser(updatedUser.data)
-                  console.log(currentUser.data)
+                  console.log(currentUser)
             }).catch((err) => {
                 console.log(`err при обновлении данных профиля ${err}`)
             }).finally(() => {setIsLoading(false)}) //** управяем состоянием/текстом кнопки сабмита */
@@ -154,13 +164,39 @@ function App() {
     function handleGetMovies() {
         return moviesApi.getAllMovies()
             .then((res) => {
-                console.log(res)
-                navigate('/movies', {replace: true})
+                  console.log(res) // (100) [{...}, {id:1, nameRU:'Роллинг', ...} ]
+                setCards(res)
+                // navigate('/movies', {replace: true})
             })
             .catch((err) => {
                 console.log(`Ошибка загрузки фильмов ${err}`)
+                setErrorApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+                // let timer = setTimeout(() => {
+                //     setErrorApi('')
+                //     clearTimeout(timer)
+                // }, 12000)
             })
     }
+    // function handleGetMovies() {
+    //     let searchInputString // ??
+    //     let setIsValid // ??
+    //     // if(!searchInputString) {
+    //     //     setIsValid(false)
+    //     // }
+    //     if (allMovies.length === 0 && searchInputString) {
+    //         moviesApi.getAllMovies()
+    //             .then((res) => {
+    //                 console.log(res)
+    //                 setIsValid(true)
+    //
+    //                 setAllMovies(res)
+    //                 localStorage.setItem(res, JSON.stringify(allMovies)) // ????
+    //             })
+    //             .catch((err) => {
+    //                 console.log(`Ошибка загрузки фильмов ${err}`)
+    //             });
+    //     } else { handleSubmitSearch() }
+    // }
 
     function onLogout() {
         localStorage.removeItem('token');
@@ -199,7 +235,8 @@ function App() {
                     <Route path='/movies' element={
                         <>
                             <Header loggedIn={loggedIn} type='movies'/>
-                            <Movies loggedIn={loggedIn} type='movies' cards={cards} handleGetMovies={handleGetMovies}/>
+                            <Movies loggedIn={loggedIn} type='movies' cards={cards} onGetMovies={handleGetMovies}
+                                    errorApi={errorApi} />
                             <Footer/>
                         </>
                     }

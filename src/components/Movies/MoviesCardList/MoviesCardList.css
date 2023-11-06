@@ -7,6 +7,18 @@
     min-height: 330px;
     gap: 38px 20px;
     justify-content: flex-start;
+    position: relative;
+}
+
+.cards__api-err {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 14px;
+    color: #FF3055;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    text-align: center;
 }
 
 /*button*/

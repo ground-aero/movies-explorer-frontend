@@ -17,6 +17,11 @@ function Profile({ onUpdateProfile, onLogout }) {
     const [isChanged, setIsChanged] = useState(false)
 
     useEffect(() => {
+        if (currentUser.name === values.name && currentUser.email === values.email) setIsChanged(false)
+        else setIsChanged(true)
+    }, [values.name, values.email]);
+
+    useEffect(() => {
         setValues(currentUser)
         setIsChanged(false)
     }, [currentUser]);
@@ -26,11 +31,6 @@ function Profile({ onUpdateProfile, onLogout }) {
     //     // if (values.email === )
     //     // setDatas(currentUser)
     // }, [isValid.email]);
-
-    useEffect(() => {
-        if (currentUser.name === values.name && currentUser.email === values.email) setIsChanged(false)
-        else setIsChanged(true)
-    }, [currentUser, values.name, values.email]);
 
     // function handleChangeName(evt) {
     //     if (evt.target.value !== values.name) setIsChanged(true)
@@ -45,8 +45,8 @@ function Profile({ onUpdateProfile, onLogout }) {
         setIsChanged(true)
     }
     /** Обработчик сабмита */
-    function handleSubmit(e) {
-        e.preventDefault()
+    function handleSubmit(evt) {
+        evt.preventDefault()
         if (isChanged) onUpdateProfile({ name: values.name, email: values.email })
 
         setIsChanged(false)
