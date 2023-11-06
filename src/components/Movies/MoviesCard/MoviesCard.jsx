@@ -10,7 +10,7 @@ function MoviesCard({ type, card, nameRU, nameEN }) {
     // const {nameRU, nameEN, image, duration} = card;
 
     useEffect(() => {
-        console.log(card)
+        // console.log(card)
     }, [])
 
     return (
@@ -29,7 +29,7 @@ function MoviesCard({ type, card, nameRU, nameEN }) {
                 </p>
             </div>
 
-                <p className='card__duration'>{`${card.duration}м`}</p>
+            <p className='card__duration'>{`${ card.duration }м`}</p>
 
         </li>
     );

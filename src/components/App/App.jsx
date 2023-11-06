@@ -171,11 +171,11 @@ function App() {
             })
             .catch((err) => {
                 console.log(`Ошибка загрузки фильмов ${err}`)
-                setErrorApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
-                let timer = setTimeout(() => {
-                    setErrorApi('')
-                    clearTimeout(timer)
-                }, 7000)
+                setErrorApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \n Подождите немного и попробуйте ещё раз')
+                // let timer = setTimeout(() => {
+                //     setErrorApi('')
+                //     clearTimeout(timer)
+                // }, 7000)
             }).finally(() => {setIsLoading(false)})
     }
     // function handleGetMovies() {

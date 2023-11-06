@@ -10,14 +10,14 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
     const { handleChange, values, errors, isValid, resetForm } = useFormWithValidation();
     // console.log(values.email, values.password)
 
+    useEffect(() => {
+        resetForm('', '', true)
+    },[])
+
     const onSubmit = (e) => {
         e.preventDefault();
         handleLogin(values.email, values.password)
     }
-
-    useEffect(() => {
-        resetForm('', '', true)
-    },[])
 
     // const [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');

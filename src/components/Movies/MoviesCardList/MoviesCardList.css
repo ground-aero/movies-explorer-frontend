@@ -18,13 +18,16 @@
 
 .cards__api-err {
     font-weight: 400;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 14px;
     color: #FF3055;
-    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    top: 0;
-    text-align: center;
+    height: 100%;
+    z-index: 10;
+    padding: 0 100px;
 }
 
 /*button*/
@@ -51,6 +54,14 @@
 
 .movies__btn-more:hover {
     opacity: .7;
+}
+
+@media (max-width: 1067px) {
+    .cards {
+        gap: 38px 30px;
+        min-height: 270px;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
