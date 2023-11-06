@@ -5,7 +5,10 @@ import './SearchForm.css';
 
 function SearchForm({ onGetMovies }) {
 
-    function handleSubmit(evt) { // загрузить карточки фильмов из сервиса: beatfilm-movies
+
+
+    /** загрузить карточки фильмов из сервиса: beatfilm-movies, по сабмиту */
+    function handleSubmit(evt) {
         evt.preventDefault()
         onGetMovies()
     }

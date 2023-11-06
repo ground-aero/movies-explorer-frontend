@@ -162,6 +162,7 @@ function App() {
     }
 
     function handleGetMovies() {
+        setIsLoading(true) /** состояние для управления 'Loading...' */
         return moviesApi.getAllMovies()
             .then((res) => {
                   console.log(res) // (100) [{...}, {id:1, nameRU:'Роллинг', ...} ]
@@ -171,11 +172,11 @@ function App() {
             .catch((err) => {
                 console.log(`Ошибка загрузки фильмов ${err}`)
                 setErrorApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
-                // let timer = setTimeout(() => {
-                //     setErrorApi('')
-                //     clearTimeout(timer)
-                // }, 12000)
-            })
+                let timer = setTimeout(() => {
+                    setErrorApi('')
+                    clearTimeout(timer)
+                }, 7000)
+            }).finally(() => {setIsLoading(false)})
     }
     // function handleGetMovies() {
     //     let searchInputString // ??
@@ -236,7 +237,7 @@ function App() {
                         <>
                             <Header loggedIn={loggedIn} type='movies'/>
                             <Movies loggedIn={loggedIn} type='movies' cards={cards} onGetMovies={handleGetMovies}
-                                    errorApi={errorApi} />
+                                    errorApi={errorApi} isLoading={isLoading}/>
                             <Footer/>
                         </>
                     }

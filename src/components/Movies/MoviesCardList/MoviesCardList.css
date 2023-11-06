@@ -10,6 +10,12 @@
     position: relative;
 }
 
+.cards__preloader {
+    position: absolute;
+    top: 0;
+    justify-self: center;
+}
+
 .cards__api-err {
     font-weight: 400;
     font-size: 13px;

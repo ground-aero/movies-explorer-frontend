@@ -2,18 +2,20 @@
 import './MoviesCard.css';
 import {useState, useEffect} from 'react';
 
-function MoviesCard({ type, nameRU, nameEN, image, card }) {
+function MoviesCard({ type, card, nameRU, nameEN }) {
     const name = nameRU ? nameRU : nameEN;
     const btnIcon = (type === 'movies') ? 'save' : 'delete';
     const [isSaved, setIsSaved] = useState(false);
 
+    // const {nameRU, nameEN, image, duration} = card;
+
     useEffect(() => {
-        // console.log(card)
+        console.log(card)
     }, [])
 
     return (
-        <li className={`card card_type_${ type }`}>
-            <img src={`https://api.nomoreparties.co/${card.image.url}`} className='card__img' alt={card.nameRU}/>
+        <li id={'movie-' + card.id } className={`card card_type_${ type }`}>
+            <img src={`https://api.nomoreparties.co/${card.image.url}`} className='card__img' alt={ card.nameRU }/>
 
             <div className='wrap'>
             <h1 className='card__name'>{ card.nameRU }</h1>

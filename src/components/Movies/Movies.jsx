@@ -2,17 +2,20 @@
 import '../general/content.css';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
-import Preloader from '../Preloader/Preloader.jsx';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 
-function Movies({ cards, type, onGetMovies, errorApi }) {
+function Movies({ cards, type, onGetMovies, errorApi, isLoading }) {
+    const state = {cards: []}
+    console.log(state)
+
     return (
         <main className='content'>
             <section className='movies content__section'>
 
                 <SearchForm onGetMovies={ onGetMovies } />
 
-                <MoviesCardList type={ type } cards={ cards } onGetMovies={ onGetMovies } errorApi={ errorApi }/>
+                    <MoviesCardList type={ type } cards={ cards } onGetMovies={ onGetMovies }
+                                    errorApi={ errorApi } isLoading={ isLoading }/>
 
                 {/*<Preloader />*/}
 
