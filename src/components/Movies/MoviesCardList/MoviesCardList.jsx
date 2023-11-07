@@ -3,13 +3,13 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../../Preloader/Preloader';
 
-function MoviesCardList({ type, cards, errorApi, isLoading }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: App->Movies->MoviesCardList
     // console.log(cards)
 
     return (
         <>
-            { errorApi
-                ? <span className='cards__api-err'>{ errorApi }</span>
+            { errorSearchApi
+                ? <span className='cards__api-err'>{ errorSearchApi }</span>
                 : <ul className='cards'>
                     {/*<MoviesCard type={ type } nameRU={'33 слова о дизайне'} image={cardImg1}/>*/}
 

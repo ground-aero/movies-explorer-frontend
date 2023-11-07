@@ -4,7 +4,7 @@ import '../general/content.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-function SearchForm({ onGetMovies }) {
+function SearchForm({ onGetMovies, onSearchMovies }) {
 
     const [isSearch, setIsSearch] = useState('');
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');
@@ -20,7 +20,7 @@ function SearchForm({ onGetMovies }) {
     /** загрузить карточки фильмов из сервиса: beatfilm-movies, по сабмиту */
     function handleSubmit(evt) {
         evt.preventDefault()
-        if (isSearch) onGetMovies()
+        if (isSearch) onSearchMovies(isSearch)
         else setIsPlaceholder('Введите запрос')
     }
 
@@ -28,8 +28,8 @@ function SearchForm({ onGetMovies }) {
             <form className='search search_form' id='search' name='search'
                   onSubmit={handleSubmit}>
                 <span className='search__wrap'>
-                    <input type='text' className='search__input' id='search-input' name='search' placeholder={isPlaceholder}
-                        onChange={handleSearch} value={isSearch}
+                    <input type='text' value={isSearch} className='search__input' id='search-input' name='search' placeholder={isPlaceholder}
+                        onChange={handleSearch}
                     />
                     <button type='submit' className='search__btn'>Найти</button>
                 </span>

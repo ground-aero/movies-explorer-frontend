@@ -6,7 +6,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ cards, type, onGetMovies, errorApi, isLoading }) {
+function Movies({ cards, type, onGetMovies, onSearchMovies, errorSearchApi, isLoading }) {
 
     useEffect(() => {
         // console.log(isLoading)
@@ -17,13 +17,13 @@ function Movies({ cards, type, onGetMovies, errorApi, isLoading }) {
         <main className='content'>
             <section className='movies content__section'>
 
-                <SearchForm onGetMovies={ onGetMovies } />
+                <SearchForm onSearchMovies={onSearchMovies} onGetMovies={ onGetMovies } />
 
                 { (isLoading && cards.length)
                     ? <span className='preloader'>
                         <Preloader />
                     </span>
-                    : <MoviesCardList type={ type } cards={ cards } errorApi={ errorApi } isLoading={ isLoading }/>
+                    : <MoviesCardList type={ type } cards={ cards } errorSearchApi={ errorSearchApi } isLoading={ isLoading }/>
                 }
 
             </section>

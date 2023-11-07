@@ -29,6 +29,7 @@ function App() {
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
     const [isUpdateProfile, setIsUpdateProfile] = useState(false);
     const [errorApi, setErrorApi] = useState(null);
+    const [errorSearchApi, setErrorSearchApi] = useState(null);
 
     const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
 
@@ -171,7 +172,7 @@ function App() {
             })
             .catch((err) => {
                 console.log(`Ошибка загрузки фильмов ${err}`)
-                setErrorApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \n Подождите немного и попробуйте ещё раз')
+                setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \n Подождите немного и попробуйте ещё раз')
                 // let timer = setTimeout(() => {
                 //     setErrorApi('')
                 //     clearTimeout(timer)
@@ -198,6 +199,27 @@ function App() {
     //             });
     //     } else { handleSubmitSearch() }
     // }
+
+    function handleSearchMovies(value) {
+        setIsLoading(true) /** состояние для управления 'Loading...' */
+        return moviesApi.getAllMovies()
+            .then((movies) => {
+                // console.log(movies)
+                const filterMovies = movies.filter((item) => {
+                    return (item.nameRU.includes(value) && item.nameEN.includes(value))
+                })
+                setCards(filterMovies);
+            })
+            .catch((err) => {
+                console.log(`Ошибка поиска фильма: ${err}`)
+                setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \nПодождите немного и попробуйте ещё раз')
+                let timer = setTimeout(() => {
+                    setErrorSearchApi('')
+                    clearTimeout(timer)
+                }, 7000)
+            }).finally(() => {setIsLoading(false)})
+    }
+
 
     function onLogout() {
         localStorage.removeItem('token');
@@ -236,8 +258,8 @@ function App() {
                     <Route path='/movies' element={
                         <>
                             <Header loggedIn={loggedIn} type='movies'/>
-                            <Movies loggedIn={loggedIn} type='movies' cards={cards} onGetMovies={handleGetMovies}
-                                    errorApi={errorApi} isLoading={isLoading}/>
+                            <Movies loggedIn={loggedIn} type='movies' cards={cards} onSearchMovies={handleSearchMovies}
+                                    onGetMovies={handleGetMovies} errorSearchApi={errorSearchApi} isLoading={isLoading}/>
                             <Footer/>
                         </>
                     }
