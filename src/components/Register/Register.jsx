@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import '../general/content.css';
 import './Register.css';
 import FormSection from '../FormSection/FormSection';
-import { useForm, useFormWithValidation } from '../ValidForm/ValidForm';
+import { useForm, useFormWithValidation } from '../../hooks/useValidForm.jsx';
 
 function Register({ handleRegister, errorApi }) { // @props из App.js - регистрация пользователя
 

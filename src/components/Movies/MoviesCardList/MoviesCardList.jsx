@@ -6,6 +6,9 @@ import Preloader from '../../Preloader/Preloader';
 function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: App->Movies->MoviesCardList
     // console.log(cards)
 
+    // console.log(isLoading)
+    // console.log(cards) // приходят отфильтрованные поиском карточки
+
     return (
         <>
             { errorSearchApi

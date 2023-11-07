@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import '../general/content.css';
 import './Profile.css';
-import { useFormWithValidation } from '../ValidForm/ValidForm';
+import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
 
 function Profile({ onUpdateProfile, onLogout }) {
 

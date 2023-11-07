@@ -205,10 +205,11 @@ function App() {
         return moviesApi.getAllMovies()
             .then((movies) => {
                 // console.log(movies)
-                const filterMovies = movies.filter((item) => {
-                    return (item.nameRU.includes(value) && item.nameEN.includes(value))
+                const searchedMovies = movies.filter((item) => {
+                    return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
                 })
-                setCards(filterMovies);
+                  console.log(searchedMovies)
+                setCards(searchedMovies);
             })
             .catch((err) => {
                 console.log(`Ошибка поиска фильма: ${err}`)
@@ -219,7 +220,6 @@ function App() {
                 }, 7000)
             }).finally(() => {setIsLoading(false)})
     }
-
 
     function onLogout() {
         localStorage.removeItem('token');

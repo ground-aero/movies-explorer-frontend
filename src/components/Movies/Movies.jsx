@@ -8,6 +8,9 @@ import Preloader from '../Preloader/Preloader';
 
 function Movies({ cards, type, onGetMovies, onSearchMovies, errorSearchApi, isLoading }) {
 
+    console.log(isLoading)
+    console.log(cards) // приходят отфильтрованные поиском карточки
+
     useEffect(() => {
         // console.log(isLoading)
         console.log(cards.length)

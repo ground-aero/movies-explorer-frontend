@@ -10,7 +10,7 @@ function SearchForm({ onGetMovies, onSearchMovies }) {
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');
 
     useEffect(() => {
-        console.log(isSearch)
+        // console.log(isSearch)
     },[isSearch])
 
     function handleSearch(evt) {

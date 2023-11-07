@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import './FormSection.css';
 import logoIcon from '../../images/logo.svg';
 import {Link} from 'react-router-dom';
-import {useFormWithValidation} from '../ValidForm/ValidForm';
+import {useFormWithValidation} from '../../hooks/useValidForm.jsx';
 
 function FormSection({
                          name,
