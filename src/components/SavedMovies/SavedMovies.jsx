@@ -3,14 +3,14 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 
-function SavedMovies({ type }) {
+function SavedMovies({ type, cards }) {
     return (
         <main className='content'>
             <section className='saved-movies'>
 
                 <SearchForm />
 
-                <MoviesCardList type={ type } />
+                <MoviesCardList type={ type } cards={cards}/>
 
                 <span className='span-box'></span>
 

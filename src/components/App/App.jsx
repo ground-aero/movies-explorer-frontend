@@ -268,7 +268,7 @@ function App() {
                     <Route path='/saved-movies' element={
                         <>
                             <Header loggedIn={loggedIn} type='saved-movies'/>
-                            <SavedMovies type='saved-movies'/>
+                            <SavedMovies type='saved-movies' cards={cards}/>
                             <Footer/>
                         </>
                     }

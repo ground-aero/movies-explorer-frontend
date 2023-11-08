@@ -21,7 +21,7 @@ function Movies({ cards, type, onGetMovies, onSearchMovies, errorSearchApi, isLo
 
                 <SearchForm onSearchMovies={onSearchMovies} onGetMovies={ onGetMovies } />
 
-                { (isLoading && cards.length)
+                { isLoading
                     ? <span className='preloader'>
                         <Preloader />
                     </span>

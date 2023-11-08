@@ -12,8 +12,6 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
 
     let initCount = null;
     let step = null;
-    const [isShowCards, setIsShowCards] = useState([]);
-    const [isAddCount, setIsAddCount] = useState(initCount);
 
     useEffect(() => {
         const handleResize = (event) => {
@@ -34,7 +32,7 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
     } else {
         if (isWidth >= 1280) {
             initCount = 12;
-            step = 3;
+            step = 4;
         } else if (isWidth <= 1279 && isWidth >= 480) {
             initCount = 8;
             step = 2;
@@ -43,9 +41,18 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
             step = 2;
         }
     }
-    //     console.log(initCount)
-    //     console.log(cards.length)
-    //     console.log(isShowCards)
+
+    const [isShowCards, setIsShowCards] = useState([]);
+    const [isAddCount, setIsAddCount] = useState(initCount);
+
+    function showMore() {
+        setIsShowCards(cards.slice(0, isAddCount + step))
+        setIsAddCount(isAddCount + step)
+    }
+        // console.log(initCount)
+        // console.log(cards.length)
+        // console.log(isAddCount)
+        // console.log(isShowCards.length)
 
     return (
         <>
@@ -62,42 +69,25 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
                       })
                     }
 
-                    {/*{ cards.length*/}
-                    {/*    ? isShowCards.map((card, ind) => {*/}
-                    {/*        return <MoviesCard*/}
-                    {/*            card={card}*/}
-                    {/*            key={card.id || card._id}*/}
-                    {/*            type={ type }*/}
-                    {/*        />*/}
-                    {/*      })*/}
-                    {/*    : <p>Ничего не найдено</p>*/}
-                    {/*}*/}
-
-                    {/*{ isLoading*/}
-                    {/*    ? <li className='cards__preloader'>*/}
-                    {/*            <Preloader />*/}
-                    {/*      </li>*/}
-                    {/*    : cards.map((card, ind) => {*/}
-                    {/*        return (*/}
-                    {/*            <MoviesCard*/}
-                    {/*                card={card}*/}
-                    {/*                key={card.id || card._id}*/}
-                    {/*                type={ type }*/}
-                    {/*            />*/}
-                    {/*        );*/}
-                    {/*      })*/}
-                    {/*}*/}
-
                   </ul>
             }
 
-            {(type === 'movies') &&
-                <div className='movies__more'>
-                    <button className='movies__btn-more' name='movies__btn-more' type='button'>
-                        Ещё
-                    </button>
-                </div>
+            { (cards.length >= isAddCount)
+                ? (<div className='movies__more'>
+                        <button onClick={showMore} className='movies__btn-more' name='movies__btn-more' type='button'>
+                            Ещё
+                        </button>
+                    </div>)
+                : null
             }
+            {/*{(type === 'movies') && (cards.length > setIsShowCards.length) &&*/}
+            {/*    <div className='movies__more'>*/}
+            {/*        <button onClick={showMore} className='movies__btn-more' name='movies__btn-more' type='button'>*/}
+            {/*            Ещё*/}
+            {/*        </button>*/}
+            {/*    </div>*/}
+            {/*}*/}
+
         </>
     );
 }
