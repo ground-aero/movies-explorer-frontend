@@ -204,12 +204,13 @@ function App() {
         setIsLoading(true) /** состояние для управления 'Loading...' */
         return moviesApi.getAllMovies()
             .then((movies) => {
-                // console.log(movies)
+                  console.log(movies)
                 const searchedMovies = movies.filter((item) => {
                     return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
                 })
                   console.log(searchedMovies)
-                setCards(searchedMovies);
+                if (searchedMovies.length) setCards(searchedMovies);
+                else setErrorSearchApi('Ничего не найдено')
             })
             .catch((err) => {
                 console.log(`Ошибка поиска фильма: ${err}`)

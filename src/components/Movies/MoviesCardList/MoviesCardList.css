@@ -62,7 +62,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .cards {
         grid-template-columns: repeat(auto-fit, 339px);
         gap: 32px 30px;

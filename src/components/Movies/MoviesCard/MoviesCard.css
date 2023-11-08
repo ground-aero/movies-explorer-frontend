@@ -106,7 +106,7 @@
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .card {
         width: 339px;
         height: 270px;

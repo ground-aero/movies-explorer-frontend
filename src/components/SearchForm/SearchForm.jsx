@@ -6,21 +6,21 @@ import './SearchForm.css';
 
 function SearchForm({ onGetMovies, onSearchMovies }) {
 
-    const [isSearch, setIsSearch] = useState('');
+    const [isSearchWord, setIsSearchWord] = useState('');
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');
 
     useEffect(() => {
-        // console.log(isSearch)
-    },[isSearch])
+        // console.log(isSearchWord)
+    },[isSearchWord])
 
     function handleSearch(evt) {
-        setIsSearch(evt.target.value)
+        setIsSearchWord(evt.target.value)
     }
 
     /** загрузить карточки фильмов из сервиса: beatfilm-movies, по сабмиту */
     function handleSubmit(evt) {
         evt.preventDefault()
-        if (isSearch) onSearchMovies(isSearch)
+        if (isSearchWord) onSearchMovies(isSearchWord)
         else setIsPlaceholder('Введите запрос')
     }
 
@@ -28,7 +28,7 @@ function SearchForm({ onGetMovies, onSearchMovies }) {
             <form className='search search_form' id='search' name='search'
                   onSubmit={handleSubmit}>
                 <span className='search__wrap'>
-                    <input type='text' value={isSearch} className='search__input' id='search-input' name='search' placeholder={isPlaceholder}
+                    <input type='text' value={isSearchWord} className='search__input' id='search-input' name='search' placeholder={isPlaceholder}
                         onChange={handleSearch}
                     />
                     <button type='submit' className='search__btn'>Найти</button>
