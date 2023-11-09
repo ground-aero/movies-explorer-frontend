@@ -73,7 +73,7 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
             }
 
             { (cards.length >= isAddCount)
-                ? (<div className='movies__more'>
+                ? (<div className={`movies__more ${errorSearchApi ? 'movies__more_display-none' : null}`}>
                         <button onClick={showMore} className='movies__btn-more' name='movies__btn-more' type='button'>
                             Ещё
                         </button>

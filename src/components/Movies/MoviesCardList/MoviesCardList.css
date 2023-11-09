@@ -38,6 +38,10 @@
     justify-content: center;
 }
 
+.movies__more_display-none {
+    display: none;
+}
+
 .movies__btn-more {
     width: 320px;
     min-height: 36px;

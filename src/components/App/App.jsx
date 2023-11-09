@@ -39,16 +39,6 @@ function App() {
         localStorage.setItem('loggedIn', loggedIn.toString()) // true
     }, [loggedIn]);
 
-    useEffect(() => {
-        const SearchStory = localStorage.getItem('SearchStory'); /** проверка истории поиска */
-        if (SearchStory) {
-            const searchSaved = JSON.parse(SearchStory)
-            setCards(searchSaved) // перезапись фильмов из истории поиска
-            console.log(cards)
-            // setIsSearchStory(searchSaved.movies) /** запись результата крайнего поиска в 'isSearchStory' */
-            //   console.log(isSearchStory)
-        }
-    }, []);
     // useEffect(() => {
     //     if (loggedIn) {
     //         mainApi.getUser()
@@ -216,6 +206,7 @@ function App() {
         return moviesApi.getAllMovies()
             .then((movies) => {
                   console.log(movies)
+                setErrorSearchApi(null)
                 const searchedMovies = movies.filter((item) => { // массив найденных фильмов
                     return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
                 })
@@ -235,6 +226,17 @@ function App() {
                 }, 7000)
             }).finally(() => {setIsLoading(false)})
     }
+
+    useEffect(() => {
+        const SearchStory = localStorage.getItem('SearchStory'); /** проверка истории поиска */
+        if (SearchStory) {
+            const searchSaved = JSON.parse(SearchStory)
+            setCards(searchSaved) // перезапись фильмов из истории поиска
+              console.log(cards)
+            // setIsSearchStory(searchSaved.movies) /** запись результата крайнего поиска в 'isSearchStory' */
+            //   console.log(isSearchStory)
+        }
+    }, []);
 
     function onLogout() {
         localStorage.removeItem('token');
