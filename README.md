@@ -39,6 +39,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+### window.innerWidth 
+- изменение количества отображаемых фильмов, в зависимости от ширины экрана устройства
+
 ### Available Scripts
 
 In the project directory, you can run:

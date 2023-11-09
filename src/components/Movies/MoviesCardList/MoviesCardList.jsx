@@ -42,8 +42,8 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
         }
     }
 
-    const [isShowCards, setIsShowCards] = useState([]);
-    const [isAddCount, setIsAddCount] = useState(initCount);
+    const [isShowCards, setIsShowCards] = useState([]); // массив карточек с заданным кол-вом
+    const [isAddCount, setIsAddCount] = useState(initCount); // инкремент кол-ва карточек
 
     function showMore() {
         setIsShowCards(cards.slice(0, isAddCount + step))

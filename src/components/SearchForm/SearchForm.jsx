@@ -8,12 +8,19 @@ function SearchForm({ onGetMovies, onSearchMovies }) {
 
     const [isSearchWord, setIsSearchWord] = useState('');
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');
+    const [isSearchStory, setIsSearchStory] = useState('')
 
     useEffect(() => {
-        // console.log(isSearchWord)
-    },[isSearchWord])
+        const SearchWord = localStorage.getItem('SearchWord'); /** проверка истории поиска */
+        if (SearchWord) {
+            const searchWord = JSON.parse(SearchWord)
+            setIsSearchWord(searchWord) // перезапись поискового слова из истории поиска
+        }
+          console.log(SearchWord)
+        // saveSearchWord(isSearchWord)
+    },[])
 
-    function handleSearch(evt) {
+    function handleInput(evt) {
         setIsSearchWord(evt.target.value)
     }
 
@@ -22,6 +29,15 @@ function SearchForm({ onGetMovies, onSearchMovies }) {
         evt.preventDefault()
         if (isSearchWord) onSearchMovies(isSearchWord)
         else setIsPlaceholder('Введите запрос')
+
+        localStorage.setItem('SearchWord', JSON.stringify(isSearchWord))
+        // saveSearchWord()
+    }
+
+    function saveSearchWord(searchWord) {
+        // localStorage.removeItem('SearchWord')
+        localStorage.setItem('SearchWord', JSON.stringify(searchWord))
+        setIsSearchWord(searchWord)
     }
 
     return (
@@ -29,7 +45,7 @@ function SearchForm({ onGetMovies, onSearchMovies }) {
                   onSubmit={handleSubmit}>
                 <span className='search__wrap'>
                     <input type='text' value={isSearchWord} className='search__input' id='search-input' name='search' placeholder={isPlaceholder}
-                        onChange={handleSearch}
+                        onChange={handleInput}
                     />
                     <button type='submit' className='search__btn'>Найти</button>
                 </span>

@@ -23,7 +23,6 @@ function App() {
     /** Состояние массива карточек */
     const [cards, setCards] = useState([]);
     // console.log(cards);
-    const [email, setEmail] = useState('');
     const [currentUser, setCurrentUser] = useState({name: '', email: ''});  // Стейт, отвечающий за данные текущего пользователя
 
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
@@ -32,12 +31,24 @@ function App() {
     const [errorSearchApi, setErrorSearchApi] = useState(null);
 
     const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
+    const [isSearchStory, setIsSearchStory] = useState('')
+
 
     useEffect(() => { /** Проверяем токен, получаем email */
     handleTokenCheck()
         localStorage.setItem('loggedIn', loggedIn.toString()) // true
     }, [loggedIn]);
 
+    useEffect(() => {
+        const SearchStory = localStorage.getItem('SearchStory'); /** проверка истории поиска */
+        if (SearchStory) {
+            const searchSaved = JSON.parse(SearchStory)
+            setCards(searchSaved) // перезапись фильмов из истории поиска
+            console.log(cards)
+            // setIsSearchStory(searchSaved.movies) /** запись результата крайнего поиска в 'isSearchStory' */
+            //   console.log(isSearchStory)
+        }
+    }, []);
     // useEffect(() => {
     //     if (loggedIn) {
     //         mainApi.getUser()
@@ -83,16 +94,15 @@ function App() {
             .then((res) => {
                 console.log(res.data); // --> _id, name, email
                 setLoggedIn(true)
-                // setEmail(res.data.email)
                 handleLogin(email, password)
             })
             .catch((err) => {
                 console.log(`Ошибка регистрации: ${err}`)
                 setErrorApi(err)
                 let timer = setTimeout(() => {
-                    setErrorApi('')
+                    setErrorApi(null)
                     clearTimeout(timer)
-                }, 7000)
+                }, 5000)
             });
     }
 
@@ -108,7 +118,6 @@ function App() {
                     setLoggedIn(true)
 
                     handleTokenCheck()
-                    // setEmail(email)
                     // setCurrentUser(data.name)
                     navigate('/movies', {replace: true})
                 }
@@ -117,9 +126,9 @@ function App() {
                 setErrorApi(err)
                 console.log(`Ошибка логинизации: ${err}`)
                 let timer = setTimeout(() => {
-                    setErrorApi('')
+                    setErrorApi(null)
                     clearTimeout(timer)
-                }, 7000)
+                }, 5000)
             })
     }
 
@@ -162,6 +171,8 @@ function App() {
         // closeAllPopups()
     }
 
+    // ============================================================================================================ //
+
     function handleGetMovies() {
         setIsLoading(true) /** состояние для управления 'Loading...' */
         return moviesApi.getAllMovies()
@@ -173,10 +184,10 @@ function App() {
             .catch((err) => {
                 console.log(`Ошибка загрузки фильмов ${err}`)
                 setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \n Подождите немного и попробуйте ещё раз')
-                // let timer = setTimeout(() => {
-                //     setErrorApi('')
-                //     clearTimeout(timer)
-                // }, 7000)
+                let timer = setTimeout(() => {
+                    setErrorSearchApi(null)
+                    clearTimeout(timer)
+                }, 5000)
             }).finally(() => {setIsLoading(false)})
     }
     // function handleGetMovies() {
@@ -205,18 +216,21 @@ function App() {
         return moviesApi.getAllMovies()
             .then((movies) => {
                   console.log(movies)
-                const searchedMovies = movies.filter((item) => {
+                const searchedMovies = movies.filter((item) => { // массив найденных фильмов
                     return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
                 })
                   console.log(searchedMovies)
-                if (searchedMovies.length) setCards(searchedMovies);
+                if (searchedMovies.length) {
+                    setCards(searchedMovies); // запись найденных фильмов в переменную 'cards'
+                    localStorage.setItem('SearchStory', JSON.stringify(searchedMovies)) // запись найденных фильмов в localStorage
+                }
                 else setErrorSearchApi('Ничего не найдено')
             })
             .catch((err) => {
                 console.log(`Ошибка поиска фильма: ${err}`)
                 setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \nПодождите немного и попробуйте ещё раз')
                 let timer = setTimeout(() => {
-                    setErrorSearchApi('')
+                    setErrorSearchApi(null)
                     clearTimeout(timer)
                 }, 7000)
             }).finally(() => {setIsLoading(false)})
@@ -224,7 +238,11 @@ function App() {
 
     function onLogout() {
         localStorage.removeItem('token');
-        setEmail(null);
+        localStorage.clear();
+        setCurrentUser(null);
+        setCards([])
+        setErrorApi(null)
+        setErrorSearchApi(null)
         setLoggedIn(false);
         navigate('/', {replace: true});
     }
