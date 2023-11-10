@@ -239,7 +239,7 @@ function App() {
     }, []);
 
     function onLogout() {
-        localStorage.removeItem('token');
+        // localStorage.removeItem('token');
         localStorage.clear();
         setCurrentUser(null);
         setCards([])
