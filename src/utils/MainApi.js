@@ -52,10 +52,11 @@ class MainApi {
     }
 
     //  # создает фильм с переданными в теле: country,...
-    createMyMovie(movieData) {
+    addMovie(movieData) {
         // console.log()
         const {
-            movieId,
+            // movieId,
+            id,
             country,
             director,
             duration,
@@ -75,15 +76,15 @@ class MainApi {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                movieId,
+                movieId: id,
                 country,
                 director,
                 duration,
                 year,
                 description,
-                image,
+                image: `https://api.nomoreparties.co${image.url}`,
                 trailerLink,
-                thumbnail,
+                thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
                 nameRU,
                 nameEN,
             }),

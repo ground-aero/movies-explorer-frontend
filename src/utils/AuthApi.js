@@ -1,5 +1,5 @@
-// export const DB_URL = 'http://127.0.0.1:4000';
-export const DB_URL = 'https://api.ga-movies.nomoredomainsicu.ru';
+export const DB_URL = 'http://127.0.0.1:4000';
+// export const DB_URL = 'https://api.ga-movies.nomoredomainsicu.ru';
 
 // function checkResponse(res) {
 //     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);

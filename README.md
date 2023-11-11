@@ -43,6 +43,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ### window.innerWidth 
 - изменение количества отображаемых фильмов, в зависимости от ширины экрана устройства
 
+### localStorage
+- сохранение/восстановление в локальной памяти предыдущих состояний (при перезагрузке): 
+1. текст запроса поиска на странице,
+2. состояние переключателя короткометражек 
+3. отображение на странице ранее найденных фильмов, взятых из localStorage
+
+
 ### Available Scripts
 
 In the project directory, you can run:

@@ -99,6 +99,9 @@
     padding: 12px 12px;
     background-position: center center;
 }
+.card__btn_save_active {
+    background-image: url('../../../images/card_heart_red.svg');
+}
 
 .card__btn_save:hover {
     background-image: url('../../../images/card_heart_red.svg');

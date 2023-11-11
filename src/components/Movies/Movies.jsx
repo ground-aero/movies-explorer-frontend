@@ -6,26 +6,26 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ cards, type, onGetMovies, onSearchMovies, errorSearchApi, isLoading }) {
-    // console.log(isLoading)
-    // console.log(cards) // приходят отфильтрованные поиском карточки
+function Movies({ searchedCards, allCards, type, onGetMovies, onSearchMovies, onSaveCard, errorSearchApi, isLoading }) {
+    // console.log(searchedCards) // приходящий массив отфильтрованных поиском карточек [{},{}]
+    // console.log(allCards)
 
     useEffect(() => {
         // console.log(isLoading)
-        console.log(cards.length)
-    },[cards.length])
+        console.log(searchedCards.length)
+    },[searchedCards.length])
 
     return (
         <main className='content'>
             <section className='movies content__section'>
 
-                <SearchForm onSearchMovies={onSearchMovies} onGetMovies={ onGetMovies } />
+                <SearchForm onSearchMovies={ onSearchMovies } onGetMovies={ onGetMovies } />
 
                 { isLoading
                     ? <span className='preloader'>
                         <Preloader />
                     </span>
-                    : <MoviesCardList type={ type } cards={ cards } errorSearchApi={ errorSearchApi } isLoading={ isLoading }/>
+                    : <MoviesCardList type={ type } searchedCards={ searchedCards } allCards={allCards} onSaveCard={onSaveCard} errorSearchApi={ errorSearchApi } isLoading={ isLoading }/>
                 }
 
             </section>

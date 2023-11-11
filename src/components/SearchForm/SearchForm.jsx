@@ -16,8 +16,7 @@ function SearchForm({ onGetMovies, onSearchMovies }) {
             const searchWord = JSON.parse(SearchWord)
             setIsSearchWord(searchWord) // перезапись поискового слова из истории поиска
         }
-          console.log(SearchWord)
-        // saveSearchWord(isSearchWord)
+          // console.log(SearchWord)
     },[])
 
     function handleInput(evt) {

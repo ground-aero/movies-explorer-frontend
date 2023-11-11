@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, searchedCards, savedCards, onSaveCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
     // console.log(isLoading)
@@ -17,18 +17,18 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
         const handleResize = (event) => {
             setIsWidth(event.target.innerWidth)
         }
-          console.log(isWidth)
+          // console.log(isWidth)
 
         window.addEventListener('resize', handleResize)
         return (() => window.removeEventListener('resize', handleResize))
     },[])
 
     useEffect(() => {
-        setIsShowCards(cards.slice(0, initCount))
-    },[cards.length])
+        setIsShowCards(searchedCards.slice(0, initCount))
+    },[searchedCards.length])
 
     if (location.pathname === '/saved-movies') {
-        initCount = cards.length
+        initCount = searchedCards.length
     } else {
         if (isWidth >= 1280) {
             initCount = 12;
@@ -46,7 +46,7 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
     const [isAddCount, setIsAddCount] = useState(initCount); // инкремент кол-ва карточек
 
     function showMore() {
-        setIsShowCards(cards.slice(0, isAddCount + step))
+        setIsShowCards(searchedCards.slice(0, isAddCount + step))
         setIsAddCount(isAddCount + step)
     }
         // console.log(initCount)
@@ -65,14 +65,16 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
                         return <MoviesCard
                             card={card}
                             key={card.id || card._id}
-                            type={type} />
+                            type={type}
+                            onSaveCard={onSaveCard}
+                        />
                       })
                     }
 
                   </ul>
             }
 
-            { (cards.length >= isAddCount)
+            { (searchedCards.length >= isAddCount)
                 ? (<div className={`movies__more ${errorSearchApi ? 'movies__more_display-none' : null}`}>
                         <button onClick={showMore} className='movies__btn-more' name='movies__btn-more' type='button'>
                             Ещё
@@ -80,13 +82,7 @@ function MoviesCardList({ type, cards, errorSearchApi, isLoading }) { // cards: 
                     </div>)
                 : null
             }
-            {/*{(type === 'movies') && (cards.length > setIsShowCards.length) &&*/}
-            {/*    <div className='movies__more'>*/}
-            {/*        <button onClick={showMore} className='movies__btn-more' name='movies__btn-more' type='button'>*/}
-            {/*            Ещё*/}
-            {/*        </button>*/}
-            {/*    </div>*/}
-            {/*}*/}
+
 
         </>
     );

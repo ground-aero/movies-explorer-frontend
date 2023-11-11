@@ -14,25 +14,23 @@ import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import * as authApi from '../../utils/AuthApi';
-import {clear} from "@testing-library/user-event/dist/clear.js";
 
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
+    const [currentUser, setCurrentUser] = useState({name: '', email: ''});  // Стейт, отвечающий за данные текущего пользователя
     const [loggedIn, setLoggedIn] = useState(false);
     /** Состояние массива карточек */
-    const [cards, setCards] = useState([]);
+    const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
+    const [allCards, setAllCards] = useState([]);
+    const [isSearchedCards, setIsSearchedCards] = useState([]);
+    const [isSavedCards, setIsSavedCards] = useState([])
     // console.log(cards);
-    const [currentUser, setCurrentUser] = useState({name: '', email: ''});  // Стейт, отвечающий за данные текущего пользователя
 
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
     const [isUpdateProfile, setIsUpdateProfile] = useState(false);
     const [errorApi, setErrorApi] = useState(null);
     const [errorSearchApi, setErrorSearchApi] = useState(null);
-
-    const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
-    const [isSearchStory, setIsSearchStory] = useState('')
-
 
     useEffect(() => { /** Проверяем токен, получаем email */
     handleTokenCheck()
@@ -167,8 +165,8 @@ function App() {
         setIsLoading(true) /** состояние для управления 'Loading...' */
         return moviesApi.getAllMovies()
             .then((res) => {
-                  console.log(res) // (100) [{...}, {id:1, nameRU:'Роллинг', ...} ]
-                setCards(res)
+                  console.log(res) // все карточки (100) [{...}, {id:1, nameRU:'Роллинг', ...} ]
+                setAllCards(res)
                 // navigate('/movies', {replace: true})
             })
             .catch((err) => {
@@ -212,7 +210,7 @@ function App() {
                 })
                   console.log(searchedMovies)
                 if (searchedMovies.length) {
-                    setCards(searchedMovies); // запись найденных фильмов в переменную 'cards'
+                    setIsSearchedCards(searchedMovies); // запись массива найденных фильмов в переменную 'cards'
                     localStorage.setItem('SearchStory', JSON.stringify(searchedMovies)) // запись найденных фильмов в localStorage
                 }
                 else setErrorSearchApi('Ничего не найдено')
@@ -231,18 +229,43 @@ function App() {
         const SearchStory = localStorage.getItem('SearchStory'); /** проверка истории поиска */
         if (SearchStory) {
             const searchSaved = JSON.parse(SearchStory)
-            setCards(searchSaved) // перезапись фильмов из истории поиска
-              console.log(cards)
-            // setIsSearchStory(searchSaved.movies) /** запись результата крайнего поиска в 'isSearchStory' */
-            //   console.log(isSearchStory)
+            setIsSearchedCards(searchSaved) /** перезапись фильмов из истории поиска в 'isSearchedCards' */
+              console.log(isSearchedCards)
         }
     }, []);
+
+    function handleSaveCard(movieData) {
+        // const isSaved = card.likes.some((id) => id === currentUser._id);
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        // const isSaved = movieData.owner === currentUser.id;
+        mainApi
+            .addMovie(movieData)
+            // Отправляем запрос в API и получаем обновлённые данные карточки
+            .then((addedCard) => { // data: {owner:.., _id:.., moviesId: 10, }
+                movieData.owner = currentUser.id; // в запрос добавляем поле 'owner' = currentUser.id
+                movieData._id = addedCard.data._id; //  в запрос добавляем поле '_id' = addedCard.data._id;
+                    // console.log(movieData)
+
+                const arrCards = isSavedCards.map(item => item) // создаем новый массив с добавленной карточкой
+                arrCards.push(addedCard.data) // записываем новую карточку в созданный новый массив
+                    console.log(arrCards)
+
+                setIsSavedCards(arrCards) // записываем добавленную карточку в ['isSavedCards']
+                    console.log(isSavedCards)
+                    // console.log(arrCards)
+                localStorage.setItem('addedCards', JSON.stringify(arrCards)) // в localStorage запись добавленной карточки
+            })
+            .catch((err) => {
+                console.log(`Ошибка при сохранении карточки: ${err}`);
+            });
+    }
 
     function onLogout() {
         // localStorage.removeItem('token');
         localStorage.clear();
         setCurrentUser(null);
-        setCards([])
+        setAllCards([])
+        setIsSearchedCards([])
         setErrorApi(null)
         setErrorSearchApi(null)
         setLoggedIn(false);
@@ -279,8 +302,8 @@ function App() {
                     <Route path='/movies' element={
                         <>
                             <Header loggedIn={loggedIn} type='movies'/>
-                            <Movies loggedIn={loggedIn} type='movies' cards={cards} onSearchMovies={handleSearchMovies}
-                                    onGetMovies={handleGetMovies} errorSearchApi={errorSearchApi} isLoading={isLoading}/>
+                            <Movies loggedIn={loggedIn} type='movies' searchedCards={isSearchedCards} onSearchMovies={handleSearchMovies}
+                                    onGetMovies={handleGetMovies} onSaveCard={handleSaveCard} errorSearchApi={errorSearchApi} isLoading={isLoading}/>
                             <Footer/>
                         </>
                     }
@@ -288,7 +311,10 @@ function App() {
                     <Route path='/saved-movies' element={
                         <>
                             <Header loggedIn={loggedIn} type='saved-movies'/>
-                            <SavedMovies type='saved-movies' cards={cards}/>
+                            <SavedMovies type='saved-movies' onSaveCard={handleSaveCard}
+                                         searchedCards={isSearchedCards}
+                                         savedCards={isSavedCards}
+                            />
                             <Footer/>
                         </>
                     }
