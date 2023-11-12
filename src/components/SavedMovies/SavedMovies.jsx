@@ -2,10 +2,13 @@
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
+import {useEffect, useState} from "react";
 
 function SavedMovies({ type, searchedCards, savedCards, onSaveCard }) {
-
+    const [isSavedCard, setIsSavedCard] = useState([]);
     console.log(savedCards)
+
+
     return (
         <main className='content'>
             <section className='saved-movies'>

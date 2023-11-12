@@ -11,6 +11,7 @@ function MoviesCard({ type, card, onSaveCard }) {
     // const name = nameRU ? nameRU : nameEN;
     const btnIcon = (type === 'movies') ? 'save' : 'delete';
     const [isSaved, setIsSaved] = useState(false); // false
+    const [isSavedCard, setIsSavedCard] = useState([]);
     /** Определяем, есть ли у карточки лайк, поставленный текущим пользователем */
     // const isLiked = card.some(id => id === currentUser.id);
 
@@ -32,20 +33,21 @@ function MoviesCard({ type, card, onSaveCard }) {
         return (`${hours}ч ${minutes}м`)
     }
 
-    // const normalizer = (card) => {
-    // let cardKeys = [description]
-    // cardKeys.map()
-    // }
-
     // const {country='aaa', description='aaa', director='aaaaa', duration='11', image='dkjlub.jpg', movieId='444', nameEN='aaa', nameRU='aaa', trailerLink='https://aaa', year='1980'} = card;
     function saveBtn() {
         onSaveCard(card) // !!!!!!!!!
         setIsSaved(true)
+
+        localStorage.setItem('addedCards', JSON.stringify(isSavedCard))
+        setIsSavedCard(isSavedCard)
+
           console.log('cliked heart')
     }
 
+    // console.log(card)
+
     return (
-        <li id={'movie-' + card.id } className={`card card_type_${ type }`}>
+        <li id={'movie-' + card._id } className={`card card_type_${ type }`}>
             <Link to={ card.trailerLink } target='_blank'>
                 <img src={`https://api.nomoreparties.co/${card.image.url}`} className='card__img' alt={ card.nameRU }/>
             </Link>

@@ -234,6 +234,15 @@ function App() {
         }
     }, []);
 
+    useEffect(() => {
+        const SavedCard = localStorage.getItem('addedCards'); /** проверка истории поиска */
+        if (SavedCard) {
+            const savedCard = JSON.parse(SavedCard)
+            setIsSavedCards(savedCard) // перезапись карточки из истории поиска
+        }
+        // console.log(SearchWord)
+    },[])
+
     function handleSaveCard(movieData) {
         // const isSaved = card.likes.some((id) => id === currentUser._id);
         // Снова проверяем, есть ли уже лайк на этой карточке
@@ -246,11 +255,11 @@ function App() {
                 movieData._id = addedCard.data._id; //  в запрос добавляем поле '_id' = addedCard.data._id;
                     // console.log(movieData)
 
-                const arrCards = isSavedCards.map(item => item) // создаем новый массив с добавленной карточкой
-                arrCards.push(addedCard.data) // записываем новую карточку в созданный новый массив
+                const arrCards = isSavedCards.map(item => item) // создаем новый пустой массив для добавления карточек
+                arrCards.push(addedCard.data) // записываем новую карточку в созданный выше массив
                     console.log(arrCards)
 
-                setIsSavedCards(arrCards) // записываем добавленную карточку в ['isSavedCards']
+                setIsSavedCards(arrCards) // записываем каждую добавленную карточку в ['isSavedCards']
                     console.log(isSavedCards)
                     // console.log(arrCards)
                 localStorage.setItem('addedCards', JSON.stringify(arrCards)) // в localStorage запись добавленной карточки
@@ -302,8 +311,14 @@ function App() {
                     <Route path='/movies' element={
                         <>
                             <Header loggedIn={loggedIn} type='movies'/>
-                            <Movies loggedIn={loggedIn} type='movies' searchedCards={isSearchedCards} onSearchMovies={handleSearchMovies}
-                                    onGetMovies={handleGetMovies} onSaveCard={handleSaveCard} errorSearchApi={errorSearchApi} isLoading={isLoading}/>
+                            <Movies loggedIn={loggedIn} type='movies'
+                                    searchedCards={isSearchedCards}
+
+                                    onSearchMovies={handleSearchMovies}
+                                    onSaveCard={handleSaveCard}
+                                    onGetMovies={handleGetMovies}
+                                    errorSearchApi={errorSearchApi}
+                                    isLoading={isLoading}/>
                             <Footer/>
                         </>
                     }
@@ -311,8 +326,10 @@ function App() {
                     <Route path='/saved-movies' element={
                         <>
                             <Header loggedIn={loggedIn} type='saved-movies'/>
-                            <SavedMovies type='saved-movies' onSaveCard={handleSaveCard}
+                            <SavedMovies type='saved-movies'
                                          searchedCards={isSearchedCards}
+
+                                         onSaveCard={handleSaveCard}
                                          savedCards={isSavedCards}
                             />
                             <Footer/>

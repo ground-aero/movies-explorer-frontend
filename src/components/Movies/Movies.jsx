@@ -10,10 +10,10 @@ function Movies({ searchedCards, allCards, type, onGetMovies, onSearchMovies, on
     // console.log(searchedCards) // приходящий массив отфильтрованных поиском карточек [{},{}]
     // console.log(allCards)
 
-    useEffect(() => {
-        // console.log(isLoading)
-        console.log(searchedCards.length)
-    },[searchedCards.length])
+    // useEffect(() => {
+    //     // console.log(isLoading)
+    //     console.log(searchedCards.length)
+    // },[searchedCards.length])
 
     return (
         <main className='content'>
