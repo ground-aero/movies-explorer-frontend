@@ -21,10 +21,9 @@ function App() {
     const [currentUser, setCurrentUser] = useState({name: '', email: ''});  // Стейт, отвечающий за данные текущего пользователя
     const [loggedIn, setLoggedIn] = useState(false);
     /** Состояние массива карточек */
-    const [allMovies, setAllMovies] = useState(JSON.parse(localStorage.getItem('allMovies')) || []);
-    const [allCards, setAllCards] = useState([]);
-    const [isSearchedCards, setIsSearchedCards] = useState([]);
-    const [isSavedCards, setIsSavedCards] = useState([])
+    // const [allCards, setAllCards] = useState(JSON.parse(localStorage.getItem('allCards')) || []);
+    const [isSearchedCards, setIsSearchedCards] = useState([]); // массив найденных карт ---> LS
+    const [isSavedCards, setIsSavedCards] = useState([]) // массив добавленных/сохраненных карт ---> LS
     // console.log(cards);
 
     const [isLoading, setIsLoading] = useState(false); /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
@@ -161,23 +160,23 @@ function App() {
 
     // ============================================================================================================ //
 
-    function handleGetMovies() {
-        setIsLoading(true) /** состояние для управления 'Loading...' */
-        return moviesApi.getAllMovies()
-            .then((res) => {
-                  console.log(res) // все карточки (100) [{...}, {id:1, nameRU:'Роллинг', ...} ]
-                setAllCards(res)
-                // navigate('/movies', {replace: true})
-            })
-            .catch((err) => {
-                console.log(`Ошибка загрузки фильмов ${err}`)
-                setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \n Подождите немного и попробуйте ещё раз')
-                let timer = setTimeout(() => {
-                    setErrorSearchApi(null)
-                    clearTimeout(timer)
-                }, 5000)
-            }).finally(() => {setIsLoading(false)})
-    }
+    // function handleGetMovies() {
+    //     setIsLoading(true) /** состояние для управления 'Loading...' */
+    //     return moviesApi.getAllMovies()
+    //         .then((res) => {
+    //               console.log(res) // все карточки (100) [{...}, {id:1, nameRU:'Роллинг', ...} ]
+    //             // setAllCards(res)
+    //             // navigate('/movies', {replace: true})
+    //         })
+    //         .catch((err) => {
+    //             console.log(`Ошибка загрузки фильмов ${err}`)
+    //             setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \n Подождите немного и попробуйте ещё раз')
+    //             let timer = setTimeout(() => {
+    //                 setErrorSearchApi(null)
+    //                 clearTimeout(timer)
+    //             }, 5000)
+    //         }).finally(() => {setIsLoading(false)})
+    // }
     // function handleGetMovies() {
     //     let searchInputString // ??
     //     let setIsValid // ??
@@ -199,6 +198,24 @@ function App() {
     //     } else { handleSubmitSearch() }
     // }
 
+    useEffect(() => {
+        const SearchStory = localStorage.getItem('SearchStory'); /** проверка истории поиска */
+        if (SearchStory) {
+            const searchSaved = JSON.parse(SearchStory)
+            setIsSearchedCards(searchSaved) /** перезапись фильмов из истории поиска в 'isSearchedCards' */
+              console.log(isSearchedCards)
+        }
+    }, []);
+
+    useEffect(() => {
+        const SavedCard = localStorage.getItem('addedCards'); /** проверка истории поиска */
+        if (SavedCard) {
+            const savedCard = JSON.parse(SavedCard)
+            setIsSavedCards(savedCard) // перезапись сохраненных карточек в 'isSavedCards'
+              console.log(isSavedCards)
+        }
+    },[])
+
     function handleSearchMovies(value) {
         setIsLoading(true) /** состояние для управления 'Loading...' */
         return moviesApi.getAllMovies()
@@ -208,7 +225,7 @@ function App() {
                 const searchedMovies = movies.filter((item) => { // массив найденных фильмов
                     return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
                 })
-                  console.log(searchedMovies)
+                  console.log('From Server: searchedMovies: ', searchedMovies)
                 if (searchedMovies.length) {
                     setIsSearchedCards(searchedMovies); // запись массива найденных фильмов в переменную 'cards'
                     localStorage.setItem('SearchStory', JSON.stringify(searchedMovies)) // запись найденных фильмов в localStorage
@@ -224,43 +241,30 @@ function App() {
                 }, 7000)
             }).finally(() => {setIsLoading(false)})
     }
-
-    useEffect(() => {
-        const SearchStory = localStorage.getItem('SearchStory'); /** проверка истории поиска */
-        if (SearchStory) {
-            const searchSaved = JSON.parse(SearchStory)
-            setIsSearchedCards(searchSaved) /** перезапись фильмов из истории поиска в 'isSearchedCards' */
-              console.log(isSearchedCards)
-        }
-    }, []);
-
-    useEffect(() => {
-        const SavedCard = localStorage.getItem('addedCards'); /** проверка истории поиска */
-        if (SavedCard) {
-            const savedCard = JSON.parse(SavedCard)
-            setIsSavedCards(savedCard) // перезапись карточки из истории поиска
-        }
-        // console.log(SearchWord)
-    },[])
+    // const checkIfLiked = () => {
+    //     const likedCards = isSearchedCards
+    // }
 
     function handleSaveCard(movieData) {
         // const isSaved = card.likes.some((id) => id === currentUser._id);
         // Снова проверяем, есть ли уже лайк на этой карточке
         // const isSaved = movieData.owner === currentUser.id;
+        // movieData.isSavedd = true;
         mainApi
             .addMovie(movieData)
             // Отправляем запрос в API и получаем обновлённые данные карточки
             .then((addedCard) => { // data: {owner:.., _id:.., moviesId: 10, }
-                movieData.owner = currentUser.id; // в запрос добавляем поле 'owner' = currentUser.id
-                movieData._id = addedCard.data._id; //  в запрос добавляем поле '_id' = addedCard.data._id;
+                movieData.owner = currentUser.id; // в новую карточку добавляем поле 'owner' = currentUser.id
+                movieData._id = addedCard.data._id; //  добавляем поле '_id' = addedCard.data._id;
+                addedCard.data.isSaved = true; // создаем поле isSave: true
                     // console.log(movieData)
 
                 const arrCards = isSavedCards.map(item => item) // создаем новый пустой массив для добавления карточек
                 arrCards.push(addedCard.data) // записываем новую карточку в созданный выше массив
-                    console.log(arrCards)
+                    console.log('my API -->: arrCards :', arrCards)
 
                 setIsSavedCards(arrCards) // записываем каждую добавленную карточку в ['isSavedCards']
-                    console.log(isSavedCards)
+                    console.log('my API -->: isSavedCards: ', isSavedCards)
                     // console.log(arrCards)
                 localStorage.setItem('addedCards', JSON.stringify(arrCards)) // в localStorage запись добавленной карточки
             })
@@ -272,12 +276,14 @@ function App() {
     function onLogout() {
         // localStorage.removeItem('token');
         localStorage.clear();
+        setLoggedIn(false);
+
         setCurrentUser(null);
-        setAllCards([])
         setIsSearchedCards([])
+        setIsSavedCards([])
+
         setErrorApi(null)
         setErrorSearchApi(null)
-        setLoggedIn(false);
         navigate('/', {replace: true});
     }
 
@@ -316,7 +322,7 @@ function App() {
 
                                     onSearchMovies={handleSearchMovies}
                                     onSaveCard={handleSaveCard}
-                                    onGetMovies={handleGetMovies}
+                                    savedCards={isSavedCards}
                                     errorSearchApi={errorSearchApi}
                                     isLoading={isLoading}/>
                             <Footer/>

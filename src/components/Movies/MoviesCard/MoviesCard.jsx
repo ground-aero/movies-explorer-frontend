@@ -4,13 +4,27 @@ import {Link} from 'react-router-dom';
 import './MoviesCard.css';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 
-function MoviesCard({ type, card, onSaveCard }) {
+function MoviesCard({ type, card, onSaveCard, savedCards, saved }) {
     const currentUser = useContext(CurrentUserContext);
-      // console.log(card) // карточки {id:,...}, {id:,...}, {id:,...}
+      // console.log(savedCards) // [{ массив карточек }] с isSaved: true
+      // console.log(saved)
+
+      console.log('on render card: ', card) // карточки на рендер в завис от ширины isWidth {id: 16,}, {id:,...}, {id:,...}
+    const [saved2, setSaved2] = useState([]);
+    // useEffect(() => {
+    //     const saved = localStorage.getItem('addedCards'); /** проверка истории поиска */
+    //     if (saved) {
+    //         const savedCard = JSON.parse(saved)
+    //         setSaved2(savedCard) /** перезапись фильмов из истории поиска в 'isSearchedCards' */
+    //         console.log(saved2)
+    //     }
+    // },[])
 
     // const name = nameRU ? nameRU : nameEN;
     const btnIcon = (type === 'movies') ? 'save' : 'delete';
     const [isSaved, setIsSaved] = useState(false); // false
+
+    const [isFalseCards, setIsFalseCards] = useState([]);
     const [isSavedCard, setIsSavedCard] = useState([]);
     /** Определяем, есть ли у карточки лайк, поставленный текущим пользователем */
     // const isLiked = card.some(id => id === currentUser.id);
@@ -18,14 +32,21 @@ function MoviesCard({ type, card, onSaveCard }) {
     // console.log(isSaved) // !!!!!!!!!!!
 
     const cardLikeClassName = ( /** переменная `className` для кнопки лайка */
-        `card__btn card__btn_${btnIcon} ${isSaved && (currentUser.id === card.data) && `card__btn_${btnIcon}_active`}`
-    );
+        // `card__btn card__btn_${btnIcon} ${ card.owner === currentUser.id ? `card__btn_${btnIcon}_active` : ''}`
+           `card__btn card__btn_${btnIcon} ${ card.isSaved === true ? `card__btn_${btnIcon}_active` : ''}`
+        );
 
     // const {nameRU, nameEN, image, duration} = card;
 
-    useEffect(() => {
-        // console.log(card)
-    }, [])
+    // useEffect(() => {
+    //     let arrFalse = []
+    //     arrFalse.push(card)
+    //     setIsFalseCards(arrFalse) // запись массива найденных фильмов в переменную '.....'
+    //
+    //     // localStorage.setItem('SearchStory2', JSON.stringify(isFalseCards))
+    //     // const saved = localStorage.getItem('addedCards')
+    // },[])
+    // console.log(isFalseCards)
 
     function getTimefromMints(totalMinutes) {
         const hours = Math.floor(totalMinutes / 60);
@@ -35,19 +56,27 @@ function MoviesCard({ type, card, onSaveCard }) {
 
     // const {country='aaa', description='aaa', director='aaaaa', duration='11', image='dkjlub.jpg', movieId='444', nameEN='aaa', nameRU='aaa', trailerLink='https://aaa', year='1980'} = card;
     function saveBtn() {
+        // card.Saveddd = true; /////////////////////////
         onSaveCard(card) // !!!!!!!!!
         setIsSaved(true)
 
-        localStorage.setItem('addedCards', JSON.stringify(isSavedCard))
-        setIsSavedCard(isSavedCard)
+        // localStorage.setItem('SearchStory', JSON.stringify(searchedCards))
 
+        // localStorage.setItem('addedCards', JSON.stringify(isSavedCard))
+        // setIsSavedCard(isSavedCard)
           console.log('cliked heart')
+    }
+
+    function deleteBtn() {
+        // onDeleteCard(card) // !!!!!!!!!
+        setIsSaved(false)
+          console.log('cliked deleted card')
     }
 
     // console.log(card)
 
     return (
-        <li id={'movie-' + card._id } className={`card card_type_${ type }`}>
+        <li id={'movie-' + card.id || card._id } className={`card card_type_${ type }`}>
             <Link to={ card.trailerLink } target='_blank'>
                 <img src={`https://api.nomoreparties.co/${card.image.url}`} className='card__img' alt={ card.nameRU }/>
             </Link>

@@ -4,7 +4,7 @@ import '../general/content.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 
-function SearchForm({ onGetMovies, onSearchMovies }) {
+function SearchForm({ onSearchMovies }) {
 
     const [isSearchWord, setIsSearchWord] = useState('');
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');

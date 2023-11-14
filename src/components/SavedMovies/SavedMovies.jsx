@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 
 function SavedMovies({ type, searchedCards, savedCards, onSaveCard }) {
     const [isSavedCard, setIsSavedCard] = useState([]);
-    console.log(savedCards)
+    // console.log(savedCards) // приходит с новым полем 'isSaved: true'
 
 
     return (

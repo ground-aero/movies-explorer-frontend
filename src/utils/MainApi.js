@@ -53,9 +53,7 @@ class MainApi {
 
     //  # создает фильм с переданными в теле: country,...
     addMovie(movieData) {
-        // console.log()
         const {
-            // movieId,
             id,
             country,
             director,

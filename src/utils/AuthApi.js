@@ -1,13 +1,9 @@
 export const DB_URL = 'http://127.0.0.1:4000';
 // export const DB_URL = 'https://api.ga-movies.nomoredomainsicu.ru';
 
-// function checkResponse(res) {
-//     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
-// }
-function checkResponse(res) {
+const checkResponse = async (res) => {
     if (res.ok) {
-        // console.log(res)
-        return res.json();
+        return await res.json();
     }
     return res.json()
         .then((errData) => {
@@ -18,66 +14,56 @@ function checkResponse(res) {
 
 /** user authentication - регистрация пользователя (отправка рег данных)
  * # создаёт пользователя с переданными в теле: email, password, name*/
-export const register = (name, email, password) => {
-    return fetch(`${DB_URL}/signup`, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({name, email, password}),
-    })
-        .then((res) => {
-            if (res.ok) {
-                console.log(res)
-                return res.json()
-            }
-            return res.json()
-                .then((err) => {
-                    return Promise.reject(err.message)
-                })
+export const register = async (name, email, password) => {
+    try {
+        const response = await fetch(`${DB_URL}/signup`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({name, email, password}),
         })
-        // .then(checkResponse)
+        return await checkResponse(response)
+    } catch (err) {
+        console.error('register error: ', err)
+        throw err
+    }
 }
 
 /** проверка на существование пользователя (логинизация) */
-export const authorize = (email, password) => {
-    return fetch(`${DB_URL}/signin`, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({email, password}),
-    })
-        .then((res) => {
-            if (res.ok) {
-                // console.log(res)
-                return res.json()
-            }
-            return res.json()
-                .then((err) => {
-                    return Promise.reject(err.message)
-                })
+export const authorize = async (email, password) => {
+    try {
+        const response = await fetch(`${DB_URL}/signin`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email, password}),
         })
-        // .then(checkResponse)
-        // .then((data) => {
-        //     console.log(data)
-        //     localStorage.setItem('token', data.token)
-        //     return data;
-        // })
+        return await checkResponse(response)
+    } catch (err) {
+        console.error('authorize error: ', err)
+        throw err
+    }
 }
 
     // Проверить токен/авторизацию запросом на сервер
-export const checkToken = (token) => {
-    // const token = localStorage.getItem('token');
-    return fetch(`${DB_URL}/users/me`, {
-        method: 'GET',
-        headers: {
-            // 'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-        },
-        // credentials: 'include', // включить отправку авторизационных данных в fetch
-    }).then(checkResponse);
-};
+export const checkToken = async (token) => {
+    try {
+        const response = await fetch(`${DB_URL}/users/me`, {
+            method: 'GET',
+            headers: {
+                // 'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            // credentials: 'include', // включить отправку авторизационных данных в fetch
+        })
+        return await checkResponse(response)
+    } catch (err) {
+        console.error('check token error: ', err)
+        throw err
+    }
+}

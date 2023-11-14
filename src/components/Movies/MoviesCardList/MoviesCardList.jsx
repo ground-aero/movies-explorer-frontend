@@ -4,12 +4,17 @@ import {useState, useEffect} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, saved, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
     // console.log(isLoading)
     // console.log(cards) // приходят отфильтрованные поиском карточки
-    // console.log(savedCards)
+
+    console.log('searchedCards with id...: ',searchedCards)
+    console.log('savedCards: ', savedCards)
+    useEffect(() => {
+        // localStorage.setItem('SearchStory', JSON.stringify(searchedCards)) // перезапись
+    },[searchedCards])
 
     let initCount = null;
     let step = null;
@@ -26,6 +31,10 @@ function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, errorSear
     useEffect(() => {
         setIsShowCards(searchedCards.slice(0, initCount))
     },[searchedCards.length])
+
+    useEffect(() => {
+
+    },[])
 
         // console.log(searchedCards.length)
         // console.log(isWidth)
@@ -52,6 +61,10 @@ function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, errorSear
         setIsShowCards(searchedCards.slice(0, isAddCount + step))
         setIsAddCount(isAddCount + step)
     }
+
+    const falseCards = () => {
+
+    }
         // console.log(initCount)
         // console.log(cards.length)
         // console.log(isAddCount)
@@ -68,10 +81,14 @@ function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, errorSear
                             {/*<MoviesCard type={ type } nameRU={'33 слова о дизайне'} image={cardImg1}/>*/}
 
                             { isShowCards.map((card, ind) => {
-                                    return <MoviesCard
+                                        card.isSaved = false;
+
+                                return <MoviesCard
                                         card={card}
                                         key={card.id || card._id}
                                         type={type}
+                                        savedCards={savedCards}
+
                                         onSaveCard={onSaveCard}
                                     />
                                 })
@@ -97,6 +114,7 @@ function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, errorSear
                         : <ul className='cards'>
 
                             { savedCards.map((card, ind) => {
+                                card.isSaved = true;
                                 return <MoviesCard
                                     card={card}
                                     key={card.id || card._id}
