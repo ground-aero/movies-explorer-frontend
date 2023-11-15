@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, saved, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, searchedCards, onSaveLikedCard, savedCards, saved, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
     // console.log(isLoading)
@@ -80,16 +80,15 @@ function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, saved, er
                         : <ul className='cards'>
                             {/*<MoviesCard type={ type } nameRU={'33 слова о дизайне'} image={cardImg1}/>*/}
 
-                            { isShowCards.map((card, ind) => {
+                            { isShowCards.map((card, _ind) => {
                                         card.isSaved = false;
-
                                 return <MoviesCard
                                         card={card}
-                                        key={card.id || card._id}
+                                        key={card.id || card._id || _ind}
                                         type={type}
                                         savedCards={savedCards}
 
-                                        onSaveCard={onSaveCard}
+                                        onSaveLikedCard={onSaveLikedCard}
                                     />
                                 })
                             }
@@ -113,13 +112,13 @@ function MoviesCardList({ type, searchedCards, onSaveCard, savedCards, saved, er
                         ? <span className='cards__api-err'>{ errorSearchApi }</span>
                         : <ul className='cards'>
 
-                            { savedCards.map((card, ind) => {
+                            { savedCards.map((card, _ind) => {
                                 card.isSaved = true;
                                 return <MoviesCard
                                     card={card}
-                                    key={card.id || card._id}
+                                    key={card.id || card._id || _ind}
                                     type={type}
-                                    onSaveCard={onSaveCard}
+                                    onSaveLikedCard={onSaveLikedCard}
                                 />
                             })
                             }

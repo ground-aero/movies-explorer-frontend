@@ -1,8 +1,7 @@
-// Содержит описание запросов к нашему Api
-/** @param options - опции для работы с API (serverURL - url сервера, headers - заголовки в виде объекта) */
+/** Содержит описание запросов к нашему Api
+ * @param options - опции для работы с API (serverURL - url сервера, headers - заголовки в виде объекта) */
 import { apiSettings } from './constants.js';
 
-// p.s: Напишите этот код на нативном JS, применяя fetch.
 class MainApi {
     constructor(options) {
         // this._headers = options.headers;
@@ -39,7 +38,7 @@ class MainApi {
         }).then(res => this._onResponse(res))
     }
 
-    // # запрашивает-->возвращает все сохранённые текущим пользователем фильмы
+    // # запрашивает-->возвращает все сохранённые в моем API текущим пользователем фильмы
     getMyMovies() {
         const token = localStorage.getItem('token');
         return fetch(`${this._serverUrl}/movies`, {
@@ -52,20 +51,7 @@ class MainApi {
     }
 
     //  # создает фильм с переданными в теле: country,...
-    addMovie(movieData) {
-        const {
-            id,
-            country,
-            director,
-            duration,
-            year,
-            description,
-            image,
-            trailerLink,
-            thumbnail,
-            nameRU,
-            nameEN,
-        } = movieData;
+    addMyMovie(movieData) {
         const token = localStorage.getItem('token');
         return fetch(`${this._serverUrl}/movies`, {
             method: 'POST',
@@ -73,21 +59,46 @@ class MainApi {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                movieId: id,
-                country,
-                director,
-                duration,
-                year,
-                description,
-                image: `https://api.nomoreparties.co${image.url}`,
-                trailerLink,
-                thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
-                nameRU,
-                nameEN,
-            }),
+            body: JSON.stringify(movieData),
         }).then(res => this._onResponse(res))
     }
+
+    // addMyMovie(movieData) {
+    //     const {
+    //         id,
+    //         country,
+    //         director,
+    //         duration,
+    //         year,
+    //         description,
+    //         image,
+    //         trailerLink,
+    //         thumbnail,
+    //         nameRU,
+    //         nameEN,
+    //     } = movieData;
+    //     const token = localStorage.getItem('token');
+    //     return fetch(`${this._serverUrl}/movies`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Authorization': `Bearer ${token}`,
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             movieId: id,
+    //             country,
+    //             director,
+    //             duration,
+    //             year,
+    //             description,
+    //             image: `https://api.nomoreparties.co${image.url}`,
+    //             trailerLink,
+    //             thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
+    //             nameRU,
+    //             nameEN,
+    //         }),
+    //     }).then(res => this._onResponse(res))
+    // }
 
     //  # удаляет сохраненный фильм по id с сервера
     deleteMyMovie(movieId) {

@@ -6,7 +6,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ searchedCards, type, onSearchMovies, onSaveCard, savedCards, errorSearchApi, isLoading }) {
+function Movies({ searchedCards, type, onSearchMovies, onSaveLikedCard, savedCards, errorSearchApi, isLoading }) {
     // console.log(searchedCards) // приходящий массив отфильтрованных поиском карточек [{},{}]
     // console.log(savedCards)
 
@@ -25,7 +25,7 @@ function Movies({ searchedCards, type, onSearchMovies, onSaveCard, savedCards, e
                     ? <span className='preloader'>
                         <Preloader />
                     </span>
-                    : <MoviesCardList type={ type } searchedCards={ searchedCards } onSaveCard={onSaveCard} savedCards={savedCards} errorSearchApi={ errorSearchApi } isLoading={ isLoading }/>
+                    : <MoviesCardList type={ type } searchedCards={ searchedCards } onSaveLikedCard={onSaveLikedCard} savedCards={savedCards} errorSearchApi={ errorSearchApi } isLoading={ isLoading }/>
                 }
 
             </section>

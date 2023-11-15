@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import './MoviesCard.css';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 
-function MoviesCard({ type, card, onSaveCard, savedCards, saved }) {
+function MoviesCard({ type, card, onSaveLikedCard, savedCards, saved }) {
     const currentUser = useContext(CurrentUserContext);
       // console.log(savedCards) // [{ массив карточек }] с isSaved: true
       // console.log(saved)
@@ -12,7 +12,7 @@ function MoviesCard({ type, card, onSaveCard, savedCards, saved }) {
       console.log('on render card: ', card) // карточки на рендер в завис от ширины isWidth {id: 16,}, {id:,...}, {id:,...}
     const [saved2, setSaved2] = useState([]);
     // useEffect(() => {
-    //     const saved = localStorage.getItem('addedCards'); /** проверка истории поиска */
+    //     const saved = localStorage.getItem('AddedCards'); /** проверка истории поиска */
     //     if (saved) {
     //         const savedCard = JSON.parse(saved)
     //         setSaved2(savedCard) /** перезапись фильмов из истории поиска в 'isSearchedCards' */
@@ -44,7 +44,7 @@ function MoviesCard({ type, card, onSaveCard, savedCards, saved }) {
     //     setIsFalseCards(arrFalse) // запись массива найденных фильмов в переменную '.....'
     //
     //     // localStorage.setItem('SearchStory2', JSON.stringify(isFalseCards))
-    //     // const saved = localStorage.getItem('addedCards')
+    //     // const saved = localStorage.getItem('AddedCards')
     // },[])
     // console.log(isFalseCards)
 
@@ -57,12 +57,12 @@ function MoviesCard({ type, card, onSaveCard, savedCards, saved }) {
     // const {country='aaa', description='aaa', director='aaaaa', duration='11', image='dkjlub.jpg', movieId='444', nameEN='aaa', nameRU='aaa', trailerLink='https://aaa', year='1980'} = card;
     function saveBtn() {
         // card.Saveddd = true; /////////////////////////
-        onSaveCard(card) // !!!!!!!!!
+        onSaveLikedCard(card) // !!!!!!!!!
         setIsSaved(true)
 
         // localStorage.setItem('SearchStory', JSON.stringify(searchedCards))
 
-        // localStorage.setItem('addedCards', JSON.stringify(isSavedCard))
+        // localStorage.setItem('AddedCards', JSON.stringify(isSavedCard))
         // setIsSavedCard(isSavedCard)
           console.log('cliked heart')
     }

@@ -26,7 +26,7 @@ export const register = async (name, email, password) => {
         })
         return await checkResponse(response)
     } catch (err) {
-        console.error('register error: ', err)
+        console.error(`register error: ${err.name}, ${err.message}`)
         throw err
     }
 }
@@ -44,7 +44,7 @@ export const authorize = async (email, password) => {
         })
         return await checkResponse(response)
     } catch (err) {
-        console.error('authorize error: ', err)
+        console.error(`authorize error: ${err.name}, ${err.message}`)
         throw err
     }
 }
@@ -63,7 +63,7 @@ export const checkToken = async (token) => {
         })
         return await checkResponse(response)
     } catch (err) {
-        console.error('check token error: ', err)
+        console.error(`check token error: ${err.name}, ${err.message}`)
         throw err
     }
 }
