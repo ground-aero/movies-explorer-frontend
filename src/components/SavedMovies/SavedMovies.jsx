@@ -4,7 +4,7 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import {useEffect, useState} from "react";
 
-function SavedMovies({ type, searchedCards, savedCards, onDeleteCard }) {
+function SavedMovies({ type, searchedMovies, savedCards, onDeleteCard }) {
     const [isSavedCard, setIsSavedCard] = useState([]);
     // console.log(savedCards) // приходит с новым полем 'isSaved: true'
 
@@ -17,7 +17,7 @@ function SavedMovies({ type, searchedCards, savedCards, onDeleteCard }) {
 
                 <MoviesCardList
                     type={ type }
-                    searchedCards={ searchedCards }
+                    searchedMovies={ searchedMovies }
 
                     isSavedCards={true}
                     savedCards={savedCards}

@@ -18,10 +18,10 @@ function MoviesCard({ type, card, onSaveLikedCard, isSavedCards, savedCards, sav
     const [saved2, setSaved2] = useState([]);
 
     // useEffect(() => {
-    //     const saved = localStorage.getItem('AddedCards'); /** проверка истории поиска */
+    //     const saved = localStorage.getItem('likedMovies'); /** проверка истории поиска */
     //     if (saved) {
     //         const savedCard = JSON.parse(saved)
-    //         setSaved2(savedCard) /** перезапись фильмов из истории поиска в 'isFoundCards' */
+    //         setSaved2(savedCard) /** перезапись фильмов из истории поиска в 'isSearchedMovies' */
     //         console.log(saved2)
     //     }
     // },[])
@@ -59,8 +59,8 @@ function MoviesCard({ type, card, onSaveLikedCard, isSavedCards, savedCards, sav
     //     arrFalse.push(card)
     //     setIsFalseCards(arrFalse) // запись массива найденных фильмов в переменную '.....'
     //
-    //     // localStorage.setItem('SearchHistory2', JSON.stringify(isFalseCards))
-    //     // const saved = localStorage.getItem('AddedCards')
+    //     // localStorage.setItem('searchedMovies2', JSON.stringify(isFalseCards))
+    //     // const saved = localStorage.getItem('likedMovies')
     // },[])
     // console.log(isFalseCards)
 
@@ -76,9 +76,9 @@ function MoviesCard({ type, card, onSaveLikedCard, isSavedCards, savedCards, sav
         onSaveLikedCard(card) // !!!!!!!!!
         setIsSaved(true)
 
-        // localStorage.setItem('SearchHistory', JSON.stringify(searchedCards))
+        // localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies))
 
-        // localStorage.setItem('AddedCards', JSON.stringify(isSavedCard))
+        // localStorage.setItem('likedMovies', JSON.stringify(isSavedCard))
         // setIsSavedCard(isSavedCard)
           console.log('cliked heart')
     }

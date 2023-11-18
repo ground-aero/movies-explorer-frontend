@@ -27,8 +27,8 @@ function App() {
     const [isRawCards, setRawCards] = useState([]); // массив всех карточек с Сервера bitFilms...
     const [isLoadedAllCards, setLoadedAllCards] = useState([]); // массив всех загруженных карт
 
-    const [isFoundCards, setFoundCards] = useState([]); // массив найденных карт ---> LS
-    const [isSavedSomeCards, setSavedSomeCards] = useState([]) // массив добавленных/сохраненных карт ---> /saved-movies ---> LS
+    const [isSearchedMovies, setSearchedMovies] = useState([]); // [ найденные(мутиров.) картчки] --> /movies ]
+    const [isLikedMovies, setLikedMovies] = useState([]) // [ лайкнутые карточки ] --> /saved-movies
     // console.log(cards);
 
     const [isLoading, setLoading] = useState(false);
@@ -183,12 +183,12 @@ function App() {
     // }
 
     useEffect(() => { // проверяем наличие в ЛС сырого массива, Для /movies
-        const RawCards = localStorage.getItem('RawCards') // проверяем наличие в ЛС загруженных карточек
+        const RawCards = localStorage.getItem('rawCards') // проверяем наличие в ЛС загруженных карточек
         if (RawCards) { // если они в ЛС есть,
             setRawCards(JSON.parse(RawCards)) // то сохраняем их в стейт для использования в ............
               console.log('from useEffect - isRawCards', isRawCards)
         } else {
-            getRawCards(); // либо запрашиваем их на стороннем Сервере
+            getRawCardsAndMutate(); // либо запрашиваем их на стороннем Сервере
         }
     }, []);
 
@@ -198,40 +198,39 @@ function App() {
     //         setLoadedAllCards(JSON.parse(LoadedAllCards)) // то сохраняем их в стейт для использования в ............
     //           console.log('from useEffect - isRawCards', isLoadedAllCards)
     //     } else {
-    //         getRawCards(); // либо запрашиваем их на стороннем Сервере
+    //         getRawCardsAndMutate(); // либо запрашиваем их на стороннем Сервере
     //     }
     // }, []);
 
-    useEffect(() => { // Для /movies
-        const SearchHistory = localStorage.getItem('SearchHistory') // проверяем наличие найденных фильмов
-        if (SearchHistory) { // если в ЛС есть найденные фильмы,
-            setFoundCards(JSON.parse(SearchHistory)) // то сохраняем их в стейт для текщуего рендеринга
-              console.log(isFoundCards)
+    useEffect(() => { // Для отображения на /movies
+        const searchedMovies = localStorage.getItem('searchedMovies') // проверяем наличие найденных фильмов
+        if (searchedMovies) { // если в ЛС есть найденные фильмы,
+            setSearchedMovies(JSON.parse(searchedMovies)) // то сохраняем их в стейт для текщуего рендера
+              console.log(isSearchedMovies)
         }
     }, []);
 
     useEffect(() => { // Для /savedMovies
-        const SavedSomeCards = localStorage.getItem('AddedCards');
-        if (SavedSomeCards) { // если в ЛС есть сохраненные карточки,
-            const savedCard = JSON.parse(SavedSomeCards)
-            setSavedSomeCards(savedCard || []) // то сохраняем их в стейт для текщуего рендеринга
-              console.log(isSavedSomeCards)
+        const likedMovies = localStorage.getItem('likedMovies');
+        if (likedMovies) { // если в ЛС есть сохраненные карточки,
+            const savedCard = JSON.parse(likedMovies)
+            setLikedMovies(savedCard || []) // то сохраняем их в стейт для текщуего рендеринга
+              console.log(isLikedMovies)
         }
     }, [])
 
-    function getRawCards() { // загрузка сырого массива фильмов (если они отсутствуют в ЛС)
+    function getRawCardsAndMutate() { // загрузка сырого массива фильмов (если они отсутствуют в ЛС)
                 setLoading(true)
                 setErrorSearchApi(null)
-
-            // if (!localStorage.getItem('RawCards')) {
+            // if (!localStorage.getItem('rawCards')) {
                 moviesApi.getAllMovies()
                     .then((raw) => { // получаем сырой массив
 
                         const mutatedCards = mutateCards(raw); // мутируем сырой массив карточек
                         setRawCards(mutatedCards); // и в стейт
-                        localStorage.setItem('RawCards', JSON.stringify(mutatedCards)); // и сохраняем в ЛС
+                        localStorage.setItem('rawCards', JSON.stringify(mutatedCards)); // и сохраняем в ЛС
 
-                        console.log('isRawCards state from getRawCards():', isRawCards)
+                        console.log('isRawCards state from getRawCardsAndMutate():', isRawCards)
                         console.log('mutated card:', mutatedCards)
                     })
                     .catch(err => console.log('Ошибка при загрузке карточек со стороннего Сервера', err))
@@ -239,174 +238,35 @@ function App() {
                         setLoading(false)
                     })
             // }
-
         setLoading(false)
     }
-    // function getRawCards() { // загрузка сырого массива фильмов (если они отсутствуют в ЛС)
-    //     setLoading(true)
-    //     setErrorSearchApi(null)
-    //
-    //     if (!localStorage.getItem('LoadedCards')) {
-    //
-    //     }
-    //     moviesApi.getAllMovies()
-    //         .then((raw) => { // получаем сырой массив
-    //
-    //             const mutatedCards = mutateCards(raw); // мутируем сырой массив карточек
-    //             localStorage.setItem('RawCards', JSON.stringify(mutatedCards)); // и сохраняем в ЛС
-    //             setRawCards(mutatedCards); // и в стейт
-    //
-    //             console.log('raw:', raw)
-    //             console.log('mutated card:', mutatedCards)
-    //         })
-    //         .catch(err => console.log('Ошибка при загрузке карточек со стороннего Сервера', err))
-    //         .finally(() => {
-    //             setLoading(false)
-    //         })
-    // }
+    // getRawCardsAndMutate()
 
-    // getRawCards()
-
-    // function handleSearchLoadedMovies(value) { // Запрос на сторонний Server, получаем изначальный массив карточек, и фильтруем поиском
-    //         setLoading(true)
-    //         setErrorSearchApi(null)
-    //     getRawCards()
-    //         .then(()=>{
-    //             console.log('getrawcards')
-    //         })
-    //         .catch((err) => {
-    //             console.log(`Ошибка поиска фильма: ${err}`)
-    //             setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \nПодождите немного и попробуйте ещё раз')
-    //             let timer = setTimeout(() => {
-    //                 setErrorSearchApi(null)
-    //                 clearTimeout(timer)
-    //             }, 7000)
-    //         }).finally(() => {
-    //             setLoading(false)
-    //         })
-        // return moviesApi.getAllMovies()
-        //     .then((rawMovies) => {
-        //           console.log('From Server: rawMovies: ', rawMovies)
-        //         const searchedMovies = rawMovies.filter((item) => { // массив найденных фильмов
-        //             return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
-        //         });
-        //         console.log('From Server: searchedMovies: ', searchedMovies)
-        //         if (searchedMovies.length) {
-        //             setFoundCards(searchedMovies); // запись массива найденных фильмов в переменную 'cards'
-        //             localStorage.setItem('SearchHistory', JSON.stringify(searchedMovies)) // запись найденных фильмов в localStorage
-        //         } else setErrorSearchApi('Ничего не найдено')
-        //     })
-        //     .catch((err) => {
-        //         console.log(`Ошибка поиска фильма: ${err}`)
-        //         setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \nПодождите немного и попробуйте ещё раз')
-        //         let timer = setTimeout(() => {
-        //             setErrorSearchApi(null)
-        //             clearTimeout(timer)
-        //         }, 7000)
-        //     }).finally(() => {
-        //         setLoading(false)
-        //     })
-    // }
-    // function handleSearchLoadedMovies(value) { // Запрос на сторонний Server, получаем изначальный массив карточек, и фильтруем поиском
-    //     setLoading(true)
-    //     setErrorSearchApi(null)
-    //
-    //     const rawCards = localStorage.getItem('RawCards');
-    //     let cards = JSON.parse(rawCards);
-    //
-    //     if (!cards) { // Если в ЛС сырые карточки отсутствуют,
-    //         moviesApi.getAllMovies()
-    //             .then((rawMovies) => {
-    //                 console.log('From Server: rawMovies: ', rawMovies)
-    //
-    //                 localStorage.setItem('RawCards', JSON.stringify(rawMovies)) // сохраняем в ЛС 'RawCards'
-    //
-    //                 const searchedMovies = rawMovies.filter((item) => { // массив найденных фильмов
-    //                     return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
-    //                 });
-    //                 console.log('From Server: searchedMovies: ', searchedMovies)
-    //                 if (searchedMovies.length) {
-    //                     setFoundCards(searchedMovies); // запись массива найденных фильмов в переменную 'cards'
-    //                     localStorage.setItem('SearchHistory', JSON.stringify(searchedMovies)) // сохраняем в ЛС 'SearchHistory'
-    //                 } else setErrorSearchApi('Ничего не найдено')
-    //             })
-    //             .catch((err) => {
-    //                 console.log(`Ошибка поиска фильма: ${err}`)
-    //                 setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \nПодождите немного и попробуйте ещё раз')
-    //                 let timer = setTimeout(() => {
-    //                     setErrorSearchApi(null)
-    //                     clearTimeout(timer)
-    //                 }, 7000)
-    //             }).finally(() => {
-    //                 setLoading(false)
-    //             })
-    //         // try {
-    //         //     cards = await moviesApi.getAllMovies()
-    //         //         .then((res) => {
-    //         //             console.log(res)
-    //         //             console.log(res)
-    //         //         }) // то делаем запрос фильмов с Сервера
-    //         //     localStorage.setItem('RawCards', JSON.stringify(cards)) // сохраняем в ЛС
-    //         // } catch (err) {
-    //         //     console.log('ошибка при сохранении из ЛС: ', err)
-    //         //     setLoading(false)
-    //         // }
-    //     } else {
-    //
-    //         const searchedMovies = isRawCards.filter((item) => { // массив найденных из сырых фильмов
-    //             return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
-    //         });
-    //         console.log('из стейта isRawCards ', isRawCards)
-    //
-    //         if (searchedMovies.length) {
-    //             setFoundCards(searchedMovies); // запись массива найденных фильмов в стейт найденных фильмов
-    //             localStorage.setItem('SearchHistory', JSON.stringify(searchedMovies)) // запись найденных фильмов в localStorage
-    //         } else {
-    //             setErrorSearchApi('Ничего не найдено')
-    //         }
-    //
-    //         setLoading(false)
-    //     }
-    //
-    //
-    //     // if (isRawCards.length) { // если ЛС, то ищем карточки из сохраненному массиву стейта
-    //     //     const searchedMovies = isRawCards.filter((item) => { // массив найденных из сырых фильмов
-    //     //         return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
-    //     //     });
-    //     //       console.log('из стейта \'isRawCards\': ', isRawCards)
-    //     //     if (searchedMovies.length) {
-    //     //         setFoundCards(searchedMovies); // запись массива найденных фильмов в стейт найденных фильмов
-    //     //         localStorage.setItem('SearchHistory', JSON.stringify(searchedMovies)) // запись найденных фильмов в localStorage
-    //     //     } else setErrorSearchApi('Ничего не найдено')
-    //     // } else {
-    // }
-
-    function handleSearchLoadedMovies(value) { // сначала на сторонний Server, за сырым массивом, и фильтруем поиском
+    function handleSearchedMovies(value) { // поиск из уже мутированных карточек
         setLoading(true)
         setErrorSearchApi(null)
 
-        // если в ЛС есть сырые все сохраненные карточки, то по этому стейту и делаем поиск фильмов,
-        //   которые потом загружаем в ЛС и стейт 'добавленных' карточек
+        // если в ЛС есть все сохраненные(мутированные) карточки, то по этому стейту и делаем поиск фильмов,
+        //   которые потом загружаем в ЛС и стейт 'searchedMovies'
 
-        if (!localStorage.getItem('RawCards')) {
-
+        if (!localStorage.getItem('rawCards')) {
             moviesApi.getAllMovies()
-                .then((rawMovies) => {
+                .then((rawCards) => {
 
-                       console.log('From Server: rawMovies: ', rawMovies)
-                    const mutatedCards = mutateCards(rawMovies); // мутируем сырой массив карточек
+                       console.log('From Server: rawCards: ', rawCards)
+                    const mutatedCards = mutateCards(rawCards); // мутируем сырой массив карточек
                         console.log('mutatedCards : ', mutatedCards)
                         console.log('mutatedCards/ isRawCards: ', isRawCards)
                     setRawCards(mutatedCards); // и в стейт
-                    localStorage.setItem('RawCards', JSON.stringify(mutatedCards)); // и сохраняем в ЛС
+                    localStorage.setItem('rawCards', JSON.stringify(mutatedCards)); // и сохраняем в ЛС
 
                     const searchedMovies = mutatedCards.filter((item) => { // массив найденных фильмов
                         return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
                     });
                       console.log('From Server: searchedMovies: ', searchedMovies)
                     if (searchedMovies.length) {
-                        setFoundCards(searchedMovies); // запись массива найденных фильмов в переменную 'cards'
-                        localStorage.setItem('SearchHistory', JSON.stringify(searchedMovies)) // запись найденных фильмов в localStorage
+                        setSearchedMovies(searchedMovies); // запись [ найденных/мутир. фильмов] в стейт для /movies
+                        localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // запись в ЛС
                     } else setErrorSearchApi('Ничего не найдено')
                 })
                 .catch((err) => {
@@ -428,8 +288,8 @@ function App() {
                 return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
             });
               console.log('From Server: searchedMovies: ', searchedMovies)
-            setFoundCards(searchedMovies); // пере-запись массива найденных фильмов в переменную 'cards'
-            localStorage.setItem('SearchHistory', JSON.stringify(searchedMovies)) // пере-запись найденных фильмов в localStorage
+            setSearchedMovies(searchedMovies); // пере-запись массива найденных фильмов в переменную 'cards'
+            localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // пере-запись найденных фильмов в localStorage
 
             setLoading(false)
         }
@@ -437,7 +297,7 @@ function App() {
     }
 
     // const checkIfLiked = () => {
-    //     const likedCards = isFoundCards
+    //     const likedCards = isSearchedMovies
     // }
 
     function handleSaveCard(card) { // Save = Like // Для постановки лайка/сохранения карточки фильма на /movie
@@ -445,11 +305,11 @@ function App() {
         return mainApi.postMyMovie(card)
             .then((addedCard) => { // --> data: {owner:.., _id:.., moviesId: 10, }
 
-            setSavedSomeCards([addedCard.data, ...isSavedSomeCards]) // записываем каждую добавленную карточку в стейт
+            setLikedMovies([addedCard.data, ...isLikedMovies]) // записываем каждую добавленную карточку в стейт
                 console.log('const movieData:', addedCard.data)
-                console.log('from handleSaveCard(card): isSavedSomeCards: ', isSavedSomeCards)
+                console.log('from handleSaveCard(card): isLikedMovies: ', isLikedMovies)
 
-            localStorage.setItem('AddedCards', JSON.stringify([addedCard.data, ...isSavedSomeCards])) // в localStorage запись добавленной карточки
+            localStorage.setItem('likedMovies', JSON.stringify([addedCard.data, ...isLikedMovies])) // в localStorage запись добавленной карточки
         }).catch((err) => {
             console.log(`Ошибка при сохранении карточки: ${err}`);
         }).finally(() => {
@@ -461,8 +321,8 @@ function App() {
         setLoading(true)
         mainApi.deleteMyMovie(movieId)
             .then(() => {
-                const otherSavedCards = isSavedSomeCards.filter((card) => card.id !== movieId);
-                setSavedSomeCards(otherSavedCards);
+                const otherSavedCards = isLikedMovies.filter((card) => card.id !== movieId);
+                setLikedMovies(otherSavedCards);
             })
             .catch((err) => {
                 console.log(`Ошибка при удалении карточки: ${err}`);
@@ -480,15 +340,15 @@ function App() {
     //             addedCard.data.isSaved = true; // созд. поле isSaved: true
     //                 // console.log(movieData)
     //
-    //             // const arrCards = isSavedSomeCards.map(item => item) // создаем новый пустой массив для добавления карточек
+    //             // const arrCards = isLikedMovies.map(item => item) // создаем новый пустой массив для добавления карточек
     //             // arrCards.push(addedCard.data) // записываем новую карточку в созданный выше массив
     //             //     console.log('my API -->: arrCards :', arrCards)
     //
-    //             setSavedSomeCards([...arrCards]) // записываем каждую добавленную карточку в ['isSavedSomeCards']
+    //             setLikedMovies([...arrCards]) // записываем каждую добавленную карточку в ['isLikedMovies']
     //                 console.log([...arrCards])
-    //                 console.log('my API -->: isSavedSomeCards: ', [...isSavedSomeCards])
+    //                 console.log('my API -->: isLikedMovies: ', [...isLikedMovies])
     //
-    //             localStorage.setItem('AddedCards', JSON.stringify(arrCards)) // в localStorage запись добавленной карточки
+    //             localStorage.setItem('likedMovies', JSON.stringify(arrCards)) // в localStorage запись добавленной карточки
     //         })
     //         .catch((err) => {
     //             console.log(`Ошибка при сохранении карточки: ${err}`);
@@ -502,8 +362,8 @@ function App() {
 
         setCurrentUser({name: '', email: ''});
         setRawCards([])
-        setFoundCards([])
-        setSavedSomeCards([])
+        setSearchedMovies([])
+        setLikedMovies([])
 
         setErrorApi(null)
         setErrorSearchApi(null)
@@ -542,11 +402,11 @@ function App() {
                         <>
                             <Header loggedIn={loggedIn} type='movies'/>
                             <Movies loggedIn={loggedIn} type='movies'
-                                    searchedCards={isFoundCards}
+                                    searchedMovies={isSearchedMovies}
 
-                                    onSubmit={handleSearchLoadedMovies}
+                                    onSubmit={handleSearchedMovies}
                                     onSaveLikedCard={handleSaveCard}
-                                    savedCards={isSavedSomeCards}
+                                    savedCards={isLikedMovies}
                                     errorSearchApi={errorSearchApi}
                                     isLoading={isLoading}/>
                             <Footer/>
@@ -557,11 +417,11 @@ function App() {
                         <>
                             <Header loggedIn={loggedIn} type='saved-movies'/>
                             <SavedMovies type='saved-movies'
-                                         searchedCards={isFoundCards}
+                                         searchedMovies={isSearchedMovies}
 
                                          onSaveLikedCard={handleSaveCard}
-                                         savedCards={isSavedSomeCards}
-                                         setSavedSomeCards={setSavedSomeCards}
+                                         savedCards={isLikedMovies}
+                                         setLikedMovies={setLikedMovies}
 
                                          onDeleteCard={handleDeleteCard}
                             />

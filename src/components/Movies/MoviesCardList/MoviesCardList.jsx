@@ -4,18 +4,18 @@ import {useState, useEffect} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ type, searchedCards, onSaveLikedCard, isSavedCards, savedCards, saved, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, searchedMovies, onSaveLikedCard, isSavedCards, savedCards, saved, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
     // console.log(isLoading)
     // console.log(cards) // приходят отфильтрованные поиском карточки
 
-    // console.log('searchedCards with id...: ',searchedCards)
+    // console.log('searchedMovies with id...: ',searchedMovies)
     // console.log('savedCards: ', savedCards)
 
     useEffect(() => {
-        // localStorage.setItem('SearchHistory', JSON.stringify(searchedCards)) // перезапись
-    },[searchedCards])
+        // localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // перезапись
+    },[searchedMovies])
 
     let initCount = null;
     let step = null;
@@ -30,18 +30,18 @@ function MoviesCardList({ type, searchedCards, onSaveLikedCard, isSavedCards, sa
     },[])
 
     useEffect(() => {
-        setIsShowCards(searchedCards.slice(0, initCount))
-    },[searchedCards.length])
+        setIsShowCards(searchedMovies.slice(0, initCount))
+    },[searchedMovies.length])
 
     useEffect(() => {
 
     },[])
 
-        // console.log(searchedCards.length)
+        // console.log(searchedMovies.length)
         // console.log(isWidth)
 
     if (location.pathname === '/saved-movies') {
-        initCount = searchedCards.length
+        initCount = searchedMovies.length
     } else {
         if (isWidth >= 1280) {
             initCount = 16;
@@ -59,7 +59,7 @@ function MoviesCardList({ type, searchedCards, onSaveLikedCard, isSavedCards, sa
     const [isAddCount, setIsAddCount] = useState(initCount); // инкремент кол-ва карточек
 
     function showMore() {
-        setIsShowCards(searchedCards.slice(0, isAddCount + step))
+        setIsShowCards(searchedMovies.slice(0, isAddCount + step))
         setIsAddCount(isAddCount + step)
     }
 
@@ -97,7 +97,7 @@ function MoviesCardList({ type, searchedCards, onSaveLikedCard, isSavedCards, sa
                         </ul>
                     }
 
-                    { (searchedCards.length >= isAddCount)
+                    { (searchedMovies.length >= isAddCount)
                         ? (<div className={`movies__more ${errorSearchApi ? 'movies__more_display-none' : null}`}>
                         <button onClick={showMore} className='movies__btn-more' name='movies__btn-more' type='button'>
                         Ещё

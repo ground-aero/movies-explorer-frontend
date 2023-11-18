@@ -7,15 +7,15 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import LoadingContext from '../../contexts/LoadingContext';
 
-function Movies({ searchedCards, type, onSubmit, onSaveLikedCard, savedCards, errorSearchApi }) {
+function Movies({ searchedMovies, type, onSubmit, onSaveLikedCard, savedCards, errorSearchApi }) {
     const isLoading = useContext(LoadingContext);
-    // console.log(searchedCards) // приходящий массив отфильтрованных поиском карточек [{},{}]
+    // console.log(searchedMovies) // приходящий массив отфильтрованных поиском карточек [{},{}]
     // console.log(savedCards)
 
     useEffect(() => {
         // console.log(isLoading)
-        // console.log(searchedCards.length)
-    },[searchedCards])
+        // console.log(searchedMovies.length)
+    },[searchedMovies])
 
     useEffect(() => {
         // прочитать ЛС и записать данные из него в стейт
@@ -38,7 +38,7 @@ function Movies({ searchedCards, type, onSubmit, onSaveLikedCard, savedCards, er
                     </span>
                     : <MoviesCardList
                         type={ type }
-                        searchedCards={ searchedCards }
+                        searchedMovies={ searchedMovies }
                         onSaveLikedCard={onSaveLikedCard}
                         isSavedCards={false}
                         savedCards={savedCards}

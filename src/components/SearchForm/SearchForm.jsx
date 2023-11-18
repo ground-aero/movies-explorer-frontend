@@ -16,7 +16,7 @@ function SearchForm(props) {
 
     useEffect(() => {
         if (location.pathname === '/movies') {
-            const SearchWord = localStorage.getItem('SearchWord' || []); // проверяем наличие поискового слова в ЛС
+            const SearchWord = localStorage.getItem('searchedWord' || []); // проверяем наличие поискового слова в ЛС
             if (SearchWord) {
                 setIsSearchWord(JSON.parse(SearchWord)) // если есть, из ЛС перезаписываем его в стейт для рендеринга
             }
@@ -70,7 +70,7 @@ function SearchForm(props) {
             if (isSearchWord) props.onSubmit(isSearchWord) // текущее поисковое слово сабмитим на Сервер
             else setIsPlaceholder('Введите запрос')
 
-            localStorage.setItem('SearchWord', JSON.stringify(isSearchWord)) // и сразу сохраняем его в ЛС
+            localStorage.setItem('searchedWord', JSON.stringify(isSearchWord)) // и сразу сохраняем его в ЛС
 
             // при нажатии на поиск в /movies - проверялось ЛС на наличие loadedCards фильмов,,
             // если нет - то загружать массив со стороннего АПИ
@@ -83,8 +83,8 @@ function SearchForm(props) {
     }
 
     function saveSearchWord(searchWord) {
-        // localStorage.removeItem('SearchWord')
-        localStorage.setItem('SearchWord', JSON.stringify(searchWord))
+        // localStorage.removeItem('searchedWord')
+        localStorage.setItem('searchedWord', JSON.stringify(searchWord))
         setIsSearchWord(searchWord)
     }
 
