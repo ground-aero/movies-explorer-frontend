@@ -14,11 +14,11 @@ class MoviesApi {
     }
 
     getAllMovies() {
-        const token = localStorage.getItem('token');
+        // const token = localStorage.getItem('token');
         return fetch(`${this._serverUrl}/beatfilm-movies`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                // 'Authorization': `Bearer ${token}`, // сюда токен не надо передавать!!!???
                 'Content-Type': 'application/json',
             },
         }).then(res => this._onResponse(res))

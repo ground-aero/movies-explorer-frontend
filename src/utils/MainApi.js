@@ -40,18 +40,22 @@ class MainApi {
 
     // # запрашивает-->возвращает все сохранённые в моем API текущим пользователем фильмы
     getMyMovies() {
-        const token = localStorage.getItem('token');
         return fetch(`${this._serverUrl}/movies`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         }).then(res => this._onResponse(res))
     }
 
+    // getAllSetupData() {
+    //     return Promise.all([this.getUser(), this._getMyMovies()]);
+    // }
+
+    // ---------------------------------------------------------------------------//
+
     //  # создает фильм с переданными в теле: country,...
-    addMyMovie(movieData) {
+    postMyMovie(card) {
         const token = localStorage.getItem('token');
         return fetch(`${this._serverUrl}/movies`, {
             method: 'POST',
@@ -59,46 +63,21 @@ class MainApi {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(movieData),
+            body: JSON.stringify({ // на наш API - @POST: сохраняем/создаем карточку в наш АПИ
+                movieId: card.movieId,
+                country: card.country,
+                director: card.director,
+                duration: card.duration,
+                year: card.year,
+                description: card.description,
+                image: card.image,
+                trailerLink: card.trailerLink,
+                thumbnail: card.thumbnail,
+                nameRU: card.nameRU,
+                nameEN: card.nameEN,
+            }),
         }).then(res => this._onResponse(res))
     }
-
-    // addMyMovie(movieData) {
-    //     const {
-    //         id,
-    //         country,
-    //         director,
-    //         duration,
-    //         year,
-    //         description,
-    //         image,
-    //         trailerLink,
-    //         thumbnail,
-    //         nameRU,
-    //         nameEN,
-    //     } = movieData;
-    //     const token = localStorage.getItem('token');
-    //     return fetch(`${this._serverUrl}/movies`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Authorization': `Bearer ${token}`,
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             movieId: id,
-    //             country,
-    //             director,
-    //             duration,
-    //             year,
-    //             description,
-    //             image: `https://api.nomoreparties.co${image.url}`,
-    //             trailerLink,
-    //             thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
-    //             nameRU,
-    //             nameEN,
-    //         }),
-    //     }).then(res => this._onResponse(res))
-    // }
 
     //  # удаляет сохраненный фильм по id с сервера
     deleteMyMovie(movieId) {

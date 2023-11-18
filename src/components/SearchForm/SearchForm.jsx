@@ -1,36 +1,85 @@
 // component for page with movies search.
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
+import {useLocation} from 'react-router-dom';
 import '../general/content.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
+import LoadingContext from '../../contexts/LoadingContext.jsx';
 
-function SearchForm({ onSearchMovies }) {
+function SearchForm(props) {
+    const isLoading = useContext(LoadingContext);
+    const location = useLocation()
 
     const [isSearchWord, setIsSearchWord] = useState('');
+
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');
-    const [isSearchStory, setIsSearchStory] = useState('')
 
     useEffect(() => {
-        const SearchWord = localStorage.getItem('SearchWord'); /** проверка истории поиска */
-        if (SearchWord) {
-            const searchWord = JSON.parse(SearchWord)
-            setIsSearchWord(searchWord) // перезапись поискового слова из истории поиска
+        if (location.pathname === '/movies') {
+            const SearchWord = localStorage.getItem('SearchWord' || []); // проверяем наличие поискового слова в ЛС
+            if (SearchWord) {
+                setIsSearchWord(JSON.parse(SearchWord)) // если есть, из ЛС перезаписываем его в стейт для рендеринга
+            }
         }
           // console.log(SearchWord)
     },[])
 
+    useEffect(() => {
+
+    },[])
+
     function handleInput(evt) {
-        setIsSearchWord(evt.target.value)
+        setIsSearchWord(evt.target.value) // текущее поисковое слово из инпута держим в стейте
     }
 
-    /** загрузить карточки фильмов из сервиса: beatfilm-movies, по сабмиту */
-    function handleSubmit(evt) {
-        evt.preventDefault()
-        if (isSearchWord) onSearchMovies(isSearchWord)
-        else setIsPlaceholder('Введите запрос')
 
-        localStorage.setItem('SearchWord', JSON.stringify(isSearchWord))
-        // saveSearchWord()
+    // async function handleSubmitSearch() {
+    //     isLoading(true);
+    //     setFoundMovies([]);
+    //     try {
+    //         if(searchRequest.length > 0) {
+    //             const moviesToRender = await handleSearch(initialMovies, searchRequest);
+    //             if(moviesToRender.length === 0) {
+    //                 setInfoTooltiptext(MOVIES_NOT_FOUND);
+    //                 setInfoTooltipPopupOpen(true);
+    //             } else {
+    //                 setRequestToLocalStorage('lastRequest', searchRequest);
+    //                 setRequestToLocalStorage('lastRequestedMovies', moviesToRender);
+    //                 setFoundMovies(moviesToRender);
+    //                 setRequestToLocalStorage('checkboxState', isCheckboxActive);
+    //             }
+    //         }
+    //         //   else {
+    //         //     setInfoTooltiptext(KEYWORD_NOT_FOUND);
+    //         //     setInfoTooltipPopupOpen(true);
+    //         // }
+    //         return
+    //     } catch(err) {
+    //         console.log(err);
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // }
+
+    function handleSubmitSearch(evt) { // по сабмиту 'найти',
+        evt.preventDefault()
+        console.log(isLoading)
+
+        if (location.pathname === '/movies') {
+                            // загрузить один раз карточки с Сервера 'beatfilm-movies', ///////////////////
+            if (isSearchWord) props.onSubmit(isSearchWord) // текущее поисковое слово сабмитим на Сервер
+            else setIsPlaceholder('Введите запрос')
+
+            localStorage.setItem('SearchWord', JSON.stringify(isSearchWord)) // и сразу сохраняем его в ЛС
+
+            // при нажатии на поиск в /movies - проверялось ЛС на наличие loadedCards фильмов,,
+            // если нет - то загружать массив со стороннего АПИ
+
+            // if () {
+            //
+            // }
+
+        }
     }
 
     function saveSearchWord(searchWord) {
@@ -41,7 +90,7 @@ function SearchForm({ onSearchMovies }) {
 
     return (
             <form className='search search_form' id='search' name='search'
-                  onSubmit={handleSubmit}>
+                  onSubmit={handleSubmitSearch}>
                 <span className='search__wrap'>
                     <input type='text' value={isSearchWord} className='search__input' id='search-input' name='search' placeholder={isPlaceholder}
                         onChange={handleInput}

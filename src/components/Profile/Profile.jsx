@@ -5,7 +5,7 @@ import '../general/content.css';
 import './Profile.css';
 import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
 
-function Profile({ onUpdateProfile, onLogout }) {
+function Profile({ onSubmit, onLogout }) {
 
     const currentUser = useContext(CurrentUserContext);
       // console.log(currentUser) // {id:..., email:..., name:...}
@@ -45,9 +45,9 @@ function Profile({ onUpdateProfile, onLogout }) {
         setIsChanged(true)
     }
     /** Обработчик сабмита */
-    function handleSubmit(evt) {
+    function handleSubmitUpdate(evt) {
         evt.preventDefault()
-        if (isChanged) onUpdateProfile({ name: values.name, email: values.email })
+        if (isChanged) onSubmit({ name: values.name, email: values.email })
 
         setIsChanged(false)
     }
@@ -60,7 +60,7 @@ function Profile({ onUpdateProfile, onLogout }) {
                     <h1 className={`form-sec__title form-sec__title_type_profile`}>{`Привет, ${ currentUser.name } `}</h1>
 
                     <form className={`form profile`} name='form-profile'
-                          onSubmit={handleSubmit} >
+                          onSubmit={handleSubmitUpdate} >
                         <div className='profile__inputs'>
                             <span className='profile__input-wrap'>
                                 <input

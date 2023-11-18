@@ -4,16 +4,17 @@ import {useState, useEffect} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ type, searchedCards, onSaveLikedCard, savedCards, saved, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, searchedCards, onSaveLikedCard, isSavedCards, savedCards, saved, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
     // console.log(isLoading)
     // console.log(cards) // приходят отфильтрованные поиском карточки
 
-    console.log('searchedCards with id...: ',searchedCards)
-    console.log('savedCards: ', savedCards)
+    // console.log('searchedCards with id...: ',searchedCards)
+    // console.log('savedCards: ', savedCards)
+
     useEffect(() => {
-        // localStorage.setItem('SearchStory', JSON.stringify(searchedCards)) // перезапись
+        // localStorage.setItem('SearchHistory', JSON.stringify(searchedCards)) // перезапись
     },[searchedCards])
 
     let initCount = null;
@@ -84,8 +85,9 @@ function MoviesCardList({ type, searchedCards, onSaveLikedCard, savedCards, save
                                         card.isSaved = false;
                                 return <MoviesCard
                                         card={card}
-                                        key={card.id || card._id || _ind}
+                                        key={card.movieId || _ind}
                                         type={type}
+                                        isSavedCards={isSavedCards}
                                         savedCards={savedCards}
 
                                         onSaveLikedCard={onSaveLikedCard}
@@ -116,9 +118,12 @@ function MoviesCardList({ type, searchedCards, onSaveLikedCard, savedCards, save
                                 card.isSaved = true;
                                 return <MoviesCard
                                     card={card}
-                                    key={card.id || card._id || _ind}
+                                    key={card.movieId || _ind}
                                     type={type}
                                     onSaveLikedCard={onSaveLikedCard}
+                                    isSavedCards={isSavedCards}
+                                    savedCards={savedCards}
+                                    onDeleteCard={onDeleteCard}
                                 />
                             })
                             }
