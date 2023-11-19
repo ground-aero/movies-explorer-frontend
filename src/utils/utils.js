@@ -1,4 +1,4 @@
-import {beatfilmApiSettings} from './constants.js';
+import {beatfilmmainApiSettings} from './constants.js';
 
 export const utilsSetToLocalStorage = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value))
@@ -18,12 +18,13 @@ export function mutateCards(cards) { // мутируем сырой массив
             duration: card.duration,
             year: card.year,
             description: card.description,
-            image: `${beatfilmApiSettings.serverUrl}`+ card.image.url,
+            image: `${beatfilmmainApiSettings.serverUrl}`+ card.image.url,
             trailerLink: card.trailerLink,
-            thumbnail: `${beatfilmApiSettings.serverUrl}`+ card.image.formats.thumbnail.url,
+            thumbnail: `${beatfilmmainApiSettings.serverUrl}`+ card.image.formats.thumbnail.url,
             nameRU: card.nameRU,
             nameEN: card.nameEN,
             key: card.id,
+            isLiked: false,
         }))
     )
 }

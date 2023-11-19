@@ -4,18 +4,19 @@ import {useState, useEffect} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ type, searchedMovies, onSaveLikedCard, isSavedCards, savedCards, saved, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, isSearchedMovies, onSaveLikedCard, isSavedCards, isLikedMovies, saved, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
     // console.log(isLoading)
     // console.log(cards) // приходят отфильтрованные поиском карточки
 
-    // console.log('searchedMovies with id...: ',searchedMovies)
-    // console.log('savedCards: ', savedCards)
+    // console.log('isSearchedMovies with id...: ',isSearchedMovies)
+    // console.log('isLikedMovies: ', isLikedMovies)
 
-    useEffect(() => {
-        // localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // перезапись
-    },[searchedMovies])
+    console.log(isSearchedMovies)
+    // useEffect(() => {
+    //     // localStorage.setItem('isSearchedMovies', JSON.stringify(isSearchedMovies)) // перезапись
+    // },[isSearchedMovies])
 
     let initCount = null;
     let step = null;
@@ -30,18 +31,18 @@ function MoviesCardList({ type, searchedMovies, onSaveLikedCard, isSavedCards, s
     },[])
 
     useEffect(() => {
-        setIsShowCards(searchedMovies.slice(0, initCount))
-    },[searchedMovies.length])
+        setIsShowCards(isSearchedMovies.slice(0, initCount))
+    },[isSearchedMovies.length])
 
     useEffect(() => {
 
     },[])
 
-        // console.log(searchedMovies.length)
+        // console.log(isSearchedMovies.length)
         // console.log(isWidth)
 
     if (location.pathname === '/saved-movies') {
-        initCount = searchedMovies.length
+        initCount = isSearchedMovies.length
     } else {
         if (isWidth >= 1280) {
             initCount = 16;
@@ -59,13 +60,10 @@ function MoviesCardList({ type, searchedMovies, onSaveLikedCard, isSavedCards, s
     const [isAddCount, setIsAddCount] = useState(initCount); // инкремент кол-ва карточек
 
     function showMore() {
-        setIsShowCards(searchedMovies.slice(0, isAddCount + step))
+        setIsShowCards(isSearchedMovies.slice(0, isAddCount + step))
         setIsAddCount(isAddCount + step)
     }
 
-    const falseCards = () => {
-
-    }
         // console.log(initCount)
         // console.log(cards.length)
         // console.log(isAddCount)
@@ -81,14 +79,15 @@ function MoviesCardList({ type, searchedMovies, onSaveLikedCard, isSavedCards, s
                         : <ul className='cards'>
                             {/*<MoviesCard type={ type } nameRU={'33 слова о дизайне'} image={cardImg1}/>*/}
 
-                            { isShowCards.map((card, _ind) => {
-                                        card.isSaved = false;
+                            { isShowCards?.map((card, _ind) => {
+                                        card.isLiked = false;
                                 return <MoviesCard
                                         card={card}
                                         key={card.movieId || _ind}
                                         type={type}
                                         isSavedCards={isSavedCards}
-                                        savedCards={savedCards}
+                                        isLikedMovies={isLikedMovies}
+                                        onDeleteCard={onDeleteCard}
 
                                         onSaveLikedCard={onSaveLikedCard}
                                     />
@@ -97,7 +96,7 @@ function MoviesCardList({ type, searchedMovies, onSaveLikedCard, isSavedCards, s
                         </ul>
                     }
 
-                    { (searchedMovies.length >= isAddCount)
+                    { (isSearchedMovies.length >= isAddCount)
                         ? (<div className={`movies__more ${errorSearchApi ? 'movies__more_display-none' : null}`}>
                         <button onClick={showMore} className='movies__btn-more' name='movies__btn-more' type='button'>
                         Ещё
@@ -114,15 +113,15 @@ function MoviesCardList({ type, searchedMovies, onSaveLikedCard, isSavedCards, s
                         ? <span className='cards__api-err'>{ errorSearchApi }</span>
                         : <ul className='cards'>
 
-                            { savedCards.map((card, _ind) => {
-                                card.isSaved = true;
+                            { isLikedMovies?.map((card, _ind) => {
+                                card.isLiked = true;
                                 return <MoviesCard
                                     card={card}
                                     key={card.movieId || _ind}
                                     type={type}
                                     onSaveLikedCard={onSaveLikedCard}
                                     isSavedCards={isSavedCards}
-                                    savedCards={savedCards}
+                                    isLikedMovies={isLikedMovies}
                                     onDeleteCard={onDeleteCard}
                                 />
                             })

@@ -1,16 +1,23 @@
 // component - компонент страницы с сохранёнными карточками фильмов.
+import {useEffect, useState, useContext} from 'react';
+import LoadingContext from '../../contexts/LoadingContext';
+import Preloader from '../Preloader/Preloader';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
-import {useEffect, useState} from "react";
 
-function SavedMovies({ type, searchedMovies, savedCards, onDeleteCard }) {
+function SavedMovies({ type, searchedMovies, isLikedMovies, onDeleteCard }) {
+    const isLoading = useContext(LoadingContext);
+
     const [isSavedCard, setIsSavedCard] = useState([]);
-    // console.log(savedCards) // приходит с новым полем 'isSaved: true'
+    // console.log(isLikedMovies) // приходит с новым полем 'isSaved: true'
 
 
-    return (
+    if (isLoading) {
+        return <Preloader/>;
+    } else return (
         <main className='content'>
+
             <section className='saved-movies'>
 
                 <SearchForm />
@@ -20,7 +27,7 @@ function SavedMovies({ type, searchedMovies, savedCards, onDeleteCard }) {
                     searchedMovies={ searchedMovies }
 
                     isSavedCards={true}
-                    savedCards={savedCards}
+                    isLikedMovies={isLikedMovies}
                     onDeleteCard={onDeleteCard}
                 />
 

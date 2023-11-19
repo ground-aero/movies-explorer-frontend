@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Routes, Route, useNavigate, Navigate} from 'react-router-dom';
+import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import LoadingContext from '../../contexts/LoadingContext';
+import Preloader from '../Preloader/Preloader';
 import '../general/page.css'
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -12,24 +13,20 @@ import Profile from '../Profile/Profile';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
-import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import * as authApi from '../../utils/AuthApi';
-import { mutateCards } from '../../utils/utils.js';
 
 /** @returns {JSX.Element} */
 function App() {
     const navigate = useNavigate();
+    const location = useLocation()
+
     const [currentUser, setCurrentUser] = useState({name: '', email: ''});  // Стейт, отвечающий за данные текущего пользователя
     const [loggedIn, setLoggedIn] = useState(false);
 
     /** Состояние массива карточек */
-    const [isRawCards, setRawCards] = useState([]); // массив всех карточек с Сервера bitFilms...
-    const [isLoadedAllCards, setLoadedAllCards] = useState([]); // массив всех загруженных карт
 
-    const [isSearchedMovies, setSearchedMovies] = useState([]); // [ найденные(мутиров.) картчки] --> /movies ]
-    const [isLikedMovies, setLikedMovies] = useState([]) // [ лайкнутые карточки ] --> /saved-movies
-    // console.log(cards);
+    const [isLikedMovies, setLikedMovies] = useState([]); // [ лайкнутые карточки ] --> /saved-movies
 
     const [isLoading, setLoading] = useState(false);
     /** для отслеживания состояния загрузки во время ожидания ответа от сервера */
@@ -107,7 +104,7 @@ function App() {
             authApi.checkToken(token)
                 .then((res) => {
                     /** автологин. Чтобы после перезагрузки не выкидывало снова в логин */
-                    console.log(res.data) // { _id:..., name:..., email:... }
+                    // console.log(res.data) // { _id:..., name:..., email:... }
                     if (res.data) {
                         let userData = {
                             id: res.data._id, // id: res.data._id,
@@ -144,53 +141,6 @@ function App() {
 
     // ============================================================================================================ //
 
-    // function handleGetMovies() {
-    //     setLoading(true) /** состояние для управления 'Loading...' */
-    //     return moviesApi.getAllMovies()
-    //         .then((res) => {
-    //               console.log(res) // все карточки (100) [{...}, {id:1, nameRU:'Роллинг', ...} ]
-    //             // setAllCards(res)
-    //             // navigate('/movies', {replace: true})
-    //         })
-    //         .catch((err) => {
-    //             console.log(`Ошибка загрузки фильмов ${err}`)
-    //             setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \n Подождите немного и попробуйте ещё раз')
-    //             let timer = setTimeout(() => {
-    //                 setErrorSearchApi(null)
-    //                 clearTimeout(timer)
-    //             }, 5000)
-    //         }).finally(() => {setLoading(false)})
-    // }
-    // function handleGetMovies() {
-    //     let searchInputString // ??
-    //     let setIsValid // ??
-    //     // if(!searchInputString) {
-    //     //     setIsValid(false)
-    //     // }
-    //     if (allMovies.length === 0 && searchInputString) {
-    //         moviesApi.getAllMovies()
-    //             .then((res) => {
-    //                 console.log(res)
-    //                 setIsValid(true)
-    //
-    //                 setAllMovies(res)
-    //                 localStorage.setItem(res, JSON.stringify(allMovies)) // ????
-    //             })
-    //             .catch((err) => {
-    //                 console.log(`Ошибка загрузки фильмов ${err}`)
-    //             });
-    //     } else { handleSubmitSearch() }
-    // }
-
-    useEffect(() => { // проверяем наличие в ЛС сырого массива, Для /movies
-        const RawCards = localStorage.getItem('rawCards') // проверяем наличие в ЛС загруженных карточек
-        if (RawCards) { // если они в ЛС есть,
-            setRawCards(JSON.parse(RawCards)) // то сохраняем их в стейт для использования в ............
-              console.log('from useEffect - isRawCards', isRawCards)
-        } else {
-            getRawCardsAndMutate(); // либо запрашиваем их на стороннем Сервере
-        }
-    }, []);
 
     // useEffect(() => { // проверяем наличие в ЛС загруженных на наш АПИ карточек, Для /movies
     //     const LoadedAllCards = localStorage.getItem('LoadedCards') // проверяем наличие в ЛС загруженных карточек
@@ -202,13 +152,7 @@ function App() {
     //     }
     // }, []);
 
-    useEffect(() => { // Для отображения на /movies
-        const searchedMovies = localStorage.getItem('searchedMovies') // проверяем наличие найденных фильмов
-        if (searchedMovies) { // если в ЛС есть найденные фильмы,
-            setSearchedMovies(JSON.parse(searchedMovies)) // то сохраняем их в стейт для текщуего рендера
-              console.log(isSearchedMovies)
-        }
-    }, []);
+
 
     useEffect(() => { // Для /savedMovies
         const likedMovies = localStorage.getItem('likedMovies');
@@ -219,97 +163,19 @@ function App() {
         }
     }, [])
 
-    function getRawCardsAndMutate() { // загрузка сырого массива фильмов (если они отсутствуют в ЛС)
-                setLoading(true)
-                setErrorSearchApi(null)
-            // if (!localStorage.getItem('rawCards')) {
-                moviesApi.getAllMovies()
-                    .then((raw) => { // получаем сырой массив
-
-                        const mutatedCards = mutateCards(raw); // мутируем сырой массив карточек
-                        setRawCards(mutatedCards); // и в стейт
-                        localStorage.setItem('rawCards', JSON.stringify(mutatedCards)); // и сохраняем в ЛС
-
-                        console.log('isRawCards state from getRawCardsAndMutate():', isRawCards)
-                        console.log('mutated card:', mutatedCards)
-                    })
-                    .catch(err => console.log('Ошибка при загрузке карточек со стороннего Сервера', err))
-                    .finally(() => {
-                        setLoading(false)
-                    })
-            // }
-        setLoading(false)
-    }
-    // getRawCardsAndMutate()
-
-    function handleSearchedMovies(value) { // поиск из уже мутированных карточек
-        setLoading(true)
-        setErrorSearchApi(null)
-
-        // если в ЛС есть все сохраненные(мутированные) карточки, то по этому стейту и делаем поиск фильмов,
-        //   которые потом загружаем в ЛС и стейт 'searchedMovies'
-
-        if (!localStorage.getItem('rawCards')) {
-            moviesApi.getAllMovies()
-                .then((rawCards) => {
-
-                       console.log('From Server: rawCards: ', rawCards)
-                    const mutatedCards = mutateCards(rawCards); // мутируем сырой массив карточек
-                        console.log('mutatedCards : ', mutatedCards)
-                        console.log('mutatedCards/ isRawCards: ', isRawCards)
-                    setRawCards(mutatedCards); // и в стейт
-                    localStorage.setItem('rawCards', JSON.stringify(mutatedCards)); // и сохраняем в ЛС
-
-                    const searchedMovies = mutatedCards.filter((item) => { // массив найденных фильмов
-                        return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
-                    });
-                      console.log('From Server: searchedMovies: ', searchedMovies)
-                    if (searchedMovies.length) {
-                        setSearchedMovies(searchedMovies); // запись [ найденных/мутир. фильмов] в стейт для /movies
-                        localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // запись в ЛС
-                    } else setErrorSearchApi('Ничего не найдено')
-                })
-                .catch((err) => {
-                    console.log(`Ошибка поиска фильма: ${err}`)
-                    setErrorSearchApi('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. \nПодождите немного и попробуйте ещё раз')
-                    let timer = setTimeout(() => {
-                        setErrorSearchApi(null)
-                        clearTimeout(timer)
-                    }, 7000)
-                }).finally(() => {
-                setLoading(false)
-            })
-
-        } else {
-
-              console.log('there are \'RawCards\' ')
-
-            const searchedMovies = isRawCards.filter((item) => { // массив найденных фильмов
-                return (item.nameRU.toLowerCase().includes(value) || item.nameEN.toLowerCase().includes(value))
-            });
-              console.log('From Server: searchedMovies: ', searchedMovies)
-            setSearchedMovies(searchedMovies); // пере-запись массива найденных фильмов в переменную 'cards'
-            localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // пере-запись найденных фильмов в localStorage
-
-            setLoading(false)
-        }
-
-    }
-
-    // const checkIfLiked = () => {
-    //     const likedCards = isSearchedMovies
-    // }
+    // ---------------------------------------------------------------------------
 
     function handleSaveCard(card) { // Save = Like // Для постановки лайка/сохранения карточки фильма на /movie
         setLoading(true)
-        return mainApi.postMyMovie(card)
-            .then((addedCard) => { // --> data: {owner:.., _id:.., moviesId: 10, }
+        return mainApi.postMyMovie(card) // на наш АПИ
+            .then((likedMovie) => { // --> data: {owner:.., _id:.., moviesId: 10, }
 
-            setLikedMovies([addedCard.data, ...isLikedMovies]) // записываем каждую добавленную карточку в стейт
-                console.log('const movieData:', addedCard.data)
+                likedMovie.data.isLiked = true;
+            setLikedMovies([likedMovie.data, ...isLikedMovies]) // записываем каждую добавленную карточку в стейт
+                console.log('likedMovie.data:', likedMovie.data) // :
                 console.log('from handleSaveCard(card): isLikedMovies: ', isLikedMovies)
 
-            localStorage.setItem('likedMovies', JSON.stringify([addedCard.data, ...isLikedMovies])) // в localStorage запись добавленной карточки
+            localStorage.setItem('likedMovies', JSON.stringify([likedMovie.data, ...isLikedMovies])) // в localStorage запись добавленной карточки
         }).catch((err) => {
             console.log(`Ошибка при сохранении карточки: ${err}`);
         }).finally(() => {
@@ -317,12 +183,16 @@ function App() {
         })
     }
 
-    function handleDeleteCard(movieId) {
+    function handleDeleteCard(_id) {
         setLoading(true)
-        mainApi.deleteMyMovie(movieId)
+        mainApi.deleteMyMovie(_id)
             .then(() => {
-                const otherSavedCards = isLikedMovies.filter((card) => card.id !== movieId);
-                setLikedMovies(otherSavedCards);
+
+                const otherLikedMovies = isLikedMovies.filter((movie) => movie._id !== _id);
+                setLikedMovies(otherLikedMovies);
+                  console.log('otherLikedMovies', otherLikedMovies)
+                // достать из ЛС isLikedMovies' и из стейта и удалить
+
             })
             .catch((err) => {
                 console.log(`Ошибка при удалении карточки: ${err}`);
@@ -331,29 +201,7 @@ function App() {
             })
     }
 
-    // function handleSaveCard(movieData) { // Save = Like // Для постановки лайка/сохранения карточки фильма на /movie
-    //     mainApi
-    //         .postMyMovie(movieData) // на наш API - @POST: сохраняем/создаем карточку в наш АПИ
-    //         .then((addedCard) => { // --> data: {owner:.., _id:.., moviesId: 10, }
-    //             movieData.owner = currentUser.id; // в новую карточку добавляем поля:'owner' = currentUser.id
-    //             movieData._id = addedCard.data._id;
-    //             addedCard.data.isSaved = true; // созд. поле isSaved: true
-    //                 // console.log(movieData)
-    //
-    //             // const arrCards = isLikedMovies.map(item => item) // создаем новый пустой массив для добавления карточек
-    //             // arrCards.push(addedCard.data) // записываем новую карточку в созданный выше массив
-    //             //     console.log('my API -->: arrCards :', arrCards)
-    //
-    //             setLikedMovies([...arrCards]) // записываем каждую добавленную карточку в ['isLikedMovies']
-    //                 console.log([...arrCards])
-    //                 console.log('my API -->: isLikedMovies: ', [...isLikedMovies])
-    //
-    //             localStorage.setItem('likedMovies', JSON.stringify(arrCards)) // в localStorage запись добавленной карточки
-    //         })
-    //         .catch((err) => {
-    //             console.log(`Ошибка при сохранении карточки: ${err}`);
-    //         });
-    // }
+
 
     function onLogout() {
         // localStorage.removeItem('token');
@@ -361,8 +209,9 @@ function App() {
         setLoggedIn(false);
 
         setCurrentUser({name: '', email: ''});
-        setRawCards([])
-        setSearchedMovies([])
+        // setRawCards([])
+        // setSearchedMovies([])
+        // setSearchedWord([])
         setLikedMovies([])
 
         setErrorApi(null)
@@ -370,6 +219,9 @@ function App() {
         navigate('/', {replace: true});
     }
 
+    if (loggedIn === undefined) {
+        return <Preloader />;
+    } else
     return (
         <>
             <CurrentUserContext.Provider value={currentUser}>
@@ -402,13 +254,14 @@ function App() {
                         <>
                             <Header loggedIn={loggedIn} type='movies'/>
                             <Movies loggedIn={loggedIn} type='movies'
-                                    searchedMovies={isSearchedMovies}
+                                    isLoading={isLoading}
 
-                                    onSubmit={handleSearchedMovies}
                                     onSaveLikedCard={handleSaveCard}
-                                    savedCards={isLikedMovies}
+                                    isLikedMovies={isLikedMovies}
+                                    onDeleteCard={handleDeleteCard}
+
                                     errorSearchApi={errorSearchApi}
-                                    isLoading={isLoading}/>
+                            />
                             <Footer/>
                         </>
                     }
@@ -417,10 +270,9 @@ function App() {
                         <>
                             <Header loggedIn={loggedIn} type='saved-movies'/>
                             <SavedMovies type='saved-movies'
-                                         searchedMovies={isSearchedMovies}
 
                                          onSaveLikedCard={handleSaveCard}
-                                         savedCards={isLikedMovies}
+                                         isLikedMovies={isLikedMovies}
                                          setLikedMovies={setLikedMovies}
 
                                          onDeleteCard={handleDeleteCard}

@@ -1,6 +1,6 @@
 /** Содержит описание запросов к нашему Api
  * @param options - опции для работы с API (serverURL - url сервера, headers - заголовки в виде объекта) */
-import { apiSettings } from './constants.js';
+import { mainApiSettings } from './constants.js';
 
 class MainApi {
     constructor(options) {
@@ -95,6 +95,6 @@ class MainApi {
 }
 
 /** Экземпляр класса mainApi  */
-const mainApi = new MainApi(apiSettings);
+const mainApi = new MainApi(mainApiSettings);
 
 export default mainApi;
