@@ -50,7 +50,7 @@ function SearchForm({ onSubmit, filterShortCheckbox }) {
                 onSubmit(isSearchedWord, isShortStatus)
                 setIsPlaceholder('Фильм')
             }
-            if (isShortStatus === false) {
+            if (isShortStatus === false && isSearchedWord) {
                 onSubmit(isSearchedWord, isShortStatus)
                 // setIsPlaceholder('Фильм')
             }
