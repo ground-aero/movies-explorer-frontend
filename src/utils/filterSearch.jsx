@@ -1,15 +1,18 @@
 import { SHORT_MOVIE } from './constants.js';
 
-const filterSearch = (movies, searchWord, shortStatus) => {
+const filterSearch = (movies, searchWord, isShort = false) => {
     return movies.filter((movie) => {
-
-        const filterToLowerCase =
+        // console.log('searchWord, isShort::', searchWord, isShort)
+        const filterToLowerCase = // boolean, по совпадению букв поиска
             movie.nameRU.toLowerCase().includes(searchWord) ||
             movie.nameEN.toLowerCase().includes(searchWord)
-        if (shortStatus) {
-            return filterToLowerCase;
-        } else {
-            return filterToLowerCase && (movie.duration <= SHORT_MOVIE);
+        // console.log(isShortStatus) // ПРИХОДИТ БЕЗ ИЗМЕНЕНИЯ !!!!!!!!!!
+        // console.log(movie.duration <= SHORT_MOVIE)
+
+        if (isShort === false) { // если длинные,
+            return filterToLowerCase; // => то получаем длинные ф.
+        } else { // если короткие, => то получаем короткие ф.
+            return filterToLowerCase && (movie.duration <= SHORT_MOVIE)
         }
     });
 };

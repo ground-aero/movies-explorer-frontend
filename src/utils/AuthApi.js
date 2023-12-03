@@ -35,6 +35,7 @@ export const register = async (name, email, password) => {
 export const authorize = async (email, password) => {
     try {
         const response = await fetch(`${DB_URL}/signin`, {
+            // credentials: 'include',
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -53,9 +54,10 @@ export const authorize = async (email, password) => {
 export const checkToken = async (token) => {
     try {
         const response = await fetch(`${DB_URL}/users/me`, {
+            // credentials: 'include',
             method: 'GET',
             headers: {
-                'Accept': 'application/json',
+                // 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },

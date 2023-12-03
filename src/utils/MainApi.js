@@ -94,7 +94,6 @@ class MainApi {
 
 }
 
-/** Экземпляр класса mainApi  */
 const mainApi = new MainApi(mainApiSettings);
 
 export default mainApi;

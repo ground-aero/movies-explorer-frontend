@@ -1,9 +1,12 @@
 // sub-component for page with movies search.
 import {useState, useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
 import './FilterCheckbox.css';
 
-function FilterCheckbox({ isShortStatus, setShortStatus }) {
-    // const [isShortStatus, setShortStatus] = useState(false);
+function FilterCheckbox({ isShortStatus, toggleCheckbox }) {
+    const location = useLocation();
+
+    console.log('isShortStatus:;:',isShortStatus)
     // const [isMovieSearch, setIsMovieSearch] = useState(false);
     // function toggleBox() { isMovieSearch ? setIsMovieSearch(false) : setIsMovieSearch(true)}
 
@@ -13,24 +16,34 @@ function FilterCheckbox({ isShortStatus, setShortStatus }) {
      * — после первого сабмита чекбокс при переключении начинает вызывать поиск
      * */
 
-    // 2.
     // useEffect(() => {
-    //     if (!isShortStatus) {
-    //         const isShortString = localStorage.getItem('isShort') /** проверка истории значения */
-    //         const shortBool = JSON.parse(isShortString)
-    //         setShortStatus(!shortBool) // перезапись значения
+    //     if (localStorage.getItem('isShort') === 'true') setShortStatus(true);
+    //     else setShortStatus(false);
+    // }, []);
+
+    // useEffect(() => { // ЭТОТ ЭФФЕКТ ВООБЩЕ НЕ СРАБАТЫВАЕТ !!!!!!!!!!
+    //     if (location.pathname === '/movies' || location.pathname === '/saved-movies') {
+    //
+    //         if (isShortStatus) { // если false =>
+    //             console.log(isShortStatus)
+    //             const isShortString = localStorage.getItem('isShort') // достаем из ЛС false,
+    //             const shortBool = JSON.parse(isShortString)
+    //             setShortStatus(shortBool) // перезаписываем значение в стейт
+    //         }
+    //         filterShortCheckbox() // записываем короткометражки [] в стейт isSearchedMovies и в ЛС
     //     }
-    // },[isShortStatus])
+    // },[])
+    // isShortStatus
 
     // 1.
-    const handleToggleCheckbox = () => {
-        setShortStatus(!isShortStatus); // зависит от стейта 'setShortStatus', на стр.
-        localStorage.setItem('isShort', JSON.stringify(isShortStatus))
-    }
-    // const handleToggleCheckbox = () => {
-    //     isShortStatus ? setShortStatus(false) : setShortStatus(true);
-    // };
-
+    // const toggleCheckbox = () => {
+    //     setShortStatus(!isShortStatus); // 1. реверсировать
+    //     console.log(isShortStatus)
+    //     // console.log(isShortStatus) // норм !
+    //     localStorage.setItem('isShort', JSON.stringify(isShortStatus))
+    //
+    //     // setShortStatus(!isShortStatus)
+    // }
 
     return (
         <div className='filter filter_checkbox'>
@@ -38,8 +51,8 @@ function FilterCheckbox({ isShortStatus, setShortStatus }) {
             <div className='filter__wrap'>
                 <input type='checkbox' className='filter__checkbox' id='filter-short'
                     // value={ isShortStatus }
-                    onChange={handleToggleCheckbox}
-                    checked={ isShortStatus }
+                    onChange={ toggleCheckbox }
+                    checked={ !isShortStatus }
                 />
             </div>
             <label className='filter__header' htmlFor='filter-short'>Короткометражки</label>

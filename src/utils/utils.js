@@ -9,7 +9,7 @@ export const utilsGetFromLocalStorage = (key) => {
     return getData ? JSON.parse(getData) : null
 }
 
-export function mutateCards(cards) { // мутируем сырой массив
+export function normalizeCards(cards) { // мутируем сырой массив
     return (
         cards.map((card) => ({
             movieId: card.id,

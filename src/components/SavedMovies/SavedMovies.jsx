@@ -1,35 +1,44 @@
 // component - компонент страницы с сохранёнными карточками фильмов.
-import {useEffect, useState, useContext} from 'react';
-import LoadingContext from '../../contexts/LoadingContext';
-import Preloader from '../Preloader/Preloader';
+import {useContext, useState} from 'react';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
+import LoadingContext from '../../contexts/LoadingContext';
+import Preloader from "../Preloader/Preloader.jsx";
 
-function SavedMovies({ type, searchedMovies, isLikedMovies, onDeleteCard }) {
+function SavedMovies({ type, onSubmit, likedMovies, onSaveLikedCard, onDeleteCard, filterShortCheckbox }) {
     const isLoading = useContext(LoadingContext);
 
-    const [isSavedCard, setIsSavedCard] = useState([]);
-    // console.log(isLikedMovies) // приходит с новым полем 'isSaved: true'
+    console.log(likedMovies) // приходит с новым полем 'isSaved: true'
+
+    //////////////////////////////////////////////////////////////////////////////////
+    ///////// Должен работать поиск. Но сохранять последний поисковый запрос в стейт не требуется.
+    // При обновлении страницы должен выводиться полный список сохраненных фильмов.
 
 
-    if (isLoading) {
-        return <Preloader/>;
-    } else return (
+    return (
         <main className='content'>
-
             <section className='saved-movies'>
 
-                <SearchForm />
-
-                <MoviesCardList
-                    type={ type }
-                    searchedMovies={ searchedMovies }
-
-                    isSavedCards={true}
-                    isLikedMovies={isLikedMovies}
-                    onDeleteCard={onDeleteCard}
+                <SearchForm
+                    filterShortCheckbox={ filterShortCheckbox }
+                    onSubmit={ onSubmit }
                 />
+
+                { isLoading
+                    ? <span className='preloader'>
+                        <Preloader />
+                    </span>
+                    : <MoviesCardList
+                        type={ type }
+                        // searchedMovies={ searchedMovies }
+
+                        likedMovies={ likedMovies }
+                        onSaveLikedCard={onSaveLikedCard}
+                        onDeleteCard={onDeleteCard}
+                        isSavedCards={true}
+                    />
+                }
 
                 <span className='span-box'></span>
 

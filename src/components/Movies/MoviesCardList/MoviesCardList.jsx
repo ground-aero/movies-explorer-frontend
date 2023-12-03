@@ -4,19 +4,15 @@ import {useState, useEffect} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ type, isSearchedMovies, onSaveLikedCard, isSavedCards, isLikedMovies, saved, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSavedCards, likedMovies = [], onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
-    // console.log(isLoading)
-    // console.log(cards) // приходят отфильтрованные поиском карточки
-
-    // console.log('isSearchedMovies with id...: ',isSearchedMovies)
+    // console.log('renderMovies : ',renderMovies)
     // console.log('isLikedMovies: ', isLikedMovies)
 
-    console.log(isSearchedMovies)
-    // useEffect(() => {
-    //     // localStorage.setItem('isSearchedMovies', JSON.stringify(isSearchedMovies)) // перезапись
-    // },[isSearchedMovies])
+    useEffect(() => {
+        // localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // перезапись
+    },[renderMovies])
 
     let initCount = null;
     let step = null;
@@ -25,24 +21,25 @@ function MoviesCardList({ type, isSearchedMovies, onSaveLikedCard, isSavedCards,
         const handleResize = (event) => {
             setIsWidth(event.target.innerWidth)
         }
-        // console.log(isWidth)
         window.addEventListener('resize', handleResize)
         return (() => window.removeEventListener('resize', handleResize))
     },[])
 
-    useEffect(() => {
-        setIsShowCards(isSearchedMovies.slice(0, initCount))
-    },[isSearchedMovies.length])
-
+    useEffect(() => { // Нарезка всех найденных, в зависимости от ширины экрана
+        if (location.pathname === '/movies') {
+            setIsShowCards(renderMovies.slice(0, initCount))
+        }
+    },[renderMovies?.length])
+    // renderMovies.length
     useEffect(() => {
 
     },[])
 
-        // console.log(isSearchedMovies.length)
+        // console.log(searchedMovies.length)
         // console.log(isWidth)
 
     if (location.pathname === '/saved-movies') {
-        initCount = isSearchedMovies.length
+        initCount = likedMovies?.length
     } else {
         if (isWidth >= 1280) {
             initCount = 16;
@@ -60,14 +57,9 @@ function MoviesCardList({ type, isSearchedMovies, onSaveLikedCard, isSavedCards,
     const [isAddCount, setIsAddCount] = useState(initCount); // инкремент кол-ва карточек
 
     function showMore() {
-        setIsShowCards(isSearchedMovies.slice(0, isAddCount + step))
+        setIsShowCards(renderMovies.slice(0, isAddCount + step))
         setIsAddCount(isAddCount + step)
     }
-
-        // console.log(initCount)
-        // console.log(cards.length)
-        // console.log(isAddCount)
-        // console.log(isShowCards.length)
 
     return (
         <>
@@ -79,26 +71,26 @@ function MoviesCardList({ type, isSearchedMovies, onSaveLikedCard, isSavedCards,
                         : <ul className='cards'>
                             {/*<MoviesCard type={ type } nameRU={'33 слова о дизайне'} image={cardImg1}/>*/}
 
-                            { isShowCards?.map((card, _ind) => {
+                            { isShowCards.map((card, _ind) => {
                                         card.isLiked = false;
                                 return <MoviesCard
                                         card={card}
                                         key={card.movieId || _ind}
-                                        type={type}
-                                        isSavedCards={isSavedCards}
-                                        isLikedMovies={isLikedMovies}
-                                        onDeleteCard={onDeleteCard}
+                                        likedMovies={likedMovies}
 
+                                        isSavedCards={isSavedCards}
                                         onSaveLikedCard={onSaveLikedCard}
+                                        onDeleteCard={onDeleteCard}
+                                        type={type}
                                     />
                                 })
                             }
                         </ul>
                     }
 
-                    { (isSearchedMovies.length >= isAddCount)
-                        ? (<div className={`movies__more ${errorSearchApi ? 'movies__more_display-none' : null}`}>
-                        <button onClick={showMore} className='movies__btn-more' name='movies__btn-more' type='button'>
+                    { (renderMovies.length >= isAddCount)
+                        ? (<div className={`movies__more ${ errorSearchApi ? 'movies__more_display-none' : null }`}>
+                        <button onClick={ showMore } className='movies__btn-more' name='movies__btn-more' type='button'>
                         Ещё
                         </button>
                         </div>)
@@ -112,17 +104,16 @@ function MoviesCardList({ type, isSearchedMovies, onSaveLikedCard, isSavedCards,
                     { errorSearchApi
                         ? <span className='cards__api-err'>{ errorSearchApi }</span>
                         : <ul className='cards'>
-
-                            { isLikedMovies?.map((card, _ind) => {
+                            { likedMovies.map((card, _ind) => {
                                 card.isLiked = true;
                                 return <MoviesCard
                                     card={card}
                                     key={card.movieId || _ind}
-                                    type={type}
-                                    onSaveLikedCard={onSaveLikedCard}
+                                    // likedMovies={likedMovies}
                                     isSavedCards={isSavedCards}
-                                    isLikedMovies={isLikedMovies}
+                                    onSaveLikedCard={onSaveLikedCard}
                                     onDeleteCard={onDeleteCard}
+                                    type={type}
                                 />
                             })
                             }

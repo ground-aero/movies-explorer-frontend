@@ -1,16 +1,17 @@
 // component - for single film card.
 import {useState, useEffect, useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import './MoviesCard.css';
 import deleteCardBtn from '../../../images/delete_icon_thin.svg';
 import likeCardBtn from '../../../images/card_heart_red.svg';
 import dislikeCardBtn from '../../../images/card_heart_grey.svg';
 import CurrentUserContext from '../../../contexts/CurrentUserContext';
 
-function MoviesCard({ type, card, onSaveLikedCard, isSavedCards, isLikedMovies, saved, onDeleteCard }) {
+function MoviesCard({ type, card, isSavedCards, likedMovies = [], saved, onSaveLikedCard, onDeleteCard }) {
     const currentUser = useContext(CurrentUserContext);
-      // console.log(isLikedMovies) // [{ массив карточек }] с isSaved: true
-      // console.log(saved)
+    const location = useLocation();
+
+      // console.log(likedMovies) // [{ массив карточек }] с isSaved: true
 
       // console.log('on render card: ', card) // карточки на рендер в завис от ширины isWidth {id: 16,}, {id:,...}, {id:,...}
 
@@ -27,7 +28,7 @@ function MoviesCard({ type, card, onSaveLikedCard, isSavedCards, isLikedMovies, 
 
     let isLiked;
     let likedId;
-    isLiked = isLikedMovies.some((item) => {
+    isLiked = likedMovies.some((item) => {
           // console.log(item)
         if (item.movieId === card.movieId) {
                 isLiked = item.isLiked; // true
@@ -45,11 +46,8 @@ function MoviesCard({ type, card, onSaveLikedCard, isSavedCards, isLikedMovies, 
         // console.log('isLikedMovies',isLikedMovies) // [{true,...}]
         // console.log('isSavedCards', isSavedCards) // как вытащить true ????
 
-    const buttonImg = (isLikedMovies
-        ? deleteCardBtn
-        : isLiked
-            ? likeCardBtn
-            : dislikeCardBtn);
+    const buttonImg = (likedMovies ? deleteCardBtn
+        : isLiked ? likeCardBtn : dislikeCardBtn);
 
     function getTimefromMints(totalMinutes) {
         const hours = Math.floor(totalMinutes / 60);
@@ -82,16 +80,13 @@ function MoviesCard({ type, card, onSaveLikedCard, isSavedCards, isLikedMovies, 
 
             <div className='wrap'>
             <h1 className='card__name'>{ card.nameRU }</h1>
-                <p className={`card__btn-wrap card__btn-wrap_${buttonImg} `}>
+                <p className={`card__btn-wrap card__btn-wrap_${ buttonImg } `}>
                     <button
                         type='button'
                         className={ cardLikeClassName }
                         onClick={ () => {
-                            isLiked
-                                ? onDeleteCard(card._id
-                                    ? card._id
-                                    : likedId)
-                                : onSaveLikedCard(card);
+                            if (location.pathname === '/movies') isLiked ? onDeleteCard(card._id ? card._id : likedId) : onSaveLikedCard(card);
+                            else !isLiked ? onDeleteCard(card._id ? card._id : likedId) : onSaveLikedCard(card);
                             }
                     }>
                     </button>
