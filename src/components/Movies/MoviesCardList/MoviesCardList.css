@@ -5,8 +5,8 @@
     grid-template-columns: repeat(auto-fit, 270px);
     margin: 0;
     min-height: 330px;
-    gap: 38px 20px;
-    justify-content: flex-start;
+    gap: 38px 10px;
+    justify-content: center;
     position: relative;
 }
 

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import LoadingContext from '../../contexts/LoadingContext';
+import SavedMoviesContext from '../../contexts/SavedMoviesContext';
 import Preloader from '../Preloader/Preloader';
 import '../general/page.css'
 import Main from '../Main/Main';
@@ -45,6 +46,7 @@ function App() {
     const [isUpdateProfile, setUpdateProfile] = useState(false);
     const [errorApi, setErrorApi] = useState(null);
     const [errorSearchApi, setErrorSearchApi] = useState(null);
+    const [messageSuccess, setMessageSuccess] = useState(null);
 
     useEffect(() => {
         /** Проверяем токен, получаем email */
@@ -141,9 +143,11 @@ function App() {
 
         return MainApi.patchUser(name, email)
             .then((updatedUser) => {
-                console.log(updatedUser.data)
+                setMessageSuccess('Ваш профиль успешно сохранен')
+                setTimeout(() => setMessageSuccess(null), 4000);
+                 console.log(updatedUser.data)
                 setCurrentUser(updatedUser.data)
-                console.log(currentUser)
+                 console.log(currentUser)
             }).catch((err) => {
                 console.log(`err при обновлении данных профиля ${err}`)
             }).finally(() => {
@@ -219,7 +223,7 @@ function App() {
     // console.log(!isShortStatus)
 
     useEffect(() => { // Для отображения на /movies
-        const searchedMovies = localStorage.getItem('searchedMovies') // проверяем наличие найденных фильмов
+        const searchedMovies = localStorage.getItem('searchedMovies' || []) // проверяем наличие найденных фильмов
         if (searchedMovies) { // если в ЛС есть найденные фильмы,
             const searchedMovie = JSON.parse(searchedMovies)
             setSearchedMovies(searchedMovie || []) // то сохраняем их в стейт для текщуего рендера
@@ -228,16 +232,16 @@ function App() {
     }, []);
 
     useEffect(() => { // Для /savedMovies
-        const renderMovies = localStorage.getItem('renderMovies');
+        const renderMovies = localStorage.getItem('renderMovies' || []);
         if (renderMovies) { // если в ЛС есть сохраненные карточки,
             const renderedMovies = JSON.parse(renderMovies)
             setRenderMovies(renderedMovies) // то сохраняем их в стейт для текщуего рендеринга
-            console.log(isRenderMovies)
+            // console.log(isRenderMovies)
         }
     }, [])
 
     useEffect(() => { // Для /savedMovies
-        const likedMovies = localStorage.getItem('likedMovies');
+        const likedMovies = localStorage.getItem('likedMovies' || []);
         if (likedMovies) { // если в ЛС есть сохраненные карточки,
             const savedCard = JSON.parse(likedMovies)
             setLikedMovies(savedCard.reverse()) // то сохраняем их в стейт для текщуего рендеринга
@@ -263,7 +267,6 @@ function App() {
             // if (!localStorage.getItem('rawCards')) {
                 MoviesApi.getAllMovies()
                     .then((raw) => { // получаем сырой массив
-
                         const normalizedCards = normalizeCards(raw); // мутируем сырой массив карточек
                         setRawCards(normalizedCards); // и в стейт
                         localStorage.setItem('rawCards', JSON.stringify(normalizedCards)); // и сохраняем в ЛС
@@ -312,7 +315,7 @@ function App() {
                     localStorage.setItem('isShort', JSON.stringify(isShort))
 
                 } else {
-                        console.log(filteredData)  // ??
+                        // console.log(filteredData)  // ??
 
                     setRenderMovies(filteredData) // запись найденных ф.
                     localStorage.setItem('renderMovies', JSON.stringify(filteredData)) // пере-запись найденных фильмов в localStorage
@@ -341,7 +344,6 @@ function App() {
         } else { // если есть фильмв в ЛС, то
 
             setLoading(true)
-
             MoviesApi.getAllMovies()
                 .then((rawCards) => {
 
@@ -351,7 +353,7 @@ function App() {
                     // console.log('mutatedCards/ isRawCards: ', isRawCards)
 
                     // Получаем фильмы <= по искомому слову + по isShort
-                    console.log('isShort :-:', isShort)
+                    // console.log('isShort :-:', isShort)
                     const filteredData = filterSearch(normalizedCards, value, isShort);  // фильруем по короткометражкам: true/false
                     console.log('filteredData, isShort ::-::',filteredData, isShort)
 
@@ -393,7 +395,51 @@ function App() {
                 setLoading(false)
             })
 
+        }
 
+    }
+
+    function handleSearchLikedMovies(value, isShort) {
+        setErrorSearchApi(null)
+        // setSearchedWord('')
+
+        if (localStorage.getItem('likedMovies')) {
+
+             console.log(`there are \'likedMovies\' in localStorage (!)`) // сначала фильтруем фильмы по: 1.вх.карточкам, 2.поиск.слову, 3.статусу isShortStatus
+            const isRawLikedCards = JSON.parse(localStorage.getItem('likedMovies'))
+             console.log('isRawLikedCards',isRawLikedCards)
+
+            // Получаем фильмы <= по искомому слову + по isShort // ............................... получаем пока фильмы [] по совпадению букв запроса (ПОКА БЕЗ СОРТ ПРОДОЛЖ.  // фильруем по короткометражкам: true/false // output ===> [{..},{..}]
+            const filteredData = filterSearch(isRawLikedCards, value, isShort);
+            console.log(!isShort)
+
+            if (filteredData.length) {
+                if (!isShort === false) {
+                     console.log(filteredData) // ??
+                    setLikedMovies(filteredData) // запись найденных ф.
+                    localStorage.setItem('likedMovies', JSON.stringify(filteredData)) // пере-запись найденных фильмов в localStorage
+
+                    setSearchedWord(value)
+                    localStorage.setItem('searchedWord', JSON.stringify(value))
+
+                    setShortStatus(isShort)
+                    localStorage.setItem('isShort', JSON.stringify(isShort))
+
+                } else {
+                    console.log('filteredData - ', filteredData)
+
+                    setLikedMovies(filteredData) // запись найденных ф.
+                    localStorage.setItem('likedMovies', JSON.stringify(filteredData)) // пере-запись найденных фильмов в localStorage
+
+                    setSearchedWord(value)
+                    localStorage.setItem('searchedWord', JSON.stringify(value))
+
+                    setShortStatus(isShort)
+                    localStorage.setItem('isShort', JSON.stringify(isShort))
+                }
+
+            } else setErrorSearchApi('Ничего не найдено')
+            // console.log(filteredData)
 
         }
 
@@ -428,7 +474,8 @@ function App() {
                 console.log('from handleSaveCard(card): isLikedMovies: ', isLikedMovies)
 
             localStorage.setItem('likedMovies', JSON.stringify([likedMovie.data, ...isLikedMovies])) // в localStorage запись добавленной карточки
-        }).catch((err) => {
+                console.log('from handleSaveCard(card): isLikedMovies: ', isLikedMovies)
+            }).catch((err) => {
             console.log(`Ошибка при сохранении карточки: ${err}`);
         }).finally(() => {
             setLoading(false)
@@ -497,12 +544,14 @@ function App() {
         setLoading(null)
     }
 
-    console.log(isRenderMovies)
+    // console.log(isRenderMovies)
+    console.log(isLikedMovies)
 
     return (
         <>
             <CurrentUserContext.Provider value={currentUser}>
                 <LoadingContext.Provider value={isLoading}>
+                    <SavedMoviesContext.Provider value={isLikedMovies}>
                 <Routes>
                     {/* при загрузке App, путь по умолчанию / не имеет соотв роута. Настраиваем. */}
                     <Route exact path='/' index={true}
@@ -522,6 +571,7 @@ function App() {
                             <Header loggedIn={loggedIn} type='profile'/>
                             <Profile onSubmit={handleUpdateProfile}
                                      currentUser={currentUser}
+                                     messageSuccess={messageSuccess}
                                      onLogout={onLogout} />
                         </>
                     }
@@ -563,7 +613,7 @@ function App() {
                             <SavedMovies
                                         type='saved-movies'
 
-                                         onSubmit={ handleSearchedMovies }
+                                         onSubmit={ handleSearchLikedMovies }
 
                                          likedMovies={isLikedMovies}
 
@@ -581,6 +631,7 @@ function App() {
 
                 </Routes>
 
+                    </SavedMoviesContext.Provider>
                 </LoadingContext.Provider>
             </CurrentUserContext.Provider>
         </>

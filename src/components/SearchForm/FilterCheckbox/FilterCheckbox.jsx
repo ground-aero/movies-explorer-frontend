@@ -6,7 +6,7 @@ import './FilterCheckbox.css';
 function FilterCheckbox({ isShortStatus, toggleCheckbox }) {
     const location = useLocation();
 
-    console.log('isShortStatus:;:',isShortStatus)
+    // console.log('isShortStatus:;:',isShortStatus)
     // const [isMovieSearch, setIsMovieSearch] = useState(false);
     // function toggleBox() { isMovieSearch ? setIsMovieSearch(false) : setIsMovieSearch(true)}
 

@@ -5,7 +5,7 @@ import '../general/content.css';
 import './Profile.css';
 import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
 
-function Profile({ onSubmit, onLogout }) {
+function Profile({ onSubmit, messageSuccess, onLogout }) {
 
     const currentUser = useContext(CurrentUserContext);
       // console.log(currentUser) // {id:..., email:..., name:...}
@@ -104,6 +104,7 @@ function Profile({ onSubmit, onLogout }) {
                         {!isChanged ?
                         <>
                             <span className='caption caption_profile'>
+                                <span className='caption__message caption__text'>{ messageSuccess }</span>
                                 <button type='button' onClick={ handleEditBtn } className='caption__text caption__text_profile caption__text_btn '>
                                     { 'Редактировать' }
                                 </button>

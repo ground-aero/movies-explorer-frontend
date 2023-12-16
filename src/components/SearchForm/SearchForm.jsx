@@ -7,7 +7,7 @@ import './SearchForm.css';
 import LoadingContext from '../../contexts/LoadingContext.jsx';
 import { useLocalStorageState as useStorage } from '../../hooks/useLocalStorageState';
 
-function SearchForm({ onSubmit, filterShortCheckbox }) {
+function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies, searchKey, filterShortCheckbox }) {
     const isLoading = useContext(LoadingContext);
     const location = useLocation()
 
@@ -15,18 +15,47 @@ function SearchForm({ onSubmit, filterShortCheckbox }) {
     // const [isSearchedWord, setSearchedWord] = useState('');
     const [isShortStatus, setShortStatus] = useStorage('isShort', false);
     // const [isShortStatus, setShortStatus] = useState(false);
+    const [isSearchedWordLiked, setSearchedWordLiked] = useStorage('searchedWordLiked', ''); // key = 'searchWord', '' = initial value
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');
-
-    console.log('isSearchedWord, isShortStatus::', isSearchedWord, isShortStatus)
+    // console.log('isSearchedWord, isShortStatus::', isSearchedWord, isShortStatus)
 
     useEffect(() => { // Для /movies: Обновление и фиксирование состояний: поискового слова, и isShort (true/false)
         if (location.pathname === '/movies') {
-
-            console.log('isSearchedWord, isShortStatus ::', isSearchedWord, isShortStatus)
+            // console.log('isSearchedWord, isShortStatus ::', isSearchedWord, isShortStatus)
+            const query = localStorage.getItem('searchedWord') // 'searchedWord', или 'searchedWordLiked'
             setTimeout(() => {
-                setSearchedWord(isSearchedWord)
                 setShortStatus(isShortStatus);
-            }, 100);
+                if (query) {
+                    setSearchedWord(JSON.parse(query))
+                }
+            }, 200);
+        }
+        if (location.pathname === '/saved-movies') {
+            const query = localStorage.getItem('searchedWordLiked') // 'searchedWord', или 'searchedWordLiked'
+            setTimeout(() => {
+                // setShortStatus(isShortStatus);
+                if (query) {
+                    setSearchedWordLiked(JSON.parse(query))
+                }
+            }, 200);
+        }
+    }, [location.pathname]);
+
+    useEffect(() => { // Для /movies: Обновление и фиксирование состояний: поискового слова, и isShort (true/false)
+        if (location.pathname === '/movies') {
+            setTimeout(() => {
+            const raw = localStorage.getItem('searchedWord')
+            setSearchedWord(JSON.parse(raw))
+            }, 200);
+        }
+    }, []);
+
+    useEffect(() => { // Для /movies: Обновление и фиксирование состояний: поискового слова, и isShort (true/false)
+        if (location.pathname === '/saved-movies') {
+            setTimeout(() => {
+                setSearchedWordLiked('')
+                setShortStatus(isShortStatus);
+            }, 200);
         }
     }, []);
     // useEffect(() => { // Для /movies: Обновление и фиксирование состояний: поискового слова, и isShort (true/false)
@@ -44,20 +73,19 @@ function SearchForm({ onSubmit, filterShortCheckbox }) {
     // location.pathname
 
     useEffect(() => { // В зависимости от 'isShort', фильтруем на: длинные или короткие
-        console.log('isSearchedWord, isShortStatus::', isSearchedWord, isShortStatus) // верно
-        setTimeout(() => {
-            if (isShortStatus === true) {
-                onSubmit(isSearchedWord, isShortStatus)
-                setIsPlaceholder('Фильм')
-            }
-            if (isShortStatus === false && isSearchedWord) {
-                onSubmit(isSearchedWord, isShortStatus)
-                // setIsPlaceholder('Фильм')
-            }
-            // else {
-            //     onSubmit(isSearchedWord, isShortStatus)
-            // }
-        }, 500);
+        // console.log('isSearchedWord, isShortStatus::', isSearchedWord, isShortStatus) // верно
+        if (location.pathname === '/movies') {
+            setTimeout(() => {
+                if (isShortStatus === true && isSearchedWord) {
+                    onSubmitMovies(isSearchedWord, isShortStatus)
+                    setIsPlaceholder('Фильм')
+                }
+                if (isShortStatus === false && isSearchedWord) {
+                    onSubmitMovies(isSearchedWord, isShortStatus)
+                    // setIsPlaceholder('Фильм')
+                }
+            }, 300);
+        }
     },[isShortStatus])
     // useEffect(() => { // В зависимости от 'isShort', фильтруем на: длинные или короткие
     //     const getSearchWord = JSON.parse(localStorage.getItem('searchedWord'))
@@ -73,7 +101,6 @@ function SearchForm({ onSubmit, filterShortCheckbox }) {
     //         }
     // }, 500);
     // },[isShortStatus])
-
 
     // useEffect(() => {
     //     if (location.pathname === '/movies') {
@@ -112,17 +139,21 @@ function SearchForm({ onSubmit, filterShortCheckbox }) {
     // },[isSearchedWord])
 
     function handleInput(evt) {
-        setSearchedWord(evt.target.value) // текущее поисковое слово из инпута держим в стейте
-        console.log(isSearchedWord)
+        // if (location.pathname === '/movies') {
+        type === 'movies'
+            ? setSearchedWord(evt.target.value) // и сразу сохраняем его в ЛС // текущее поисковое слово из инпута держим в стейте
+            : setSearchedWordLiked(evt.target.value)
+        // }
+        console.log(isSearchedWord, isSearchedWordLiked)
     }
 
     function handleSubmitSearch(evt) { // По сабмиту 'найти по: искомому слову + 'коротыши или длинные'
         evt.preventDefault();
         // if (location.pathname === '/movies') {
-              console.log('isShortStatus, isSearchedWord::', isShortStatus, isSearchedWord)
+        console.log('isShortStatus, isSearchedWord::', isShortStatus, isSearchedWord)
         localStorage.setItem('searchedWord', JSON.stringify(isSearchedWord)) // и сразу сохраняем его в ЛС
 
-        if (isSearchedWord) onSubmit(isSearchedWord, isShortStatus) // текущее поисковое слово сабмитим на Сервер
+        if (isSearchedWord) onSubmitMovies(isSearchedWord, isShortStatus) // текущее поисковое слово сабмитим на Сервер
         else setIsPlaceholder('Введите запрос')
         // }
     }
@@ -134,21 +165,25 @@ function SearchForm({ onSubmit, filterShortCheckbox }) {
     }
 
     return (
-            <form onSubmit={ handleSubmitSearch } className='search search_form' id='search' name='search' >
+        <form onSubmit={ handleSubmitSearch } className='search search_form' id='search' name='search' >
                 <span className='search__wrap'>
-                    <input type='text' value={ isSearchedWord || '' } className='search__input' id='search-input' name='search' placeholder={isPlaceholder}
-                        onChange={ handleInput }
+                    <input type='text' value={
+                        type === 'movies'
+                        ? isSearchedWord || ''
+                        : isSearchedWordLiked || ''
+                    } className='search__input' id='search-input' name='search' placeholder={isPlaceholder}
+                           onChange={ handleInput }
                     />
                     <button type='submit' className='search__btn'>Найти</button>
                 </span>
 
 
-                <FilterCheckbox
-                    isShortStatus={ isShortStatus }
-                    toggleCheckbox={ toggleCheckbox }
-                />
+            <FilterCheckbox
+                isShortStatus={ isShortStatus }
+                toggleCheckbox={ toggleCheckbox }
+            />
 
-            </form>
+        </form>
     );
 }
 

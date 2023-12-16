@@ -1,14 +1,17 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.
 import {useLocation} from 'react-router-dom';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
 
 function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSavedCards, likedMovies = [], onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+    const savedMoviesContext = useContext(SavedMoviesContext);
+    const [isLikedMovies, setLikedMovies] = useState([]);
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
     // console.log('renderMovies : ',renderMovies)
-    // console.log('isLikedMovies: ', isLikedMovies)
+    // console.log('savedMoviesContext: ', savedMoviesContext)
 
     useEffect(() => {
         // localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // перезапись
@@ -31,26 +34,42 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
         }
     },[renderMovies?.length])
     // renderMovies.length
+
+    useEffect(() => { // Нарезка всех найденных, в зависимости от ширины экрана
+        if (location.pathname === '/saved-movies') {
+            const likedMovies = localStorage.getItem('likedMovies' || []);
+            if (likedMovies) { // если в ЛС есть сохраненные карточки,
+                const savedCards = JSON.parse(likedMovies)
+                setLikedMovies(savedCards.reverse()) // то сохраняем их в стейт для текщуего рендеринга
+                console.log(isLikedMovies)
+            }
+        }
+    },[isLikedMovies?.length])
+    console.log('savedMoviesContext: ', savedMoviesContext)
+    // renderMovies.length
     useEffect(() => {
 
     },[])
-
         // console.log(searchedMovies.length)
         // console.log(isWidth)
 
     if (location.pathname === '/saved-movies') {
-        initCount = likedMovies?.length
+        initCount = savedMoviesContext?.length
     } else {
-        if (isWidth >= 1280) {
+        if (isWidth >= 1250) {
             initCount = 16;
             step = 4;
-        } else if (isWidth <= 1279 && isWidth >= 480) {
+        } else if (isWidth <= 1249 && isWidth >= 768) {
             initCount = 8;
             step = 2;
-        } else if (isWidth >= 320 && isWidth < 480) {
+        } else if (isWidth <= 767 && isWidth >= 320) {
             initCount = 5;
             step = 2;
         }
+        // else if (isWidth >= 320 && isWidth < 480) {
+        //     initCount = 5;
+        //     step = 2;
+        // }
     }
 
     const [isShowCards, setIsShowCards] = useState([]); // массив карточек с заданным кол-вом
@@ -63,14 +82,11 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
 
     return (
         <>
-
             { location.pathname === '/movies' &&
                 <>
                     { errorSearchApi
                         ? <span className='cards__api-err'>{ errorSearchApi }</span>
                         : <ul className='cards'>
-                            {/*<MoviesCard type={ type } nameRU={'33 слова о дизайне'} image={cardImg1}/>*/}
-
                             { isShowCards.map((card, _ind) => {
                                         card.isLiked = false;
                                 return <MoviesCard
@@ -104,12 +120,13 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
                     { errorSearchApi
                         ? <span className='cards__api-err'>{ errorSearchApi }</span>
                         : <ul className='cards'>
-                            { likedMovies.map((card, _ind) => {
+                            { savedMoviesContext.map((card, _ind) => {
                                 card.isLiked = true;
                                 return <MoviesCard
                                     card={card}
                                     key={card.movieId || _ind}
-                                    // likedMovies={likedMovies}
+                                    likedMovies={likedMovies}
+
                                     isSavedCards={isSavedCards}
                                     onSaveLikedCard={onSaveLikedCard}
                                     onDeleteCard={onDeleteCard}

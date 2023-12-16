@@ -18,7 +18,7 @@ function Movies({
 
     useEffect(() => {
 
-        console.log(renderMovies.length)
+        // console.log(renderMovies.length)
     },[renderMovies])
 
     useEffect(() => {
@@ -34,7 +34,10 @@ function Movies({
             <section className='movies content__section'>
 
                 <SearchForm
-                    onSubmit={ onSubmit }
+                    onSubmitMovies={ onSubmit }
+                    searchKey={'searchedWord'}
+                    type={ type }
+
                     filterShortCheckbox={ filterShortCheckbox }
                     isShortStatus={isShortStatus}
                     setShortStatus={setShortStatus}
