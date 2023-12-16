@@ -59,17 +59,16 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
         if (isWidth >= 1250) {
             initCount = 16;
             step = 4;
-        } else if (isWidth <= 1249 && isWidth >= 768) {
+        } else if (isWidth <= 1249 && isWidth >= 970) {
+            initCount = 12;
+            step = 3;
+        } else if (isWidth <= 969 && isWidth >= 730) {
             initCount = 8;
             step = 2;
-        } else if (isWidth <= 767 && isWidth >= 320) {
+        } else if (isWidth >= 320 && isWidth <= 729) {
             initCount = 5;
             step = 2;
         }
-        // else if (isWidth >= 320 && isWidth < 480) {
-        //     initCount = 5;
-        //     step = 2;
-        // }
     }
 
     const [isShowCards, setIsShowCards] = useState([]); // массив карточек с заданным кол-вом

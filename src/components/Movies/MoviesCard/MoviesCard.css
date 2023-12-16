@@ -109,8 +109,8 @@
     opacity: .7;
     cursor: pointer;
 }
-
-@media (max-width: 767px) {
+/*768*/
+@media (max-width: 768px) {
     .card {
         width: 339px;
         height: 270px;
