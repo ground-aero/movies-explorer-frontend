@@ -5,12 +5,11 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
 
-function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSavedCards, likedMovies = [], onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSavedCards, likedMovies = [], temporaryLikedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const savedMoviesContext = useContext(SavedMoviesContext);
     const [isLikedMovies, setLikedMovies] = useState([]);
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
-    // console.log('renderMovies : ',renderMovies)
     // console.log('savedMoviesContext: ', savedMoviesContext)
 
     useEffect(() => {
@@ -28,6 +27,8 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
         return (() => window.removeEventListener('resize', handleResize))
     },[])
 
+    // ------------------ ( movies ) -------------------------------------------------------------------
+
     useEffect(() => { // Нарезка всех найденных, в зависимости от ширины экрана
         if (location.pathname === '/movies') {
             setIsShowCards(renderMovies.slice(0, initCount))
@@ -35,21 +36,29 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
     },[renderMovies?.length])
     // renderMovies.length
 
-    useEffect(() => { // Нарезка всех найденных, в зависимости от ширины экрана
+    // ------------------ ( saved-movies ) -------------------------------------------------------------
+
+    useEffect(() => { // Отображение всех лайкнутых фильмов
         if (location.pathname === '/saved-movies') {
             const likedMovies = localStorage.getItem('likedMovies' || []);
-            if (likedMovies) { // если в ЛС есть сохраненные карточки,
-                const savedCards = JSON.parse(likedMovies)
-                setLikedMovies(savedCards.reverse()) // то сохраняем их в стейт для текщуего рендеринга
-                console.log(isLikedMovies)
-            }
-        }
-    },[isLikedMovies?.length])
-    console.log('savedMoviesContext: ', savedMoviesContext)
-    // renderMovies.length
-    useEffect(() => {
 
-    },[])
+            if (temporaryLikedMovies.length) {
+                setLikedMovies(temporaryLikedMovies?.reverse())
+                  console.log('temporaryLikedMovies: ', temporaryLikedMovies)
+            } else {
+                const savedCards = JSON.parse(likedMovies)
+                setLikedMovies(savedCards?.reverse())
+                  console.log('isLikedMovies: ', isLikedMovies)
+            }
+            // if (likedMovies) {
+            //     const savedCards = JSON.parse(likedMovies)
+            //     setLikedMovies(savedCards.reverse())
+            //      console.log(isLikedMovies)
+            // }
+        }
+    },[isLikedMovies?.length, temporaryLikedMovies?.length])
+    // renderMovies.length
+
         // console.log(searchedMovies.length)
         // console.log(isWidth)
 
@@ -78,6 +87,9 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
         setIsShowCards(renderMovies.slice(0, isAddCount + step))
         setIsAddCount(isAddCount + step)
     }
+
+    console.log('renderMovies, likedMovies, temporaryLikedMovies :: ', renderMovies, likedMovies, temporaryLikedMovies)
+    console.log('isLikedMovies, savedMoviesContext: ', isLikedMovies, savedMoviesContext)
 
     return (
         <>
@@ -119,7 +131,7 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
                     { errorSearchApi
                         ? <span className='cards__api-err'>{ errorSearchApi }</span>
                         : <ul className='cards'>
-                            { savedMoviesContext.map((card, _ind) => {
+                            { isLikedMovies?.map((card, _ind) => {
                                 card.isLiked = true;
                                 return <MoviesCard
                                     card={card}

@@ -17,7 +17,6 @@ function Movies({
     // console.log(isLikedMovies)
 
     useEffect(() => {
-
         // console.log(renderMovies.length)
     },[renderMovies])
 
@@ -27,7 +26,6 @@ function Movies({
         // .then((cards) => {
         // setCards(cards)}); // и сохранение их в стейт
     }, [])
-
 
     return (
         <main className='content'>
@@ -50,16 +48,16 @@ function Movies({
                     : <MoviesCardList
                         type={ type }
 
-                        renderMovies={renderMovies}
+                        renderMovies={ renderMovies }
                         searchedMovies={ searchedMovies }
-                        shortMovies={shortMovies}
+                        shortMovies={ shortMovies }
 
-                        likedMovies={likedMovies}
-                        onSaveLikedCard={onSaveLikedCard}
+                        likedMovies={ likedMovies }
+                        onSaveLikedCard={ onSaveLikedCard }
 
                         isSavedCards={false}
 
-                        onDeleteCard={onDeleteCard}
+                        onDeleteCard={ onDeleteCard }
                         errorSearchApi={ errorSearchApi }
                     />
                 }

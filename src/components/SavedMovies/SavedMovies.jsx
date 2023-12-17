@@ -6,9 +6,9 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import LoadingContext from '../../contexts/LoadingContext';
 import Preloader from "../Preloader/Preloader.jsx";
-import {useLocalStorageState as useStorage} from "../../hooks/useLocalStorageState.jsx";
+import {useLocalStorageState as useStorage} from '../../hooks/useLocalStorageState';
 
-function SavedMovies({ type, onSubmit, likedMovies, onSaveLikedCard, onDeleteCard, filterShortCheckbox }) {
+function SavedMovies({ type, onSubmit, likedMovies, temporaryLikedMovies, onSaveLikedCard, onDeleteCard, filterShortCheckbox, errorSearchApi }) {
     const isLoading = useContext(LoadingContext);
     const location = useLocation()
 
@@ -17,8 +17,8 @@ function SavedMovies({ type, onSubmit, likedMovies, onSaveLikedCard, onDeleteCar
     const [isShortStatus, setShortStatus] = useStorage('isShort', false); //// !!!!!!!!!!!!
     // const [isShortStatus, setShortStatus] = useState(false);
     // console.log('savedMoviesContext::')
-    console.log(likedMovies) // приходит с новым полем 'isSaved: true'
-    console.log('isSearchedWord','isShortStatus ::',isSearchedWordLiked, isShortStatus) // приходит с новым полем 'isSaved: true'
+        console.log('likedMovies, ', likedMovies) // приходит с новым полем 'isSaved: true'
+        console.log('isSearchedWord','isShortStatus, temporaryLikedMovies ::',isSearchedWordLiked, isShortStatus, temporaryLikedMovies) // приходит с новым полем 'isSaved: true'
     //////////////////////////////////////////////////////////////////////////////////
     ///////// Должен работать поиск. Но сохранять последний поисковый запрос в стейт не требуется.
     // При обновлении страницы должен выводиться полный список сохраненных фильмов.
@@ -69,8 +69,11 @@ function SavedMovies({ type, onSubmit, likedMovies, onSaveLikedCard, onDeleteCar
                         // searchedMovies={ searchedMovies }
 
                         // savedMoviesContext={ savedMoviesContext }
-                        onSaveLikedCard={onSaveLikedCard}
-                        onDeleteCard={onDeleteCard}
+                        temporaryLikedMovies={ temporaryLikedMovies }
+                        errorSearchApi={ errorSearchApi }
+
+                        onSaveLikedCard={ onSaveLikedCard }
+                        onDeleteCard={ onDeleteCard }
                         isSavedCards={true}
                     />
                 }
