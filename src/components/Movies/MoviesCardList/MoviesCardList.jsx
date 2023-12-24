@@ -50,11 +50,6 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
                 setLikedMovies(savedCards?.reverse())
                   console.log('isLikedMovies: ', isLikedMovies)
             }
-            // if (likedMovies) {
-            //     const savedCards = JSON.parse(likedMovies)
-            //     setLikedMovies(savedCards.reverse())
-            //      console.log(isLikedMovies)
-            // }
         }
     },[isLikedMovies?.length, temporaryLikedMovies?.length])
     // renderMovies.length
@@ -128,7 +123,7 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
 
             { location.pathname === '/saved-movies' &&
                 <>
-                    { errorSearchApi
+                    { errorSearchApi && ((isLikedMovies.length === 0) || (temporaryLikedMovies.length === 0))
                         ? <span className='cards__api-err'>{ errorSearchApi }</span>
                         : <ul className='cards'>
                             { isLikedMovies?.map((card, _ind) => {

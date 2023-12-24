@@ -16,6 +16,7 @@ function SavedMovies({ type, onSubmit, likedMovies, temporaryLikedMovies, onSave
     // const [isSearchedWord, setSearchedWord] = useState('');
     const [isShortStatus, setShortStatus] = useStorage('isShort', false); //// !!!!!!!!!!!!
     // const [isShortStatus, setShortStatus] = useState(false);
+    const [isLikedMovies, setLikedMovies] = useState([]);
     // console.log('savedMoviesContext::')
         console.log('likedMovies, ', likedMovies) // приходит с новым полем 'isSaved: true'
         console.log('isSearchedWord','isShortStatus, temporaryLikedMovies ::',isSearchedWordLiked, isShortStatus, temporaryLikedMovies) // приходит с новым полем 'isSaved: true'
@@ -33,20 +34,18 @@ function SavedMovies({ type, onSubmit, likedMovies, temporaryLikedMovies, onSave
     //     }
     // }, []);
 
-    // useEffect(() => { // В зависимости от 'isShort', фильтруем на: длинные или короткие
-    //     if (location.pathname === '/saved-movies') {
-    //         setTimeout(() => {
-    //             if (isShortStatus === true) {
-    //                 onSubmit(isSearchedWordLiked, isShortStatus)
-    //                 // setIsPlaceholder('Фильм')
-    //             }
-    //             if (isShortStatus === false) {
-    //                 onSubmit(isSearchedWordLiked, isShortStatus)
-    //                 // setIsPlaceholder('Фильм')
-    //             }
-    //         }, 500);
-    //     }
-    // },[isShortStatus])
+    useEffect(() => {
+
+    },[])
+
+    useEffect(() => { // Для /savedMovies
+        const likedMovies = localStorage.getItem('likedMovies' || []);
+        if (likedMovies) { // если в ЛС есть сохраненные карточки,
+            const savedCard = JSON.parse(likedMovies)
+            setLikedMovies(savedCard.reverse()) // то сохраняем их в стейт для текщуего рендеринга
+              console.log(isLikedMovies)
+        }
+    }, [])
 
     return (
         <main className='content'>
@@ -69,11 +68,13 @@ function SavedMovies({ type, onSubmit, likedMovies, temporaryLikedMovies, onSave
                         // searchedMovies={ searchedMovies }
 
                         // savedMoviesContext={ savedMoviesContext }
+                        isLikedMovies={ likedMovies }
                         temporaryLikedMovies={ temporaryLikedMovies }
                         errorSearchApi={ errorSearchApi }
 
-                        onSaveLikedCard={ onSaveLikedCard }
                         onDeleteCard={ onDeleteCard }
+
+                        onSaveLikedCard={ onSaveLikedCard } // ??????
                         isSavedCards={true}
                     />
                 }
