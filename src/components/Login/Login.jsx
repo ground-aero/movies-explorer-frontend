@@ -8,7 +8,6 @@ import {useForm, useFormWithValidation} from '../../hooks/useValidForm.jsx';
 function Login({ handleLogin, errorApi }) { // @props из App.js - аутентификация пользователя
     /** логика и стейты: values.name, values.emaiil, ... --> in ValidForm component */
     const { handleChange, values, errors, isValid, resetForm } = useFormWithValidation();
-    // console.log(values.email, values.password)
 
     useEffect(() => {
         resetForm('', '', true)
@@ -19,20 +18,6 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
         handleLogin(values.email, values.password)
     }
 
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [emailError, setEmailError] = useState('Email не может быть пустым');
-    // const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
-    // const handleNameError = (e) => {
-    //     setName(e.target.value)
-    //     if (!isValid.name) {
-    //         setNameError('Имя может содержать буквы на латинице или крилице')
-    //     } else { setNameError('') }
-    // }
-    // const handleChangeEmail = (e) => {
-    //     setEmail(e.target.value);
-    // }
-
     return (
         <main className='content'>
 
@@ -40,8 +25,6 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
                 captionText={'Еще не зарегистрированы?'} captionLink={'/signup'} captionLinkText={'Регистрация'}
                 onSubmit={ onSubmit } errorApi={errorApi}
             >
-
-                {/*<span className='login__inputs'>*/}
 
                     <label className='login__input-label' htmlFor='login-input-email'>E-mail
                         <input
@@ -76,8 +59,6 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
                         />
                         {errors.password && <span className='login__input-err'>{ errors.password }</span>}
                     </label>
-
-                {/*</span>*/}
 
             </FormSection>
 

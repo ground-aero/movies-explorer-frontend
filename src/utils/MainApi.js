@@ -48,10 +48,6 @@ class MainApi {
         }).then(res => this._onResponse(res))
     }
 
-    // getAllSetupData() {
-    //     return Promise.all([this.getUser(), this._getMyMovies()]);
-    // }
-
     // ---------------------------------------------------------------------------//
 
     //  # создает фильм с переданными в теле: country,...

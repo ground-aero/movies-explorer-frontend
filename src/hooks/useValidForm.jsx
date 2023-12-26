@@ -11,7 +11,6 @@ export function useForm() {
         setValues({...values, [name]: value});
     };
 
-    // console.log(values.name, values.email)
     return {values, handleChange, setValues};
 }
 

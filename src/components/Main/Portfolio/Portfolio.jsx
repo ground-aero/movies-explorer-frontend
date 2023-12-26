@@ -27,7 +27,6 @@ function Portfolio() {
                         <span className='portfolio__link-icon'></span>
                     </Link>
                 </li>
-
             </ul>
 
             </span>

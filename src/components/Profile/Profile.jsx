@@ -8,12 +8,12 @@ import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
 function Profile({ onSubmit, messageSuccess, onLogout }) {
 
     const currentUser = useContext(CurrentUserContext);
-      // console.log(currentUser) // {id:..., email:..., name:...}
     const { values, setValues, handleChange, errors, isValid, setIsValid, resetForm } = useFormWithValidation();
 
-    // Логика:
-    // Кнопка: isChanged ---> 'Сохранить' | else ---> 'Редактировать', 'Выйти'
-    // Переменная: isValid ---> 'Сохранить' | else ---> disabled
+    /** Логика:
+     * Кнопка: isChanged ---> 'Сохранить' | else ---> 'Редактировать', 'Выйти'
+     * Переменная: isValid ---> 'Сохранить' | else ---> disabled
+     */
     const [isChanged, setIsChanged] = useState(false)
 
     useEffect(() => {
@@ -26,25 +26,10 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
         setIsChanged(false)
     }, [currentUser]);
 
-    // useEffect(() => {
-    //     if (isValid.email) setIsValid(true)
-    //     // if (values.email === )
-    //     // setDatas(currentUser)
-    // }, [isValid.email]);
-
-    // function handleChangeName(evt) {
-    //     if (evt.target.value !== values.name) setIsChanged(true)
-    //     else setIsChanged(false)
-    //
-    //     setValues.name(evt.target.value)
-    //     handleChange(evt)
-    // }
-    //   // console.log(isValid)
-
     function handleEditBtn() {
         setIsChanged(true)
     }
-    /** Обработчик сабмита */
+
     function handleSubmitUpdate(evt) {
         evt.preventDefault()
         if (isChanged) onSubmit({ name: values.name, email: values.email })
@@ -100,7 +85,6 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                         </div>
 
                         {/** отображение 'caption' Profile* */}
-
                         {!isChanged ?
                         <>
                             <span className='caption caption_profile'>
@@ -119,7 +103,6 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                                 </button>
                         }
                     </form>
-
                 </div>
             </section>
 

@@ -1,6 +1,5 @@
 // component - компонент страницы с сохранёнными карточками фильмов.
 import {useContext, useState, useEffect} from 'react';
-import {useLocation} from 'react-router-dom';
 import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
@@ -10,39 +9,15 @@ import {useLocalStorageState as useStorage} from '../../hooks/useLocalStorageSta
 
 function SavedMovies({ type, onSubmit, likedMovies, temporaryLikedMovies, onSaveLikedCard, onDeleteCard, filterShortCheckbox, errorSearchApi }) {
     const isLoading = useContext(LoadingContext);
-    const location = useLocation()
-
     const [isSearchedWordLiked, setSearchedWordLiked] = useStorage('searchedWordLiked', ''); // key = 'searchWord', '' = initial value
-    // const [isSearchedWord, setSearchedWord] = useState('');
-    const [isShortStatus, setShortStatus] = useStorage('isShort', false); //// !!!!!!!!!!!!
-    // const [isShortStatus, setShortStatus] = useState(false);
+    const [isShortStatus, setShortStatus] = useStorage('isShort', false);
     const [isLikedMovies, setLikedMovies] = useState([]);
-    // console.log('savedMoviesContext::')
-        console.log('likedMovies, ', likedMovies) // приходит с новым полем 'isSaved: true'
-        console.log('isSearchedWord','isShortStatus, temporaryLikedMovies ::',isSearchedWordLiked, isShortStatus, temporaryLikedMovies) // приходит с новым полем 'isSaved: true'
-    //////////////////////////////////////////////////////////////////////////////////
-    ///////// Должен работать поиск. Но сохранять последний поисковый запрос в стейт не требуется.
-    // При обновлении страницы должен выводиться полный список сохраненных фильмов.
-    // useEffect(() => { // Для /movies: Обновление и фиксирование состояний: поискового слова, и isShort (true/false)
-    //     if (location.pathname === '/saved-movies') {
-    //         // console.log('isSearchedWord, isShortStatus ::', isSearchedWord, isShortStatus)
-    //         // const raw = localStorage.getItem('searchedWord')
-    //         setTimeout(() => {
-    //             setSearchedWord(isSearchedWord)
-    //             setShortStatus(isShortStatus);
-    //         }, 300);
-    //     }
-    // }, []);
-
-    useEffect(() => {
-
-    },[])
 
     useEffect(() => { // Для /savedMovies
         const likedMovies = localStorage.getItem('likedMovies' || []);
-        if (likedMovies) { // если в ЛС есть сохраненные карточки,
+        if (likedMovies) {
             const savedCard = JSON.parse(likedMovies)
-            setLikedMovies(savedCard.reverse()) // то сохраняем их в стейт для текщуего рендеринга
+            setLikedMovies(savedCard.reverse()) // сохраняем их в стейт для текщуего рендеринга
               console.log(isLikedMovies)
         }
     }, [])
@@ -52,7 +27,6 @@ function SavedMovies({ type, onSubmit, likedMovies, temporaryLikedMovies, onSave
             <section className='saved-movies'>
 
                 <SearchForm
-                    filterShortCheckbox={ filterShortCheckbox }
                     onSubmitLikedMovies={ onSubmit }
 
                     searchKey={'searchedWordLiked'}
@@ -65,16 +39,14 @@ function SavedMovies({ type, onSubmit, likedMovies, temporaryLikedMovies, onSave
                     </span>
                     : <MoviesCardList
                         type={ type }
-                        // searchedMovies={ searchedMovies }
 
-                        // savedMoviesContext={ savedMoviesContext }
                         isLikedMovies={ likedMovies }
                         temporaryLikedMovies={ temporaryLikedMovies }
                         errorSearchApi={ errorSearchApi }
 
                         onDeleteCard={ onDeleteCard }
 
-                        onSaveLikedCard={ onSaveLikedCard } // ??????
+                        onSaveLikedCard={ onSaveLikedCard }
                         isSavedCards={true}
                     />
                 }

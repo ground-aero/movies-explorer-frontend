@@ -1,6 +1,7 @@
 {
   "name": "movies-explorer-frontend",
   "version": "0.1.0",
+  "homepage": "https://ga-movies.nomoredomainsicu.ru",
   "private": true,
   "type": "module",
   "dependencies": {
@@ -18,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npx eslint --ext .jsx ."
   },
   "eslintConfig": {
     "extends": [
@@ -39,7 +41,5 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.50.0",
-    "eslint-plugin-react": "^7.33.2"
   }
 }

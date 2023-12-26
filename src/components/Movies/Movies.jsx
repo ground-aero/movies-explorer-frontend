@@ -9,23 +9,13 @@ import LoadingContext from '../../contexts/LoadingContext';
 
 function Movies({
                     type, onSubmit, renderMovies, searchedMovies, shortMovies,
-                    filterShortCheckbox, likedMovies, onSaveLikedCard,
-                    onDeleteCard, errorSearchApi, isShortStatus, setShortStatus
+                    likedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi,
+                    isShortStatus, setShortStatus
 }) {
     const isLoading = useContext(LoadingContext);
-    // console.log(searchedMovies) // приходящий массив отфильтрованных поиском карточек [{},{}]
-    // console.log(isLikedMovies)
 
     useEffect(() => {
-        // console.log(renderMovies.length)
     },[renderMovies])
-
-    useEffect(() => {
-        // прочитать ЛС и записать данные из него в стейт
-        // MoviesApi.getAllMovies() // запрос всех фильмов со стороннего АПИ
-        // .then((cards) => {
-        // setCards(cards)}); // и сохранение их в стейт
-    }, [])
 
     return (
         <main className='content'>
@@ -36,7 +26,6 @@ function Movies({
                     searchKey={'searchedWord'}
                     type={ type }
 
-                    filterShortCheckbox={ filterShortCheckbox }
                     isShortStatus={isShortStatus}
                     setShortStatus={setShortStatus}
                 />

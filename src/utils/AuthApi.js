@@ -54,14 +54,12 @@ export const authorize = async (email, password) => {
 export const checkToken = async (token) => {
     try {
         const response = await fetch(`${DB_URL}/users/me`, {
-            // credentials: 'include',
             method: 'GET',
             headers: {
                 // 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`,
             },
-            // credentials: 'include', // включить отправку авторизационных данных в fetch
         })
         return await checkResponse(response)
     } catch (err) {

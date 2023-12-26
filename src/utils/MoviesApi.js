@@ -2,7 +2,6 @@
 /** @param options - опции для работы с API (serverURL - url сервера, headers - заголовки в виде объекта) */
 import { beatfilmmainApiSettings } from './constants.js';
 
-// p.s: Напишите этот код на нативном JS, применяя fetch.
 class MoviesApi {
     constructor(options) {
         // this._headers = options.headers;
@@ -18,7 +17,6 @@ class MoviesApi {
         return fetch(`${this._serverUrl}/beatfilm-movies`, {
             method: 'GET',
             headers: {
-                // 'Authorization': `Bearer ${token}`, // сюда токен не надо передавать!!!???
                 'Content-Type': 'application/json',
             },
         }).then(res => this._onResponse(res))

@@ -74,21 +74,6 @@
         margin: 53px 0 80px;
     }
 }
-/*@media (max-width: 767px) {*/
-/*    .cards {*/
-/*        grid-template-columns: repeat(auto-fit, 339px);*/
-/*        gap: 32px 30px;*/
-/*        min-height: 270px;*/
-/*        padding-bottom: 10px;*/
-/*        justify-content: center;*/
-/*    }*/
-/*    .movies__more {*/
-/*        height: 100%;*/
-/*    }*/
-/*    .movies__btn-more {*/
-/*        margin: 53px 0 80px;*/
-/*    }*/
-/*}*/
 
 @media (max-width: 540px) {
     .cards {

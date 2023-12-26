@@ -1,43 +1,12 @@
 // Component for Register/signup page - компонент страницы регистрации.
-import {useState, useEffect} from 'react';
 import '../general/content.css';
 import './Register.css';
 import FormSection from '../FormSection/FormSection';
-import { useForm, useFormWithValidation } from '../../hooks/useValidForm.jsx';
+import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
 
 function Register({ handleRegister, errorApi }) { // @props из App.js - регистрация пользователя
 
-    // const { values, handleChange } = useForm();
-    const { handleChange, values, errors, isValid, resetForm } = useFormWithValidation();
-    // console.log('render', errors.name, errors.email, errors.password)
-    // console.log(values.name, values.email)
-
-    // !!! дополнительно нужно будет сделать условия проверки regex для email и для имени !!!
-    // Логика валдирования инпутов содержится в --> 'ValidForm'
-
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
-    // const [nameError, setNameError] = useState('');
-    // const [emailError, setEmailError] = useState('Email не может быть пустым');
-    // const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
-
-    // const handleNameError = (e) => {
-    //     setName(e.target.value)
-    //     if (!isValid.name) {
-    //         setNameError('Имя может содержать буквы на латинице или крилице')
-    //     } else { setNameError('') }
-    // }
-    // const handleChangeName = (e) => {
-    //     setName(e.target.value);
-    // }
-    // const handleChangeEmail = (e) => {
-    //     setEmail(e.target.value);
-    // }
-    // const handleChangePassword = (e) => {
-    //     setPassword(e.target.value);
-    // }
-
+    const { handleChange, values, errors, isValid } = useFormWithValidation();
     const onSubmit = (e) => {
         e.preventDefault();
         handleRegister(values.name, values.email, values.password)
@@ -50,7 +19,6 @@ function Register({ handleRegister, errorApi }) { // @props из App.js - рег
                          captionText={'Уже зарегистрированы?'} captionLink={'/signin'} captionLinkText={'Войти'}
                          onSubmit={ onSubmit } errorApi={ errorApi }
             >
-                {/*<span className='register__inputs'>*/}
                     <label className='register__input-label' htmlFor='register-input-name'>Имя
                         <input
                             type='text'
@@ -100,10 +68,6 @@ function Register({ handleRegister, errorApi }) { // @props из App.js - рег
                         />
                     </label>
                     {errors.password && <span className='register__input-err'>{ errors.password }</span>}
-                    {/*<span className='register__input-err'>{ (errors.name || errors.email) }</span>*/}
-
-                {/*</span>*/}
-
             </FormSection>
 
         </main>

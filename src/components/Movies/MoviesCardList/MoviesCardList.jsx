@@ -10,10 +10,8 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
     const [isLikedMovies, setLikedMovies] = useState([]);
     const location = useLocation();
     const [isWidth, setIsWidth] = useState(window.innerWidth);
-    // console.log('savedMoviesContext: ', savedMoviesContext)
 
     useEffect(() => {
-        // localStorage.setItem('searchedMovies', JSON.stringify(searchedMovies)) // перезапись
     },[renderMovies])
 
     let initCount = null;
@@ -34,7 +32,6 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
             setIsShowCards(renderMovies.slice(0, initCount))
         }
     },[renderMovies?.length])
-    // renderMovies.length
 
     // ------------------ ( saved-movies ) -------------------------------------------------------------
 
@@ -52,10 +49,6 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
             }
         }
     },[isLikedMovies?.length, temporaryLikedMovies?.length])
-    // renderMovies.length
-
-        // console.log(searchedMovies.length)
-        // console.log(isWidth)
 
     if (location.pathname === '/saved-movies') {
         initCount = savedMoviesContext?.length
@@ -142,11 +135,8 @@ function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSav
                             }
                         </ul>
                     }
-
                 </>
             }
-
-
         </>
     );
 }

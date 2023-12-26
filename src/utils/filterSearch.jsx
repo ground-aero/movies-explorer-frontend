@@ -6,8 +6,6 @@ const filterSearch = (movies, searchWord, isShort = false) => {
         const filterToLowerCase = // boolean, по совпадению букв поиска
             movie.nameRU.toLowerCase().includes(searchWord) ||
             movie.nameEN.toLowerCase().includes(searchWord)
-        // console.log(isShortStatus) // ПРИХОДИТ БЕЗ ИЗМЕНЕНИЯ !!!!!!!!!!
-        // console.log(movie.duration <= SHORT_MOVIE)
 
         if (isShort === false) { // если длинные,
             return filterToLowerCase; // => то получаем длинные ф.

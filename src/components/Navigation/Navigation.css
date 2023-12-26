@@ -133,7 +133,6 @@
     padding: 7.75px;
 }
 
-/** !loggedIn && land - styles */
 .account__link {
     text-decoration: none;
     padding-right: 30px;
@@ -188,7 +187,6 @@
     .menu__link {
         display: none;
     }
-    /*.account,*/
     .account_type_movies_authorized,
     .account_type_saved-movies_authorized,
     .account_type_land_authorized,

@@ -1,7 +1,6 @@
 .card {
     list-style: none;
     width: 270px;
-    /*min-height: 100%;*/
     height: 230px;
     position: relative;
     overflow: hidden;
@@ -109,7 +108,7 @@
     opacity: .7;
     cursor: pointer;
 }
-/*768*/
+
 @media (max-width: 768px) {
     .card {
         width: 339px;

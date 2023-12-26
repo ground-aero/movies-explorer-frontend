@@ -1,7 +1,6 @@
 // NavBar.js
 import {NavLink, Link} from 'react-router-dom';
 import './Navigation.css';
-// import accountMan from '../../images/account-man-full.svg';
 import logoIcon from '../../images/logo.svg';
 import NavBurger from './NavBurger/NavBurger';
 
@@ -32,8 +31,6 @@ function Navigation({ loggedIn, type, rights }) {
                     <Link to='/profile'
                           className={`account account_type_${ type } account_type_${ type }_${rights}`}>
                         <p className='account__text'>Аккаунт</p>
-                        {/*<img src={accountMan}*/}
-                        {/*     className='account__man' alt='account icon'/>*/}
                     </Link>
                 </>
                 }
@@ -52,7 +49,6 @@ function Navigation({ loggedIn, type, rights }) {
 
                     </nav>
                 }
-
             </nav>
         </>
     )

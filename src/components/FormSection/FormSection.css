@@ -14,7 +14,6 @@
 }
 
 .form-sec__box {
-    /*min-height: 560px;*/
     min-width: 396px;
     display: flex;
     flex-direction: column;
@@ -140,7 +139,6 @@
     .form-sec__box {
         min-width: 260px;
         max-width: 260px;
-        /*flex-grow: 1;*/
     }
     .form-sec__box_register {
         padding-top: 56px;

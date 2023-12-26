@@ -19,7 +19,6 @@ export const useResize = () => {
         return (() => window.removeEventListener('resize', handleResize))
     },[])
 
-    // // const-breakpoints.js
         const SCREEN_SM = 540;
         const SCREEN_MD = 768;
         // const SCREEN_LG = 992;
