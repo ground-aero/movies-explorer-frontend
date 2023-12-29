@@ -11,11 +11,10 @@ function Main() {
         <main className='content'>
 
             <Promo/>
-
             <About/>
             <Techs/>
             <AboutMe/>
-                {/*<Portfolio/>*/}
+            {/*<Portfolio/>*/}
 
         </main>
     );

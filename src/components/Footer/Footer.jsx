@@ -8,7 +8,6 @@ function Footer () {
 
             <h3 className='footer__header'>Учебный проект Яндекс.Практикум х BeatFilm.</h3>
 
-            {/* flex: <- space-between -> */}
             <div className='footer__bottom'>
 
                 <p className='footer__year'>© 2023</p>

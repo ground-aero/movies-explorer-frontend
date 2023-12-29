@@ -15,8 +15,6 @@ function Promo() {
                     <HashLink smooth to='/#about' className='promo__link'>Узнать больше</HashLink>
                 </div>
 
-                {/*<img src={logoGlobe} className='promo__globe-img' alt='logo globe'/>*/}
-
             </section>
     );
 }

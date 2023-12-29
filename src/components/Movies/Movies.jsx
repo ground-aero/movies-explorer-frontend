@@ -1,20 +1,52 @@
 // Component for page with movies search.
+import {useContext, useEffect} from 'react';
 import '../general/content.css';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
-import Preloader from '../Preloader/Preloader.jsx';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
+import LoadingContext from '../../contexts/LoadingContext';
 
-function Movies({ cards, type  }) {
+function Movies({
+                    type, onSubmit, renderMovies,
+                    likedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi,
+                    isShortStatus, setShortStatus
+}) {
+    const isLoading = useContext(LoadingContext);
+
+    useEffect(() => {
+    },[renderMovies])
+
     return (
         <main className='content'>
             <section className='movies content__section'>
 
-                <SearchForm />
+                <SearchForm
+                    onSubmitMovies={ onSubmit }
+                    searchKey={'searchedWord'}
+                    type={ type }
 
-                <MoviesCardList type={ type } cards={cards}/>
+                    isShortStatus={isShortStatus}
+                    setShortStatus={setShortStatus}
+                />
 
-                {/*<Preloader />*/}
+                { isLoading
+                    ? <span className='preloader'>
+                        <Preloader />
+                    </span>
+                    : <MoviesCardList
+                        type={ type }
+                        renderMovies={ renderMovies }
+
+                        likedMovies={ likedMovies }
+                        onSaveLikedCard={ onSaveLikedCard }
+
+                        isSavedCards={false}
+
+                        onDeleteCard={ onDeleteCard }
+                        errorSearchApi={ errorSearchApi }
+                    />
+                }
 
             </section>
         </main>
