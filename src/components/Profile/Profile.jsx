@@ -8,7 +8,7 @@ import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
 function Profile({ onSubmit, messageSuccess, onLogout }) {
 
     const currentUser = useContext(CurrentUserContext);
-    const { values, setValues, handleChange, errors, isValid, setIsValid, resetForm } = useFormWithValidation();
+    const { values, setValues, handleChange, errors, isValid } = useFormWithValidation();
 
     /** Логика:
      * Кнопка: isChanged ---> 'Сохранить' | else ---> 'Редактировать', 'Выйти'

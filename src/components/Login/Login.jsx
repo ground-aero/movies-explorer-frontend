@@ -1,9 +1,9 @@
 // component - for Authorization page
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import '../general/content.css';
 import './Login.css';
 import FormSection from '../FormSection/FormSection';
-import {useForm, useFormWithValidation} from '../../hooks/useValidForm.jsx';
+import {useFormWithValidation} from '../../hooks/useValidForm.jsx';
 
 function Login({ handleLogin, errorApi }) { // @props из App.js - аутентификация пользователя
     /** логика и стейты: values.name, values.emaiil, ... --> in ValidForm component */

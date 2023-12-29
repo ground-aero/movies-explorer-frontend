@@ -3,6 +3,8 @@
 - `Movies Explorer` - Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
 ---
+### *Ссылка на pull request #2:*
+https://github.com/ground-aero/movies-explorer-frontend/pull/2
 
 ### *Front domain address:*
 - `https://ga-movies.nomoredomainsicu.ru/`

@@ -29,11 +29,8 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
 
     /** Состояние массива карточек */
-    const [isRawCards, setRawCards] = useState([]); // все карточки [] с Сервера bitFilms (не нормализованные)
-    const [isRenderMovies, setRenderMovies] = useState([]);
+    const [isRenderMovies, setRenderMovies] = useState([]); // [ найденные(мутиров.) картчки] --> /movies ]
 
-    const [isSearchedMovies, setSearchedMovies] = useState([]); // [ найденные(мутиров.) картчки] --> /movies ]
-    const [isShortMovies, setShortMovies] = useState([]);
     const [isLikedMovies, setLikedMovies] = useState([]); // [ лайкнутые карточки ] --> /saved-movies
     const [isTempLikedMovies, setTempLikedMovies] = useState([]); // [ временные карточки ] --> /saved-movies
 
@@ -41,7 +38,6 @@ function App() {
     const [isSearchedWord, setSearchedWord] = useState('');
 
     const [isLoading, setLoading] = useState(false); // для состояния загрузки во время ожидания ответа от серв
-    const [isUpdateProfile, setUpdateProfile] = useState(false);
     const [errorApi, setErrorApi] = useState(null);
     const [errorSearchApi, setErrorSearchApi] = useState(null);
     const [messageSuccess, setMessageSuccess] = useState(null);
@@ -65,7 +61,6 @@ function App() {
                             email: res.data.email,
                         }
                         setCurrentUser(userData) // запись текущего пользака в глоб. контекст
-                        setRawCards([])
                         setLoggedIn(true)
                     }
                 })
@@ -120,7 +115,6 @@ function App() {
 
     function handleUpdateProfile(name, email) {
         setLoading(true)
-        setUpdateProfile(true);
 
         return MainApi.patchUser(name, email)
             .then((updatedUser) => {
@@ -137,14 +131,6 @@ function App() {
     }
 
     // ************************************************************************************************************* //
-
-    useEffect(() => { // Для отображения на /movies
-        const searchedMovies = localStorage.getItem('searchedMovies' || []) // проверяем наличие найденных ф.
-        if (searchedMovies) { // если в ЛС есть найденные ф.
-            const searchedMovie = JSON.parse(searchedMovies)
-            setSearchedMovies(searchedMovie || []) // то сохраняем их в стейт для текщуего рендера
-        }
-    }, []);
 
     useEffect(() => { // Для /Movies
         const renderMovies = localStorage.getItem('renderMovies' || []);
@@ -214,7 +200,6 @@ function App() {
                     if (filteredData?.length) {
 
                         localStorage.setItem('rawCards', JSON.stringify(normalizedCards)); // сохраняем
-                        setRawCards(normalizedCards);
 
                         setRenderMovies(filteredData) // запись найденных ф.
                         localStorage.setItem('renderMovies', JSON.stringify(filteredData)) // пере-запись найденных фильмов в localStorage
@@ -309,7 +294,6 @@ function App() {
         localStorage.clear();
 
         setCurrentUser({name: '', email: ''});
-        setRawCards([])
         setRenderMovies([])
         setSearchedWord('')
         setLikedMovies([])
@@ -377,9 +361,6 @@ function App() {
 
                                     onSubmit={handleSearchedMovies}
                                     renderMovies={isRenderMovies}
-
-                                    searchedMovies={isSearchedMovies}
-                                    shortMovies={isShortMovies}
 
                                     isSearchedWord={isSearchedWord}
                                     setSearchedWord={setSearchedWord}

@@ -5,7 +5,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
 
-function MoviesCardList({ type, renderMovies, searchedMovies, shortMovies, isSavedCards, likedMovies = [], temporaryLikedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, renderMovies, isSavedCards, likedMovies = [], temporaryLikedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const savedMoviesContext = useContext(SavedMoviesContext);
     const [isLikedMovies, setLikedMovies] = useState([]);
     const location = useLocation();

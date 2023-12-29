@@ -5,12 +5,9 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import LoadingContext from '../../contexts/LoadingContext';
 import Preloader from "../Preloader/Preloader.jsx";
-import {useLocalStorageState as useStorage} from '../../hooks/useLocalStorageState';
 
 function SavedMovies({ type, onSubmit, likedMovies, temporaryLikedMovies, onSaveLikedCard, onDeleteCard, filterShortCheckbox, errorSearchApi }) {
     const isLoading = useContext(LoadingContext);
-    const [isSearchedWordLiked, setSearchedWordLiked] = useStorage('searchedWordLiked', ''); // key = 'searchWord', '' = initial value
-    const [isShortStatus, setShortStatus] = useStorage('isShort', false);
     const [isLikedMovies, setLikedMovies] = useState([]);
 
     useEffect(() => { // Для /savedMovies

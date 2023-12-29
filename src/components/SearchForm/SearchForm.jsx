@@ -1,5 +1,5 @@
 // component for page with movies search.
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import '../general/content.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';

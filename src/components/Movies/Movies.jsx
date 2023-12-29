@@ -8,7 +8,7 @@ import Preloader from '../Preloader/Preloader';
 import LoadingContext from '../../contexts/LoadingContext';
 
 function Movies({
-                    type, onSubmit, renderMovies, searchedMovies, shortMovies,
+                    type, onSubmit, renderMovies,
                     likedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi,
                     isShortStatus, setShortStatus
 }) {
@@ -36,10 +36,7 @@ function Movies({
                     </span>
                     : <MoviesCardList
                         type={ type }
-
                         renderMovies={ renderMovies }
-                        searchedMovies={ searchedMovies }
-                        shortMovies={ shortMovies }
 
                         likedMovies={ likedMovies }
                         onSaveLikedCard={ onSaveLikedCard }

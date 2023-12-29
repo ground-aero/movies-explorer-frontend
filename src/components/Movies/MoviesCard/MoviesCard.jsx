@@ -1,5 +1,4 @@
 // component - for single film card.
-import {useContext} from 'react';
 import {Link, useLocation} from 'react-router-dom';
 import './MoviesCard.css';
 import deleteCardBtn from '../../../images/delete_icon_thin.svg';
