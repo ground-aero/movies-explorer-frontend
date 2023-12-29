@@ -40,7 +40,7 @@ function App() {
     const [isShortStatus, setShortStatus] = useState(false); // данные для фильтрации
     const [isSearchedWord, setSearchedWord] = useState('');
 
-    const [isLoading, setLoading] = useState(false); // для состояния загрузки во время ожидания ответа от сервера
+    const [isLoading, setLoading] = useState(false); // для состояния загрузки во время ожидания ответа от серв
     const [isUpdateProfile, setUpdateProfile] = useState(false);
     const [errorApi, setErrorApi] = useState(null);
     const [errorSearchApi, setErrorSearchApi] = useState(null);
