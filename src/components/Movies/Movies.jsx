@@ -10,7 +10,7 @@ import LoadingContext from '../../contexts/LoadingContext';
 function Movies({
                     type, onSubmit, renderMovies,
                     likedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi,
-                    isShortStatus, setShortStatus
+                    isShort, setShortStatus
 }) {
     const isLoading = useContext(LoadingContext);
 
@@ -26,7 +26,7 @@ function Movies({
                     searchKey={'searchedWord'}
                     type={ type }
 
-                    isShortStatus={isShortStatus}
+                    isShortStatus={isShort}
                     setShortStatus={setShortStatus}
                 />
 
@@ -41,6 +41,7 @@ function Movies({
                         likedMovies={ likedMovies }
                         onSaveLikedCard={ onSaveLikedCard }
 
+                        isShort={isShort}
                         isSavedCards={false}
 
                         onDeleteCard={ onDeleteCard }

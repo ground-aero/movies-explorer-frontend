@@ -5,14 +5,12 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
 
-function MoviesCardList({ type, renderMovies, isSavedCards, likedMovies = [], temporaryLikedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
-    const savedMoviesContext = useContext(SavedMoviesContext);
-    const [isLikedMovies, setLikedMovies] = useState([]);
+function MoviesCardList({ type, renderMovies, isShort, isSavedCards, likedMovies, tempLikedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
+    const savedMoviesContext = useContext(SavedMoviesContext);
     const [isWidth, setIsWidth] = useState(window.innerWidth);
 
-    useEffect(() => {
-    },[renderMovies])
+    const [isShowLikedMovies, setShowLikedMovies] = useState([]);
 
     let initCount = null;
     let step = null;
@@ -30,25 +28,27 @@ function MoviesCardList({ type, renderMovies, isSavedCards, likedMovies = [], te
     useEffect(() => { // Нарезка всех найденных, в зависимости от ширины экрана
         if (location.pathname === '/movies') {
             setIsShowCards(renderMovies.slice(0, initCount))
+              // console.log('in effect renderMovies',renderMovies)
         }
-    },[renderMovies?.length])
+    },[isShort, renderMovies])
 
     // ------------------ ( saved-movies ) -------------------------------------------------------------
 
-    useEffect(() => { // Отображение всех лайкнутых фильмов
+    useEffect(() => { // Отображение всех лайкнутых фильмов, в завис. от поиск. слова .....
         if (location.pathname === '/saved-movies') {
-            const likedMovies = localStorage.getItem('likedMovies' || []);
+            // const likedMovies = JSON.parse(localStorage.getItem('likedMovies' || []));
 
-            if (temporaryLikedMovies.length) {
-                setLikedMovies(temporaryLikedMovies?.reverse())
-                  console.log('temporaryLikedMovies: ', temporaryLikedMovies)
-            } else {
-                const savedCards = JSON.parse(likedMovies)
-                setLikedMovies(savedCards?.reverse())
-                  console.log('isLikedMovies: ', isLikedMovies)
+            // if (tempLikedMovies.length) {
+                setShowLikedMovies(tempLikedMovies?.reverse())
+            //       console.log('tempLikedMovies: ', tempLikedMovies)
+            // } else {
+
+                // const savedMovies = JSON.parse(likedMovies)
+            // setShowLikedMovies(likedMovies?.reverse())
+                  // console.log('isShowLikedMovies: ', isShowLikedMovies)
             }
-        }
-    },[isLikedMovies?.length, temporaryLikedMovies?.length])
+        // }
+    },[likedMovies, tempLikedMovies])
 
     if (location.pathname === '/saved-movies') {
         initCount = savedMoviesContext?.length
@@ -76,8 +76,8 @@ function MoviesCardList({ type, renderMovies, isSavedCards, likedMovies = [], te
         setIsAddCount(isAddCount + step)
     }
 
-    console.log('renderMovies, likedMovies, temporaryLikedMovies :: ', renderMovies, likedMovies, temporaryLikedMovies)
-    console.log('isLikedMovies, savedMoviesContext: ', isLikedMovies, savedMoviesContext)
+    // console.log('isShort, renderMovies, likedMovies, tempLikedMovies :: ', isShort, renderMovies, likedMovies, tempLikedMovies)
+    // console.log('isShowLikedMovies, savedMoviesContext: ', isShowLikedMovies, savedMoviesContext)
 
     return (
         <>
@@ -114,12 +114,13 @@ function MoviesCardList({ type, renderMovies, isSavedCards, likedMovies = [], te
                 </>
             }
 
+            {/*|| (tempLikedMovies.length === 0)*/}
             { location.pathname === '/saved-movies' &&
                 <>
-                    { errorSearchApi && ((isLikedMovies.length === 0) || (temporaryLikedMovies.length === 0))
+                    { errorSearchApi
                         ? <span className='cards__api-err'>{ errorSearchApi }</span>
                         : <ul className='cards'>
-                            { isLikedMovies?.map((card, _ind) => {
+                            { isShowLikedMovies?.map((card, _ind) => {
                                 card.isLiked = true;
                                 return <MoviesCard
                                     card={card}

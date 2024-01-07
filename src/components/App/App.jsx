@@ -15,7 +15,6 @@ import Footer from '../Footer/Footer';
 import NotFound from '../NotFound/NotFound';
 import MoviesApi from '../../utils/MoviesApi';
 import MainApi from '../../utils/MainApi';
-import * as AuthApi from '../../utils/AuthApi';
 import { normalizeCards } from '../../utils/utils.js';
 import filterSearch from '../../utils/filterSearch';
 import ProtectedRoute from '../../hoc/ProtectedRoute.js';
@@ -45,16 +44,21 @@ function App() {
     useEffect(() => { /** Проверяем токен, получаем email */
         handleTokenCheck()
         localStorage.setItem('loggedIn', loggedIn.toString()) // true
+
+        if (loggedIn) { // перегружаем сохраненные ф. с Сервера в ЛС и в стейт
+            getSavedMovies();
+        }
     }, [loggedIn]);
 
     function handleTokenCheck() { /** @endpoint: '/users/me' */
-        let token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
         if (token) {
             /** есть ли jwt токен в локальном хранилище браузера ? */
-            AuthApi.checkToken(token)
+            MainApi.getUserAuth(token)
                 .then((res) => {
                     /** автологин. Чтобы после перезагрузки не выкидывало снова в логин */
-                    if (res.data) { // { _id:..., name:..., email:... }
+                      // console.log('res getUserAuth:', res.data)
+                    if (res) { // { _id:..., name:..., email:... }
                         let userData = {
                             id: res.data._id, // id: res.data._id,
                             name: res.data.name,
@@ -72,7 +76,7 @@ function App() {
     }
 
     function handleRegister(name, email, password) {
-       AuthApi.register(name, email, password)
+        MainApi.register(name, email, password)
             .then((res) => {
                 console.log(res.data); // --> _id, name, email
                 setLoggedIn(true)
@@ -92,7 +96,7 @@ function App() {
         if (!email || !password) {
             return;
         }
-        return AuthApi.authorize(email, password)
+        return MainApi.login(email, password)
             .then((data) => {
                 console.log(data); // --> {token: "eyJhbGciOi....eyJfa'}
                 if (data.token) {
@@ -120,9 +124,9 @@ function App() {
             .then((updatedUser) => {
                 setMessageSuccess('Ваш профиль успешно сохранен')
                 setTimeout(() => setMessageSuccess(null), 5000);
-                 console.log(updatedUser.data)
+                console.log(updatedUser.data)
                 setCurrentUser(updatedUser.data)
-                 console.log(currentUser)
+                console.log(currentUser)
             }).catch((err) => {
                 console.log(`err при обновлении данных профиля ${err}`)
             }).finally(() => {
@@ -141,51 +145,70 @@ function App() {
     }, [])
 
     useEffect(() => { // Для /savedMovies: обновл. данные 'likedMovies'
-        const likedMovies = localStorage.getItem('likedMovies' || [])
+        const likedMovies = JSON.parse(localStorage.getItem('likedMovies' || []))
         if (likedMovies) { // если в ЛС есть сохраненные карточки,
-            const savedCards = JSON.parse(likedMovies)
-            setLikedMovies(savedCards.reverse()) // то сохраняем их в стейт для текщуего рендеринга
+            setLikedMovies(likedMovies.reverse()) // то сохраняем их в стейт для текщуего рендеринга
         }
-    }, [isLikedMovies?.length, isTempLikedMovies?.length])
+    }, [])
+
+    // useEffect(() => { // Для /  обновл. данные 'likedMovies'
+    //         setTempLikedMovies(isTempLikedMovies) // то сохраняем их в стейт для текщуего рендеринга
+    // }, [isTempLikedMovies, isLikedMovies])
+
+    function getSavedMovies() { // с моего API перегружаю в стейт и в ЛС, для отображения в /saved-movies и в useEffect
+        setLoading(true);
+        MainApi
+            .getMyMovies(localStorage.getItem('token'))
+            .then((res) => {
+                  // console.log('res', res.data)
+                setLikedMovies(res.data.reverse()); // ---> в стейт
+                localStorage.setItem('likedMovies', JSON.stringify(res.data)); // ---> в ЛС
+                  // console.log('isLikedMovies', isLikedMovies)
+            })
+            .catch((err) => console.log(`Ошибка при запросе сохраненных фильмов: ${err}`))
+            .finally(() => setLoading(false));
+    }
 
     // По искомому слову + isShort. Возвращает а)все искомые, или б)короткие ф. (из нормализованных карточек)
-    function handleSearchedMovies(value, isShort) {
+    function handleSearchMovies(value, isShort) {
         setErrorSearchApi(null)
 
         if (localStorage.getItem('rawCards')) { // Если ф. есть в ЛС
-            const isRawCards = JSON.parse(localStorage.getItem('rawCards'))
+            const normalizedCards = JSON.parse(localStorage.getItem('rawCards'))
 
-            // фильтруем ф. по: 1.вх.карточкам, 2.поиск.слову, 3.статусу isShortStatus
+            // Фильтр ф. по: 1.вх.карточкам, 2.поиск.слову, 3.статусу isShort
             // Получаем ф. <= по искомому слову + по isShort
-            const filteredData = filterSearch(isRawCards, value, isShort);
-                console.log(!isShort)
+            const filteredData = filterSearch(normalizedCards, value, isShort);
 
             if (filteredData?.length) {
 
-                if (!isShort === false) {
+                if (isShort === false) { // если тумблер 'false' <-- ( все ф.)
 
-                    setRenderMovies(filteredData) // запись найденных ф.
+                    setShortStatus(isShort)
+                    localStorage.setItem('isShort', JSON.stringify(isShort))
+
+                    setRenderMovies(filteredData) // запись всех найденных ф.
                     localStorage.setItem('renderMovies', JSON.stringify(filteredData))
 
                     setSearchedWord(value)
                     localStorage.setItem('searchedWord', JSON.stringify(value))
 
-                    setShortStatus(isShort)
-                    localStorage.setItem('isShort', JSON.stringify(isShort))
-
+                      console.log('сработал длинный метр: isShort, value, filteredData', isShort, value, filteredData)
                 } else {
 
-                    setRenderMovies(filteredData) // запись найденных ф.
+                    setShortStatus(isShort) // 'true' ( ф. < 40 мин. )
+                    localStorage.setItem('isShort', JSON.stringify(isShort))
+
+                    setRenderMovies(filteredData) // запись найденных ф. < 40 мин.
                     localStorage.setItem('renderMovies', JSON.stringify(filteredData))
 
                     setSearchedWord(value)
                     localStorage.setItem('searchedWord', JSON.stringify(value))
 
-                    setShortStatus(isShort)
-                    localStorage.setItem('isShort', JSON.stringify(isShort))
+                      console.log('сработал короткий метр: isShort, value, filteredData', isShort, value, filteredData)
                 }
 
-            } else setErrorSearchApi('Ничего не найдено')
+            } else setErrorSearchApi('Ничего не найдено.')
 
         } else {
 
@@ -222,24 +245,29 @@ function App() {
         }
     }
 
-    function handleSearchLikedMovies(value, isShort) {
+    function handleSearchLikedMovies(value, isShort) { // по сабмиту поиска, храним во временном массиве, для текущ. рендеринга
         setErrorSearchApi(null)
 
         if (localStorage.getItem('likedMovies')) {
 
-             console.log(`there are \'likedMovies\' in localStorage (!)`) // сначала фильтруем фильмы по: 1.вх.карточкам, 2.поиск.слову, 3.статусу isShortStatus
-            const isRawLikedCards = JSON.parse(localStorage.getItem('likedMovies'))
-             console.log('isRawLikedCards',isRawLikedCards)
+             console.log(`there are \'likedMovies\' in localStorage (!)`) // сначала фильтруем фильмы по: 1.вх.карточкам, 2.поиск.слову, 3.статусу isShort
+            const likedMovies = JSON.parse(localStorage.getItem('likedMovies'))
+            // const normalizedCards = JSON.parse(localStorage.getItem('rawCards'))
+             console.log('likedMovies',likedMovies)
 
-            // Получаем фильмы <= по искомому слову + по isShort
-            const filteredData = filterSearch(isRawLikedCards, value, isShort);
-            if (filteredData?.length) {
-                if (!isShort === false) {
-                     console.log(filteredData)
-                    setTempLikedMovies(filteredData) // временный массив
+            // Из массива 'likedMovies' получаем ф. <= по искомому слову + по isShort
+            const filteredData = filterSearch(likedMovies, value, isShort);
 
-                } else {
+              console.log('liked: filteredData.length', filteredData)
+             if (filteredData?.length) {
+
+                if (isShort === false) { // if 'false' == ( все ф. )
+                    setTempLikedMovies(filteredData) // все ф. --> во временный массив
+                      console.log('сработали длинные: isShort, value, filteredData', isShort, value, filteredData)
+
+                } else { // ( короткие ф. )
                     setTempLikedMovies(filteredData)
+                      console.log('сработали короткие: isShort, value, filteredData', isShort, value, filteredData)
                 }
             } else setErrorSearchApi('Ничего не найдено')
         }
@@ -266,17 +294,20 @@ function App() {
         MainApi.deleteMyMovie(_id)
             .then(() => {
                 const restMoviesLiked = isLikedMovies.filter((movie) => movie._id !== _id);
+
                 const restTempMoviesLiked = isTempLikedMovies.filter((movie) => movie._id !== _id);
                 const tempSearchWord = localStorage.getItem('searchedWordLiked')
                   console.log(tempSearchWord)
 
-                if (location.pathname === '/saved-movies') {
-                    if (isTempLikedMovies?.length === 0 && tempSearchWord?.length === 0) {
-                        setErrorSearchApi('Ничего не найдено')
-                    } else {
-                        setTempLikedMovies(restTempMoviesLiked);
-                    }
-                }
+                // if (location.pathname === '/saved-movies') {
+                //     if (isTempLikedMovies?.length === 0 && tempSearchWord?.length === 0) {
+                //         setErrorSearchApi('Ничего не найдено')
+                    // } else {
+
+                        // setTempLikedMovies(restTempMoviesLiked);
+
+                    // }
+                // }
 
                 setLikedMovies(restMoviesLiked);
                   console.log('otherLikedMovies', restMoviesLiked)
@@ -359,13 +390,13 @@ function App() {
                                     component={Movies}
                                     type={'movies'}
 
-                                    onSubmit={handleSearchedMovies}
+                                    onSubmit={handleSearchMovies}
                                     renderMovies={isRenderMovies}
 
                                     isSearchedWord={isSearchedWord}
                                     setSearchedWord={setSearchedWord}
 
-                                    isShortStatus={isShortStatus}
+                                    isShort={isShortStatus}
                                     setShortStatus={setShortStatus}
 
                                     likedMovies={isLikedMovies}
@@ -398,7 +429,7 @@ function App() {
                                 onSubmit={ handleSearchLikedMovies }
 
                                 likedMovies={isLikedMovies}
-                                temporaryLikedMovies={isTempLikedMovies}
+                                tempLikedMovies={isTempLikedMovies}
                                 errorSearchApi={errorSearchApi}
 
                                 onSaveLikedCard={handleSaveCard}

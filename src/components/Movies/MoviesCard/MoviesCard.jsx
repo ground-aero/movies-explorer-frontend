@@ -49,7 +49,7 @@ function MoviesCard({ type, card, likedMovies = [], onSaveLikedCard, onDeleteCar
                         className={ cardLikeClassName }
                         onClick={ () => {
                             if (location.pathname === '/movies') isLiked ? onDeleteCard(card._id ? card._id : likedId) : onSaveLikedCard(card);
-                            else !isLiked ? onDeleteCard(card._id ? card._id : likedId) : onSaveLikedCard(card);
+                            else !isLiked ? onSaveLikedCard(card) : onDeleteCard(card._id ? card._id : likedId);
                             }
                     }>
                     </button>

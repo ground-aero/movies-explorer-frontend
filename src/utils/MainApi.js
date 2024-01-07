@@ -1,20 +1,43 @@
 /** Содержит описание запросов к нашему Api
  * @param options - опции для работы с API (serverURL - url сервера, headers - заголовки в виде объекта) */
-import { mainApiSettings } from './constants.js';
+import {mainApiSettings} from './constants.js';
+// import {DB_URL} from "./AuthApi.js";
 
 class MainApi {
-    constructor(options) {
-        // this._headers = options.headers;
-        this._serverUrl = options.serverUrl;
-    }
 
     _onResponse(res) {
         return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status} ${res.statusText}`)
     }
 
-    getUser() {
-        const token = localStorage.getItem('token');
-        return fetch(`${this._serverUrl}/users/me`,{
+    /** user authentication - регистрация пользователя (отправка рег данных)
+     * # создаёт пользователя с переданными в теле: email, password, name*/
+    register(name, email, password) {
+        return fetch(`${mainApiSettings.serverUrl}/signup`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({name, email, password}),
+        }).then(res => this._onResponse(res))
+    }
+
+    /** проверка на существование пользователя (логинизация) */
+    login(email, password) {
+        return fetch(`${mainApiSettings.serverUrl}/signin`, {
+            // credentials: 'include',
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email, password}),
+        }).then(res => this._onResponse(res))
+    }
+
+    getUserAuth(token) {
+        // const token = localStorage.getItem('token');
+        return fetch(`${mainApiSettings.serverUrl}/users/me`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -25,7 +48,7 @@ class MainApi {
 
     patchUser(formValue) {
         const token = localStorage.getItem('token');
-        return fetch(`${this._serverUrl}/users/me`,{
+        return fetch(`${mainApiSettings.serverUrl}/users/me`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -38,22 +61,24 @@ class MainApi {
         }).then(res => this._onResponse(res))
     }
 
+    // ************************************************************************************************************* //
+
     // # запрашивает-->возвращает все сохранённые в моем API текущим пользователем фильмы
-    getMyMovies() {
-        return fetch(`${this._serverUrl}/movies`, {
+    getMyMovies(token) {
+        return fetch(`${mainApiSettings.serverUrl}/movies`, {
             method: 'GET',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
             },
         }).then(res => this._onResponse(res))
     }
 
-    // ---------------------------------------------------------------------------//
-
     //  # создает фильм с переданными в теле: country,...
     postMyMovie(card) {
         const token = localStorage.getItem('token');
-        return fetch(`${this._serverUrl}/movies`, {
+        return fetch(`${mainApiSettings.serverUrl}/movies`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -79,7 +104,7 @@ class MainApi {
     deleteMyMovie(movieId) {
         console.log(movieId)
         const token = localStorage.getItem('token');
-        return fetch(`${this._serverUrl}/movies/${movieId}`, {
+        return fetch(`${mainApiSettings.serverUrl}/movies/${movieId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
