@@ -6,15 +6,14 @@ import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 import { useLocalStorageState as useStorage } from '../../hooks/useLocalStorageState';
 
-function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies, isSearchedWordLiked, setSearchedWordLiked }) {
+function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies,
+                        isSearchedWordLiked, setSearchedWordLiked, isShortLiked, setShortLiked,
+                        onClickCheckboxLiked }) {
     const location = useLocation()
 
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');
     const [isSearchedWord, setSearchedWord] = useStorage('searchedWord', ''); // key = 'searchWord', '' = initial value
     const [isShortStatus, setShortStatus] = useStorage('isShort', false);
-
-    const [isShortStatusLiked, setShortStatusLiked] = useState(false);
-    // const [isSearchedWordLiked, setSearchedWordLiked] = useStorage('searchedWordLiked', ''); // key = 'searchWord', '' = initial value
 
     // ------------------ ( movies ) ---------------------------------------------------------------------------------
 
@@ -27,7 +26,7 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies, isSearchedWordL
             }, 350);
         }
     }, []);
-
+    //
     useEffect(() => { // Фильтруем на: длинные или короткие, в зависимости от стейта 'isShort',
         if (location.pathname === '/movies') {
             setTimeout(() => {
@@ -46,31 +45,21 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies, isSearchedWordL
 
     // ------------------ ( saved-movies ) --------------------------------------------------------------------------
 
-    useEffect(() => { // Обновление и фиксирование состояний: поискового слова, и isShort (true/false)
-        if (location.pathname === '/saved-movies') {
-            setTimeout(() => {
-                setSearchedWordLiked('')
-                setShortStatusLiked(isShortStatusLiked);
-
-            }, 200);
-        }
-    }, []);
-
-    useEffect(() => { // Фильтруем на: длинные или короткие, в зависимости от стейта 'isShort',
-        if (location.pathname === '/saved-movies') {
-            setTimeout(() => {
-                if (isShortStatusLiked === false && isSearchedWordLiked) {
-                    onSubmitLikedMovies(isSearchedWordLiked, isShortStatusLiked)
-                      console.log('срабоал длинный: isShortStatusLiked, isSearchedWordLiked', isShortStatusLiked, isSearchedWordLiked)
-                }
-                if (isShortStatusLiked === true && isSearchedWordLiked) {
-                    onSubmitLikedMovies(isSearchedWordLiked, isShortStatusLiked)
-                    // setIsPlaceholder('Фильм')
-                      console.log('срабоал короткий: isShortStatusLiked, isSearchedWordLiked', isShortStatusLiked, isSearchedWordLiked)
-                }
-            }, 300);
-        }
-    },[isShortStatusLiked])
+    // useEffect(() => { // Фильтруем на: длинные или короткие, в зависимости от стейта 'isShort',
+    //     if (location.pathname === '/saved-movies') {
+    //         setTimeout(() => {
+    //             if (isShortStatusLiked === false && isSearchedWordLiked) {
+    //                 onSubmitLikedMovies(isSearchedWordLiked, isShortStatusLiked)
+    //                   console.log('срабоал длинный: isShortStatusLiked, isSearchedWordLiked', isShortStatusLiked, isSearchedWordLiked)
+    //             }
+    //             if (isShortStatusLiked === true && isSearchedWordLiked) {
+    //                 onSubmitLikedMovies(isSearchedWordLiked, isShortStatusLiked)
+    //                 // setIsPlaceholder('Фильм')
+    //                   console.log('срабоал короткий: isShortStatusLiked, isSearchedWordLiked', isShortStatusLiked, isSearchedWordLiked)
+    //             }
+    //         }, 300);
+    //     }
+    // },[isShortStatusLiked])
 
     function handleInput(evt) {
         if (location.pathname === '/movies') {
@@ -79,7 +68,7 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies, isSearchedWordL
         } else {
             setSearchedWordLiked(evt.target.value)
         }
-            console.log('isSearchedWord, isSearchedWordLiked:', isSearchedWord, isSearchedWordLiked)
+            // console.log('isSearchedWord, isSearchedWordLiked:', isSearchedWord, isSearchedWordLiked)
     }
 
     function handleSubmitSearch(evt) { // По сабмиту 'найти по: искомому слову + 'коротыши или длинные'
@@ -94,7 +83,7 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies, isSearchedWordL
         }
         // '/saved-movies'
         if (location.pathname === '/saved-movies') {
-            if (isSearchedWordLiked) onSubmitLikedMovies(isSearchedWordLiked, isShortStatusLiked) // текущее поисковое слово сабмитим на Сервер
+            if (isSearchedWordLiked) onSubmitLikedMovies(isSearchedWordLiked, isShortLiked) // текущее поисковое слово сабмитим на Сервер
             else setIsPlaceholder('Введите запрос')
         }
     }
@@ -105,7 +94,8 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies, isSearchedWordL
             localStorage.setItem('isShort', JSON.stringify(isShortStatus)) // сохр. стейт в ЛС
         }
         if (location.pathname === '/saved-movies') {
-            setShortStatusLiked(prev => !prev)
+            setShortLiked(prev => !prev)
+            // onClickCheckboxLiked(isShortLiked)
         }
     }
 
@@ -125,7 +115,8 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies, isSearchedWordL
             <FilterCheckbox
                 isShortStatus={ type === 'movies'
                                 ? isShortStatus
-                                : isShortStatusLiked }
+                                : isShortLiked }
+                // onClick={ onClickCheckboxLiked } // для saved-movies ???
                 toggleCheckbox={ toggleCheckbox }
             />
 

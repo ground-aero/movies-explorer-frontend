@@ -5,7 +5,7 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
 
-function MoviesCardList({ type, renderMovies, isShort, isSavedCards, likedMovies, tempLikedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, isSavedCards, likedMovies, foundLikedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
     const savedMoviesContext = useContext(SavedMoviesContext);
     const [isWidth, setIsWidth] = useState(window.innerWidth);
@@ -38,9 +38,9 @@ function MoviesCardList({ type, renderMovies, isShort, isSavedCards, likedMovies
         if (location.pathname === '/saved-movies') {
             // const likedMovies = JSON.parse(localStorage.getItem('likedMovies' || []));
 
-            // if (tempLikedMovies.length) {
-                setShowLikedMovies(tempLikedMovies?.reverse())
-            //       console.log('tempLikedMovies: ', tempLikedMovies)
+            // if (foundLikedMovies.length) {
+                setShowLikedMovies(renderLikedMovies)
+            //       console.log('foundLikedMovies: ', foundLikedMovies)
             // } else {
 
                 // const savedMovies = JSON.parse(likedMovies)
@@ -48,7 +48,8 @@ function MoviesCardList({ type, renderMovies, isShort, isSavedCards, likedMovies
                   // console.log('isShowLikedMovies: ', isShowLikedMovies)
             }
         // }
-    },[likedMovies, tempLikedMovies])
+    },[renderLikedMovies])
+    // likedMovies, foundLikedMovies
 
     if (location.pathname === '/saved-movies') {
         initCount = savedMoviesContext?.length
@@ -76,7 +77,7 @@ function MoviesCardList({ type, renderMovies, isShort, isSavedCards, likedMovies
         setIsAddCount(isAddCount + step)
     }
 
-    // console.log('isShort, renderMovies, likedMovies, tempLikedMovies :: ', isShort, renderMovies, likedMovies, tempLikedMovies)
+    // console.log('isShort, renderMovies, likedMovies, foundLikedMovies :: ', isShort, renderMovies, likedMovies, foundLikedMovies)
     // console.log('isShowLikedMovies, savedMoviesContext: ', isShowLikedMovies, savedMoviesContext)
 
     return (
@@ -114,7 +115,7 @@ function MoviesCardList({ type, renderMovies, isShort, isSavedCards, likedMovies
                 </>
             }
 
-            {/*|| (tempLikedMovies.length === 0)*/}
+            {/*|| (foundLikedMovies.length === 0)*/}
             { location.pathname === '/saved-movies' &&
                 <>
                     { errorSearchApi
