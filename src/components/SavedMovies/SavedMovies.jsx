@@ -27,7 +27,7 @@ function SavedMovies({ type, onSubmit, likedMovies, isFoundLikedMovies, setFound
     useEffect(() => { // При первом переходе, Отображение всех лайкнутых ф.
         // setLikedMovies(savedMoviesContext)
         setFoundLikedMovies(likedMovies)
-          console.log('likedMovies, foundLikedMovies: ', likedMovies, isFoundLikedMovies)
+          // console.log('likedMovies, foundLikedMovies: ', likedMovies, isFoundLikedMovies)
     },[])
 
     useEffect(() => {
@@ -75,7 +75,7 @@ function SavedMovies({ type, onSubmit, likedMovies, isFoundLikedMovies, setFound
                 const likedMovies = JSON.parse(localStorage.getItem('likedMovies'))
 
                 const moviesOnRender = handleSearch(likedMovies, isSearchedWordLiked, isShortLiked);
-                  console.log('сработали moviesOnRender(liked)', moviesOnRender)
+                  // console.log('сработали moviesOnRender(liked)', moviesOnRender)
                 if  ( moviesOnRender.length === 0 ) {
                     setErrorSearchApi('Фильмы не найдены');
                 }
@@ -128,7 +128,7 @@ function SavedMovies({ type, onSubmit, likedMovies, isFoundLikedMovies, setFound
     // function handleClickCheckbox(value) { /** на верх. уровне, созд. управление чекбоксом */
     //     setShortLiked(value); // цель: изменить состояние
     // }
-    console.log('isShortLiked', isShortLiked)
+    // console.log('isShortLiked', isShortLiked)
 
     return (
         <main className='content'>
@@ -141,7 +141,6 @@ function SavedMovies({ type, onSubmit, likedMovies, isFoundLikedMovies, setFound
                     isSearchedWordLiked={isSearchedWordLiked}
                     setSearchedWordLiked={setSearchedWordLiked}
 
-                    // onClickCheckboxLiked={handleClickCheckbox} // передаем на фильтр-чекбокс ?????
                     isShortLiked={isShortLiked}
                     setShortLiked={setShortLiked}
                     searchKey={'searchedWordLiked'}

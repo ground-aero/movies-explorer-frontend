@@ -3,6 +3,7 @@ import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-do
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import LoadingContext from '../../contexts/LoadingContext';
 import SavedMoviesContext from '../../contexts/SavedMoviesContext';
+import DisabledFormContext from '../../contexts/DisabledFormContext'
 import '../general/page.css'
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -25,7 +26,8 @@ function App() {
     const location = useLocation()
 
     const [currentUser, setCurrentUser] = useState({name: '', email: ''});
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') || false);
+    const [isDisabled, setDisabled] = useState(false);
 
     /** Состояние массива карточек */
     const [isRenderMovies, setRenderMovies] = useState([]); // [ найденные(мутиров.) картчки] --> /movies ]
@@ -119,6 +121,7 @@ function App() {
 
     function handleUpdateProfile(name, email) {
         setLoading(true)
+        setDisabled(true)
 
         return MainApi.patchUser(name, email)
             .then((updatedUser) => {
@@ -131,6 +134,7 @@ function App() {
                 console.log(`err при обновлении данных профиля ${err}`)
             }).finally(() => {
                 setLoading(false)
+                setDisabled(false)
             })
     }
 
@@ -324,14 +328,15 @@ function App() {
         navigate('/', {replace: true});
         setLoading(null)
     }
-    console.log('isFoundLikedMovies: ', isFoundLikedMovies)
-    console.log('isLikedMovies: ', isLikedMovies)
+    // console.log('isFoundLikedMovies: ', isFoundLikedMovies)
+    // console.log('isLikedMovies: ', isLikedMovies)
 
     return (
         <>
             <CurrentUserContext.Provider value={currentUser}>
                 <LoadingContext.Provider value={isLoading}>
                     <SavedMoviesContext.Provider value={isLikedMovies}>
+                        <DisabledFormContext.Provider value={isDisabled}>
                 <Routes>
                     <Route exact path='/' index={true}
                            element={
@@ -439,6 +444,7 @@ function App() {
 
                 </Routes>
 
+                        </DisabledFormContext.Provider>
                     </SavedMoviesContext.Provider>
                 </LoadingContext.Provider>
             </CurrentUserContext.Provider>

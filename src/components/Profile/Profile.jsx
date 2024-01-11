@@ -1,6 +1,7 @@
 // component page - for patching/changing of Profile - компонент страницы изменения профиля.
 import React, { useState, useEffect, useContext } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import DisabledFormContext from '../../contexts/DisabledFormContext';
 import '../general/content.css';
 import './Profile.css';
 import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
@@ -8,33 +9,44 @@ import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
 function Profile({ onSubmit, messageSuccess, onLogout }) {
 
     const currentUser = useContext(CurrentUserContext);
-    const { values, setValues, handleChange, errors, isValid } = useFormWithValidation();
+    const isDisabled = useContext(DisabledFormContext);
+    const { values, setValues, handleChange, errors, isValid, setIsValid, isValidated } = useFormWithValidation();
 
     /** Логика:
      * Кнопка: isChanged ---> 'Сохранить' | else ---> 'Редактировать', 'Выйти'
      * Переменная: isValid ---> 'Сохранить' | else ---> disabled
      */
     const [isChanged, setIsChanged] = useState(false)
+    const [isProcessed, setIsProcessed] = useState(false)
 
     useEffect(() => {
-        if (currentUser.name === values.name && currentUser.email === values.email) setIsChanged(false)
-        else setIsChanged(true)
+        if (currentUser.name !== values.name || currentUser.email !== values.email) setIsProcessed(true)
+        else setIsProcessed(false)
     }, [values.name, values.email]);
 
     useEffect(() => {
-        setValues(currentUser)
-        setIsChanged(false)
-    }, [currentUser]);
+        setValues({
+            name: currentUser.name,
+            email: currentUser.email
+        })
+        setIsValid({
+            name: values.name = true,
+            email: values.email = true
+        })
+    }, [currentUser.name, currentUser.email])
+
+    console.log('isValid.name, isValid.email', isValid)
 
     function handleEditBtn() {
         setIsChanged(true)
     }
 
-    function handleSubmitUpdate(evt) {
-        evt.preventDefault()
-        if (isChanged) onSubmit({ name: values.name, email: values.email })
+    function handleSubmitUpdate(e) {
+        e.preventDefault()
+        if (isChanged && (isValid.name && isValid.email)) onSubmit({name: values.name, email: values.email})
 
         setIsChanged(false)
+        setIsProcessed(false)
     }
 
     return (
@@ -50,8 +62,8 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                             <span className='profile__input-wrap'>
                                 <input
                                     className='profile__input'
-                                    onChange={handleChange}
-                                    value={ (isChanged ? values.name : currentUser.name) || '' }
+                                    onChange={ handleChange }
+                                    value={ values.name ?? '' }
                                     type='text'
                                     autoFocus
                                     id='profile-input-name'
@@ -60,6 +72,7 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                                     tabIndex='1'
                                     minLength='2'
                                     required
+                                    disabled={!isChanged}
                                 />
                                 { errors.name && <span className='profile__input-err'>{ errors.name }</span>}
                                 <label className='profile__input-label' htmlFor='profile-input-name'>Имя</label>
@@ -68,8 +81,8 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                             <span className='profile__input-wrap'>
                                 <input
                                     className='profile__input profile__input_type_email'
-                                    onChange={handleChange}
-                                    value={ (isChanged ? values.email : currentUser.email) || '' }
+                                    onChange={ handleChange }
+                                    value={ values.email ?? '' }
                                     type='email'
                                     id='profile-input-email'
                                     placeholder='введите Ваш email'
@@ -77,6 +90,7 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                                     tabIndex='2'
                                     minLength='4'
                                     required
+                                    disabled={!isChanged}
                                 />
                                 { errors.email && <span className='profile__input-err'>{ errors.email }</span>}
                                 <label className='profile__input-label' htmlFor='profile-input-email'>E-mail</label>
@@ -97,10 +111,14 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                                 </button>
                             </span>
                         </> :
-                                <button type='submit' className={`btn btn_entry btn_entry_profile ${(!isChanged || (!isValid.name || !isValid.email)) ? 'btn_entry_profile_disabled' : '' }`}
-                                        disabled={ !isValid.name || !isValid.email } aria-label='edit'>
-                                    { 'Сохранить' }
-                                </button>
+                            <button type='submit' className={`btn btn_entry btn_entry_profile ${isProcessed && (isValid.email && isValid.name) ? '' : 'btn_entry_profile_disabled'}`}
+                                     disabled={ !(isProcessed && (isValid.email && isValid.name)) } aria-label='edit'>
+                                { 'Сохранить' }
+                            </button>
+                                // <button type='submit' className={`btn btn_entry btn_entry_profile ${(!isChanged && (!isValid.name && !isValid.email)) ? 'btn_entry_profile_disabled' : '' }`}
+                                //         disabled={ !isValid.name && !isValid.email } aria-label='edit'>
+                                //     { 'Сохранить' }
+                                // </button>
                         }
                     </form>
                 </div>

@@ -7,8 +7,7 @@ import './SearchForm.css';
 import { useLocalStorageState as useStorage } from '../../hooks/useLocalStorageState';
 
 function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies,
-                        isSearchedWordLiked, setSearchedWordLiked, isShortLiked, setShortLiked,
-                        onClickCheckboxLiked }) {
+                        isSearchedWordLiked, setSearchedWordLiked, isShortLiked, setShortLiked }) {
     const location = useLocation()
 
     const [isPlaceholder, setIsPlaceholder] = useState('Фильм');
@@ -95,7 +94,6 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies,
         }
         if (location.pathname === '/saved-movies') {
             setShortLiked(prev => !prev)
-            // onClickCheckboxLiked(isShortLiked)
         }
     }
 
@@ -116,7 +114,6 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies,
                 isShortStatus={ type === 'movies'
                                 ? isShortStatus
                                 : isShortLiked }
-                // onClick={ onClickCheckboxLiked } // для saved-movies ???
                 toggleCheckbox={ toggleCheckbox }
             />
 

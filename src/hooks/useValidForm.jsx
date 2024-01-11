@@ -16,12 +16,16 @@ export function useForm() {
 
 //хук управления формой и валидации формы
 export function useFormWithValidation() {
-    const [values, setValues] = React.useState({});
+    const [values, setValues] = React.useState({
+        name: '',
+        email: ''
+    });
     const [errors, setErrors] = React.useState({});
     const [isValid, setIsValid] = React.useState(false);
 
     /** Изменения и запись: 1. значений полей, 2. ошибок валидации полей, 3. статусы isValid
      * 4. вызов тестирования полей */
+    // onChange={ (event) => setName(event.target.value) }
     const handleChange = (event) => {
         const target = event.target;
         const name = target.name;
@@ -75,5 +79,7 @@ export function useFormWithValidation() {
         [setValues, setErrors, setIsValid]
     );
 
-    return { values, setValues, handleChange, errors, isValid, setIsValid, resetForm };
+    const isValidated = (isValid.email && isValid.password)
+
+    return { values, setValues, handleChange, errors, isValid, setIsValid, isValidated, resetForm };
 }

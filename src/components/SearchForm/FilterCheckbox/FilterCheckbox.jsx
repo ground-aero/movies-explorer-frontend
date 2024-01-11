@@ -9,7 +9,6 @@ function FilterCheckbox({ isShortStatus, toggleCheckbox }) {
             <div className='filter__wrap'>
                 <input type='checkbox' className='filter__checkbox' id='filter-short'
                        checked={ !isShortStatus }
-                        // onChange={(evt) => onClick(evt.target.checked) }
                         onChange={ toggleCheckbox }
                 />
             </div>
