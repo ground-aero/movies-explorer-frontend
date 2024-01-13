@@ -59,7 +59,7 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                         <div className='profile__inputs'>
                             <span className='profile__input-wrap'>
                                 <input
-                                    disabled={ !isChanged || isDisabled }
+                                    disabled={ !isChanged }
                                     className='profile__input'
                                     onChange={ handleChange }
                                     value={ values.name ?? '' }
@@ -78,7 +78,7 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
 
                             <span className='profile__input-wrap'>
                                 <input
-                                    disabled={ !isChanged || isDisabled }
+                                    disabled={ !isChanged }
                                     className='profile__input profile__input_type_email'
                                     onChange={ handleChange }
                                     value={ values.email ?? '' }
