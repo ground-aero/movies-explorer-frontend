@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import LoadingContext from '../../contexts/LoadingContext';
@@ -18,12 +18,16 @@ import MoviesApi from '../../utils/MoviesApi';
 import MainApi from '../../utils/MainApi';
 import { normalizeCards } from '../../utils/utils.js';
 import filterSearch from '../../utils/filterSearch';
+import {SCREEN_XL,SCREEN_LG,SCREEN_MD,SCREEN_SM,INIT_COUNT_XL,INIT_COUNT_LG,INIT_COUNT_MD,INIT_COUNT_SM} from '../../utils/constants'
 import ProtectedRoute from '../../hoc/ProtectedRoute.js';
 
 /** @returns {JSX.Element} */
 function App() {
+    const savedMoviesContext = useContext(SavedMoviesContext);
     const navigate = useNavigate();
     const location = useLocation()
+
+    const [isWidth, setIsWidth] = useState(window.innerWidth);
 
     const [currentUser, setCurrentUser] = useState({name: '', email: ''});
     const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') || false);
@@ -31,6 +35,7 @@ function App() {
 
     /** Состояние массива карточек */
     const [isRenderMovies, setRenderMovies] = useState([]); // [ найденные(мутиров.) картчки] --> /movies ]
+    const [isAddCount, setIsAddCount] = useState(null); // инкремент кол-ва карточек
 
     const [isLikedMovies, setLikedMovies] = useState([]); // [ лайкнутые карточки ] --> /saved-movies
     const [isFoundLikedMovies, setFoundLikedMovies] = useState([]); // [ временные карточки ] --> /saved-movies
@@ -43,6 +48,21 @@ function App() {
     const [errorSearchApi, setErrorSearchApi] = useState(null);
     const [messageSuccess, setMessageSuccess] = useState(null);
 
+    let initCount = null;
+    if (location.pathname === '/saved-movies') {
+        initCount = savedMoviesContext?.length
+    } else {
+        if (isWidth >= SCREEN_XL) { // 1250px
+            initCount = INIT_COUNT_XL; // 16
+        } else if (isWidth < SCREEN_XL && isWidth >= SCREEN_LG) { // 970px
+            initCount = INIT_COUNT_LG; // 12
+        } else if (isWidth < SCREEN_LG && isWidth >= SCREEN_MD) { // 730px
+            initCount = INIT_COUNT_MD; // 8
+        } else if (isWidth >= SCREEN_SM && isWidth < SCREEN_MD) {
+            initCount = INIT_COUNT_SM; // 5
+        }
+    }
+
     useEffect(() => { /** Проверяем токен, получаем email */
         handleTokenCheck()
         localStorage.setItem('loggedIn', loggedIn.toString()) // true
@@ -51,6 +71,15 @@ function App() {
             getSavedMovies();
         }
     }, [loggedIn]);
+
+    useEffect(() => {
+        const handleResize = (event) => {
+            setIsWidth(event.target.innerWidth)
+        }
+        window.addEventListener('resize', handleResize)
+        return (() => window.removeEventListener('resize', handleResize))
+    },[])
+
 
     function handleTokenCheck() { /** @endpoint: '/users/me' */
     let token = localStorage.getItem('token');
@@ -78,6 +107,7 @@ function App() {
     }
 
     function handleRegister(name, email, password) {
+        setDisabled(true)
         MainApi.register(name, email, password)
             .then((res) => {
                 console.log(res.data); // --> _id, name, email
@@ -91,14 +121,17 @@ function App() {
                     setErrorApi(null)
                     clearTimeout(timer)
                 }, 5000)
-            });
+            })
+            .finally(() => setDisabled(false))
     }
 
     function handleLogin(email, password) {
+        setDisabled(true)
+
         if (!email || !password) {
             return;
         }
-        return MainApi.login(email, password)
+        MainApi.login(email, password)
             .then((data) => {
                 console.log(data); // --> {token: "eyJhbGciOi....eyJfa'}
                 if (data.token) {
@@ -117,13 +150,12 @@ function App() {
                     clearTimeout(timer)
                 }, 5000)
             })
+            .finally(() => setDisabled(false))
     }
 
     function handleUpdateProfile(name, email) {
-        setLoading(true)
         setDisabled(true)
-
-        return MainApi.patchUser(name, email)
+        MainApi.patchUser(name, email)
             .then((updatedUser) => {
                 setMessageSuccess('Ваш профиль успешно сохранен')
                 setTimeout(() => setMessageSuccess(null), 5000);
@@ -132,10 +164,9 @@ function App() {
                 console.log(currentUser)
             }).catch((err) => {
                 console.log(`err при обновлении данных профиля ${err}`)
-            }).finally(() => {
-                setLoading(false)
-                setDisabled(false)
             })
+            .finally(() => setDisabled(false))
+
     }
 
     // ************************************************************************************************************* //
@@ -150,23 +181,17 @@ function App() {
     useEffect(() => { // Для /savedMovies: обновл. данные 'likedMovies'
         const likedMovies = JSON.parse(localStorage.getItem('likedMovies' || []))
         if (likedMovies) { // если в ЛС есть сохраненные карточки,
-            setLikedMovies(likedMovies.reverse()) // то сохраняем их в стейт для текщуего рендеринга
+            setLikedMovies(likedMovies) // то сохраняем их в стейт для текщуего рендеринга
         }
     }, [])
-
-    // useEffect(() => { // Для /  обновл. данные 'likedMovies'
-    //         setFoundLikedMovies(isFoundLikedMovies) // то сохраняем их в стейт для текщуего рендеринга
-    // }, [isFoundLikedMovies, isLikedMovies])
 
     function getSavedMovies() { // с моего API перегружаю в стейт и в ЛС, для отображения в /saved-movies и в useEffect
         setLoading(true);
         MainApi
             .getMyMovies(localStorage.getItem('token'))
             .then((res) => {
-                  // console.log('res', res.data)
                 setLikedMovies(res.data.reverse()); // ---> в стейт
                 localStorage.setItem('likedMovies', JSON.stringify(res.data)); // ---> в ЛС
-                  // console.log('isLikedMovies', isLikedMovies)
             })
             .catch((err) => console.log(`Ошибка при запросе сохраненных фильмов: ${err}`))
             .finally(() => setLoading(false));
@@ -174,7 +199,9 @@ function App() {
 
     // По искомому слову + isShort. Возвращает а)все искомые, или б)короткие ф. (из нормализованных карточек)
     function handleSearchMovies(value, isShort) {
+        setDisabled(true)
         setErrorSearchApi(null)
+        setIsAddCount(initCount)
 
         if (localStorage.getItem('rawCards')) { // Если ф. есть в ЛС
             const normalizedCards = JSON.parse(localStorage.getItem('rawCards'))
@@ -207,8 +234,6 @@ function App() {
 
                     setSearchedWord(value)
                     localStorage.setItem('searchedWord', JSON.stringify(value))
-
-                      console.log('сработал короткий метр: isShort, value, filteredData', isShort, value, filteredData)
                 }
 
             } else setErrorSearchApi('Ничего не найдено.')
@@ -221,7 +246,6 @@ function App() {
 
                     const normalizedCards = normalizeCards(rawCards); // мутируем сырой массив карточек
                     const filteredData = filterSearch(normalizedCards, value, isShort);  // фильруем по короткометражкам: true/false
-                    // console.log('filteredData, isShort ::-::',filteredData, isShort)
 
                     if (filteredData?.length) {
 
@@ -241,76 +265,39 @@ function App() {
                     let timer = setTimeout(() => {
                         setErrorSearchApi(null)
                         clearTimeout(timer)
-                    }, 7000)
+                    }, 5000)
                 }).finally(() => {
                 setLoading(false)
+                setDisabled(false)
             })
         }
     }
 
-    // function handleSearchLikedMovies(value, isShort) { // по сабмиту поиска, храним во временном массиве, для текущ. рендеринга
-    //     setErrorSearchApi(null)
-    //
-    //     if (localStorage.getItem('likedMovies')) {
-    //
-    //          console.log(`there are \'likedMovies\' in localStorage (!)`) // сначала фильтруем фильмы по: 1.вх.карточкам, 2.поиск.слову, 3.статусу isShort
-    //         const likedMovies = JSON.parse(localStorage.getItem('likedMovies'))
-    //         // const normalizedCards = JSON.parse(localStorage.getItem('rawCards'))
-    //          console.log('likedMovies',likedMovies)
-    //
-    //         // Из массива 'likedMovies' получаем ф. <= по искомому слову + по isShort
-    //         const filteredData = filterSearch(likedMovies, value, isShort);
-    //
-    //           console.log('liked: filteredData.length', filteredData)
-    //          if (filteredData?.length) {
-    //
-    //             if (isShort === false) { // if 'false' == ( все ф. )
-    //                 setFoundLikedMovies(filteredData) // все ф. --> во временный массив
-    //                   console.log('сработали длинные: isShort, value, filteredData', isShort, value, filteredData)
-    //
-    //             } else { // ( короткие ф. )
-    //                 setFoundLikedMovies(filteredData)
-    //                   console.log('сработали короткие: isShort, value, filteredData', isShort, value, filteredData)
-    //             }
-    //         } else setErrorSearchApi('Ничего не найдено')
-    //     }
-    //
-    // }
-    // ------------------------------------------------------------------------------------------------------------
-
     function handleSaveCard(card) { // Постановка лайка/сохранения карточки фильма на /movies
-        setLoading(true)
-        return MainApi.postMyMovie(card) // на наш АПИ
+        return MainApi.postMyMovie(card) // на свой АПИ
             .then((likedMovie) => { // --> data: {owner:.., _id:.., moviesId: 10, }
-                likedMovie.data.isLiked = true; // меняем поле на --> isLiked: true
-            setLikedMovies([likedMovie.data, ...isLikedMovies].reverse()) // запись каждой добавленной карточки
+                likedMovie.data.isLiked = true; // меняю поле на --> isLiked: true
+            setLikedMovies([likedMovie.data, ...isLikedMovies]) // запись каждой добавленной карточки
             localStorage.setItem('likedMovies', JSON.stringify([likedMovie.data, ...isLikedMovies]))
             }).catch((err) => {
             console.log(`Ошибка при сохранении карточки: ${err}`);
-        }).finally(() => {
-            setLoading(false)
-        });
+        })
     }
 
     function handleDeleteCard(_id) {
-        setLoading(true)
         MainApi.deleteMyMovie(_id)
             .then((movie) => {
                 // likedMovie.data.isLiked = true; // меняем поле на --> isLiked: true
                 const restMoviesLiked = isLikedMovies.filter((movie) => movie._id !== _id);
-                // const restTempMoviesLiked = isFoundLikedMovies.filter((movie) => movie._id !== _id);
 
                 setLikedMovies(restMoviesLiked);
-                  console.log('otherLikedMovies', restMoviesLiked)
                 localStorage.setItem('likedMovies', JSON.stringify([...restMoviesLiked]))
 
                 setFoundLikedMovies(restMoviesLiked)
             })
             .catch((err) => {
                 console.log(`Ошибка при удалении карточки: ${err}`);
-            }).finally(() => {
-            setLoading(false);
-        })
+            })
     }
 
     function onLogout() {
@@ -328,8 +315,6 @@ function App() {
         navigate('/', {replace: true});
         setLoading(null)
     }
-    // console.log('isFoundLikedMovies: ', isFoundLikedMovies)
-    // console.log('isLikedMovies: ', isLikedMovies)
 
     return (
         <>
@@ -387,9 +372,12 @@ function App() {
 
                                     onSubmit={handleSearchMovies}
                                     renderMovies={isRenderMovies}
+                                    initCount={initCount}
 
                                     isSearchedWord={isSearchedWord}
                                     setSearchedWord={setSearchedWord}
+                                    isAddCount={isAddCount}
+                                    setIsAddCount={setIsAddCount}
 
                                     isShort={isShortStatus}
                                     setShortStatus={setShortStatus}
@@ -420,8 +408,6 @@ function App() {
                                 loggedIn={loggedIn}
                                 component={SavedMovies}
                                 type={'saved-movies'}
-
-                                // onSubmit={ handleSearchLikedMovies }
 
                                 likedMovies={isLikedMovies}
                                 isFoundLikedMovies={isFoundLikedMovies}

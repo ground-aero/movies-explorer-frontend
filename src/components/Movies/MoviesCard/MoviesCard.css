@@ -7,9 +7,9 @@
     transition: box-shadow .3s linear;
 }
 
-.card:hover {
-    box-shadow: 0 0 15px rgba(30,30,30,.7);
-}
+/*.card:hover {*/
+/*    box-shadow: 0 0 15px rgba(30,30,30,.7);*/
+/*}*/
 
 .card__img {
     width: 270px;
@@ -40,6 +40,7 @@
 
 .card__btn-wrap_delete {
     align-items: center;
+    background-color: transparent;
 }
 
 .card__name {

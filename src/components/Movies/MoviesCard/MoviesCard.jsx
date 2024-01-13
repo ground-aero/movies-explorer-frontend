@@ -13,7 +13,6 @@ function MoviesCard({ type, card, likedMovies = [], onSaveLikedCard, onDeleteCar
     let isLiked;
     let likedId;
     isLiked = likedMovies.some((item) => {
-
         if (item.movieId === card.movieId) {
                 isLiked = item.isLiked; // true
                 likedId = item._id; // item._id: 6558d7af107b7f63e2c3bcbc
@@ -43,12 +42,12 @@ function MoviesCard({ type, card, likedMovies = [], onSaveLikedCard, onDeleteCar
 
             <div className='wrap'>
             <h1 className='card__name'>{ card.nameRU }</h1>
-                <p className={`card__btn-wrap card__btn-wrap_${ buttonImg } `}>
+                <p className={`card__btn-wrap card__btn-wrap_${ buttonImg } card__btn-wrap_${ btnIcon }`}>
                     <button
                         type='button'
                         className={ cardLikeClassName }
                         onClick={ () => {
-                            if (location.pathname === '/movies') isLiked ? onDeleteCard(card._id ? card._id : likedId) : onSaveLikedCard(card);
+                            if (location.pathname === '/movies') isLiked ? onDeleteCard(card._id ? card._id : likedId) : onSaveLikedCard(card)
                             else !isLiked ? onSaveLikedCard(card) : onDeleteCard(card._id ? card._id : likedId);
                             }
                     }>

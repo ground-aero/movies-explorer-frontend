@@ -31,19 +31,31 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies,
             setTimeout(() => {
                 if (isShortStatus === false && isSearchedWord?.length) {
                     onSubmitMovies(isSearchedWord, isShortStatus)
-                      // console.log('срабоало: isShortStatus, isSearchedWord?.length', isShortStatus, isSearchedWord?.length)
                 }
                 if (isShortStatus === true && isSearchedWord?.length) {
                     onSubmitMovies(isSearchedWord, isShortStatus)
-                    // setIsPlaceholder('Фильм')
-                    // console.log('срабоало: isShortStatus, isSearchedWord?.length', isShortStatus, isSearchedWord?.length)
                 }
             }, 300);
         }
     },[isShortStatus])
 
+    // console.log('isShortLiked,', isShortLiked)
     // ------------------ ( saved-movies ) --------------------------------------------------------------------------
-
+    // useEffect(() => {
+    //     if (location.pathname === '/saved-movies') {
+    //         setTimeout(() => {
+    //             if (isShortLiked === false) {
+    //                 onSubmitLikedMovies(isSearchedWordLiked = '', isShortLiked)
+    //                 // console.log('срабоало: isShortStatus, isSearchedWord?.length', isShortStatus, isSearchedWord?.length)
+    //             }
+    //             if (isShortLiked === true) {
+    //                 onSubmitLikedMovies(isSearchedWordLiked = '', isShortLiked)
+    //                 // setIsPlaceholder('Фильм')
+    //                 // console.log('срабоало: isShortStatus, isSearchedWord?.length', isShortStatus, isSearchedWord?.length)
+    //             }
+    //         }, 300);
+    //     }
+    // }, [isSearchedWordLiked, isShortLiked]);
     // useEffect(() => { // Фильтруем на: длинные или короткие, в зависимости от стейта 'isShort',
     //     if (location.pathname === '/saved-movies') {
     //         setTimeout(() => {
@@ -67,7 +79,6 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies,
         } else {
             setSearchedWordLiked(evt.target.value)
         }
-            // console.log('isSearchedWord, isSearchedWordLiked:', isSearchedWord, isSearchedWordLiked)
     }
 
     function handleSubmitSearch(evt) { // По сабмиту 'найти по: искомому слову + 'коротыши или длинные'

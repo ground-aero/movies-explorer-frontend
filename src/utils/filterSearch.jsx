@@ -2,7 +2,6 @@ import { SHORT_MOVIE } from './constants.js';
 
 const filterSearch = (movies, searchWord, isShort = false) => {
     return movies.filter((movie) => {
-        // console.log('searchWord, isShort::', searchWord, isShort)
         let lowCase = searchWord.toLowerCase()
         const searchResult = // boolean, по совпадению букв поиска
             movie.nameRU.toLowerCase().includes(lowCase) ||

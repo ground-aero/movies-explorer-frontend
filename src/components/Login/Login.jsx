@@ -1,13 +1,15 @@
 // component - for Authorization page
-import {useEffect} from 'react';
+import {useContext, useEffect} from 'react';
 import '../general/content.css';
 import './Login.css';
 import FormSection from '../FormSection/FormSection';
 import {useFormWithValidation} from '../../hooks/useValidForm.jsx';
+import DisabledFormContext from '../../contexts/DisabledFormContext';
 
 function Login({ handleLogin, errorApi }) { // @props из App.js - аутентификация пользователя
     /** логика и стейты: values.name, values.emaiil, ... --> in ValidForm component */
     const { handleChange, values, errors, isValid, resetForm } = useFormWithValidation();
+    const isDisabled = useContext(DisabledFormContext);
 
     useEffect(() => {
         resetForm('', '', true)
@@ -23,11 +25,12 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
 
             <FormSection name={'login'} title={'Рады видеть!'} buttonText={'Войти'} isValid={(isValid.email && isValid.password)}
                 captionText={'Еще не зарегистрированы?'} captionLink={'/signup'} captionLinkText={'Регистрация'}
-                onSubmit={ onSubmit } errorApi={errorApi}
+                onSubmit={ onSubmit } errorApi={ errorApi }
             >
 
                     <label className='login__input-label' htmlFor='login-input-email'>E-mail
                         <input
+                            disabled={isDisabled}
                             className='login__input'
                             value={values.email ?? ''}
                             onChange={handleChange}
@@ -45,6 +48,7 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
 
                     <label className='login__input-label' htmlFor='login-input-pass'>Пароль
                         <input
+                            disabled={isDisabled}
                             className='login__input'
                             value={values.password ?? ''}
                             onChange={handleChange}

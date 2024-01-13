@@ -3,10 +3,12 @@ import '../general/content.css';
 import './Register.css';
 import FormSection from '../FormSection/FormSection';
 import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
+import {useContext} from "react";
+import DisabledFormContext from '../../contexts/DisabledFormContext';
 
 function Register({ handleRegister, errorApi }) { // @props из App.js - регистрация пользователя
-
     const { handleChange, values, errors, isValid } = useFormWithValidation();
+    const isDisabled = useContext(DisabledFormContext);
     const onSubmit = (e) => {
         e.preventDefault();
         handleRegister(values.name, values.email, values.password)
@@ -21,6 +23,7 @@ function Register({ handleRegister, errorApi }) { // @props из App.js - рег
             >
                     <label className='register__input-label' htmlFor='register-input-name'>Имя
                         <input
+                            disabled={isDisabled}
                             type='text'
                             pattern='^[a-zA-Zа-яА-ЯЁё \-]+$'
                             name='name'
@@ -39,6 +42,7 @@ function Register({ handleRegister, errorApi }) { // @props из App.js - рег
 
                     <label className='register__input-label' htmlFor='register-input-email'>E-mail
                         <input
+                            disabled={isDisabled}
                             name='email'
                             value={values.email ?? ''}
                             onChange={handleChange}
@@ -55,6 +59,7 @@ function Register({ handleRegister, errorApi }) { // @props из App.js - рег
 
                     <label className='register__input-label' htmlFor='register-input-pass'>Пароль
                         <input
+                            disabled={isDisabled}
                             name='password'
                             value={values.password ?? ''}
                             onChange={handleChange}

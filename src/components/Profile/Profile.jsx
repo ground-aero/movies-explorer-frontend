@@ -10,7 +10,7 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
 
     const currentUser = useContext(CurrentUserContext);
     const isDisabled = useContext(DisabledFormContext);
-    const { values, setValues, handleChange, errors, isValid, setIsValid, isValidated } = useFormWithValidation();
+    const { values, setValues, handleChange, errors, isValid, setIsValid } = useFormWithValidation();
 
     /** Логика:
      * Кнопка: isChanged ---> 'Сохранить' | else ---> 'Редактировать', 'Выйти'
@@ -34,8 +34,6 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
             email: values.email = true
         })
     }, [currentUser.name, currentUser.email])
-
-    console.log('isValid.name, isValid.email', isValid)
 
     function handleEditBtn() {
         setIsChanged(true)
@@ -61,6 +59,7 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                         <div className='profile__inputs'>
                             <span className='profile__input-wrap'>
                                 <input
+                                    disabled={ !isChanged || isDisabled }
                                     className='profile__input'
                                     onChange={ handleChange }
                                     value={ values.name ?? '' }
@@ -72,7 +71,6 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                                     tabIndex='1'
                                     minLength='2'
                                     required
-                                    disabled={!isChanged}
                                 />
                                 { errors.name && <span className='profile__input-err'>{ errors.name }</span>}
                                 <label className='profile__input-label' htmlFor='profile-input-name'>Имя</label>
@@ -80,6 +78,7 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
 
                             <span className='profile__input-wrap'>
                                 <input
+                                    disabled={ !isChanged || isDisabled }
                                     className='profile__input profile__input_type_email'
                                     onChange={ handleChange }
                                     value={ values.email ?? '' }
@@ -90,7 +89,6 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                                     tabIndex='2'
                                     minLength='4'
                                     required
-                                    disabled={!isChanged}
                                 />
                                 { errors.email && <span className='profile__input-err'>{ errors.email }</span>}
                                 <label className='profile__input-label' htmlFor='profile-input-email'>E-mail</label>

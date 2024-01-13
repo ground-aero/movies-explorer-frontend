@@ -31,22 +31,22 @@ function FormSection({
                 {/** отображение лого в зависимости от компонента (кроме: profile) */}
                 {(name === 'login' || name === 'register') &&
                     <Link to='/' className='form-sec__logo'>
-                        <img className='logo' src={logoIcon} alt='логотип'/>
+                        <img className='logo' src={ logoIcon } alt='логотип'/>
                     </Link>
                 }
 
-                <h1 className={`form-sec__title form-sec__title_type_${name}`}>{title}</h1>
+                <h1 className={`form-sec__title form-sec__title_type_${name}`}>{ title }</h1>
 
                 <form
-                    className={`form form_entry ${name}`}
-                    name={`form-${name}`}
-                    onSubmit={onSubmit}
+                    className={`form form_entry ${ name }`}
+                    name={`form-${ name }`}
+                    onSubmit={ onSubmit }
                     autoComplete='off'
                 >
 
                     {/* Register, Login - inputs */}
                     <span className='form__inputs'>
-                        {children}
+                        { children }
                     </span>
 
                     {/** отображение 'caption' в зависимости от компонента (кроме: profile) */}

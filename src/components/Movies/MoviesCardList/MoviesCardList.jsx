@@ -1,19 +1,26 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством.
 import {useLocation} from 'react-router-dom';
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import SavedMoviesContext from '../../../contexts/SavedMoviesContext';
+import {
+    SCREEN_XL,
+    SCREEN_LG,
+    SCREEN_MD,
+    SCREEN_SM,
+    STEP_COUNT_XL,
+    STEP_COUNT_LG,
+    STEP_COUNT_MD,
+    STEP_COUNT_SM,
+} from '../../../utils/constants.js'
 
-function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, isSavedCards, likedMovies, foundLikedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
+function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, initCount, isAddCount, setIsAddCount,
+                            isSavedCards, likedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi }) { // cards: App->Movies->MoviesCardList
     const location = useLocation();
-    const savedMoviesContext = useContext(SavedMoviesContext);
     const [isWidth, setIsWidth] = useState(window.innerWidth);
 
     const [isShowLikedMovies, setShowLikedMovies] = useState([]);
-
-    let initCount = null;
-    let step = null;
+    const [isShowCards, setIsShowCards] = useState([]); // массив карточек с заданным кол-вом
 
     useEffect(() => {
         const handleResize = (event) => {
@@ -21,64 +28,40 @@ function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, isSave
         }
         window.addEventListener('resize', handleResize)
         return (() => window.removeEventListener('resize', handleResize))
-    },[])
+    },[isWidth])
 
     // ------------------ ( movies ) -------------------------------------------------------------------
 
     useEffect(() => { // Нарезка всех найденных, в зависимости от ширины экрана
         if (location.pathname === '/movies') {
-            setIsShowCards(renderMovies.slice(0, initCount))
-              // console.log('in effect renderMovies',renderMovies)
+            setIsAddCount(isAddCount)
+            setIsShowCards(renderMovies.slice(0, isAddCount))
         }
-    },[isShort, renderMovies])
+    },[isShort, renderMovies, isAddCount])
 
     // ------------------ ( saved-movies ) -------------------------------------------------------------
-
     useEffect(() => { // Отображение всех лайкнутых фильмов, в завис. от поиск. слова .....
         if (location.pathname === '/saved-movies') {
-            // const likedMovies = JSON.parse(localStorage.getItem('likedMovies' || []));
-
-            // if (foundLikedMovies.length) {
                 setShowLikedMovies(renderLikedMovies)
-            //       console.log('foundLikedMovies: ', foundLikedMovies)
-            // } else {
-
-                // const savedMovies = JSON.parse(likedMovies)
-            // setShowLikedMovies(likedMovies?.reverse())
-                  // console.log('isShowLikedMovies: ', isShowLikedMovies)
             }
-        // }
     },[renderLikedMovies])
-    // likedMovies, foundLikedMovies
 
-    if (location.pathname === '/saved-movies') {
-        initCount = savedMoviesContext?.length
-    } else {
-        if (isWidth >= 1250) {
-            initCount = 16;
-            step = 4;
-        } else if (isWidth <= 1249 && isWidth >= 970) {
-            initCount = 12;
-            step = 3;
-        } else if (isWidth <= 969 && isWidth >= 730) {
-            initCount = 8;
-            step = 2;
-        } else if (isWidth >= 320 && isWidth <= 729) {
-            initCount = 5;
-            step = 2;
+    const showMore = useCallback(() => {  // Начальное кол-во Ф. (от ширины Э.)
+        if (isWidth >= SCREEN_XL) { // 1250px
+            setIsAddCount((prevState) => prevState + STEP_COUNT_XL); // 4
+        } else if (isWidth < SCREEN_XL && isWidth >= SCREEN_LG) { // 970px
+            setIsAddCount((prevState) => prevState + STEP_COUNT_LG); // 3
+        } else if (isWidth < SCREEN_LG && isWidth >= SCREEN_MD) { // 730px
+            setIsAddCount((prevState) => prevState + STEP_COUNT_MD); // 2
+        } else if (isWidth >= SCREEN_SM && isWidth < SCREEN_MD) { // 320px
+            setIsAddCount((prevState) => prevState + STEP_COUNT_SM); // 2
         }
-    }
 
-    const [isShowCards, setIsShowCards] = useState([]); // массив карточек с заданным кол-вом
-    const [isAddCount, setIsAddCount] = useState(initCount); // инкремент кол-ва карточек
+        setIsShowCards(renderMovies.slice(0, isAddCount)); // в стейт сохр. это* кол-во Ф.
 
-    function showMore() {
-        setIsShowCards(renderMovies.slice(0, isAddCount + step))
-        setIsAddCount(isAddCount + step)
-    }
+    }, [isWidth, isShowCards]);
 
-    // console.log('isShort, renderMovies, likedMovies, foundLikedMovies :: ', isShort, renderMovies, likedMovies, foundLikedMovies)
-    // console.log('isShowLikedMovies, savedMoviesContext: ', isShowLikedMovies, savedMoviesContext)
+    console.log('initCount, isAddCount +, isShowCards', initCount, isAddCount, isShowCards)
 
     return (
         <>

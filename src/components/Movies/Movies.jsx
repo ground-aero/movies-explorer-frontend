@@ -10,12 +10,17 @@ import LoadingContext from '../../contexts/LoadingContext';
 function Movies({
                     type, onSubmit, renderMovies,
                     likedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi,
-                    isShort, setShortStatus
+                    isShort, setShortStatus, initCount, isAddCount, setIsAddCount
 }) {
     const isLoading = useContext(LoadingContext);
 
     useEffect(() => {
-    },[renderMovies])
+
+    },[])
+    // onSaveLikedCard
+
+    // useEffect(() => {
+    // },[renderMovies])
 
     return (
         <main className='content'>
@@ -37,6 +42,9 @@ function Movies({
                     : <MoviesCardList
                         type={ type }
                         renderMovies={ renderMovies }
+                        initCount={initCount}
+                        isAddCount={ isAddCount }
+                        setIsAddCount={ setIsAddCount }
 
                         likedMovies={ likedMovies }
                         onSaveLikedCard={ onSaveLikedCard }
