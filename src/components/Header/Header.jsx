@@ -1,9 +1,13 @@
 // Component Header - for Main page,
 // should change its outlay, if user authorized or not.
+import {useContext} from 'react';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
+import AuthContext from '../../contexts/AuthContext';
 
-function Header({ loggedIn, type }) {
+function Header({ type }) {
+
+    const loggedIn = useContext(AuthContext);
 
     return (
                 <header className={`header header_wrap header_type_${ type }`}>

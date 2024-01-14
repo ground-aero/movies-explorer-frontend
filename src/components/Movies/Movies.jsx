@@ -6,6 +6,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import LoadingContext from '../../contexts/LoadingContext';
+import AuthContext from "../../contexts/AuthContext.jsx";
 
 function Movies({
                     type, onSubmit, renderMovies,
@@ -13,9 +14,10 @@ function Movies({
                     isShort, setShortStatus, initCount, isAddCount, setIsAddCount
 }) {
     const isLoading = useContext(LoadingContext);
+    const loggedIn = useContext(AuthContext);
 
     useEffect(() => {
-
+        localStorage.getItem('loggedIn' || false);
     },[])
     // onSaveLikedCard
 

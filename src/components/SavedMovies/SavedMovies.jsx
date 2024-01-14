@@ -38,7 +38,7 @@ function SavedMovies({ type, likedMovies, isFoundLikedMovies, setFoundLikedMovie
                 const likedMovies = JSON.parse(localStorage.getItem('likedMovies'))
 
                 const moviesOnRender = handleSearch(likedMovies, isSearchedWordLiked, isShortLiked);
-                  console.log('сработал handleSearch(likedMovies, isSearchedWordLiked, isShortLiked)', moviesOnRender)
+                  // console.log('сработал handleSearch(likedMovies, isSearchedWordLiked, isShortLiked)', moviesOnRender)
 
                 if  ( moviesOnRender.length === 0 ) {
                     setErrorSearchApi('Фильмы не найдены');
@@ -56,7 +56,7 @@ function SavedMovies({ type, likedMovies, isFoundLikedMovies, setFoundLikedMovie
             const searchResult = movie.nameRU.toLowerCase().includes(lowCase) ||
                    movie.nameEN.toLowerCase().includes(lowCase)
 
-            console.log('searchResult', searchResult)
+            // console.log('searchResult', searchResult)
             if (isShortLiked === false) { // если длинные,
                 return searchResult; // => то получаем длинные ф.
             } if (isShortLiked === true) { // если короткие, => то получаем короткие ф.

@@ -1,10 +1,11 @@
 // этот компонент принимает другой компонент в качестве пропса
-import React from 'react';
+import React, {useContext} from 'react';
 import { Navigate } from 'react-router-dom';
+import AuthContext from '../contexts/AuthContext.jsx';
 
 const ProtectedRoute = ({ component: Component, ...props  }) => {
-    return (
-        props.loggedIn ? <Component {...props} /> : <Navigate to='/' replace/>
-    )}
+    let loggedIn = useContext(AuthContext)
+    return loggedIn ? <Component {...props} /> : <Navigate to='/' replace/>
+    };
 
 export default ProtectedRoute;

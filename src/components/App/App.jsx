@@ -3,7 +3,8 @@ import {Routes, Route, useNavigate, Navigate, useLocation} from 'react-router-do
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import LoadingContext from '../../contexts/LoadingContext';
 import SavedMoviesContext from '../../contexts/SavedMoviesContext';
-import DisabledFormContext from '../../contexts/DisabledFormContext'
+import DisabledFormContext from '../../contexts/DisabledFormContext';
+import AuthContext from '../../contexts/AuthContext';
 import '../general/page.css'
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -30,7 +31,8 @@ function App() {
     const [isWidth, setIsWidth] = useState(window.innerWidth);
 
     const [currentUser, setCurrentUser] = useState({name: '', email: ''});
-    const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn') || false);
+    const [loggedIn, setLoggedIn] = useState(false);
+    // const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn'|| false));
     const [isDisabled, setDisabled] = useState(false);
 
     /** Состояние массива карточек */
@@ -79,7 +81,6 @@ function App() {
         window.addEventListener('resize', handleResize)
         return (() => window.removeEventListener('resize', handleResize))
     },[])
-
 
     function handleTokenCheck() { /** @endpoint: '/users/me' */
     let token = localStorage.getItem('token');
@@ -133,7 +134,7 @@ function App() {
         }
         MainApi.login(email, password)
             .then((data) => {
-                console.log(data); // --> {token: "eyJhbGciOi....eyJfa'}
+                // console.log(data); // --> {token: "eyJhbGciOi....eyJfa'}
                 if (data.token) {
                     localStorage.setItem('token', data.token)
                     setLoggedIn(true)
@@ -159,9 +160,9 @@ function App() {
             .then((updatedUser) => {
                 setMessageSuccess('Ваш профиль успешно сохранен')
                 setTimeout(() => setMessageSuccess(null), 5000);
-                console.log(updatedUser.data)
+                // console.log(updatedUser.data)
                 setCurrentUser(updatedUser.data)
-                console.log(currentUser)
+                // console.log(currentUser)
             }).catch((err) => {
                 console.log(`err при обновлении данных профиля ${err}`)
             })
@@ -190,7 +191,7 @@ function App() {
         MainApi
             .getMyMovies(localStorage.getItem('token'))
             .then((res) => {
-                setLikedMovies(res.data.reverse()); // ---> в стейт
+                setLikedMovies(res.data.reverse()); // .reverse() __?? ---> в стейт
                 localStorage.setItem('likedMovies', JSON.stringify(res.data)); // ---> в ЛС
             })
             .catch((err) => console.log(`Ошибка при запросе сохраненных фильмов: ${err}`))
@@ -223,7 +224,7 @@ function App() {
                     setSearchedWord(value)
                     localStorage.setItem('searchedWord', JSON.stringify(value))
 
-                      console.log('сработал длинный метр: isShort, value, filteredData', isShort, value, filteredData)
+                      // console.log('сработал длинный метр: isShort, value, filteredData', isShort, value, filteredData)
                 } else {
 
                     setShortStatus(isShort) // 'true' ( ф. < 40 мин. )
@@ -274,9 +275,14 @@ function App() {
     }
 
     function handleSaveCard(card) { // Постановка лайка/сохранения карточки фильма на /movies
+          // console.log('like: вх.card', card)
         return MainApi.postMyMovie(card) // на свой АПИ
             .then((likedMovie) => { // --> data: {owner:.., _id:.., moviesId: 10, }
+                  // console.log('likedMovie.data', likedMovie.data)
+                card.isLiked = true;
                 likedMovie.data.isLiked = true; // меняю поле на --> isLiked: true
+                card._id = likedMovie.data._id;
+
             setLikedMovies([likedMovie.data, ...isLikedMovies]) // запись каждой добавленной карточки
             localStorage.setItem('likedMovies', JSON.stringify([likedMovie.data, ...isLikedMovies]))
             }).catch((err) => {
@@ -284,16 +290,40 @@ function App() {
         })
     }
 
+    // function defineId(_id) {
+    //     console.log('define card:', _id)
+    //     if (!_id) {
+    //         _id = isLikedMovies.find((item) => item._id === _id);
+    //     }
+    // }
+    // console.log('defineId(_id)', defineId(_id))
+
     function handleDeleteCard(_id) {
-        MainApi.deleteMyMovie(_id)
+        MainApi
+            .deleteMyMovie(_id)
+            // .then(() =>
+            //     setLikedMovies(isLikedMovies.filter((item) => item._id !== card))
+            // )
+            // .then(() => {
+            //     const savedList = JSON.parse(
+            //         localStorage.getItem('likedMovies')
+            //     ).filter((item) => item.movieId !== card);
+            //     localStorage.setItem('likedMovies', JSON.stringify(savedList));
+            // })
+            // .then(() => {
+            //     isLikedMovies.forEach((item, _ind) => {
+            //         if (item.movieId === card) {
+            //             isLikedMovies[_ind].isLiked = false;
+            //         }
+            //     });
+            // })
             .then((movie) => {
                 // likedMovie.data.isLiked = true; // меняем поле на --> isLiked: true
                 const restMoviesLiked = isLikedMovies.filter((movie) => movie._id !== _id);
 
                 setLikedMovies(restMoviesLiked);
                 localStorage.setItem('likedMovies', JSON.stringify([...restMoviesLiked]))
-
-                setFoundLikedMovies(restMoviesLiked)
+                // setFoundLikedMovies(restMoviesLiked)
             })
             .catch((err) => {
                 console.log(`Ошибка при удалении карточки: ${err}`);
@@ -318,75 +348,104 @@ function App() {
 
     return (
         <>
-            <CurrentUserContext.Provider value={currentUser}>
-                <LoadingContext.Provider value={isLoading}>
-                    <SavedMoviesContext.Provider value={isLikedMovies}>
-                        <DisabledFormContext.Provider value={isDisabled}>
-                <Routes>
-                    <Route exact path='/' index={true}
-                           element={
-                               <>
-                                   <Header loggedIn={loggedIn} type='land' onLogout={onLogout}/>
-                                   <Main/>
-                                   <Footer/>
-                               </>
-                           }
-                    />
+            <AuthContext.Provider value={loggedIn}>
+                <CurrentUserContext.Provider value={currentUser}>
+                    <LoadingContext.Provider value={isLoading}>
+                        <SavedMoviesContext.Provider value={isLikedMovies}>
+                            <DisabledFormContext.Provider value={isDisabled}>
+                    <Routes>
+                        <Route exact path='/' index={true}
+                               element={
+                                   <>
+                                       <Header loggedIn={loggedIn} type='land' onLogout={onLogout}/>
+                                       <Main/>
+                                       <Footer/>
+                                   </>
+                               }
+                        />
 
-                    <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister} errorApi={errorApi} />) : (<Navigate to='/movies'/>)}/>
-                    <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi} />) : (<Navigate to='/movies'/>)}/>
-                    <Route
-                        path='/profile'
-                        element={
-                        <>
-                            <ProtectedRoute
-                                loggedIn={loggedIn}
-                                component={Header}
-                                type={'profile'}
-                            />
-                            <ProtectedRoute
-                                loggedIn={loggedIn}
-                                component={Profile}
-                                onSubmit={handleUpdateProfile}
-                                currentUser={currentUser}
-                                messageSuccess={messageSuccess}
-                                onLogout={onLogout}
-                            />
-                        </>
-                        }
-                    />
-
-                    <Route
-                        path='/movies'
-                        element={
+                        <Route path='/signup' element={!loggedIn ? (<Register handleRegister={handleRegister} errorApi={errorApi} />) : (<Navigate to='/movies'/>)}/>
+                        <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi} />) : (<Navigate to='/movies'/>)}/>
+                        <Route
+                            path='/profile'
+                            element={
                             <>
                                 <ProtectedRoute
-                                    loggedIn={loggedIn}
                                     component={Header}
-                                    type={'movies'}
+                                    type={'profile'}
                                 />
                                 <ProtectedRoute
                                     loggedIn={loggedIn}
-                                    component={Movies}
-                                    type={'movies'}
+                                    component={Profile}
+                                    onSubmit={handleUpdateProfile}
+                                    currentUser={currentUser}
+                                    messageSuccess={messageSuccess}
+                                    onLogout={onLogout}
+                                />
+                            </>
+                            }
+                        />
 
-                                    onSubmit={handleSearchMovies}
-                                    renderMovies={isRenderMovies}
-                                    initCount={initCount}
+                        <Route
+                            path='/movies'
+                            element={
+                                <>
+                                    <ProtectedRoute
+                                        loggedIn={loggedIn}
+                                        component={Header}
+                                        type={'movies'}
+                                    />
+                                    <ProtectedRoute
+                                        loggedIn={loggedIn}
+                                        component={Movies}
+                                        type={'movies'}
 
-                                    isSearchedWord={isSearchedWord}
-                                    setSearchedWord={setSearchedWord}
-                                    isAddCount={isAddCount}
-                                    setIsAddCount={setIsAddCount}
+                                        onSubmit={handleSearchMovies}
+                                        renderMovies={isRenderMovies}
+                                        initCount={initCount}
 
-                                    isShort={isShortStatus}
-                                    setShortStatus={setShortStatus}
+                                        isSearchedWord={isSearchedWord}
+                                        setSearchedWord={setSearchedWord}
+                                        isAddCount={isAddCount}
+                                        setIsAddCount={setIsAddCount}
+
+                                        isShort={isShortStatus}
+                                        setShortStatus={setShortStatus}
+
+                                        likedMovies={isLikedMovies}
+                                        onSaveLikedCard={handleSaveCard}
+
+                                        onDeleteCard={handleDeleteCard}
+                                        errorSearchApi={errorSearchApi}
+                                    />
+                                    <ProtectedRoute
+                                        loggedIn={loggedIn}
+                                        component={Footer}
+                                    />
+                                </>
+                            }
+                        />
+                        <Route
+                            path='/saved-movies'
+                            element={
+                            <>
+                                <ProtectedRoute
+                                    component={Header}
+                                    type={'saved-movies'}
+                                />
+                                <ProtectedRoute
+                                    loggedIn={loggedIn}
+                                    component={SavedMovies}
+                                    type={'saved-movies'}
 
                                     likedMovies={isLikedMovies}
-                                    onSaveLikedCard={handleSaveCard}
-
-                                    onDeleteCard={handleDeleteCard}
+                                    isFoundLikedMovies={isFoundLikedMovies}
+                                    setFoundLikedMovies={setFoundLikedMovies}
                                     errorSearchApi={errorSearchApi}
+                                    setErrorSearchApi={setErrorSearchApi}
+
+                                    onSaveLikedCard={handleSaveCard}
+                                    onDeleteCard={handleDeleteCard}
                                 />
                                 <ProtectedRoute
                                     loggedIn={loggedIn}
@@ -394,46 +453,17 @@ function App() {
                                 />
                             </>
                         }
-                    />
-                    <Route
-                        path='/saved-movies'
-                        element={
-                        <>
-                            <ProtectedRoute
-                                loggedIn={loggedIn}
-                                component={Header}
-                                type={'saved-movies'}
-                            />
-                            <ProtectedRoute
-                                loggedIn={loggedIn}
-                                component={SavedMovies}
-                                type={'saved-movies'}
+                        />
 
-                                likedMovies={isLikedMovies}
-                                isFoundLikedMovies={isFoundLikedMovies}
-                                setFoundLikedMovies={setFoundLikedMovies}
-                                errorSearchApi={errorSearchApi}
-                                setErrorSearchApi={setErrorSearchApi}
+                        <Route path='*' element={<NotFound/>}/>
 
-                                onSaveLikedCard={handleSaveCard}
-                                onDeleteCard={handleDeleteCard}
-                            />
-                            <ProtectedRoute
-                                loggedIn={loggedIn}
-                                component={Footer}
-                            />
-                        </>
-                    }
-                    />
+                    </Routes>
 
-                    <Route path='*' element={<NotFound/>}/>
-
-                </Routes>
-
-                        </DisabledFormContext.Provider>
-                    </SavedMoviesContext.Provider>
-                </LoadingContext.Provider>
-            </CurrentUserContext.Provider>
+                            </DisabledFormContext.Provider>
+                        </SavedMoviesContext.Provider>
+                    </LoadingContext.Provider>
+                </CurrentUserContext.Provider>
+            </AuthContext.Provider>
         </>
     );
 }

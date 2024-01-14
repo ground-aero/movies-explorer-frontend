@@ -13,7 +13,7 @@ export const useResize = () => {
         const handleResize = (event) => {
             setIsWidth(event.target.innerWidth)
         }
-        console.log(isWidth)
+        // console.log(isWidth)
 
         window.addEventListener('resize', handleResize)
         return (() => window.removeEventListener('resize', handleResize))

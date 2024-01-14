@@ -61,7 +61,7 @@ function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, initCo
 
     }, [isWidth, isShowCards]);
 
-    console.log('initCount, isAddCount +, isShowCards', initCount, isAddCount, isShowCards)
+    // console.log('renderMovies,, initCount, isAddCount +, isShowCards', renderMovies, initCount, isAddCount, isShowCards)
 
     return (
         <>
@@ -87,7 +87,7 @@ function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, initCo
                         </ul>
                     }
 
-                    { (renderMovies.length >= isAddCount)
+                    { (renderMovies.length !== 0 && renderMovies.length >= isAddCount)
                         ? (<div className={`movies__more ${ errorSearchApi ? 'movies__more_display-none' : null }`}>
                         <button onClick={ showMore } className='movies__btn-more' name='movies__btn-more' type='button'>
                         Ещё

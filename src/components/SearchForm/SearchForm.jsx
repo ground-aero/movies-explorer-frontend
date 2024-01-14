@@ -39,39 +39,6 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies,
         }
     },[isShortStatus])
 
-    // console.log('isShortLiked,', isShortLiked)
-    // ------------------ ( saved-movies ) --------------------------------------------------------------------------
-    // useEffect(() => {
-    //     if (location.pathname === '/saved-movies') {
-    //         setTimeout(() => {
-    //             if (isShortLiked === false) {
-    //                 onSubmitLikedMovies(isSearchedWordLiked = '', isShortLiked)
-    //                 // console.log('срабоало: isShortStatus, isSearchedWord?.length', isShortStatus, isSearchedWord?.length)
-    //             }
-    //             if (isShortLiked === true) {
-    //                 onSubmitLikedMovies(isSearchedWordLiked = '', isShortLiked)
-    //                 // setIsPlaceholder('Фильм')
-    //                 // console.log('срабоало: isShortStatus, isSearchedWord?.length', isShortStatus, isSearchedWord?.length)
-    //             }
-    //         }, 300);
-    //     }
-    // }, [isSearchedWordLiked, isShortLiked]);
-    // useEffect(() => { // Фильтруем на: длинные или короткие, в зависимости от стейта 'isShort',
-    //     if (location.pathname === '/saved-movies') {
-    //         setTimeout(() => {
-    //             if (isShortStatusLiked === false && isSearchedWordLiked) {
-    //                 onSubmitLikedMovies(isSearchedWordLiked, isShortStatusLiked)
-    //                   console.log('срабоал длинный: isShortStatusLiked, isSearchedWordLiked', isShortStatusLiked, isSearchedWordLiked)
-    //             }
-    //             if (isShortStatusLiked === true && isSearchedWordLiked) {
-    //                 onSubmitLikedMovies(isSearchedWordLiked, isShortStatusLiked)
-    //                 // setIsPlaceholder('Фильм')
-    //                   console.log('срабоал короткий: isShortStatusLiked, isSearchedWordLiked', isShortStatusLiked, isSearchedWordLiked)
-    //             }
-    //         }, 300);
-    //     }
-    // },[isShortStatusLiked])
-
     function handleInput(evt) {
         if (location.pathname === '/movies') {
             localStorage.setItem('searchedWord', JSON.stringify(evt.target.value)) // сохраняем искомое слово в ЛС
@@ -86,7 +53,7 @@ function SearchForm({ type, onSubmitMovies, onSubmitLikedMovies,
         if (location.pathname === '/movies') {
         const searchedWord = JSON.parse(localStorage.getItem('searchedWord')) // достаем 'searchedWord' из ЛС
         const shortStatus = JSON.parse(localStorage.getItem('isShort'))
-            console.log('isShortStatus, isSearchedWord::', isShortStatus, searchedWord)
+            // console.log('isShortStatus, isSearchedWord::', isShortStatus, searchedWord)
 
         if (searchedWord) onSubmitMovies(searchedWord, shortStatus) // текущее поисковое слово сабмитим на Сервер
         else setIsPlaceholder('Введите запрос')
