@@ -41,23 +41,20 @@
 
 ---
 ### *Front domain address:*
-- `https://ga-movies.nomoredomainsicu.ru`
+- [https://ga-movies.nomoredomainsicu.ru](https://ga-movies.nomoredomainsicu.ru)
 
 ### *Server domain address:*
-- `https://api.ga-movies.nomoredomainsicu.ru`
+- [https://api.ga-movies.nomoredomainsicu.ru](https://api.ga-movies.nomoredomainsicu.ru)
 
 ### *Films DataBase address:*
 -  `https://api.nomoreparties.co/beatfilm-movies`
 
-### Макет: light-1
-#### Ссылка на макет: [Figma 'light-1' template](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=932-3961&mode=design&t=VCMDVvNjAbCo2lft-0)
+#### *Template:*
+ *[Figma 'light-1' template](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=932-3961&mode=design&t=VCMDVvNjAbCo2lft-0)*
 
 ---
-### *Frontend:*
-HTML, CSS, JavaScript, React
-### *Backend:*
-NodeJS, Express, MongoDB
-### *Infrastructure:*
-WebPack, Git, Github
-### *DevOps:*
-VM, Ubuntu, Nginx, SSL
+### *Tech Stack:*
+FRONT: *HTML, CSS, JavaScript, React*
+BACK: *NodeJS, Express, MongoDB*
+INFRASTRUCTURE: *WebPack, Git, Github*
+DEV OPS: *VM, Ubuntu, Nginx, SSL*
