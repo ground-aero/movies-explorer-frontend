@@ -5,13 +5,12 @@ import '../../general/content.css';
 function About() {
 
     return (
-        <section id='about' className='sec about content__section'> {/* flex, column - */}
+        <section id='about' className='sec about content__section'>
 
             <div className='sec__header-wrap sec__header-wrap_about'>
                 <h2 className='sec__header'>О проекте</h2>
             </div>
 
-            {/*2nd flex-box*/}
             <article className='articles articles_wrap'>
                 <div className='article'>
                     <h3 className='article__title'>Дипломный проект включал 5 этапов</h3>
@@ -23,7 +22,6 @@ function About() {
                 </div>
             </article>
 
-            {/*3rd flex-box - table - align-self: flex-end*/}
             <ul className='table'>
                 <li className='table-cell'>
                     <p className='table-row table-row_theme_primary'>1 неделя</p>
@@ -33,7 +31,6 @@ function About() {
                     <p className='table-row table-row_theme_primary table-row_type_tech'>Back-end</p>
                     <p className='table-row table-row_theme_secondary table-row_type_tech'>Front-end</p>
                 </li>
-
             </ul>
 
         </section>

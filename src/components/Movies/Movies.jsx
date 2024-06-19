@@ -1,20 +1,59 @@
 // Component for page with movies search.
+import {useContext, useEffect} from 'react';
 import '../general/content.css';
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
-import Preloader from '../Preloader/Preloader.jsx';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
+import Preloader from '../Preloader/Preloader';
+import LoadingContext from '../../contexts/LoadingContext';
+import AuthContext from "../../contexts/AuthContext.jsx";
 
-function Movies({ cards, type  }) {
+function Movies({
+                    type, onSubmit, renderMovies,
+                    likedMovies, onSaveLikedCard, onDeleteCard, errorSearchApi,
+                    isShort, setShortStatus, initCount, isAddCount, setIsAddCount
+}) {
+    const isLoading = useContext(LoadingContext);
+    const loggedIn = useContext(AuthContext);
+
+    useEffect(() => {
+        localStorage.getItem('loggedIn' || false);
+    },[])
+
     return (
         <main className='content'>
             <section className='movies content__section'>
 
-                <SearchForm />
+                <SearchForm
+                    onSubmitMovies={ onSubmit }
+                    searchKey={'searchedWord'}
+                    type={ type }
 
-                <MoviesCardList type={ type } cards={cards}/>
+                    isShortStatus={isShort}
+                    setShortStatus={setShortStatus}
+                />
 
-                {/*<Preloader />*/}
+                { isLoading
+                    ? <span className='preloader'>
+                        <Preloader />
+                    </span>
+                    : <MoviesCardList
+                        type={ type }
+                        renderMovies={ renderMovies }
+                        initCount={initCount}
+                        isAddCount={ isAddCount }
+                        setIsAddCount={ setIsAddCount }
+
+                        likedMovies={ likedMovies }
+                        onSaveLikedCard={ onSaveLikedCard }
+
+                        isShort={isShort}
+                        isSavedCards={false}
+
+                        onDeleteCard={ onDeleteCard }
+                        errorSearchApi={ errorSearchApi }
+                    />
+                }
 
             </section>
         </main>

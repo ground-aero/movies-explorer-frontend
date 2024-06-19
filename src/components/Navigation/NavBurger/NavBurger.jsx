@@ -1,16 +1,11 @@
 // Component NavBurger - mobile menu
-import { NavLink, Link } from 'react-router-dom';
-import {useState, useEffect} from 'react';
+import { NavLink} from 'react-router-dom';
+import {useState} from 'react';
 import './NavBurger.css';
 
-function NavBurger ({ type, rights }) {
+function NavBurger ({ type }) {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
-    // useEffect(() => {
-    //     document.body.style.overflow = isOverlayOpen ? 'overlay_hidden' : '';
-    // }, [isOverlayOpen]);
-
-    // function toggleBurger() { isOverlayOpen ? setIsOverlayOpen(false) : setIsOverlayOpen(true)}
     function openBurger() { isOverlayOpen ? setIsOverlayOpen(false) : setIsOverlayOpen(true) }
     function closeBurger() { !isOverlayOpen ? setIsOverlayOpen(true) : setIsOverlayOpen(false) }
 
@@ -27,7 +22,6 @@ function NavBurger ({ type, rights }) {
 
                 <nav className='overlay__container'>
 
-                    {/*<span className={`links links_${ rights }`}>*/}
                     <span className='links links_wrap'>
                         <NavLink to='/'
                                  className={({isActive}) => `link link_type_${type} ` + (isActive ? `link_active` : '')}>Главная</NavLink>
@@ -40,14 +34,11 @@ function NavBurger ({ type, rights }) {
                     <NavLink to='/profile'
                              className={({isActive}) => `account link link_type_account ` + (isActive ? 'link_active' : '')}>
                         <p className='account__text'>Аккаунт</p>
-                        {/*<img src={accountMan} className='account__man' alt='account icon'/>*/}
                     </NavLink>
-                    {/*</span>*/}
+
                 </nav>
 
             </div>
-
-
         </>
     );
 }

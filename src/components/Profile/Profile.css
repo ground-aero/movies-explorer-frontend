@@ -56,7 +56,9 @@
     font-size: 11px;
     color: #000;
     line-height: 13.3px;
+    height: 100%;
     width: 20%;
+    position: relative;
     /*padding-top: 16px;*/
 }
 
@@ -73,6 +75,7 @@
     outline: 0;
     text-align: right;
     width: 80%;
+    height: 100%;
     padding: 0;
 }
 
@@ -80,12 +83,22 @@
     content: '';
     position: absolute;
     top: 0;
-    right: 0;
-    width: 100%;
+    left: 0;
+    width: 410px;
     height: 100%;
     color: #A0A0A0;
     border-bottom: 1px solid #3456F3;
-    /*box-shadow: 0 0 10px rgb(155, 159, 159, .5);*/
+}
+
+.profile__input-err {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #FF3055;
+    padding-top: 4px;
+    position: absolute;
+    bottom: -1px;
+    right: 0;
 }
 
 .caption_profile {
@@ -93,6 +106,20 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+    position: relative;
+}
+
+.caption__message {
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 15.7px;
+    margin: 0;
+    display: block;
+    color: #028a02;
+    padding: 0;
+    position: absolute;
+    top: -30px;
 }
 
 .caption__text_profile {
@@ -118,6 +145,12 @@
     cursor: pointer;
 }
 
+.caption__text_btn-logout {
+    color: #FF3055;
+    font-weight: 500;
+    padding: 16px 0 67px;
+}
+
 .btn_entry {
     width: 100%;
     min-height: 45px;
@@ -128,15 +161,15 @@
     line-height: 17px;
     color: #FFF;
 }
-/*.profile__input_type_email {*/
-/*    border-bottom: none;*/
-/*}*/
+
 .btn_entry_profile {
     margin-bottom: 67px;
 }
+
 .btn_entry_profile_disabled {
     background-color: #F8F8F8;
     color: #C2C2C2;
+    cursor: not-allowed;
 }
 
 @media (max-width: 768px) {
@@ -146,14 +179,20 @@
     .profile__input-wrap:first-of-type {
         padding-top: 97px;
     }
-    /*.profile__input-label:first-child {*/
-    /*    padding-top: 96px;*/
-    /*}*/
     .profile__inputs {
         min-height: 177px;
     }
+    .profile__input-err {
+        padding-top: 7px;
+    }
     .caption_profile {
         padding: 192px 0 269px;
+    }
+    .caption__message {
+        top: 150px;
+    }
+    .caption__text_btn-logout {
+        padding: 16px 0 0;
     }
     .btn_entry_profile {
         margin-top: 192px;
@@ -172,11 +211,18 @@
     .profile__input-wrap:first-of-type {
         padding-top: 81px;
     }
-    /*.profile__input-label:first-child {*/
-    /*    padding-top: 80px;*/
-    /*}*/
+    .profile__input-err {
+        padding-top: 5px;
+        bottom: -11px;
+    }
+    .profile__input:focus + .profile__input-label::after {
+        width: 260px;
+    }
     .caption_profile {
         padding: 344px 0 40px;
+    }
+    .caption__message {
+        top: 310px;
     }
     .caption__text {
         font-size: 12px;
