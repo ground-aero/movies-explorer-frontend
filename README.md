@@ -4,12 +4,12 @@
 
 ### Приложение состоит из следующих страниц:
 #### *This App includes the following pages:*
-`Главная (main)`. Содержит информацию о выполненном проекте.
-`Страница с фильмами (movies)`. На ней есть форма поиска фильмов и блок с результатами поиска.
-`Страница с сохранёнными фильмами (saved movies)`. Показывает фильмы, сохранённые пользователем.
-`Страница регистрации (register)`. Позволяет пользователю зарегистрировать аккаунт.
-`Страница авторизации (authorization)`. На ней пользователь может войти в систему.
-`Страница редактирования профиля (profile)`. Пользователь может изменить данные своего аккаунта. 
+`Главная (main)`. Содержит информацию о выполненном проекте.  
+`Страница с фильмами (movies)`. На ней есть форма поиска фильмов и блок с результатами поиска.  
+`Страница с сохранёнными фильмами (saved movies)`. Показывает фильмы, сохранённые пользователем.  
+`Страница регистрации (register)`. Позволяет пользователю зарегистрировать аккаунт.  
+`Страница авторизации (authorization)`. На ней пользователь может войти в систему.  
+`Страница редактирования профиля (profile)`. Пользователь может изменить данные своего аккаунта.  
 
 --- 
 ### *Как он должен работать?*
@@ -33,9 +33,9 @@
 *display previously found movies taken from localStorage on the page*
 
 ### Работа с Form/inputs
-- Поле 'name' валидируется на фронте через атрибут — pattern при помощи регулярного выражения; 
-*The 'name' field is being validated on the front end via pattern attribute using a regular expression;*
-- Мгновенная валидация полей за счет псевдоклассов :invalid, :valid
+- Поле 'name' валидируется на фронте через атрибут — pattern при помощи регулярного выражения.  
+*The 'name' field is being validated on the front end via pattern attribute using a regular expression.*  
+- Мгновенная валидация полей за счет псевдоклассов :invalid, :valid  
 *Prompt validation of fields due to pseudo-classes :valid, :invalid,*
 
 
@@ -52,9 +52,10 @@
 #### *Template:*
  *[Figma 'light-1' template](https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=932-3961&mode=design&t=VCMDVvNjAbCo2lft-0)*
 
+
 ---
 ### *Tech Stack:*
-FRONT: *HTML, CSS, JavaScript, React*
-BACK: *NodeJS, Express, MongoDB*
-INFRASTRUCTURE: *WebPack, Git, Github*
-DEV OPS: *VM, Ubuntu, Nginx, SSL*
+FRONT: *HTML, CSS, JavaScript, React*  
+BACK: *NodeJS, Express, MongoDB*  
+INFRASTRUCTURE: *WebPack, Git, Github*  
+DEV OPS: *VM, Ubuntu, Nginx, SSL*  
