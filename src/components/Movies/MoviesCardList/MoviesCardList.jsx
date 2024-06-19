@@ -30,7 +30,7 @@ function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, initCo
         return (() => window.removeEventListener('resize', handleResize))
     },[isWidth])
 
-    // ------------------ ( movies ) -------------------------------------------------------------------
+    // ------------------ ( movies ) ------------------------------------------
 
     useEffect(() => { // Нарезка всех найденных, в зависимости от ширины экрана
         if (location.pathname === '/movies') {
@@ -39,7 +39,7 @@ function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, initCo
         }
     },[isShort, renderMovies, isAddCount])
 
-    // ------------------ ( saved-movies ) -------------------------------------------------------------
+    // ------------------ ( saved-movies ) -----------------------------------------
     useEffect(() => { // Отображение всех лайкнутых ф., в завис. от поиск. слова ...
         if (location.pathname === '/saved-movies') {
                 setShowLikedMovies(renderLikedMovies)

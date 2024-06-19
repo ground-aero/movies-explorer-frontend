@@ -4,12 +4,10 @@ import '../general/content.css';
 import './Login.css';
 import FormSection from '../FormSection/FormSection';
 import {useFormWithValidation} from '../../hooks/useValidForm.jsx';
-import DisabledFormContext from '../../contexts/DisabledFormContext';
 
 function Login({ handleLogin, errorApi }) { // @props из App.js - аутентификация пользователя
     /** логика и стейты: values.name, values.emaiil, ... --> in ValidForm component */
     const { handleChange, values, errors, isValid, resetForm } = useFormWithValidation();
-    const isDisabled = useContext(DisabledFormContext);
 
     useEffect(() => {
         resetForm('', '', true)
@@ -30,7 +28,6 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
 
                     <label className='login__input-label' htmlFor='login-input-email'>E-mail
                         <input
-                            disabled={isDisabled}
                             className='login__input'
                             value={values.email ?? ''}
                             onChange={handleChange}
@@ -48,7 +45,6 @@ function Login({ handleLogin, errorApi }) { // @props из App.js - аутент
 
                     <label className='login__input-label' htmlFor='login-input-pass'>Пароль
                         <input
-                            disabled={isDisabled}
                             className='login__input'
                             value={values.password ?? ''}
                             onChange={handleChange}

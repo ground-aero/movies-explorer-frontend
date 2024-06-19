@@ -113,10 +113,6 @@ function Profile({ onSubmit, messageSuccess, onLogout }) {
                                      disabled={ !(isProcessed && (isValid.email && isValid.name)) } aria-label='edit'>
                                 { 'Сохранить' }
                             </button>
-                                // <button type='submit' className={`btn btn_entry btn_entry_profile ${(!isChanged && (!isValid.name && !isValid.email)) ? 'btn_entry_profile_disabled' : '' }`}
-                                //         disabled={ !isValid.name && !isValid.email } aria-label='edit'>
-                                //     { 'Сохранить' }
-                                // </button>
                         }
                     </form>
                 </div>
