@@ -102,7 +102,7 @@ class MainApi {
 
     //  # удаляет сохраненный фильм по id с сервера
     deleteMyMovie(movieId) {
-        // console.log(movieId)
+        console.log(movieId)
         const token = localStorage.getItem('token');
         return fetch(`${mainApiSettings.serverUrl}/movies/${movieId}`, {
             method: 'DELETE',

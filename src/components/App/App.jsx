@@ -36,7 +36,7 @@ function App() {
     const [isDisabled, setDisabled] = useState(false);
 
     /** Состояние массива карточек */
-    const [isRenderMovies, setRenderMovies] = useState([]); // [ найденные(мутиров.) картчки] --> /movies ]
+    const [isRenderMovies, setRenderMovies] = useState([]); // [ найденные(мутиров.) карточки] --> /movies ]
     const [isAddCount, setIsAddCount] = useState(null); // инкремент кол-ва карточек
 
     const [isLikedMovies, setLikedMovies] = useState([]); // [ лайкнутые карточки ] --> /saved-movies
@@ -85,19 +85,19 @@ function App() {
     function handleTokenCheck() { /** @endpoint: '/users/me' */
     let token = localStorage.getItem('token');
         if (token) {
-            /** есть ли jwt токен в локальном хранилище браузера ? */
             MainApi.getUserAuth(token)
-                .then((res) => {
+                .then((isValid) => {
                     /** автологин. Чтобы после перезагрузки не выкидывало снова в логин */
-                      // console.log('res getUserAuth:', res.data)
-                    if (res) { // { _id:..., name:..., email:... }
+                      // console.log('isValid getUserAuth:', isValid.data)
+                    if (isValid) { // { _id:..., name:..., email:... }
                         let userData = {
-                            id: res.data._id, // id: res.data._id,
-                            name: res.data.name,
-                            email: res.data.email,
+                            id: isValid.data._id, // id: res.data._id,
+                            name: isValid.data.name,
+                            email: isValid.data.email,
                         }
                         setCurrentUser(userData) // запись текущего пользака в глоб. контекст
                         setLoggedIn(true)
+                        navigate(location.pathname, {replace: true}) // при перезагрузке, остаемся на той же странице
                     }
                 })
                 .catch((err) => {
@@ -159,6 +159,7 @@ function App() {
         MainApi.patchUser(name, email)
             .then((updatedUser) => {
                 setMessageSuccess('Ваш профиль успешно сохранен')
+                setLoggedIn(true)
                 setTimeout(() => setMessageSuccess(null), 5000);
                 // console.log(updatedUser.data)
                 setCurrentUser(updatedUser.data)
@@ -275,10 +276,10 @@ function App() {
     }
 
     function handleSaveCard(card) { // Постановка лайка/сохранения карточки фильма на /movies
-          // console.log('like: вх.card', card)
+          console.log('like: вх.card', card)
         return MainApi.postMyMovie(card) // на свой АПИ
             .then((likedMovie) => { // --> data: {owner:.., _id:.., moviesId: 10, }
-                  // console.log('likedMovie.data', likedMovie.data)
+                  console.log('likedMovie.data', likedMovie.data)
                 card.isLiked = true;
                 likedMovie.data.isLiked = true; // меняю поле на --> isLiked: true
                 card._id = likedMovie.data._id;
@@ -299,6 +300,7 @@ function App() {
     // console.log('defineId(_id)', defineId(_id))
 
     function handleDeleteCard(_id) {
+        console.log(_id)
         MainApi
             .deleteMyMovie(_id)
             // .then(() =>
@@ -320,6 +322,7 @@ function App() {
             .then((movie) => {
                 // likedMovie.data.isLiked = true; // меняем поле на --> isLiked: true
                 const restMoviesLiked = isLikedMovies.filter((movie) => movie._id !== _id);
+                 console.log(restMoviesLiked)
 
                 setLikedMovies(restMoviesLiked);
                 localStorage.setItem('likedMovies', JSON.stringify([...restMoviesLiked]))
@@ -368,9 +371,10 @@ function App() {
                         <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi} />) : (<Navigate to='/movies'/>)}/>
                         <Route
                             path='/profile'
-                            element={
-                            <>
+                            element={ loggedIn ?
+                            (<>
                                 <ProtectedRoute
+                                loggedIn={loggedIn}
                                     component={Header}
                                     type={'profile'}
                                 />
@@ -382,14 +386,14 @@ function App() {
                                     messageSuccess={messageSuccess}
                                     onLogout={onLogout}
                                 />
-                            </>
+                            </>) : <Navigate to='/signin'/>
                             }
                         />
 
                         <Route
                             path='/movies'
-                            element={
-                                <>
+                            element={ loggedIn ?
+                                (<>
                                     <ProtectedRoute
                                         loggedIn={loggedIn}
                                         component={Header}
@@ -422,14 +426,15 @@ function App() {
                                         loggedIn={loggedIn}
                                         component={Footer}
                                     />
-                                </>
+                                </>) : (<Navigate to='/signin'/>)
                             }
                         />
                         <Route
                             path='/saved-movies'
-                            element={
-                            <>
+                            element={ loggedIn ?
+                            (<>
                                 <ProtectedRoute
+                                    loggedIn={loggedIn}
                                     component={Header}
                                     type={'saved-movies'}
                                 />
@@ -451,7 +456,7 @@ function App() {
                                     loggedIn={loggedIn}
                                     component={Footer}
                                 />
-                            </>
+                            </>) : (<Navigate to='/signin'/>)
                         }
                         />
 
