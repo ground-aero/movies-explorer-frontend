@@ -12,7 +12,6 @@ function SavedMovies({ type, likedMovies, isFoundLikedMovies, setFoundLikedMovie
     const isLoading = useContext(LoadingContext);
     const [isSearchedWordLiked, setSearchedWordLiked] = useState('');
     const [isShortLiked, setShortLiked] = useState(false);
-
     const [isShortMovies, setShortMovies] = useState([]); // коротыши
     // ------------------ ( saved-movies ) -------------------------------------------------------------
 

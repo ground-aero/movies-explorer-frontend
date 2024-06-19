@@ -19,10 +19,6 @@ function Movies({
     useEffect(() => {
         localStorage.getItem('loggedIn' || false);
     },[])
-    // onSaveLikedCard
-
-    // useEffect(() => {
-    // },[renderMovies])
 
     return (
         <main className='content'>

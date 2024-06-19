@@ -371,8 +371,8 @@ function App() {
                         <Route path='/signin' element={!loggedIn ? (<Login handleLogin={handleLogin} errorApi={errorApi} />) : (<Navigate to='/movies'/>)}/>
                         <Route
                             path='/profile'
-                            element={ loggedIn ?
-                            (<>
+                            element={
+                            <>
                                 <ProtectedRoute
                                 loggedIn={loggedIn}
                                     component={Header}
@@ -386,14 +386,14 @@ function App() {
                                     messageSuccess={messageSuccess}
                                     onLogout={onLogout}
                                 />
-                            </>) : <Navigate to='/signin'/>
+                            </>
                             }
                         />
 
                         <Route
                             path='/movies'
-                            element={ loggedIn ?
-                                (<>
+                            element={
+                                <>
                                     <ProtectedRoute
                                         loggedIn={loggedIn}
                                         component={Header}
@@ -426,13 +426,13 @@ function App() {
                                         loggedIn={loggedIn}
                                         component={Footer}
                                     />
-                                </>) : (<Navigate to='/signin'/>)
+                                </>
                             }
                         />
                         <Route
                             path='/saved-movies'
-                            element={ loggedIn ?
-                            (<>
+                            element={
+                            <>
                                 <ProtectedRoute
                                     loggedIn={loggedIn}
                                     component={Header}
@@ -456,7 +456,7 @@ function App() {
                                     loggedIn={loggedIn}
                                     component={Footer}
                                 />
-                            </>) : (<Navigate to='/signin'/>)
+                            </>
                         }
                         />
 

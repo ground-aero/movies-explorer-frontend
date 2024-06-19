@@ -40,7 +40,7 @@ function MoviesCardList({ type, renderMovies, isShort, renderLikedMovies, initCo
     },[isShort, renderMovies, isAddCount])
 
     // ------------------ ( saved-movies ) -------------------------------------------------------------
-    useEffect(() => { // Отображение всех лайкнутых фильмов, в завис. от поиск. слова .....
+    useEffect(() => { // Отображение всех лайкнутых ф., в завис. от поиск. слова ...
         if (location.pathname === '/saved-movies') {
                 setShowLikedMovies(renderLikedMovies)
             }
