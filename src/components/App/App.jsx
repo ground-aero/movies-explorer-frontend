@@ -276,10 +276,10 @@ function App() {
     }
 
     function handleSaveCard(card) { // Постановка лайка/сохранения карточки фильма на /movies
-          console.log('like: вх.card', card)
+        //   console.log('like: вх.card', card)
         return MainApi.postMyMovie(card) // на свой АПИ
             .then((likedMovie) => { // --> data: {owner:.., _id:.., moviesId: 10, }
-                  console.log('likedMovie.data', likedMovie.data)
+                //   console.log('likedMovie.data', likedMovie.data)
                 card.isLiked = true;
                 likedMovie.data.isLiked = true; // меняю поле на --> isLiked: true
                 card._id = likedMovie.data._id;
@@ -300,29 +300,12 @@ function App() {
     // console.log('defineId(_id)', defineId(_id))
 
     function handleDeleteCard(_id) {
-        console.log(_id)
         MainApi
             .deleteMyMovie(_id)
-            // .then(() =>
-            //     setLikedMovies(isLikedMovies.filter((item) => item._id !== card))
-            // )
-            // .then(() => {
-            //     const savedList = JSON.parse(
-            //         localStorage.getItem('likedMovies')
-            //     ).filter((item) => item.movieId !== card);
-            //     localStorage.setItem('likedMovies', JSON.stringify(savedList));
-            // })
-            // .then(() => {
-            //     isLikedMovies.forEach((item, _ind) => {
-            //         if (item.movieId === card) {
-            //             isLikedMovies[_ind].isLiked = false;
-            //         }
-            //     });
-            // })
             .then((movie) => {
                 // likedMovie.data.isLiked = true; // меняем поле на --> isLiked: true
                 const restMoviesLiked = isLikedMovies.filter((movie) => movie._id !== _id);
-                 console.log(restMoviesLiked)
+                //  console.log(restMoviesLiked)
 
                 setLikedMovies(restMoviesLiked);
                 localStorage.setItem('likedMovies', JSON.stringify([...restMoviesLiked]))
