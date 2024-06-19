@@ -23,7 +23,6 @@
     margin: 0;
 }
 
-/* portfolio list */
 .portfolio__list {
     display: flex;
     flex-direction: column;

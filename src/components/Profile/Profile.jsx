@@ -1,48 +1,68 @@
 // component page - for patching/changing of Profile - компонент страницы изменения профиля.
+import React, { useState, useEffect, useContext } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import DisabledFormContext from '../../contexts/DisabledFormContext';
 import '../general/content.css';
 import './Profile.css';
-import FormSection from '../FormSection/FormSection';
-import {Link} from "react-router-dom";
-import {useState} from "react";
+import { useFormWithValidation } from '../../hooks/useValidForm.jsx';
 
-function Profile({ onUpdateProfile }) {
-    // const [isUpdateProfile, setIsUpdateProfile] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+function Profile({ onSubmit, messageSuccess, onLogout }) {
+
+    const currentUser = useContext(CurrentUserContext);
+    const isDisabled = useContext(DisabledFormContext);
+    const { values, setValues, handleChange, errors, isValid, setIsValid } = useFormWithValidation();
+
+    /** Логика:
+     * Кнопка: isChanged ---> 'Сохранить' | else ---> 'Редактировать', 'Выйти'
+     * Переменная: isValid ---> 'Сохранить' | else ---> disabled
+     */
     const [isChanged, setIsChanged] = useState(false)
-    // console.log(onUpdateProfile)
-    console.log(isChanged)
-    /** Обработчики изменения инпута обновляет стейт */
-    function handleUpdateProfile() {
+    const [isProcessed, setIsProcessed] = useState(false)
+
+    useEffect(() => {
+        if (currentUser.name !== values.name || currentUser.email !== values.email) setIsProcessed(true)
+        else setIsProcessed(false)
+    }, [values.name, values.email]);
+
+    useEffect(() => {
+        setValues({
+            name: currentUser.name,
+            email: currentUser.email
+        })
+        setIsValid({
+            name: values.name = true,
+            email: values.email = true
+        })
+    }, [currentUser.name, currentUser.email])
+
+    function handleEditBtn() {
         setIsChanged(true)
     }
-    function handleChangeName(e) {
-        if (e.target.value !== name) setIsChanged(true)
-        else setIsChanged(false)
-        setName(e.target.value);
-    }
-    function handleChangeEmail(e) {
-        if (e.target.value !== email) setIsChanged(true)
-        else setIsChanged(false)
-        setEmail(e.target.value);
+
+    function handleSubmitUpdate(e) {
+        e.preventDefault()
+        if (isChanged && (isValid.name && isValid.email)) onSubmit({name: values.name, email: values.email})
+
+        setIsChanged(false)
+        setIsProcessed(false)
     }
 
     return (
         <main className='content'>
 
-            {/*<FormSection name={'profile'} title={'Привет, Виталий!'}*/}
-            {/*             captionLinkEdit={'Редактировать'} captionLinkLogout={'Выйти из аккаунта'} captionLink={'/'}>*/}
             <section className='form-sec'>
-
                 <div className={`form-sec__box form-sec__box_profile`}>
-                    <h1 className={`form-sec__title form-sec__title_type_profile`}>{ 'Привет, Виталий!' }</h1>
-                    <form className={`form profile`} name='form-profile'>
+                    <h1 className={`form-sec__title form-sec__title_type_profile`}>{`Привет, ${ currentUser.name } `}</h1>
+
+                    <form className={`form profile`} name='form-profile'
+                          onSubmit={handleSubmitUpdate} >
                         <div className='profile__inputs'>
                             <span className='profile__input-wrap'>
                                 <input
+                                    disabled={ !isChanged }
                                     className='profile__input'
-                                    value={name}
-                                    onChange={handleChangeName}
+                                    onChange={ handleChange }
+                                    value={ values.name ?? '' }
                                     type='text'
                                     autoFocus
                                     id='profile-input-name'
@@ -52,14 +72,16 @@ function Profile({ onUpdateProfile }) {
                                     minLength='2'
                                     required
                                 />
+                                { errors.name && <span className='profile__input-err'>{ errors.name }</span>}
                                 <label className='profile__input-label' htmlFor='profile-input-name'>Имя</label>
                             </span>
 
                             <span className='profile__input-wrap'>
                                 <input
+                                    disabled={ !isChanged }
                                     className='profile__input profile__input_type_email'
-                                    value={email}
-                                    onChange={handleChangeEmail}
+                                    onChange={ handleChange }
+                                    value={ values.email ?? '' }
                                     type='email'
                                     id='profile-input-email'
                                     placeholder='введите Ваш email'
@@ -68,29 +90,33 @@ function Profile({ onUpdateProfile }) {
                                     minLength='4'
                                     required
                                 />
+                                { errors.email && <span className='profile__input-err'>{ errors.email }</span>}
                                 <label className='profile__input-label' htmlFor='profile-input-email'>E-mail</label>
                             </span>
 
                         </div>
 
                         {/** отображение 'caption' Profile* */}
-
                         {!isChanged ?
                         <>
                             <span className='caption caption_profile'>
-                                <button type='button' onClick={ handleUpdateProfile } className='caption__text caption__text_profile caption__text_btn '>{ 'Редактировать' }</button>
-                                <Link to='/' className='caption__text caption__text_profile'>{ 'Выйти из аккаунта' }</Link>
+                                <span className='caption__message caption__text'>{ messageSuccess }</span>
+                                <button type='button' onClick={ handleEditBtn } className='caption__text caption__text_profile caption__text_btn '>
+                                    { 'Редактировать' }
+                                </button>
+                                <button type='button' onClick={ onLogout } className='caption__text caption__text_profile caption__text_btn caption__text_btn-logout '>
+                                    { 'Выйти из аккаунта' }
+                                </button>
                             </span>
                         </> :
-                                <button type='submit' className={`btn btn_entry btn_entry_profile ${!isChanged ? '' : 'btn_entry_profile_disabled'}`} aria-label='edit' >
-                                    { 'Сохранить' }
-                                </button>
+                            <button type='submit' className={`btn btn_entry btn_entry_profile ${isProcessed && (isValid.email && isValid.name) ? '' : 'btn_entry_profile_disabled'}`}
+                                     disabled={ !(isProcessed && (isValid.email && isValid.name)) } aria-label='edit'>
+                                { 'Сохранить' }
+                            </button>
                         }
                     </form>
-
                 </div>
             </section>
-            {/*</FormSection>*/}
 
         </main>
     );
