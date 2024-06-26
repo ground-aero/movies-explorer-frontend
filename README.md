@@ -58,4 +58,4 @@
 FRONT: *HTML, CSS, JavaScript, React*  
 BACK: *NodeJS, Express, MongoDB*  
 INFRASTRUCTURE: *WebPack, Git, Github*  
-DEV OPS: *VM, Ubuntu, Nginx, SSL*  
+DEV OPS: *VM, Ubuntu, Nginx, SSL*. (Приложение развернуто на Облаке firstVDS)
