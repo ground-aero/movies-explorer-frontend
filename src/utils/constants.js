@@ -5,7 +5,8 @@ export const beatfilmmainApiSettings = {
 
 export const mainApiSettings = {
     // serverUrl: 'http://127.0.0.1:4000'
-    serverUrl: 'https://api.ga-movies.nomoredomainsicu.ru'
+    // serverUrl: 'https://api.ga-movies.nomoredomainsicu.ru'
+    serverUrl: 'https://api.movies-explorer.online'
 };
 
 export const SHORT_MOVIE = 40;
