@@ -41,10 +41,10 @@
 
 ---
 ### *Front domain address:*
-- [https://ga-movies.nomoredomainsicu.ru](https://ga-movies.nomoredomainsicu.ru)
+- [https://movies-explorer.online/](https://movies-explorer.online/)
 
-### *Server domain address:*
-- [https://api.ga-movies.nomoredomainsicu.ru](https://api.ga-movies.nomoredomainsicu.ru)
+### *Backend domain address:*
+- [https://api.movies-explorer.online/](https://api.movies-explorer.online/)
 
 ### *Films DataBase address:*
 -  `https://api.nomoreparties.co/beatfilm-movies`
