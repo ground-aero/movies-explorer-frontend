@@ -9,8 +9,8 @@ function Promo() {
 
                 <div className='promo__wrap'>
                     <span className='promo__wrap-text'>
-                        <h1 className='promo__header'>Учебный проект студента факультета <span className='promo-white-space'>Веб-разработки.</span></h1>
-                        <p className='promo__text'>Листайте ниже, чтобы узнать больше про&nbsp;этот проект и его создателя</p>
+                        <h1 className='promo__header'>Проект студента факультета <span className='promo-white-space'>Веб-разработки.</span></h1>
+                        <p className='promo__text'>Листайте ниже, чтобы узнать больше про&nbsp;этот проект и его создателя. <span className='promo-white-space'></span>Или зарегистрируйтесь чтобы искать и сохранять фильмы</p>
                     </span>
                     <HashLink smooth to='/#about' className='promo__link'>Узнать больше</HashLink>
                 </div>

@@ -27,6 +27,11 @@ function Portfolio() {
                         <span className='portfolio__link-icon'></span>
                     </Link>
                 </li>
+                <li className='portfolio__item'>
+                    <Link to='https://mesto-react.tech/' className='portfolio__link' target='_blank'>Приложение "Место" с авторизацией и регистрацией
+                        <span className='portfolio__link-icon'></span>
+                    </Link>
+                </li>
             </ul>
 
             </span>
