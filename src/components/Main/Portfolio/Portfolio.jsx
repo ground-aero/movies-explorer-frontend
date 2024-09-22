@@ -13,7 +13,7 @@ function Portfolio() {
 
             <ul className='portfolio__list'>
                 <li className='portfolio__item'>
-                    <Link to='https://ground-aero.github.io/how-to-learn/' className='portfolio__link' target='_blank'>Статичный сайт
+                    <Link to='https://ground.aero/' className='portfolio__link' target='_blank'>Pet-проект - сайт 'ground.aero'
                         <span className='portfolio__link-icon'></span>
                     </Link>
                 </li>
@@ -29,6 +29,11 @@ function Portfolio() {
                 </li>
                 <li className='portfolio__item'>
                     <Link to='https://mesto-react.tech/' className='portfolio__link' target='_blank'>Приложение "Место" с авторизацией и регистрацией
+                        <span className='portfolio__link-icon'></span>
+                    </Link>
+                </li>
+                <li className='portfolio__item'>
+                    <Link to='https://tg-app-client.netlify.app/' className='portfolio__link' target='_blank'>Приложение "3 в одном" - Telegram (Mini App): Чат, Погода, Прогноз. <br/> Имя в Telegram: @TgGroundBot
                         <span className='portfolio__link-icon'></span>
                     </Link>
                 </li>
